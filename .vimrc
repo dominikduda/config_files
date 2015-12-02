@@ -80,7 +80,6 @@ Plugin 'jiangmiao/auto-pairs'
 call vundle#end()
 filetype plugin indent on
 
-"filetype plugin indent on
 set omnifunc=syntaxcomplete#Complete
 
 let mapleader = ","
@@ -96,7 +95,7 @@ nmap <C-j> ddkP
 nmap <C-k> ddp
 "press leader to easy motion
 map <Leader> <Plug>(easymotion-prefix)
-"CtrlP ustawia tak zebybylo logicznie i cos optymalizuje
+"optimizations and ctrlp settings
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlPMixed'
 "Speed fixes http://stackoverflow.com/questions/21346068/slow-performance-on-ctrlp-it-doesnt-work-to-ignore-some-folders
@@ -120,7 +119,6 @@ function! XTermPasteBegin()
   set paste
   return ""
 endfunction
-
 
 autocmd BufWritePost * exe ":UpdateTags"
 "tab lengths:
