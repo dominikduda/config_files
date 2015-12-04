@@ -1,3 +1,4 @@
+"Ubuntu
 set shell=/bin/bash\ -i
 language en_US.UTF-8
 set nocompatible
@@ -50,8 +51,8 @@ syntax on
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-Plugin 'Yggdroot/indentLine'
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'Yggdroot/indentLine'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-easytags'
 Plugin 'easymotion/vim-easymotion'
@@ -80,6 +81,7 @@ Plugin 'jiangmiao/auto-pairs'
 call vundle#end()
 filetype plugin indent on
 
+"filetype plugin indent on
 set omnifunc=syntaxcomplete#Complete
 
 let mapleader = ","
@@ -91,11 +93,11 @@ let &t_Co=256
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 "ctrl+move line
-nmap <C-j> ddkP
-nmap <C-k> ddp
+nmap <C-k> ddkP
+nmap <C-j> ddp
 "press leader to easy motion
 map <Leader> <Plug>(easymotion-prefix)
-"optimizations and ctrlp settings
+"CtrlP ustawia tak zebybylo logicznie i cos optymalizuje
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlPMixed'
 "Speed fixes http://stackoverflow.com/questions/21346068/slow-performance-on-ctrlp-it-doesnt-work-to-ignore-some-folders
@@ -119,6 +121,7 @@ function! XTermPasteBegin()
   set paste
   return ""
 endfunction
+
 
 autocmd BufWritePost * exe ":UpdateTags"
 "tab lengths:
