@@ -50,7 +50,7 @@ syntax on
 
 "GVIM
 if has('gui_running')
-  colorscheme torte
+  colorscheme dante_modified
   set guifont=Hack\ 9
 endif
 
