@@ -48,6 +48,12 @@ set backspace=indent,eol,start
 "color syntax
 syntax on
 
+"GVIM
+if has('gui_running')
+  colorscheme torte
+  set guifont=Hack\ 9
+endif
+
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
