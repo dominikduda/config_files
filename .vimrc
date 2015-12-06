@@ -45,6 +45,8 @@ set ruler
 set colorcolumn=120
 set undolevels=100
 set backspace=indent,eol,start
+"color current line background
+set cursorline
 "color syntax
 syntax on
 
@@ -52,13 +54,18 @@ syntax on
 if has('gui_running')
   colorscheme dante_modified
   set guifont=Hack\ 9
+  "remove toolbar
+  set guioptions-=T
+  "remove right-hand scroll bar
+  set guioptions-=r
+  "remove left-hand scroll bar
+  set guioptions-=L
 endif
 
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'Yggdroot/indentLine'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-easytags'
 Plugin 'easymotion/vim-easymotion'
