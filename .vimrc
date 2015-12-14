@@ -134,6 +134,16 @@ function! XTermPasteBegin()
   return ""
 endfunction
 
+"color symbols
+autocmd FileType * call <SID>def_base_syntax() " autocmd Syntax may be better
+function! s:def_base_syntax()
+  " Simple example
+  syntax match commonOperator "\(+\|=\|-\|\^\|\*\|?\|: \)"
+  syntax match baseDelimiter ","
+  hi link commonOperator Operator
+  hi link baseDelimiter Special
+endfunction
+
 " autocmd BufWritePost * exe ":UpdateTags"
 "tab lengths:
 autocmd Filetype html setlocal ts=2 sts=2 sw=2
