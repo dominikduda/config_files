@@ -54,8 +54,8 @@ if has('gui_running')
   set guifont=Hack\ 9
   "color current line background
   set cursorline
-  "remove toolbar
-  set guioptions-=T
+  "color current color background
+  set cursorcolumn
   "remove right-hand scroll bar
   set guioptions-=r
   "remove left-hand scroll bar
@@ -67,7 +67,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-easytags'
+" Plugin 'xolox/vim-easytags'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
@@ -99,11 +99,10 @@ set omnifunc=syntaxcomplete#Complete
 
 let mapleader = ","
 nnoremap ; :
-let g:indentLine_char = '┆'
 "airline fixes
 set fillchars+=stl:\ ,stlnc:\
 let &t_Co=256
-let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 "ctrl+move line
 nmap <C-k> ddkP
@@ -135,7 +134,7 @@ function! XTermPasteBegin()
   return ""
 endfunction
 
-autocmd BufWritePost * exe ":UpdateTags"
+" autocmd BufWritePost * exe ":UpdateTags"
 "tab lengths:
 autocmd Filetype html setlocal ts=2 sts=2 sw=2
 autocmd Filetype haml setlocal ts=2 sts=2 sw=2
