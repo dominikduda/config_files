@@ -135,13 +135,10 @@ function! XTermPasteBegin()
 endfunction
 
 "color symbols
-autocmd FileType * call <SID>def_base_syntax() " autocmd Syntax may be better
+autocmd FileType * call <SID>def_base_syntax()
 function! s:def_base_syntax()
-  " Simple example
-  syntax match commonOperator "\(+\|=\|-\|\^\|\*\|?\|: \)"
-  syntax match baseDelimiter ","
+syntax match commonOperator "\(+\|=\|-\|\^\|\* \| ?\|: \|&&\|||\| < \| > \|<=\|>=\|/\| !\)"
   hi link commonOperator Operator
-  hi link baseDelimiter Special
 endfunction
 
 " autocmd BufWritePost * exe ":UpdateTags"
