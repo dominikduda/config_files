@@ -19,6 +19,8 @@ set novisualbell
 set hidden
 "always show status line
 set laststatus=2
+"automatically change current directory
+set autochdir
 set nobackup
 
 "ENCODING
