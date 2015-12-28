@@ -53,7 +53,7 @@ syntax on
 "GVIM
 if has('gui_running')
   colorscheme dante_modified
-  set guifont=Hack\ 9
+  set guifont=Hack\ 10
   "color current line background
   set cursorline
   "color current color background
@@ -104,13 +104,17 @@ nnoremap ; :
 "airline fixes
 set fillchars+=stl:\ ,stlnc:\
 let &t_Co=256
-" let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 "ctrl+move line
 nmap <C-k> ddkP
 nmap <C-j> ddp
 "press leader to easy motion
 map <Leader> <Plug>(easymotion-prefix)
+"copy to system clipboard
+vnoremap <C-c> "+y
+"paste form system clipboard
+vnoremap <C-v> "+p
+nmap <C-v> "+p
 "CtrlP
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlPMixed'
