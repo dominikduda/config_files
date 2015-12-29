@@ -62,6 +62,8 @@ if has('gui_running')
   set guioptions-=r
   "remove left-hand scroll bar
   set guioptions-=L
+  "remove toolbar
+  set guioptions-=T
 endif
 
 filetype off
@@ -113,7 +115,6 @@ map <Leader> <Plug>(easymotion-prefix)
 "copy to system clipboard
 vnoremap <C-c> "+y
 "paste form system clipboard
-vnoremap <C-v> "+p
 nmap <C-v> "+p
 "CtrlP
 let g:ctrlp_map = '<c-p>'
