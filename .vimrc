@@ -95,6 +95,7 @@ Plugin 'ngmy/vim-rubocop'
 Plugin 'tpope/vim-endwise'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'jiangmiao/auto-pairs'
+Plugin 'lambdalisue/vim-fullscreen'
 call vundle#end()
 filetype plugin indent on
 
@@ -144,7 +145,7 @@ endfunction
 "color symbols
 autocmd FileType * call <SID>def_base_syntax()
 function! s:def_base_syntax()
-syntax match commonOperator "\(+\|=\|-\|\^\|\* \| ?\|: \|&&\|||\| < \| > \|<=\|>=\|/\| !\)"
+syntax match commonOperator "\(+\|=\|-\|\^\|\* \| ?\|: \|&&\|||\| < \| > \|<=\|>=\|/\| !\|%\)"
   hi link commonOperator Operator
 endfunction
 
