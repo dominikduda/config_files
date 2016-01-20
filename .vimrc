@@ -145,7 +145,7 @@ endfunction
 "color symbols
 autocmd FileType * call <SID>def_base_syntax()
 function! s:def_base_syntax()
-syntax match commonOperator "\(+\|=\|-\|\^\|\* \| ?\|: \|&&\|||\| < \| > \|<=\|>=\|/\| !\|%\)"
+syntax match commonOperator "\(+\|=\|-\|^\|\* \| ?\|: \|&&\|||\| < \| > \|<=\|>=\|/\| !\|%\|+=\|++\|-=\|--\|*=\|/=\|**\)"
   hi link commonOperator Operator
 endfunction
 
