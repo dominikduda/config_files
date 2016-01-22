@@ -4,7 +4,7 @@ language en_US.UTF-8
 set nocompatible
 set noswapfile
 "sequence timeout
-set timeoutlen=500
+set timeoutlen=900
 "show line number
 set number
 "wrap long lines
@@ -64,6 +64,8 @@ if has('gui_running')
   set guioptions-=L
   "remove toolbar
   set guioptions-=T
+  "start maximized
+  set lines=999 columns=999
 endif
 
 filetype off
@@ -145,7 +147,8 @@ endfunction
 " color symbols
 autocmd FileType * call <SID>def_base_syntax()
 function! s:def_base_syntax()
-syntax match commonOperator "\( + \| = \| - \| * \| ? \| : \|&&\|||\| < \| > \| <= \| >= \| / \|! \| % \| += \| ++\|++ \| -= \| --\|-- \| *= \| /= \)"
+" syntax match commonOperator "\( + \| - \| * \| ?\|= \| !\| : \|&&\|||\| < \| > \|<=\|>=\| / \| % \|+=\|++\|-=\|--\|*=\|/=\)"
+syntax match commonOperator "\(+\|-\| * \|? \|=\|!= \|: \|&&\|||\| < \| > \|<=\|>=\| / \|%\|*=\|/=\)"
   hi link commonOperator Operator
 endfunction
 
