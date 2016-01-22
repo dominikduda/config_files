@@ -56,8 +56,6 @@ if has('gui_running')
   set guifont=Hack\ 10
   "color current line background
   set cursorline
-  "color current color background
-  set cursorcolumn
   "remove right-hand scroll bar
   set guioptions-=r
   "remove left-hand scroll bar
@@ -148,7 +146,7 @@ endfunction
 autocmd FileType * call <SID>def_base_syntax()
 function! s:def_base_syntax()
 " syntax match commonOperator "\( + \| - \| * \| ?\|= \| !\| : \|&&\|||\| < \| > \|<=\|>=\| / \| % \|+=\|++\|-=\|--\|*=\|/=\)"
-syntax match commonOperator "\(+\|-\| * \|? \|=\|!= \|: \|&&\|||\| < \| > \|<=\|>=\| / \|%\|*=\|/=\)"
+syntax match commonOperator "\(+\|-\|* \|? \|=\|!= \|: \|&&\|||\| < \| > \|<=\|>=\| / \|%\|*=\|/=\)"
   hi link commonOperator Operator
 endfunction
 
