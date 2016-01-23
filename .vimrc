@@ -113,10 +113,12 @@ nmap <C-k> ddkP
 nmap <C-j> ddp
 "press leader to easy motion
 map <Leader> <Plug>(easymotion-prefix)
-"copy to system clipboard
-vnoremap <C-c> "+y
-"paste form system clipboard
-nmap <C-v> "+p
+"NERDTree toggle
+nmap <C-n> :NERDTreeToggle<CR>
+"NERDTree refresh
+nmap <F5> :NERDTree<CR>
+"close vim if only NERDTree is opened
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 "CtrlP
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlPMixed'
@@ -132,6 +134,10 @@ if executable('ag')
     let g:ctrlp_use_caching = 0
 endif
 
+"copy to system clipboard
+vnoremap <C-c> "+y
+"paste form system clipboard
+nmap <C-v> "+p
 "auto set paste before pasting and set nopaste after pasting
 let &t_SI .= "\<Esc>[?2004h"
 let &t_EI .= "\<Esc>[?2004l"
@@ -145,8 +151,7 @@ endfunction
 " color symbols
 autocmd FileType * call <SID>def_base_syntax()
 function! s:def_base_syntax()
-" syntax match commonOperator "\( + \| - \| * \| ?\|= \| !\| : \|&&\|||\| < \| > \|<=\|>=\| / \| % \|+=\|++\|-=\|--\|*=\|/=\)"
-syntax match commonOperator "\(+\|-\|* \|? \|=\|!= \|: \|&&\|||\| < \| > \|<=\|>=\| / \|%\|*=\|/=\)"
+syntax match commonOperator "\(->\|+\|-\|* \|? \|=\|!= \|: \|&&\|||\| < \| > \|<=\|>=\| / \|%\|*=\|/=\)"
   hi link commonOperator Operator
 endfunction
 
