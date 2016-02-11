@@ -2,6 +2,7 @@
 set shell=/bin/bash\ -i
 language en_US.UTF-8
 set nocompatible
+set re=1
 set noswapfile
 "sequence timeout
 set timeoutlen=900
@@ -63,7 +64,7 @@ if has('gui_running')
   "remove toolbar
   set guioptions-=T
   "start maximized
-  set lines=999 columns=999
+  set lines=150 columns=300
 endif
 
 filetype off
@@ -95,6 +96,7 @@ Plugin 'ngmy/vim-rubocop'
 Plugin 'tpope/vim-endwise'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'jiangmiao/auto-pairs'
+Plugin 'slim-template/vim-slim'
 Plugin 'lambdalisue/vim-fullscreen'
 call vundle#end()
 filetype plugin indent on
@@ -148,15 +150,20 @@ function! XTermPasteBegin()
   return ""
 endfunction
 
-" color symbols
+"color symbols
 autocmd FileType * call <SID>def_base_syntax()
 function! s:def_base_syntax()
 syntax match commonOperator "\(->\|+\|-\|* \|? \|=\|!= \|: \|&&\|||\| < \| > \|<=\|>=\| / \|%\|*=\|/=\)"
   hi link commonOperator Operator
 endfunction
 
-" autocmd BufWritePost * exe ":UpdateTags"
+"Gitgutter
+let g:gitgutter_realtime = 0
+let g:gitgutter_eager = 0
+let g:gitgutter_grep_command = 'ag %s -l --nocolor -g ""'
+
 "tab lengths:
+autocmd Filetype slim setlocal ts=2 sts=2 sw=2
 autocmd Filetype html setlocal ts=2 sts=2 sw=2
 autocmd Filetype haml setlocal ts=2 sts=2 sw=2
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
