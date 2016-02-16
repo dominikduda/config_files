@@ -20,8 +20,6 @@ set novisualbell
 set hidden
 "always show status line
 set laststatus=2
-"automatically change current directory
-set autochdir
 set nobackup
 
 "ENCODING
@@ -72,7 +70,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'xolox/vim-misc'
-" Plugin 'xolox/vim-easytags'
+Plugin 'xolox/vim-easytags'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
@@ -81,10 +79,12 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/syntastic'
 "ctrl+p search
 Plugin 'kien/ctrlp.vim'
+Plugin 'JazzCore/ctrlp-cmatcher'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'tpope/vim-commentary'
 "confrim autocompletion with tab
 Plugin 'ervandew/supertab'
+Plugin 'tpope/vim-surround'
 Plugin 'bling/vim-airline'
 Plugin 'bronson/vim-trailing-whitespace'
 "select region +/-
@@ -98,6 +98,10 @@ Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'slim-template/vim-slim'
 Plugin 'lambdalisue/vim-fullscreen'
+"language specific
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'tpope/vim-haml'
+Plugin 'tpope/vim-rails'
 call vundle#end()
 filetype plugin indent on
 
@@ -117,24 +121,29 @@ nmap <C-j> ddp
 map <Leader> <Plug>(easymotion-prefix)
 "NERDTree toggle
 nmap <C-n> :NERDTreeToggle<CR>
-"NERDTree refresh
-nmap <F5> :NERDTree<CR>
 "close vim if only NERDTree is opened
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 "CtrlP
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlPMixed'
+map <C-l> :CtrlPMRU<CR>
+"show hidden files
+let g:ctrlp_show_hidden = 1
 "Speed fixes http://stackoverflow.com/questions/21346068/slow-performance-on-ctrlp-it-doesnt-work-to-ignore-some-folders
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 
 if executable('ag')
-    "Use ag over grep
     set grepprg=ag\ --nogroup\ --nocolor
     "Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
     let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
     "ag is fast enough that CtrlP doesn't need to cache
     let g:ctrlp_use_caching = 0
 endif
+
+"Async easytags
+let g:easytags_async = 1
+"Better performance
+let g:easytags_syntax_keyword = 'always'
 
 "copy to system clipboard
 vnoremap <C-c> "+y
@@ -151,11 +160,11 @@ function! XTermPasteBegin()
 endfunction
 
 "color symbols
-autocmd FileType * call <SID>def_base_syntax()
-function! s:def_base_syntax()
-syntax match commonOperator "\(->\|+\|-\|* \|? \|=\|!= \|: \|&&\|||\| < \| > \|<=\|>=\| / \|%\|*=\|/=\)"
-  hi link commonOperator Operator
-endfunction
+" autocmd FileType * call <SID>def_base_syntax()
+" function! s:def_base_syntax()
+" syntax match commonOperator "\(->\|+\|-\|* \|? \| =\|!= \|: \|&&\|||\| < \| > \|<=\|>=\| / \|%\|*=\|/=\)"
+"   hi link commonOperator Operator
+" endfunction
 
 "Gitgutter
 let g:gitgutter_realtime = 0
@@ -169,4 +178,5 @@ autocmd Filetype haml setlocal ts=2 sts=2 sw=2
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 autocmd Filetype coffee setlocal ts=2 sts=2 sw=2
 autocmd Filetype sass setlocal ts=2 sts=2 sw=2
+autocmd Filetype yaml setlocal ts=2 sts=2 sw=2
 autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
