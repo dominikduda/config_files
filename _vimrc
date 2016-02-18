@@ -19,6 +19,7 @@ set hidden
 "always show status line
 set laststatus=2
 set nobackup
+"asdfas
 
 "ENCODING
 set encoding=utf-8
