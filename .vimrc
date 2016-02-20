@@ -1,4 +1,4 @@
-"Ubuntu
+"Ubuntusy
 set shell=/bin/bash\ -i
 language en_US.UTF-8
 set nocompatible
@@ -144,6 +144,12 @@ endif
 let g:easytags_async = 1
 "Better performance
 let g:easytags_syntax_keyword = 'always'
+"tags filename and placement
+set tags=./tags;
+"create tag file per project
+let g:easytags_dynamic_files = 2
+"needed for upper line to work
+set cpoptions+=d
 
 "copy to system clipboard
 vnoremap <C-c> "+y
