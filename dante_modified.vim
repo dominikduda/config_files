@@ -9,7 +9,7 @@ if version > 580
 endif
 
 set t_Co=256
-let g:colors_name = "dante_modified_modified_modified"
+let g:colors_name = "dante_modified"
 
 "hi SignColumn -- no settings --
 "hi CTagsMember -- no settings --
