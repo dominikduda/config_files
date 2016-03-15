@@ -9,7 +9,6 @@ set timeoutlen=900
 "show line number
 set number
 "wrap long lines
-set linebreak
 "wrap symbol
 set showbreak=+>>
 set textwidth=120
@@ -52,7 +51,7 @@ syntax on
 "GVIM
 if has('gui_running')
   colorscheme dante_modified
-  set guifont=Hack\ 10
+  set guifont=Knack\ 10
   "color current line background
   set cursorline
   "remove right-hand scroll bar
@@ -105,9 +104,9 @@ Plugin 'tpope/vim-rails'
 call vundle#end()
 filetype plugin indent on
 
-"filetype plugin indent on
 set omnifunc=syntaxcomplete#Complete
 
+" :set conceallevel=0
 let mapleader = ","
 nnoremap ; :
 "airline fixes
@@ -151,6 +150,14 @@ let g:easytags_dynamic_files = 2
 "needed for upper line to work
 set cpoptions+=d
 
+" devicons
+" let g:WebDevIconsNerdTreeGitPluginForceVAlign = 0
+" let g:WebDevIconsNerdTreeAfterGlyphPadding = ''
+" autocmd FileType nerdtree setlocal nolist
+" if exists("g:loaded_webdevicons")
+    " call webdevicons#refresh()
+" endif
+
 "copy to system clipboard
 vnoremap <C-c> "+y
 "paste form system clipboard
@@ -171,6 +178,18 @@ endfunction
 " syntax match commonOperator "\(->\|+\|-\|* \|? \| =\|!= \|: \|&&\|||\| < \| > \|<=\|>=\| / \|%\|*=\|/=\)"
 "   hi link commonOperator Operator
 " endfunction
+"
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "+",
+    \ "Staged"    : "x",
+    \ "Untracked" : "*",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "X",
+    \ "Clean"     : "✔︎",
+    \ "Unknown"   : "?"
+    \ }
 
 "Gitgutter
 let g:gitgutter_realtime = 0
@@ -183,6 +202,6 @@ autocmd Filetype html setlocal ts=2 sts=2 sw=2
 autocmd Filetype haml setlocal ts=2 sts=2 sw=2
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 autocmd Filetype coffee setlocal ts=2 sts=2 sw=2
-autocmd Filetype sass setlocal ts=2 sts=2 sw=2
+autocmd Filetype sass setlocal ts=4 sts=4 sw=4
 autocmd Filetype yaml setlocal ts=2 sts=2 sw=2
 autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
