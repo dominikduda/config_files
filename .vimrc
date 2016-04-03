@@ -1,5 +1,5 @@
 "Ubuntusy
-set shell=/bin/bash\ -i
+" set shell=/bin/bash\ -i
 language en_US.UTF-8
 set nocompatible
 set re=1
@@ -22,7 +22,7 @@ set laststatus=2
 set nobackup
 
 "ENCODING
-set encoding=utf-8
+" set encoding=utf-8
 "encoding when saving
 set fileencoding=utf-8
 
@@ -44,16 +44,15 @@ set softtabstop=4
 set ruler
 set colorcolumn=120
 set undolevels=100
+set cursorline
 set backspace=indent,eol,start
 "color syntax
 syntax on
 
 "GVIM
 if has('gui_running')
-  colorscheme dante_modified
-  set guifont=Knack\ 10
+  set guifont=Hack\ 10
   "color current line background
-  set cursorline
   "remove right-hand scroll bar
   set guioptions-=r
   "remove left-hand scroll bar
@@ -65,53 +64,60 @@ if has('gui_running')
 endif
 
 filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-easytags'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'scrooloose/nerdtree'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'tpope/vim-fugitive'
-Plugin 'scrooloose/syntastic'
+call plug#begin('~/.vim/plugged')
+Plug 'VundleVim/Vundle.vim'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-easytags'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'easymotion/vim-easymotion'
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+Plug 'scrooloose/syntastic'
+Plug 'kien/ctrlp.vim'
 "ctrl+p search
-Plugin 'kien/ctrlp.vim'
-Plugin 'JazzCore/ctrlp-cmatcher'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'tpope/vim-commentary'
+Plug 'JazzCore/ctrlp-cmatcher'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+Plug 'tpope/vim-commentary'
 "confrim autocompletion with tab
-Plugin 'ervandew/supertab'
-Plugin 'tpope/vim-surround'
-Plugin 'bling/vim-airline'
-Plugin 'bronson/vim-trailing-whitespace'
+Plug 'ervandew/supertab'
+Plug 'tpope/vim-surround'
+Plug 'bling/vim-airline'
+Plug 'bronson/vim-trailing-whitespace'
 "select region +/-
-Plugin 'terryma/vim-expand-region'
-Plugin 'terryma/vim-multiple-cursors'
+Plug 'terryma/vim-expand-region'
+Plug 'terryma/vim-multiple-cursors'
 "maximize/minimize window on f3
-Plugin 'szw/vim-maximizer'
-Plugin 'ngmy/vim-rubocop'
-Plugin 'tpope/vim-endwise'
-Plugin 'octol/vim-cpp-enhanced-highlight'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'slim-template/vim-slim'
-Plugin 'lambdalisue/vim-fullscreen'
+Plug 'szw/vim-maximizer'
+Plug 'ngmy/vim-rubocop'
+Plug 'tpope/vim-endwise'
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'jiangmiao/auto-pairs'
+Plug 'slim-template/vim-slim'
+Plug 'lambdalisue/vim-fullscreen'
 "language specific
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'tpope/vim-haml'
-Plugin 'tpope/vim-rails'
-call vundle#end()
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-haml'
+Plug 'tpope/vim-rails'
+Plug 'hriskempson/vim-tomorrow-theme'
+
+"neovim only
+Plug 'benekastah/neomake'
+call plug#end()
 filetype plugin indent on
 
 set omnifunc=syntaxcomplete#Complete
 
-" :set conceallevel=0
-let mapleader = ","
+set background=dark
+let &t_Co=256
+colorscheme dante_modified
+
+" let mapleader = ","
+nnoremap , ;
 nnoremap ; :
 "airline fixes
 set fillchars+=stl:\ ,stlnc:\
-let &t_Co=256
 let g:airline_powerline_fonts = 1
 "ctrl+move line
 nmap <C-k> ddkP
@@ -119,13 +125,13 @@ nmap <C-j> ddp
 "press leader to easy motion
 map <Leader> <Plug>(easymotion-prefix)
 "NERDTree toggle
-nmap <C-n> :NERDTreeToggle<CR>
+nmap <leader>2 :NERDTreeToggle<CR>
 "close vim if only NERDTree is opened
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 "CtrlP
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlPMixed'
-map <C-l> :CtrlPMRU<CR>
+map <C-h> :CtrlPMRU<CR>
 "show hidden files
 let g:ctrlp_show_hidden = 1
 "Speed fixes http://stackoverflow.com/questions/21346068/slow-performance-on-ctrlp-it-doesnt-work-to-ignore-some-folders
@@ -150,13 +156,7 @@ let g:easytags_dynamic_files = 2
 "needed for upper line to work
 set cpoptions+=d
 
-" devicons
-" let g:WebDevIconsNerdTreeGitPluginForceVAlign = 0
-" let g:WebDevIconsNerdTreeAfterGlyphPadding = ''
-" autocmd FileType nerdtree setlocal nolist
-" if exists("g:loaded_webdevicons")
-    " call webdevicons#refresh()
-" endif
+let g:NERDTreeWinSize = 36
 
 "copy to system clipboard
 vnoremap <C-c> "+y
@@ -172,29 +172,25 @@ function! XTermPasteBegin()
   return ""
 endfunction
 
-"color symbols
-" autocmd FileType * call <SID>def_base_syntax()
-" function! s:def_base_syntax()
-" syntax match commonOperator "\(->\|+\|-\|* \|? \| =\|!= \|: \|&&\|||\| < \| > \|<=\|>=\| / \|%\|*=\|/=\)"
-"   hi link commonOperator Operator
-" endfunction
-"
-let g:NERDTreeIndicatorMapCustom = {
-    \ "Modified"  : "+",
-    \ "Staged"    : "x",
-    \ "Untracked" : "*",
-    \ "Renamed"   : "➜",
-    \ "Unmerged"  : "═",
-    \ "Deleted"   : "✖",
-    \ "Dirty"     : "X",
-    \ "Clean"     : "✔︎",
-    \ "Unknown"   : "?"
-    \ }
-
 "Gitgutter
 let g:gitgutter_realtime = 0
 let g:gitgutter_eager = 0
 let g:gitgutter_grep_command = 'ag %s -l --nocolor -g ""'
+
+set wildignore+=*/tmp/*,*.so,*.swp,*.zipo
+
+"Exit terminal mode with esc
+:tnoremap <Esc> <C-\><C-n>"
+
+"Improve windows navigation by using 'alt + x' combination even when terminal window is active
+:tnoremap <A-h> <C-\><C-n><C-w>h
+:tnoremap <A-j> <C-\><C-n><C-w>j
+:tnoremap <A-k> <C-\><C-n><C-w>k
+:tnoremap <A-l> <C-\><C-n><C-w>l
+:nnoremap <A-h> <C-w>h
+:nnoremap <A-j> <C-w>j
+:nnoremap <A-k> <C-w>k
+:nnoremap <A-l> <C-w>l
 
 "tab lengths:
 autocmd Filetype slim setlocal ts=2 sts=2 sw=2
@@ -205,3 +201,7 @@ autocmd Filetype coffee setlocal ts=2 sts=2 sw=2
 autocmd Filetype sass setlocal ts=4 sts=4 sw=4
 autocmd Filetype yaml setlocal ts=2 sts=2 sw=2
 autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
+
+let g:ycm_path_to_python_interpreter = '/usr/bin/python'
+
+autocmd! BufWritePost * Neomake
