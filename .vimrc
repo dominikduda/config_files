@@ -131,7 +131,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 "CtrlP
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlPMixed'
-map <C-h> :CtrlPMRU<CR>
+map <C-l> :CtrlPMRU<CR>
 "show hidden files
 let g:ctrlp_show_hidden = 1
 "Speed fixes http://stackoverflow.com/questions/21346068/slow-performance-on-ctrlp-it-doesnt-work-to-ignore-some-folders
@@ -179,18 +179,20 @@ let g:gitgutter_grep_command = 'ag %s -l --nocolor -g ""'
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zipo
 
-"Exit terminal mode with esc
-:tnoremap <Esc> <C-\><C-n>"
+if has('nvim')
+  "Exit terminal mode with esc
+  :tnoremap <Esc> <C-\><C-n>"
 
-"Improve windows navigation by using 'alt + x' combination even when terminal window is active
-:tnoremap <A-h> <C-\><C-n><C-w>h
-:tnoremap <A-j> <C-\><C-n><C-w>j
-:tnoremap <A-k> <C-\><C-n><C-w>k
-:tnoremap <A-l> <C-\><C-n><C-w>l
-:nnoremap <A-h> <C-w>h
-:nnoremap <A-j> <C-w>j
-:nnoremap <A-k> <C-w>k
-:nnoremap <A-l> <C-w>l
+  "Improve windows navigation by using 'alt + x' combination even when terminal window is active
+  :tnoremap <A-h> <C-\><C-n><C-w>h
+  :tnoremap <A-j> <C-\><C-n><C-w>j
+  :tnoremap <A-k> <C-\><C-n><C-w>k
+  :tnoremap <A-l> <C-\><C-n><C-w>l
+  :nnoremap <A-h> <C-w>h
+  :nnoremap <A-j> <C-w>j
+  :nnoremap <A-k> <C-w>k
+  :nnoremap <A-l> <C-w>l
+endif
 
 "tab lengths:
 autocmd Filetype slim setlocal ts=2 sts=2 sw=2
