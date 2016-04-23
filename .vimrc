@@ -68,11 +68,9 @@ call plug#begin('~/.vim/plugged')
 Plug 'VundleVim/Vundle.vim'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-easytags'
-Plug 'NLKNguyen/papercolor-theme'
 Plug 'easymotion/vim-easymotion'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/syntastic'
 Plug 'kien/ctrlp.vim'
@@ -100,7 +98,12 @@ Plug 'lambdalisue/vim-fullscreen'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-haml'
 Plug 'tpope/vim-rails'
-Plug 'hriskempson/vim-tomorrow-theme'
+Plug 'Shougo/vimproc.vim'
+Plug 'Quramy/tsuquyomi'
+" CHOOSE ONE DO
+" Plug 'airblade/vim-gitgutter'
+Plug 'leafgarland/typescript-vim'
+" END
 
 "neovim only
 Plug 'benekastah/neomake'
@@ -203,6 +206,12 @@ autocmd Filetype coffee setlocal ts=2 sts=2 sw=2
 autocmd Filetype sass setlocal ts=4 sts=4 sw=4
 autocmd Filetype yaml setlocal ts=2 sts=2 sw=2
 autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
+
+let g:neomake_typescript_enabled_makers = []
+let g:tsuquyomi_disable_quickfix = 1
+let g:syntastic_typescript_tsc_fname = ''
+let g:syntastic_typescript_checkers = ['tsuquyomi']
+autocmd FileType typescript setlocal completeopt+=menu,preview
 
 let g:ycm_path_to_python_interpreter = '/usr/bin/python'
 
