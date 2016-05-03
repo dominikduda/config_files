@@ -98,11 +98,11 @@ Plug 'lambdalisue/vim-fullscreen'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-haml'
 Plug 'tpope/vim-rails'
-Plug 'Shougo/vimproc.vim'
-Plug 'Quramy/tsuquyomi'
+" Plug 'Shougo/vimproc.vim'
+" Plug 'Quramy/tsuquyomi'
 " CHOOSE ONE DO
-" Plug 'airblade/vim-gitgutter'
-Plug 'leafgarland/typescript-vim'
+Plug 'airblade/vim-gitgutter'
+" Plug 'leafgarland/typescript-vim'
 " END
 
 "neovim only
@@ -159,7 +159,7 @@ let g:easytags_dynamic_files = 2
 "needed for upper line to work
 set cpoptions+=d
 
-let g:NERDTreeWinSize = 36
+let g:NERDTreeWinSize = 25
 
 "copy to system clipboard
 vnoremap <C-c> "+y
@@ -207,11 +207,11 @@ autocmd Filetype sass setlocal ts=4 sts=4 sw=4
 autocmd Filetype yaml setlocal ts=2 sts=2 sw=2
 autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
 
-let g:neomake_typescript_enabled_makers = []
-let g:tsuquyomi_disable_quickfix = 1
-let g:syntastic_typescript_tsc_fname = ''
-let g:syntastic_typescript_checkers = ['tsuquyomi']
-autocmd FileType typescript setlocal completeopt+=menu,preview
+" let g:neomake_typescript_enabled_makers = []
+" let g:tsuquyomi_disable_quickfix = 1
+" let g:syntastic_typescript_tsc_fname = ''
+" let g:syntastic_typescript_checkers = ['tsuquyomi']
+" autocmd FileType typescript setlocal completeopt+=menu,preview
 
 let g:ycm_path_to_python_interpreter = '/usr/bin/python'
 
