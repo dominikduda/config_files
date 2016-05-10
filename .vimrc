@@ -8,6 +8,7 @@ set noswapfile
 set timeoutlen=900
 "show line number
 set number
+set relativenumber
 "wrap long lines
 "wrap symbol
 set showbreak=+>>
