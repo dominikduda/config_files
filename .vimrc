@@ -126,6 +126,7 @@ let g:airline_powerline_fonts = 1
 "ctrl+move line
 nmap <C-k> ddkP
 nmap <C-j> ddp
+imap <C-l> <Esc>$a
 "press leader to easy motion
 map <Leader> <Plug>(easymotion-prefix)
 "NERDTree toggle
