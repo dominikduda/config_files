@@ -1,4 +1,5 @@
 "Ubuntusy
+"
 " set shell=/bin/bash\ -i
 language en_US.UTF-8
 set nocompatible
@@ -113,8 +114,8 @@ filetype plugin indent on
 
 set omnifunc=syntaxcomplete#Complete
 
-set background=dark
-let &t_Co=256
+" set background=dark
+ let &t_Co=256
 colorscheme dante_modified
 
 " let mapleader = ","
@@ -198,6 +199,11 @@ if has('nvim')
   :nnoremap <A-k> <C-w>k
   :nnoremap <A-l> <C-w>l
 endif
+
+" Change Color when entering Insert Mode
+autocmd InsertEnter * highlight  CursorLine ctermbg=52 ctermfg=None
+" Revert Color to default when leaving Insert Mode
+autocmd InsertLeave * highlight  CursorLine ctermbg=233 ctermfg=None
 
 "tab lengths:
 autocmd Filetype slim setlocal ts=2 sts=2 sw=2
