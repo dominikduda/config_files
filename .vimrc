@@ -10,18 +10,17 @@ set timeoutlen=900
 "show line number
 set number
 set relativenumber
-"wrap long lines
 "wrap symbol
 set showbreak=+>>
-set textwidth=120
+" set textwidth=120
 set noshowmatch
 "turn screen blinking off
 set novisualbell
-"hide file instead of closing (some plugins work better)
 set hidden
 "always show status line
 set laststatus=2
 set nobackup
+set showcmd
 
 "ENCODING
 " set encoding=utf-8
@@ -200,10 +199,12 @@ if has('nvim')
   :nnoremap <A-l> <C-w>l
 endif
 
+
+" au InsertEnter * hi Normal ctermbg=52 au InsertLeave * hi Normal ctermbg=233
 " Change Color when entering Insert Mode
-autocmd InsertEnter * highlight  CursorLine ctermbg=52 ctermfg=None
+autocmd InsertEnter * highlight  CursorLine ctermbg=52
 " Revert Color to default when leaving Insert Mode
-autocmd InsertLeave * highlight  CursorLine ctermbg=233 ctermfg=None
+autocmd InsertLeave * highlight  CursorLine ctermbg=233
 
 "tab lengths:
 autocmd Filetype slim setlocal ts=2 sts=2 sw=2
