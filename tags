@@ -1,0 +1,28 @@
+!_TAG_FILE_SORTED	2	/0=unsorted, 1=sorted, 2=foldcase/
+,	/home/dominikduda/.vimrc	/^nnoremap , ;$/;"	m	language:Vim
+;	/home/dominikduda/.vimrc	/^nnoremap ; :$/;"	m	language:Vim
+<C-c>	/home/dominikduda/.vimrc	/^vnoremap <C-c> "+y$/;"	m	language:Vim
+<C-j>	/home/dominikduda/.vimrc	/^nmap <C-j> ddp$/;"	m	language:Vim
+<C-k>	/home/dominikduda/.vimrc	/^nmap <C-k> ddkP$/;"	m	language:Vim
+<C-l>	/home/dominikduda/.vimrc	/^imap <C-l> <Esc>$a$/;"	m	language:Vim
+<C-l>	/home/dominikduda/.vimrc	/^map <C-l> :CtrlPMRU<CR>$/;"	m	language:Vim
+<C-v>	/home/dominikduda/.vimrc	/^nmap <C-v> "+p$/;"	m	language:Vim
+<Esc>[200~	/home/dominikduda/.vimrc	/^inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()$/;"	m	language:Vim
+<Leader>	/home/dominikduda/.vimrc	/^map <Leader> <Plug>(easymotion-prefix)$/;"	m	language:Vim
+<leader>1	/home/dominikduda/.vimrc	/^nnoremap <expr> <leader>1 (g:gitgutter_highlight_lines) ? ':GitGutterLineHighlightsToggle<CR>:NERDTreeToggle<CR><C-w>l:q!<CR>' : ':GitGutterLineHighlightsToggle<CR>:Gvsplit<CR>:NERDTreeToggle<CR>'$/;"	m	language:Vim
+<leader>2	/home/dominikduda/.vimrc	/^nmap <leader>2 :NERDTreeToggle<CR>$/;"	m	language:Vim
+g:airline_powerline_fonts	/home/dominikduda/.vimrc	/^let g:airline_powerline_fonts = 1$/;"	v	language:Vim
+g:ctrlp_cache_dir	/home/dominikduda/.vimrc	/^let g:ctrlp_cache_dir = $HOME . '\/.cache\/ctrlp'$/;"	v	language:Vim
+g:ctrlp_cmd	/home/dominikduda/.vimrc	/^let g:ctrlp_cmd = 'CtrlPMixed'$/;"	v	language:Vim
+g:ctrlp_map	/home/dominikduda/.vimrc	/^let g:ctrlp_map = '<c-p>'$/;"	v	language:Vim
+g:ctrlp_show_hidden	/home/dominikduda/.vimrc	/^let g:ctrlp_show_hidden = 1$/;"	v	language:Vim
+g:ctrlp_user_command	/home/dominikduda/.vimrc	/^    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'$/;"	v	language:Vim
+g:ctrlp_use_caching	/home/dominikduda/.vimrc	/^    let g:ctrlp_use_caching = 0$/;"	v	language:Vim
+g:easytags_async	/home/dominikduda/.vimrc	/^let g:easytags_async = 1$/;"	v	language:Vim
+g:easytags_dynamic_files	/home/dominikduda/.vimrc	/^let g:easytags_dynamic_files = 2$/;"	v	language:Vim
+g:easytags_syntax_keyword	/home/dominikduda/.vimrc	/^let g:easytags_syntax_keyword = 'always'$/;"	v	language:Vim
+g:gitgutter_signs	/home/dominikduda/.vimrc	/^let g:gitgutter_signs = 1$/;"	v	language:Vim
+g:gitgutter_sign_column_always	/home/dominikduda/.vimrc	/^let g:gitgutter_sign_column_always = 1$/;"	v	language:Vim
+g:NERDTreeWinSize	/home/dominikduda/.vimrc	/^let g:NERDTreeWinSize = 23$/;"	v	language:Vim
+g:ycm_path_to_python_interpreter	/home/dominikduda/.vimrc	/^let g:ycm_path_to_python_interpreter = '\/usr\/bin\/python'$/;"	v	language:Vim
+XTermPasteBegin	/home/dominikduda/.vimrc	/^function! XTermPasteBegin()$/;"	f	language:Vim

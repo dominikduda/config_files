@@ -2,8 +2,9 @@
 "
 " set shell=/bin/bash\ -i
 language en_US.UTF-8
+set updatetime=2000
 set nocompatible
-set re=1
+" set re=1
 set noswapfile
 "sequence timeout
 set timeoutlen=900
@@ -161,7 +162,11 @@ let g:easytags_dynamic_files = 2
 "needed for upper line to work
 set cpoptions+=d
 
-let g:NERDTreeWinSize = 25
+let g:NERDTreeWinSize = 23
+
+" start with nerdtree open if no file were specified
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 "copy to system clipboard
 vnoremap <C-c> "+y
@@ -177,10 +182,13 @@ function! XTermPasteBegin()
   return ""
 endfunction
 
-"Gitgutter
-let g:gitgutter_realtime = 0
-let g:gitgutter_eager = 0
-let g:gitgutter_grep_command = 'ag %s -l --nocolor -g ""'
+" Gitgutter
+let g:gitgutter_sign_column_always = 1
+let g:gitgutter_signs = 1
+" uncomment 2 lines below in case of performance issues
+" let g:gitgutter_realtime = 1
+" let g:gitgutter_eager = 1
+nnoremap <expr> <leader>1 (g:gitgutter_highlight_lines) ? ':GitGutterLineHighlightsToggle<CR>:NERDTreeToggle<CR><C-w>l:q!<CR>' : ':GitGutterLineHighlightsToggle<CR>:Gvsplit<CR>:NERDTreeToggle<CR>'
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zipo
 
