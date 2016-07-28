@@ -144,6 +144,8 @@ Plug 'shime/vim-livedown', { 'do': 'npm install -g livedown' }
 Plug 'tpope/vim-rvm'
 " Comments
 Plug 'tpope/vim-commentary'
+" Undo history tree
+Plug 'sjl/gundo.vim'
 
 " AUTOCOMPLETE AND SNIPPETS ************************************
 " Autocomplete
@@ -328,6 +330,8 @@ nnoremap , :Ag<SPACE>
 " check file change every 4 seconds ('CursorHold') and reload the buffer upon detecting change (2 lines below)
 set autoread
 au CursorHold * checktime
+" Toggle Gundo window
+nnoremap <F5> :GundoToggle<CR>
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIM-TEST CONFIG ************************************
@@ -351,7 +355,8 @@ if has('nvim')
   :tnoremap <A-l> <C-\><C-n><C-w>l
   :nnoremap <A-h> <C-w>h
   :nnoremap <A-j> <C-w>j
-  :nnoremap <A-k> <C-w>k
+  " Its like this to scroll NERDtree properly and switch to file buffer instantly
+  :nnoremap <A-k> <C-w>kzb<C-w>l
   :nnoremap <A-l> <C-w>l
 endif
 " <!!!!!!!!**************!!!!!!!!>
