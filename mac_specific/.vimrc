@@ -21,7 +21,7 @@ set fileencoding=utf-8
 " <!!!!!!!!**************!!!!!!!!>
 
 " Removed in nvim, keeping for backwards compatibility
-" set nocompatible
+set nocompatible
 
 " NOT SURE OR TOO LAZY TO CHECK ************************************
 set ttimeoutlen=0
@@ -109,15 +109,16 @@ endif
 filetype off
 call plug#begin('~/.vim/plugged')
 
-" GENERAL ************************************
+" DEBUG
+" " GENERAL ************************************
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-easytags'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
-" <!!!!!!!!**************!!!!!!!!>
+" " <!!!!!!!!**************!!!!!!!!>
 
-" GIT INTEGRATION ************************************
-Plug 'airblade/vim-gitgutter'
+" " GIT INTEGRATION ************************************
+" Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 " <!!!!!!!!**************!!!!!!!!>
@@ -304,8 +305,8 @@ let g:gitgutter_sign_column_always = 1
 " View diff with <leader>1
 nnoremap <expr> <leader>1 (g:gitgutter_highlight_lines) ? ':GitGutterLineHighlightsToggle<CR>:NERDTreeToggle<CR><C-w>l:q!<CR>' : ':GitGutterLineHighlightsToggle<CR>:Gvsplit<CR>:NERDTreeToggle<CR>'
 " uncomment 2 lines below in case of performance issues
-" let g:gitgutter_realtime = 0
-" let g:gitgutter_eager = 0
+let g:gitgutter_realtime = 0
+let g:gitgutter_eager = 0
 " <!!!!!!!!**************!!!!!!!!>
 
 " PERSONAL CONFIG AND SHORTCUTS ************************************
@@ -328,7 +329,7 @@ autocmd InsertLeave * highlight  CursorLine ctermbg=233
 command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 nnoremap , :Ag<SPACE>
 " check file change every 4 seconds ('CursorHold') and reload the buffer upon detecting change (2 lines below)
-set autoread
+" set autoread
 au CursorHold * checktime
 " Toggle Gundo window
 nnoremap <F5> :GundoToggle<CR>
