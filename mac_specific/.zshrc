@@ -87,3 +87,9 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 # jak nie dziala po zmianie kompa to przez to!!! :
 export PATH="$PATH:/Users/dominikduda/.rvm/gems/ruby-2.3.0/bin"
+
+prompt_context() {
+  if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
+    prompt_segment black default "%(!.%{%F{yellow}%}.)@dd"
+  fi
+}
