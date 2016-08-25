@@ -14,6 +14,13 @@ set shell=/bin/zsh
 " | Normal comment always concerns only one line below it (unless specified otherwise).     |
 " |-----------------------------------------------------------------------------------------|
 
+" AB SPECIFIC ************************************
+" Add empty line at end of file after save
+set eol
+" let g:vimrubocop_rubocop_cmd = '/Users/dominikduda/.rvm/gems/ruby-2.1.2@akelius_box/bin/rubocop'
+" let g:vimrubocop_rubocop_cmd = execute 'echo which rubocop'
+" <!!!!!!!!**************!!!!!!!!>
+
 " ENCODING ************************************
 language en_US.UTF-8
 set langmenu=en_US.UTF-8
@@ -29,8 +36,14 @@ set smarttab
 set softtabstop=2
 " <!!!!!!!!**************!!!!!!!!>
 
+" PERFORMANCE FIXES ************************************
+syntax sync minlines=256
+set synmaxcol=200
+set re=1
+" <!!!!!!!!**************!!!!!!!!>
+
 " AFAIK time to update gitgutter signs
-set updatetime=300
+set updatetime=1000
 " Mouse support
 set mouse=a
 " Only redraw when it is needed
@@ -386,5 +399,5 @@ autocmd! BufWritePost * Neomake
 "Auto remove trailing whitespaces on save
 autocmd BufWritePre * FixWhitespace
 
-" MAC
-let $PATH = '/usr/local/opt/python/Frameworks/Python.framework/Versions/2.7/lib/libpython2.7.dylib -DPYTHON_INCLUDE_DIR=/usr/local/opt/python/Frameworks/Python.framework/Versions/2.7'.$PATH
+" so ycm works
+" let $PATH = '/usr/local/opt/python/Frameworks/Python.framework/Versions/2.7/lib/libpython2.7.dylib -DPYTHON_INCLUDE_DIR=/usr/local/opt/python/Frameworks/Python.framework/Versions/2.7'.$PATH
