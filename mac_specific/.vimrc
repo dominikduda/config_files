@@ -17,8 +17,7 @@ set shell=/bin/zsh
 " AB SPECIFIC ************************************
 " Add empty line at end of file after save
 set eol
-" let g:vimrubocop_rubocop_cmd = '/Users/dominikduda/.rvm/gems/ruby-2.1.2@akelius_box/bin/rubocop'
-" let g:vimrubocop_rubocop_cmd = execute 'echo which rubocop'
+let test#ruby#minitest#file_pattern = '_spec\.rb'
 " <!!!!!!!!**************!!!!!!!!>
 
 " ENCODING ************************************
@@ -26,9 +25,6 @@ language en_US.UTF-8
 set langmenu=en_US.UTF-8
 set fileencoding=utf-8
 " <!!!!!!!!**************!!!!!!!!>
-
-" Removed in nvim, keeping for backwards compatibility
-set nocompatible
 
 " NOT SURE OR TOO LAZY TO CHECK ************************************
 set ttimeoutlen=0
@@ -42,6 +38,8 @@ set synmaxcol=200
 set re=1
 " <!!!!!!!!**************!!!!!!!!>
 
+" Removed in nvim, keeping for backwards compatibility
+set nocompatible
 " AFAIK time to update gitgutter signs
 set updatetime=1000
 " Mouse support
@@ -303,7 +301,7 @@ set cpoptions+=d
 " <!!!!!!!!**************!!!!!!!!>
 
 " NERDTREE CONFIG ************************************
-let g:NERDTreeWinSize = 23
+let g:NERDTreeWinSize = 46
 "close vim if only NERDTree is opened
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " start with nerdtree open if no file were specified (2 lines below)
