@@ -17,7 +17,9 @@ set shell=/bin/zsh
 " AB SPECIFIC ************************************
 " Add empty line at end of file after save
 set eol
-let test#ruby#minitest#file_pattern = '_spec\.rb'
+" let test#ruby#minitest#file_pattern = '_spec\.rb'
+let test#ruby#rspec#executable = 'foreman run rspec'
+let g:test#runner_commands = ['Rspec']
 " <!!!!!!!!**************!!!!!!!!>
 
 " ENCODING ************************************
