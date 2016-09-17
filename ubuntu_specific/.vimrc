@@ -13,13 +13,11 @@ set shell=/bin/zsh
 " |                                                                                         |
 " | Normal comment always concerns only one line below it (unless specified otherwise).     |
 " |-----------------------------------------------------------------------------------------|
-
 " ENCODING ************************************
 language en_US.UTF-8
 set langmenu=en_US.UTF-8
 set fileencoding=utf-8
 " <!!!!!!!!**************!!!!!!!!>
-
 " Removed in nvim, keeping for backwards compatibility
 " set nocompatible
 
@@ -114,6 +112,7 @@ Plug 'xolox/vim-misc'
 Plug 'xolox/vim-easytags'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
+Plug 'majutsushi/tagbar'
 " <!!!!!!!!**************!!!!!!!!>
 
 " GIT INTEGRATION ************************************
@@ -298,6 +297,11 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " NerdTree toggle
 nmap <leader>2 :NERDTreeToggle<CR>
 " <!!!!!!!!**************!!!!!!!!>
+
+" TAGBAR CONFIG ************************************
+autocmd VimEnter * Tagbar
+" <!!!!!!!!**************!!!!!!!!>
+
 
 " GITGUTTER CONFIG ************************************
 let g:gitgutter_sign_column_always = 1
