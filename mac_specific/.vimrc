@@ -14,14 +14,6 @@ set shell=/bin/zsh
 " | Normal comment always concerns only one line below it (unless specified otherwise).     |
 " |-----------------------------------------------------------------------------------------|
 
-" AB SPECIFIC ************************************
-" Add empty line at end of file after save
-set eol
-" let test#ruby#minitest#file_pattern = '_spec\.rb'
-let test#ruby#rspec#executable = 'foreman run rspec'
-let g:test#runner_commands = ['Rspec']
-" <!!!!!!!!**************!!!!!!!!>
-
 " ENCODING ************************************
 language en_US.UTF-8
 set langmenu=en_US.UTF-8
@@ -38,12 +30,13 @@ set softtabstop=2
 syntax sync minlines=256
 set synmaxcol=200
 set re=1
+" let ruby_no_expensive = 1
 " <!!!!!!!!**************!!!!!!!!>
 
 " Removed in nvim, keeping for backwards compatibility
 set nocompatible
 " AFAIK time to update gitgutter signs
-set updatetime=1000
+set updatetime=900
 " Mouse support
 set mouse=a
 " Only redraw when it is needed
@@ -92,8 +85,6 @@ set shiftwidth=2
 set smartindent
 " Show column and row numbers
 set ruler
-" Color 120th column
-set colorcolumn=120
 " Amount of possible undos
 set undolevels=100
 " Highlight current line
@@ -122,15 +113,15 @@ endif
 filetype off
 call plug#begin('~/.vim/plugged')
 
-" DEBUG
-" " GENERAL ************************************
+" GENERAL ************************************
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-easytags'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
+Plug 'majutsushi/tagbar'
 " " <!!!!!!!!**************!!!!!!!!>
 
-" " GIT INTEGRATION ************************************
+" GIT INTEGRATION ************************************
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -160,6 +151,8 @@ Plug 'tpope/vim-rvm'
 Plug 'tpope/vim-commentary'
 " Undo history tree
 Plug 'sjl/gundo.vim'
+" Change ruby blocks between do end and { }
+Plug 'jgdavey/vim-blockle'
 
 " AUTOCOMPLETE AND SNIPPETS ************************************
 " Autocomplete
@@ -272,7 +265,7 @@ let g:airline_powerline_fonts = 1
 " <!!!!!!!!**************!!!!!!!!>
 
 " CTRLP CONFIG ************************************
-let g:ctrlp_map = '<c-p>'
+let g:ctrlp_map = '<C-p>'
 let g:ctrlp_cmd = 'CtrlPMixed'
 map <C-l> :CtrlPMRU<CR>
 "show hidden files
@@ -303,7 +296,7 @@ set cpoptions+=d
 " <!!!!!!!!**************!!!!!!!!>
 
 " NERDTREE CONFIG ************************************
-let g:NERDTreeWinSize = 46
+let g:NERDTreeWinSize = 43
 "close vim if only NERDTree is opened
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " start with nerdtree open if no file were specified (2 lines below)
@@ -313,16 +306,24 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 nmap <leader>2 :NERDTreeToggle<CR>
 " <!!!!!!!!**************!!!!!!!!>
 
+" TAGBAR CONFIG ************************************
+" autocmd VimEnter * Tagbar
+" start with nerdtree open if no file were specified (2 lines below)
+" autocmd StdinReadPre * let s:std_in=1
+nmap <leader>\ :TagbarToggle<CR>
+" <!!!!!!!!**************!!!!!!!!>
+
 " GITGUTTER CONFIG ************************************
 let g:gitgutter_sign_column_always = 1
 " View diff with <leader>1
 nnoremap <expr> <leader>1 (g:gitgutter_highlight_lines) ? ':GitGutterLineHighlightsToggle<CR>:NERDTreeToggle<CR><C-w>l:q!<CR>' : ':GitGutterLineHighlightsToggle<CR>:Gvsplit<CR>:NERDTreeToggle<CR>'
 " uncomment 2 lines below in case of performance issues
-let g:gitgutter_realtime = 1
-let g:gitgutter_eager = 1
+let g:gitgutter_realtime = 0
+let g:gitgutter_eager = 0
 " <!!!!!!!!**************!!!!!!!!>
 
 " PERSONAL CONFIG AND SHORTCUTS ************************************
+let g:syntastic_ruby_mri_exec = '/Users/dominikduda/.rvm/rubies/ruby-2.3.1/bin/ruby'
 " ctrl+move line (2 lines below)
 nmap <C-k> ddkP
 nmap <C-j> ddp
@@ -346,6 +347,9 @@ nnoremap , :Ag<SPACE>
 au CursorHold * checktime
 " Toggle Gundo window
 nnoremap <F5> :GundoToggle<CR>
+autocmd! BufWritePost * Neomake
+"Auto remove trailing whitespaces on save
+autocmd BufWritePre * FixWhitespace
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIM-TEST CONFIG ************************************
@@ -356,6 +360,10 @@ nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
 let test#strategy = 'neoterm'
 let g:neoterm_position = 'horizontal'
+" <!!!!!!!!**************!!!!!!!!>
+
+" VIM-TEST CONFIG ************************************
+let g:blockle_mapping = '<C-b>'
 " <!!!!!!!!**************!!!!!!!!>
 
 " TERMINAL MODE SHORTCUTS ************************************
@@ -370,7 +378,7 @@ if has('nvim')
   :nnoremap <A-h> <C-w>h
   :nnoremap <A-j> <C-w>j
   " Its like this to scroll NERDtree properly and switch to file buffer instantly
-  :nnoremap <A-k> <C-w>kzb<C-w>l
+  :nnoremap <A-k> <C-w>k
   :nnoremap <A-l> <C-w>l
 endif
 " <!!!!!!!!**************!!!!!!!!>
@@ -392,12 +400,29 @@ let g:tsuquyomi_disable_quickfix = 1
 " let g:neomake_typescript_enabled_makers = []
 " let g:syntastic_typescript_tsc_fname = ''
 " let g:syntastic_typescript_checkers = ['tsuquyomi']
-autocmd FileType typescript setlocal completeopt+=menu,preview
+
+" autocmd FileType typescript setlocal completeopt+=menu,preview
 " <!!!!!!!!**************!!!!!!!!>
 
-autocmd! BufWritePost * Neomake
-"Auto remove trailing whitespaces on save
-autocmd BufWritePre * FixWhitespace
+" AB SPECIFIC ************************************
+" Add empty line at end of file after save
+set eol
+" let test#ruby#minitest#file_pattern = '_spec\.rb'
+let test#ruby#rspec#executable = 'foreman run rspec'
+let g:test#runner_commands = ['Rspec']
+" vim-rails priority rspec tests when using :A
+let g:rails_projections = {
+      \  'app/*.rb': {
+      \     'alternate': 'spec/{}_spec.rb',
+      \     'type': 'source'
+      \   },
+      \  'spec/*_spec.rb': {
+      \     'alternate': 'app/{}.rb',
+      \     'type': 'test'
+      \   }
+      \}
+" Color 120th column
+set colorcolumn=100
+" <!!!!!!!!**************!!!!!!!!>
 
-" so ycm works
-" let $PATH = '/usr/local/opt/python/Frameworks/Python.framework/Versions/2.7/lib/libpython2.7.dylib -DPYTHON_INCLUDE_DIR=/usr/local/opt/python/Frameworks/Python.framework/Versions/2.7'.$PATH
+
