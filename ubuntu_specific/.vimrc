@@ -145,6 +145,8 @@ Plug 'tpope/vim-rvm'
 Plug 'tpope/vim-commentary'
 " Undo history tree
 Plug 'sjl/gundo.vim'
+" Change ruby blocks between do end and { }
+Plug 'jgdavey/vim-blockle'
 
 " AUTOCOMPLETE AND SNIPPETS ************************************
 " Autocomplete
@@ -229,7 +231,7 @@ let g:jsx_ext_required = 0
 
 " YOUCOMPLETEME CONFIG ************************************
 " Path to python interpreter for ycm
-let g:ycm_path_to_python_interpreter = '/usr/bin/python'
+" let g:ycm_path_to_python_interpreter = '/usr/bin/python3'
 " Make YCM compatible with UltiSnips using supertab (3 lines below)
 let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
@@ -295,10 +297,11 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " NerdTree toggle
-nmap <leader>2 :NERDTreeToggle<CR>
+nmap <leader>1 :NERDTreeToggle<CR>
 " <!!!!!!!!**************!!!!!!!!>
 
 " TAGBAR CONFIG ************************************
+nmap <leader>\ :TagbarToggle<CR>
 autocmd VimEnter * Tagbar
 " <!!!!!!!!**************!!!!!!!!>
 
@@ -306,7 +309,7 @@ autocmd VimEnter * Tagbar
 " GITGUTTER CONFIG ************************************
 let g:gitgutter_sign_column_always = 1
 " View diff with <leader>1
-nnoremap <expr> <leader>1 (g:gitgutter_highlight_lines) ? ':GitGutterLineHighlightsToggle<CR>:NERDTreeToggle<CR><C-w>l:q!<CR>' : ':GitGutterLineHighlightsToggle<CR>:Gvsplit<CR>:NERDTreeToggle<CR>'
+nnoremap <expr> <leader>2 (g:gitgutter_highlight_lines) ? ':GitGutterLineHighlightsToggle<CR>:NERDTreeToggle<CR><C-w>l:q!<CR>' : ':GitGutterLineHighlightsToggle<CR>:Gvsplit<CR>:NERDTreeToggle<CR>'
 " uncomment 2 lines below in case of performance issues
 " let g:gitgutter_realtime = 0
 " let g:gitgutter_eager = 0
@@ -347,7 +350,11 @@ nmap <silent> <leader>g :TestVisit<CR>
 let test#strategy = 'neoterm'
 let g:neoterm_position = 'horizontal'
 " <!!!!!!!!**************!!!!!!!!>
-
+"
+" BLOCKLE CONFIG ************************************
+let g:blockle_mapping = '<C-b>'
+" <!!!!!!!!**************!!!!!!!!>
+"
 " TERMINAL MODE SHORTCUTS ************************************
 if has('nvim')
   " Exit terminal mode with esc
