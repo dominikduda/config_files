@@ -88,7 +88,7 @@ set ruler
 " Amount of possible undos
 set undolevels=100
 " Highlight current line
-set cursorline
+" set cursorline
 " Allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 " Color syntax
@@ -303,20 +303,21 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " NerdTree toggle
-nmap <leader>2 :NERDTreeToggle<CR>
+nmap <leader>1 :NERDTreeToggle<CR>
 " <!!!!!!!!**************!!!!!!!!>
 
 " TAGBAR CONFIG ************************************
 " autocmd VimEnter * Tagbar
 " start with nerdtree open if no file were specified (2 lines below)
 " autocmd StdinReadPre * let s:std_in=1
+let g:tagbar_sort = 0
 nmap <leader>\ :TagbarToggle<CR>
 " <!!!!!!!!**************!!!!!!!!>
 
 " GITGUTTER CONFIG ************************************
 let g:gitgutter_sign_column_always = 1
 " View diff with <leader>1
-nnoremap <expr> <leader>1 (g:gitgutter_highlight_lines) ? ':GitGutterLineHighlightsToggle<CR>:NERDTreeToggle<CR><C-w>l:q!<CR>' : ':GitGutterLineHighlightsToggle<CR>:Gvsplit<CR>:NERDTreeToggle<CR>'
+nnoremap <expr> <leader>2 (g:gitgutter_highlight_lines) ? ':GitGutterLineHighlightsToggle<CR>:NERDTreeToggle<CR><C-w>l:q!<CR>' : ':GitGutterLineHighlightsToggle<CR>:Gvsplit<CR>:NERDTreeToggle<CR>'
 " uncomment 2 lines below in case of performance issues
 let g:gitgutter_realtime = 0
 let g:gitgutter_eager = 0
@@ -362,8 +363,12 @@ let test#strategy = 'neoterm'
 let g:neoterm_position = 'horizontal'
 " <!!!!!!!!**************!!!!!!!!>
 
-" VIM-TEST CONFIG ************************************
+" BLOCKLE CONFIG ************************************
 let g:blockle_mapping = '<C-b>'
+" <!!!!!!!!**************!!!!!!!!>
+
+" FUGITIVE CONFIG ************************************
+set diffopt+=vertical
 " <!!!!!!!!**************!!!!!!!!>
 
 " TERMINAL MODE SHORTCUTS ************************************
