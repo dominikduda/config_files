@@ -301,10 +301,20 @@ nmap <leader>1 :NERDTreeToggle<CR>
 " <!!!!!!!!**************!!!!!!!!>
 
 " TAGBAR CONFIG ************************************
+autocmd BufEnter * nested :call tagbar#autoopen(0)
 nmap <leader>\ :TagbarToggle<CR>
-autocmd VimEnter * Tagbar
+let g:tagbar_sort = 0
+let g:tagbar_type_ruby = {
+    \ 'kinds' : [
+        \ 'm:modules',
+        \ 'c:classes',
+        \ 'd:describes',
+        \ 'C:contexts',
+        \ 'f:methods',
+        \ 'F:singleton methods'
+    \ ]
+\ }
 " <!!!!!!!!**************!!!!!!!!>
-
 
 " GITGUTTER CONFIG ************************************
 let g:gitgutter_sign_column_always = 1
@@ -339,6 +349,8 @@ set autoread
 au CursorHold * checktime
 " Toggle Gundo window
 nnoremap <F5> :GundoToggle<CR>
+" move Ag window to bottom after opened
+autocmd FileType qf wincmd J
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIM-TEST CONFIG ************************************
@@ -366,12 +378,14 @@ if has('nvim')
   :tnoremap <A-l> <C-\><C-n><C-w>l
   :nnoremap <A-h> <C-w>h
   :nnoremap <A-j> <C-w>j
-  " Its like this to scroll NERDtree properly and switch to file buffer instantly
-  :nnoremap <A-k> <C-w>kzb<C-w>l
+  " Its like this to swap to middle buffer when switching from term (left is usually nerdtree)
+  :nnoremap <A-k> <C-w>k<C-w>l
   :nnoremap <A-l> <C-w>l
 endif
 " <!!!!!!!!**************!!!!!!!!>
-
+let g:easytags_suppress_ctags_warning = 1
+let g:easytags_cmd = '/usr/local/bin/ctags'
+let g:tabgbar_ctags_bin="ctajgs"
 " TAB LENGTHS ************************************
 autocmd Filetype slim setlocal ts=2 sts=2 sw=2
 autocmd Filetype html setlocal ts=2 sts=2 sw=2
@@ -395,3 +409,4 @@ autocmd FileType typescript setlocal completeopt+=menu,preview
 autocmd! BufWritePost * Neomake
 "Auto remove trailing whitespaces on save
 autocmd BufWritePre * FixWhitespace
+set switchbuf=split
