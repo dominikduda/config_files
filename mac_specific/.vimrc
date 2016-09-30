@@ -88,7 +88,7 @@ set ruler
 " Amount of possible undos
 set undolevels=100
 " Highlight current line
-" set cursorline
+set cursorline
 " Allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 " Color syntax
@@ -307,7 +307,6 @@ nmap <leader>1 :NERDTreeToggle<CR>
 " <!!!!!!!!**************!!!!!!!!>
 
 " TAGBAR CONFIG ************************************
-" autocmd VimEnter * Tagbar
 " start with nerdtree open if no file were specified (2 lines below)
 " autocmd StdinReadPre * let s:std_in=1
 let g:tagbar_sort = 0
@@ -351,6 +350,8 @@ nnoremap <F5> :GundoToggle<CR>
 autocmd! BufWritePost * Neomake
 "Auto remove trailing whitespaces on save
 autocmd BufWritePre * FixWhitespace
+" move Ag window to bottom after opened
+autocmd FileType qf wincmd J
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIM-TEST CONFIG ************************************
@@ -364,7 +365,7 @@ let g:neoterm_position = 'horizontal'
 " <!!!!!!!!**************!!!!!!!!>
 
 " BLOCKLE CONFIG ************************************
-let g:blockle_mapping = '<C-b>'
+" let g:blockle_mapping = <leader>b
 " <!!!!!!!!**************!!!!!!!!>
 
 " FUGITIVE CONFIG ************************************
@@ -382,8 +383,8 @@ if has('nvim')
   :tnoremap <A-l> <C-\><C-n><C-w>l
   :nnoremap <A-h> <C-w>h
   :nnoremap <A-j> <C-w>j
-  " Its like this to scroll NERDtree properly and switch to file buffer instantly
-  :nnoremap <A-k> <C-w>k
+  " Its like this to swap to middle buffer when switching from term (left is usually nerdtree)
+  :nnoremap <A-k> <C-w>k<C-w>l
   :nnoremap <A-l> <C-w>l
 endif
 " <!!!!!!!!**************!!!!!!!!>
