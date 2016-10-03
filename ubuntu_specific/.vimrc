@@ -40,7 +40,7 @@ set number
 " Show relative line number
 set relativenumber
 " Wrapped line symbol
-set showbreak=▶▶
+set showbreak=▶▶▶
 " Text (e. g. comment) break point
 set textwidth=120
 " Disable jumping to matching parenthesis after typing it
@@ -82,7 +82,7 @@ set colorcolumn=120
 " Amount of possible undos
 set undolevels=100
 " Highlight current line
-set cursorline
+" set cursorline
 " Allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 " Color syntax
@@ -301,7 +301,7 @@ nmap <leader>1 :NERDTreeToggle<CR>
 " <!!!!!!!!**************!!!!!!!!>
 
 " TAGBAR CONFIG ************************************
-autocmd BufEnter * nested :call tagbar#autoopen(0)
+" autocmd BufEnter * nested :call tagbar#autoopen(0)
 nmap <leader>\ :TagbarToggle<CR>
 let g:tagbar_sort = 0
 let g:tagbar_type_ruby = {
@@ -326,6 +326,10 @@ nnoremap <expr> <leader>2 (g:gitgutter_highlight_lines) ? ':GitGutterLineHighlig
 " <!!!!!!!!**************!!!!!!!!>
 
 " PERSONAL CONFIG AND SHORTCUTS ************************************
+" show highlight source by pressing F10 (3 lines below)
+map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 " ctrl+move line (2 lines below)
 nmap <C-k> ddkP
 nmap <C-j> ddp
@@ -339,8 +343,10 @@ nmap <C-v> "+p
 imap <C-v> <Esc>"+pa
 " Change current line color when entering insert mode
 autocmd InsertEnter * highlight  CursorLine ctermbg=52
+autocmd InsertEnter * set cursorline
 " Revert current line color to default when leaving insert mode
-autocmd InsertLeave * highlight  CursorLine ctermbg=233
+autocmd InsertLeave * highlight  CursorLine ctermbg=232
+autocmd InsertLeave * set cursorline!
 " Search on , (2 lines below)
 command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 nnoremap , :Ag<SPACE>
@@ -362,11 +368,15 @@ nmap <silent> <leader>g :TestVisit<CR>
 let test#strategy = 'neoterm'
 let g:neoterm_position = 'horizontal'
 " <!!!!!!!!**************!!!!!!!!>
-"
+
 " BLOCKLE CONFIG ************************************
-let g:blockle_mapping = '<C-b>'
+" let g:blockle_mapping = '<C-b>'
 " <!!!!!!!!**************!!!!!!!!>
-"
+
+" FUGITIVE CONFIG ************************************
+set diffopt+=vertical
+" <!!!!!!!!**************!!!!!!!!>
+
 " TERMINAL MODE SHORTCUTS ************************************
 if has('nvim')
   " Exit terminal mode with esc
@@ -383,9 +393,7 @@ if has('nvim')
   :nnoremap <A-l> <C-w>l
 endif
 " <!!!!!!!!**************!!!!!!!!>
-let g:easytags_suppress_ctags_warning = 1
-let g:easytags_cmd = '/usr/local/bin/ctags'
-let g:tabgbar_ctags_bin="ctajgs"
+
 " TAB LENGTHS ************************************
 autocmd Filetype slim setlocal ts=2 sts=2 sw=2
 autocmd Filetype html setlocal ts=2 sts=2 sw=2
