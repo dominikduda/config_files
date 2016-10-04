@@ -206,6 +206,8 @@ Plug 'slim-template/vim-slim'
 Plug 'mattn/emmet-vim'
 " Easy text align with regexp
 Plug 'godlygeek/tabular'
+" Coffe script support
+Plug 'kchmck/vim-coffee-script'
 
 " " GVIM ONLY ************************************
 " " Enabling fulscreen helper
