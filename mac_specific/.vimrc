@@ -48,7 +48,7 @@ set number
 " Show relative line number
 set relativenumber
 " Wrapped line symbol
-set showbreak=▶▶
+set showbreak=▶▶▶
 " Text (e. g. comment) break point
 set textwidth=120
 " Disable jumping to matching parenthesis after typing it
@@ -88,7 +88,7 @@ set ruler
 " Amount of possible undos
 set undolevels=100
 " Highlight current line
-set cursorline
+" set cursorline
 " Allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 " Color syntax
@@ -307,10 +307,19 @@ nmap <leader>1 :NERDTreeToggle<CR>
 " <!!!!!!!!**************!!!!!!!!>
 
 " TAGBAR CONFIG ************************************
-" start with nerdtree open if no file were specified (2 lines below)
-" autocmd StdinReadPre * let s:std_in=1
+let g:tagbar_width = 30
 let g:tagbar_sort = 0
 nmap <leader>\ :TagbarToggle<CR>
+let g:tagbar_type_ruby = {
+    \ 'kinds' : [
+        \ 'm:modules',
+        \ 'c:classes',
+        \ 'd:describes',
+        \ 'C:contexts',
+        \ 'f:methods',
+        \ 'F:singleton methods'
+    \ ]
+\ }
 " <!!!!!!!!**************!!!!!!!!>
 
 " GITGUTTER CONFIG ************************************
@@ -335,10 +344,12 @@ vnoremap <C-c> "+y
 " Paste form system clipboard (2 lines below)
 nmap <C-v> "+p
 imap <C-v> <Esc>"+pa
-" Change current line color when entering insert mode
+" Change current line color when entering insert mode (2 lines below)
 autocmd InsertEnter * highlight  CursorLine ctermbg=52
-" Revert current line color to default when leaving insert mode
-autocmd InsertLeave * highlight  CursorLine ctermbg=233
+autocmd InsertEnter * set cursorline
+" Revert current line color to default when leaving insert mode (2 lines below)
+autocmd InsertLeave * highlight  CursorLine ctermbg=232
+autocmd InsertLeave * set cursorline!
 " Search on , (2 lines below)
 command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 nnoremap , :Ag<SPACE>
@@ -430,5 +441,7 @@ let g:rails_projections = {
 " Color 120th column
 set colorcolumn=100
 " <!!!!!!!!**************!!!!!!!!>
+" Higliht showbreak characters (and ~ unfortunately too)
 
-
+" Put this in dante_modified
+hi! link NonText LineNr
