@@ -200,6 +200,8 @@ Plug 'slim-template/vim-slim'
 Plug 'mattn/emmet-vim'
 " Easy text align with regexp
 Plug 'godlygeek/tabular'
+" Coffe script support
+Plug 'kchmck/vim-coffee-script'
 
 " " GVIM ONLY ************************************
 " " Enabling fulscreen helper
@@ -412,6 +414,27 @@ let g:tsuquyomi_disable_quickfix = 1
 " let g:syntastic_typescript_tsc_fname = ''
 " let g:syntastic_typescript_checkers = ['tsuquyomi']
 autocmd FileType typescript setlocal completeopt+=menu,preview
+" <!!!!!!!!**************!!!!!!!!>
+
+" AB SPECIFIC ************************************
+" Add empty line at end of file after save
+set eol
+" let test#ruby#minitest#file_pattern = '_spec\.rb'
+let test#ruby#rspec#executable = 'foreman run rspec'
+let g:test#runner_commands = ['Rspec']
+" vim-rails priority rspec tests when using :A
+let g:rails_projections = {
+      \  'app/*.rb': {
+      \     'alternate': 'spec/{}_spec.rb',
+      \     'type': 'source'
+      \   },
+      \  'spec/*_spec.rb': {
+      \     'alternate': 'app/{}.rb',
+      \     'type': 'test'
+      \   }
+      \}
+" Color 120th column
+set colorcolumn=100
 " <!!!!!!!!**************!!!!!!!!>
 
 autocmd! BufWritePost * Neomake
