@@ -13,6 +13,7 @@ set shell=/bin/zsh
 " |                                                                                         |
 " | Normal comment always concerns only one line below it (unless specified otherwise).     |
 " |-----------------------------------------------------------------------------------------|
+
 " ENCODING ************************************
 language en_US.UTF-8
 set langmenu=en_US.UTF-8
@@ -82,7 +83,7 @@ set colorcolumn=120
 " Amount of possible undos
 set undolevels=100
 " Highlight current line
-" set cursorline
+set cursorline
 " Allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 " Color syntax
@@ -106,6 +107,7 @@ endif
 
 filetype off
 call plug#begin('~/.vim/plugged')
+
 
 " GENERAL ************************************
 Plug 'xolox/vim-misc'
@@ -176,6 +178,10 @@ Plug 'tpope/vim-repeat'
 " Plug 'Shougo/vimproc.vim'
 " " <!!!!!!!!**************!!!!!!!!>
 
+" tmux compatibility - switch windows events
+Plug 'tmux-plugins/vim-tmux-focus-events'
+" Dim inactive windows
+Plug 'blueyed/vim-diminactive'
 " Airline
 Plug 'bling/vim-airline'
 " Detect trailing whitespaces
@@ -225,8 +231,9 @@ call plug#end()
 filetype plugin indent on
 set wildignore+=*/tmp/*,*.so,*.swp,*.zipo
 set omnifunc=syntaxcomplete#Complete
-colorscheme dante_modified
 let &t_Co=256
+set t_Co=16
+colorscheme dante_modified
 " JS thing
 let g:jsx_ext_required = 0
 " <!!!!!!!!**************!!!!!!!!>
@@ -291,6 +298,15 @@ let g:easytags_dynamic_files = 2
 set cpoptions+=d
 " <!!!!!!!!**************!!!!!!!!>
 
+" DIMINACTIVE SETTINGS ************************************
+" Enable dimming non-file windows (like nerdtree, ag)
+let g:diminactive_buftype_blacklist = []
+" tmux integration
+let g:diminactive_enable_focus = 1
+" Fixes not-dimming properly when file is opened from nerdtree
+autocmd BufNew * DimInactive
+" <!!!!!!!!**************!!!!!!!!>
+"
 " NERDTREE CONFIG ************************************
 let g:NERDTreeWinSize = 43
 "close vim if only NERDTree is opened
@@ -305,6 +321,7 @@ nmap <leader>1 :NERDTreeToggle<CR>
 " TAGBAR CONFIG ************************************
 " autocmd BufEnter * nested :call tagbar#autoopen(0)
 nmap <leader>\ :TagbarToggle<CR>
+let g:tagbar_width = 30
 let g:tagbar_sort = 0
 let g:tagbar_type_ruby = {
     \ 'kinds' : [
@@ -323,8 +340,9 @@ let g:gitgutter_sign_column_always = 1
 " View diff with <leader>1
 nnoremap <expr> <leader>2 (g:gitgutter_highlight_lines) ? ':GitGutterLineHighlightsToggle<CR>:NERDTreeToggle<CR><C-w>l:q!<CR>' : ':GitGutterLineHighlightsToggle<CR>:Gvsplit<CR>:NERDTreeToggle<CR>'
 " uncomment 2 lines below in case of performance issues
-" let g:gitgutter_realtime = 0
-" let g:gitgutter_eager = 0
+let g:gitgutter_realtime = 1
+let g:gitgutter_eager = 1
+let g:gitgutter_async = 1
 " <!!!!!!!!**************!!!!!!!!>
 
 " PERSONAL CONFIG AND SHORTCUTS ************************************
@@ -345,10 +363,8 @@ nmap <C-v> "+p
 imap <C-v> <Esc>"+pa
 " Change current line color when entering insert mode
 autocmd InsertEnter * highlight  CursorLine ctermbg=52
-autocmd InsertEnter * set cursorline
 " Revert current line color to default when leaving insert mode
-autocmd InsertLeave * highlight  CursorLine ctermbg=232
-autocmd InsertLeave * set cursorline!
+autocmd InsertLeave * highlight  CursorLine ctermbg=235
 " Search on , (2 lines below)
 command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 nnoremap , :Ag<SPACE>
@@ -391,7 +407,7 @@ if has('nvim')
   :nnoremap <A-h> <C-w>h
   :nnoremap <A-j> <C-w>j
   " Its like this to swap to middle buffer when switching from term (left is usually nerdtree)
-  :nnoremap <A-k> <C-w>k<C-w>l
+  :nnoremap <A-k> <C-w>k
   :nnoremap <A-l> <C-w>l
 endif
 " <!!!!!!!!**************!!!!!!!!>
@@ -416,28 +432,28 @@ let g:tsuquyomi_disable_quickfix = 1
 autocmd FileType typescript setlocal completeopt+=menu,preview
 " <!!!!!!!!**************!!!!!!!!>
 
-" AB SPECIFIC ************************************
-" Add empty line at end of file after save
-set eol
-" let test#ruby#minitest#file_pattern = '_spec\.rb'
-let test#ruby#rspec#executable = 'foreman run rspec'
-let g:test#runner_commands = ['Rspec']
-" vim-rails priority rspec tests when using :A
-let g:rails_projections = {
-      \  'app/*.rb': {
-      \     'alternate': 'spec/{}_spec.rb',
-      \     'type': 'source'
-      \   },
-      \  'spec/*_spec.rb': {
-      \     'alternate': 'app/{}.rb',
-      \     'type': 'test'
-      \   }
-      \}
-" Color 120th column
-set colorcolumn=100
-" <!!!!!!!!**************!!!!!!!!>
+" " AB SPECIFIC ************************************
+" " Add empty line at end of file after save
+" set eol
+" let test#ruby#rspec#executable = 'foreman run rspec'
+" let g:test#runner_commands = ['Rspec']
+" " vim-rails priority rspec tests when using :A
+" let g:rails_projections = {
+"       \  'app/*.rb': {
+"       \     'alternate': 'spec/{}_spec.rb',
+"       \     'type': 'source'
+"       \   },
+"       \  'spec/*_spec.rb': {
+"       \     'alternate': 'app/{}.rb',
+"       \     'type': 'test'
+"       \   }
+"       \}
+" " Color 100th column
+" set colorcolumn=100
+" " <!!!!!!!!**************!!!!!!!!>
 
 autocmd! BufWritePost * Neomake
 "Auto remove trailing whitespaces on save
 autocmd BufWritePre * FixWhitespace
 set switchbuf=split
+
