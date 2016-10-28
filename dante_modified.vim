@@ -70,8 +70,8 @@ hi VisualNOS guifg=NONE guibg=NONE guisp=NONE gui=bold,underline ctermfg=NONE ct
 hi DiffDelete guifg=#080808 guibg=#d70000 guisp=#d70000 gui=NONE ctermfg=232 ctermbg=160 cterm=NONE
 hi ModeMsg guifg=NONE guibg=NONE guisp=NONE gui=bold ctermfg=NONE ctermbg=NONE cterm=bold
 hi CursorColumn guifg=NONE guibg=#0e0e0e guisp=#0e0e0e gui=NONE ctermfg=NONE ctermbg=234 cterm=NONE
-hi Define guifg=#1766b0 guibg=NONE guisp=NONE gui=NONE ctermfg=25 ctermbg=NONE cterm=NONE
-hi Function guifg=#4040d6 guibg=NONE guisp=NONE gui=NONE ctermfg=62 ctermbg=NONE cterm=NONE
+hi Define guifg=#1766b0 guibg=NONE guisp=NONE gui=NONE ctermfg=62 ctermbg=NONE cterm=NONE
+hi Function guifg=#4040d6 guibg=NONE guisp=NONE gui=NONE ctermfg=33 ctermbg=NONE cterm=NONE
 hi FoldColumn guifg=#3a5fcd guibg=#ffffff guisp=#ffffff gui=NONE ctermfg=68 ctermbg=15 cterm=NONE
 hi PreProc guifg=#008cc4 guibg=NONE guisp=NONE gui=NONE ctermfg=4 ctermbg=NONE cterm=NONE
 hi Visual guifg=#080808 guibg=#bfbfbf guisp=#bfbfbf gui=NONE ctermfg=232 ctermbg=7 cterm=NONE
@@ -110,4 +110,5 @@ hi CTagsClass guifg=#000000 guibg=NONE guisp=NONE gui=underline ctermfg=NONE cte
 hi! link NonText LineNr
 hi rubymodulenametag guifg=#61d700 guibg=NONE guisp=NONE gui=NONE ctermfg=76 ctermbg=NONE cterm=underline
 hi rubyclassnametag guifg=#61d700 guibg=NONE guisp=NONE gui=NONE ctermfg=76 ctermbg=NONE cterm=underline
-hi rubymethodnametag guifg=#4040d6 guibg=NONE guisp=NONE gui=underline ctermfg=62 ctermbg=NONE cterm=underline
+hi rubymethodnametag guifg=#4040d6 guibg=NONE guisp=NONE gui=underline ctermfg=33 ctermbg=NONE cterm=underline
+

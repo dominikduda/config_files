@@ -108,6 +108,7 @@ endif
 filetype off
 call plug#begin('~/.vim/plugged')
 
+" Plug 'tmux-plugins/vim-tmux-focus-events'
 
 " GENERAL ************************************
 Plug 'xolox/vim-misc'
@@ -178,8 +179,6 @@ Plug 'tpope/vim-repeat'
 " Plug 'Shougo/vimproc.vim'
 " " <!!!!!!!!**************!!!!!!!!>
 
-" tmux compatibility - switch windows events
-Plug 'tmux-plugins/vim-tmux-focus-events'
 " Dim inactive windows
 Plug 'blueyed/vim-diminactive'
 " Airline
@@ -432,25 +431,25 @@ let g:tsuquyomi_disable_quickfix = 1
 autocmd FileType typescript setlocal completeopt+=menu,preview
 " <!!!!!!!!**************!!!!!!!!>
 
-" " AB SPECIFIC ************************************
-" " Add empty line at end of file after save
-" set eol
-" let test#ruby#rspec#executable = 'foreman run rspec'
-" let g:test#runner_commands = ['Rspec']
-" " vim-rails priority rspec tests when using :A
-" let g:rails_projections = {
-"       \  'app/*.rb': {
-"       \     'alternate': 'spec/{}_spec.rb',
-"       \     'type': 'source'
-"       \   },
-"       \  'spec/*_spec.rb': {
-"       \     'alternate': 'app/{}.rb',
-"       \     'type': 'test'
-"       \   }
-"       \}
-" " Color 100th column
-" set colorcolumn=100
-" " <!!!!!!!!**************!!!!!!!!>
+" AB SPECIFIC ************************************
+" Add empty line at end of file after save
+set eol
+let test#ruby#rspec#executable = 'foreman run rspec'
+let g:test#runner_commands = ['Rspec']
+" vim-rails priority rspec tests when using :A
+let g:rails_projections = {
+      \  'app/*.rb': {
+      \     'alternate': 'spec/{}_spec.rb',
+      \     'type': 'source'
+      \   },
+      \  'spec/*_spec.rb': {
+      \     'alternate': 'app/{}.rb',
+      \     'type': 'test'
+      \   }
+      \}
+" Color 100th column
+set colorcolumn=100
+" <!!!!!!!!**************!!!!!!!!>
 
 autocmd! BufWritePost * Neomake
 "Auto remove trailing whitespaces on save
