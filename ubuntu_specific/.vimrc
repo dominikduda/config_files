@@ -261,6 +261,12 @@ let g:livedown_browser = 'google-chrome'
 let g:livedown_open = 1
 " <!!!!!!!!**************!!!!!!!!>
 
+" NEOTERM CONFIG ************************************
+nmap <leader>2 :Ttoggle<CR>
+let g:neoterm_size = 10
+let g:neoterm_keep_term_open = 0
+" <!!!!!!!!**************!!!!!!!!>
+
 " AIRLINE CONFIG ************************************
 set fillchars+=stl:\ ,stlnc:\
 let g:airline_powerline_fonts = 1
@@ -320,7 +326,8 @@ nmap <leader>1 :NERDTreeToggle<CR>
 " TAGBAR CONFIG ************************************
 " autocmd BufEnter * nested :call tagbar#autoopen(0)
 nmap <leader>\ :TagbarToggle<CR>
-let g:tagbar_width = 30
+let g:tagbar_autoclose = 1
+let g:tagbar_width = 39
 let g:tagbar_sort = 0
 let g:tagbar_type_ruby = {
     \ 'kinds' : [
@@ -337,7 +344,7 @@ let g:tagbar_type_ruby = {
 " GITGUTTER CONFIG ************************************
 let g:gitgutter_sign_column_always = 1
 " View diff with <leader>1
-nnoremap <expr> <leader>2 (g:gitgutter_highlight_lines) ? ':GitGutterLineHighlightsToggle<CR>:NERDTreeToggle<CR><C-w>l:q!<CR>' : ':GitGutterLineHighlightsToggle<CR>:Gvsplit<CR>:NERDTreeToggle<CR>'
+" nnoremap <expr> <leader>2 (g:gitgutter_highlight_lines) ? ':GitGutterLineHighlightsToggle<CR>:NERDTreeToggle<CR><C-w>l:q!<CR>' : ':GitGutterLineHighlightsToggle<CR>:Gvsplit<CR>:NERDTreeToggle<CR>'
 " uncomment 2 lines below in case of performance issues
 let g:gitgutter_realtime = 1
 let g:gitgutter_eager = 1
