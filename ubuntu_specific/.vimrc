@@ -116,6 +116,7 @@ Plug 'xolox/vim-easytags'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
 Plug 'majutsushi/tagbar'
+Plug 'rhysd/clever-f.vim'
 " <!!!!!!!!**************!!!!!!!!>
 
 " GIT INTEGRATION ************************************
@@ -265,6 +266,7 @@ let g:livedown_open = 1
 nmap <leader>2 :Ttoggle<CR>
 let g:neoterm_size = 10
 let g:neoterm_keep_term_open = 0
+let g:neoterm_run_tests_bg = 1
 " <!!!!!!!!**************!!!!!!!!>
 
 " AIRLINE CONFIG ************************************
@@ -311,7 +313,7 @@ let g:diminactive_enable_focus = 1
 " Fixes not-dimming properly when file is opened from nerdtree
 autocmd BufNew * DimInactive
 " <!!!!!!!!**************!!!!!!!!>
-"
+
 " NERDTREE CONFIG ************************************
 let g:NERDTreeWinSize = 43
 "close vim if only NERDTree is opened
@@ -381,6 +383,11 @@ au CursorHold * checktime
 nnoremap <F5> :GundoToggle<CR>
 " move Ag window to bottom after opened
 autocmd FileType qf wincmd J
+" Use J and K to jump between paragraphs (4 lines below)
+nmap J }
+nmap K {
+vmap J }
+vmap K {
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIM-TEST CONFIG ************************************
