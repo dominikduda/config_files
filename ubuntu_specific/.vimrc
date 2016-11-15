@@ -39,7 +39,7 @@ set timeoutlen=900
 " Show absolute line number in current line
 set number
 " Show relative line number
-set relativenumber
+" set relativenumber
 " Wrapped line symbol
 set showbreak=▶▶▶
 " Text (e. g. comment) break point
@@ -64,6 +64,8 @@ set hidden
 set nobackup
 " Highlight search results
 set hlsearch
+" Ignore case of searched characters
+set ignorecase
 " Override the 'ignorecase' option if the search pattern contains upper case characters.
 set smartcase
 " Search as you type
@@ -208,6 +210,8 @@ Plug 'mattn/emmet-vim'
 Plug 'godlygeek/tabular'
 " Coffe script support
 Plug 'kchmck/vim-coffee-script'
+" Project wide search
+Plug 'mileszs/ack.vim'
 
 " " GVIM ONLY ************************************
 " " Enabling fulscreen helper
@@ -353,6 +357,14 @@ let g:gitgutter_eager = 1
 let g:gitgutter_async = 1
 " <!!!!!!!!**************!!!!!!!!>
 
+" ACK.VIM CONFIG ************************************
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+nnoremap , :Ack!<SPACE>
+" <!!!!!!!!**************!!!!!!!!>
+
 " PERSONAL CONFIG AND SHORTCUTS ************************************
 " show highlight source by pressing F10 (3 lines below)
 map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
@@ -361,7 +373,6 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 " ctrl+move line (2 lines below)
 nmap <C-k> ddkP
 nmap <C-j> ddp
-nnoremap , ;
 nnoremap ; :
 imap <C-l> <Esc>$a
 " Copy to system clipboard
@@ -373,21 +384,25 @@ imap <C-v> <Esc>"+pa
 autocmd InsertEnter * highlight  CursorLine ctermbg=52
 " Revert current line color to default when leaving insert mode
 autocmd InsertLeave * highlight  CursorLine ctermbg=235
-" Search on , (2 lines below)
-command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
-nnoremap , :Ag<SPACE>
 " check file change every 4 seconds ('CursorHold') and reload the buffer upon detecting change (2 lines below)
 set autoread
 au CursorHold * checktime
 " Toggle Gundo window
 nnoremap <F5> :GundoToggle<CR>
 " move Ag window to bottom after opened
-autocmd FileType qf wincmd J
-" Use J and K to jump between paragraphs (4 lines below)
-nmap J }
-nmap K {
-vmap J }
-vmap K {
+" autocmd FileType qf wincmd J
+" Use { to span next line to current
+nnoremap { J
+" Use J and K to jump between paragraphs in visual and normal modes (4 lines below)
+nnoremap J }
+nnoremap K {
+vnoremap J }
+vnoremap K {
+" Use H and L to jump to beginning and end of line in normal and visual modes (4 lines below)
+nnoremap H ^
+nnoremap L $
+vnoremap H ^
+vnoremap L $
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIM-TEST CONFIG ************************************
@@ -469,4 +484,3 @@ autocmd! BufWritePost * Neomake
 "Auto remove trailing whitespaces on save
 autocmd BufWritePre * FixWhitespace
 set switchbuf=split
-
