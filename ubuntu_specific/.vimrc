@@ -29,7 +29,7 @@ set softtabstop=2
 " <!!!!!!!!**************!!!!!!!!>
 
 " AFAIK time to update gitgutter signs
-set updatetime=300
+set updatetime=600
 " Mouse support
 set mouse=a
 " Only redraw when it is needed
@@ -108,7 +108,7 @@ endif
 " <!!!!!!!!**************!!!!!!!!>
 
 filetype off
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/plug')
 
 " Plug 'tmux-plugins/vim-tmux-focus-events'
 
@@ -150,7 +150,7 @@ Plug 'tpope/vim-rvm'
 " Comments
 Plug 'tpope/vim-commentary'
 " Undo history tree
-Plug 'sjl/gundo.vim'
+Plug 'mbbill/undotree'
 " Change ruby blocks between do end and { }
 Plug 'jgdavey/vim-blockle'
 
@@ -186,6 +186,8 @@ Plug 'tpope/vim-repeat'
 Plug 'blueyed/vim-diminactive'
 " Airline
 Plug 'bling/vim-airline'
+" Airline themes
+Plug 'vim-airline/vim-airline-themes'
 " Detect trailing whitespaces
 Plug 'bronson/vim-trailing-whitespace'
 " Select region +/-
@@ -201,7 +203,7 @@ Plug 'tpope/vim-endwise'
 " Better highlighting for c++
 Plug 'octol/vim-cpp-enhanced-highlight'
 " Auto insert matching brackets
-Plug 'jiangmiao/auto-pairs'
+Plug 'Townk/vim-autoclose'
 " Slim support
 Plug 'slim-template/vim-slim'
 " HTML support
@@ -276,6 +278,7 @@ let g:neoterm_run_tests_bg = 1
 " AIRLINE CONFIG ************************************
 set fillchars+=stl:\ ,stlnc:\
 let g:airline_powerline_fonts = 1
+let g:airline_theme='base16_summerfruit'
 " <!!!!!!!!**************!!!!!!!!>
 
 " CTRLP CONFIG ************************************
@@ -387,8 +390,8 @@ autocmd InsertLeave * highlight  CursorLine ctermbg=235
 " check file change every 4 seconds ('CursorHold') and reload the buffer upon detecting change (2 lines below)
 set autoread
 au CursorHold * checktime
-" Toggle Gundo window
-nnoremap <F5> :GundoToggle<CR>
+" Toggle Undotree window
+nnoremap <F5> :UndotreeToggle<CR>
 " move Ag window to bottom after opened
 " autocmd FileType qf wincmd J
 " Use { to span next line to current
