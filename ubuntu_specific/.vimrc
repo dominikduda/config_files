@@ -156,7 +156,8 @@ Plug 'jgdavey/vim-blockle'
 
 " AUTOCOMPLETE AND SNIPPETS ************************************
 " Autocomplete
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 " Confrim autocompletion with tab
 Plug 'ervandew/supertab'
 " Snippets for various languages pack
@@ -251,6 +252,14 @@ let g:jsx_ext_required = 0
 let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
+" <!!!!!!!!**************!!!!!!!!>
+
+" DEOPLETE CONFIG ************************************
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_refresh_always = 1
+let g:deoplete#auto_refresh_delay = 50
+imap <c-j> <Tab>
+imap <c-k> <S-Tab>
 " <!!!!!!!!**************!!!!!!!!>
 
 " ULTISNIPS CONFIG ************************************
