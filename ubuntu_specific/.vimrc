@@ -155,7 +155,7 @@ Plug 'mbbill/undotree'
 Plug 'jgdavey/vim-blockle'
 
 " AUTOCOMPLETE AND SNIPPETS ************************************
-" Autocomplete
+" Autocomplete (2 lines below, choose one)
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 " Confrim autocompletion with tab
@@ -245,21 +245,26 @@ colorscheme dante_modified
 let g:jsx_ext_required = 0
 " <!!!!!!!!**************!!!!!!!!>
 
-" YOUCOMPLETEME CONFIG ************************************
-" Path to python interpreter for ycm
-" let g:ycm_path_to_python_interpreter = '/usr/bin/python3'
-" Make YCM compatible with UltiSnips using supertab (3 lines below)
-let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
+" " YOUCOMPLETEME CONFIG ************************************
+" " Path to python interpreter for ycm
+" " let g:ycm_path_to_python_interpreter = '/usr/bin/python3'
+" " Make YCM compatible with UltiSnips using supertab (3 lines below)
+" let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
+" let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
+" let g:SuperTabDefaultCompletionType = '<C-n>'
+" " <!!!!!!!!**************!!!!!!!!>
+
+" VIM-AUTOCLOSE CONFIG ************************************
+" It fixes need to press ESC twice to exit insert mode when YCM/deoplete popup is present
+let g:AutoClosePumvisible = {"ENTER": "<C-Y>", "ESC": "<ESC>"}
 " <!!!!!!!!**************!!!!!!!!>
 
 " DEOPLETE CONFIG ************************************
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_refresh_always = 1
-let g:deoplete#auto_refresh_delay = 50
-imap <c-j> <Tab>
-imap <c-k> <S-Tab>
+let g:deoplete#auto_refresh_delay = 30
+imap <c-k> <Tab>
+imap <c-j> <S-Tab>
 " <!!!!!!!!**************!!!!!!!!>
 
 " ULTISNIPS CONFIG ************************************
@@ -279,8 +284,8 @@ let g:livedown_open = 1
 
 " NEOTERM CONFIG ************************************
 nmap <leader>2 :Ttoggle<CR>
-let g:neoterm_size = 10
-let g:neoterm_keep_term_open = 0
+" let g:neoterm_size = 20
+let g:neoterm_keep_term_open = 1
 let g:neoterm_run_tests_bg = 1
 " <!!!!!!!!**************!!!!!!!!>
 
@@ -386,7 +391,7 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 nmap <C-k> ddkP
 nmap <C-j> ddp
 nnoremap ; :
-imap <C-l> <Esc>$a
+imap <C-l> <End>
 " Copy to system clipboard
 vnoremap <C-c> "+y
 " Paste form system clipboard (2 lines below)
@@ -472,25 +477,25 @@ let g:tsuquyomi_disable_quickfix = 1
 autocmd FileType typescript setlocal completeopt+=menu,preview
 " <!!!!!!!!**************!!!!!!!!>
 
-" AB SPECIFIC ************************************
-" Add empty line at end of file after save
-set eol
-let test#ruby#rspec#executable = 'foreman run rspec'
-let g:test#runner_commands = ['Rspec']
-" vim-rails priority rspec tests when using :A
-let g:rails_projections = {
-      \  'app/*.rb': {
-      \     'alternate': 'spec/{}_spec.rb',
-      \     'type': 'source'
-      \   },
-      \  'spec/*_spec.rb': {
-      \     'alternate': 'app/{}.rb',
-      \     'type': 'test'
-      \   }
-      \}
-" Color 100th column
-set colorcolumn=100
-" <!!!!!!!!**************!!!!!!!!>
+" " AB SPECIFIC ************************************
+" " Add empty line at end of file after save
+" set eol
+" let test#ruby#rspec#executable = 'foreman run rspec'
+" let g:test#runner_commands = ['Rspec']
+" " vim-rails priority rspec tests when using :A
+" let g:rails_projections = {
+"       \  'app/*.rb': {
+"       \     'alternate': 'spec/{}_spec.rb',
+"       \     'type': 'source'
+"       \   },
+"       \  'spec/*_spec.rb': {
+"       \     'alternate': 'app/{}.rb',
+"       \     'type': 'test'
+"       \   }
+"       \}
+" " Color 100th column
+" set colorcolumn=100
+" " <!!!!!!!!**************!!!!!!!!>
 
 autocmd! BufWritePost * Neomake
 "Auto remove trailing whitespaces on save
