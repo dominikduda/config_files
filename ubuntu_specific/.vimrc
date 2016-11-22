@@ -21,6 +21,7 @@ set fileencoding=utf-8
 " <!!!!!!!!**************!!!!!!!!>
 " Removed in nvim, keeping for backwards compatibility
 " set nocompatible
+"
 
 " NOT SURE OR TOO LAZY TO CHECK ************************************
 set ttimeoutlen=0
@@ -28,6 +29,12 @@ set smarttab
 set softtabstop=2
 " <!!!!!!!!**************!!!!!!!!>
 
+" Always show at least 5 columns on the left/right side of cursor
+set sidescrolloff=5
+" Always show at least 1 line above/below the cursor
+set scrolloff=1
+" Use old regexp engine (on new one easytagsh highlighting was running deadly slow)
+set regexpengine=0
 " AFAIK time to update gitgutter signs
 set updatetime=600
 " Mouse support
@@ -110,8 +117,6 @@ endif
 filetype off
 call plug#begin('~/.config/nvim/plug')
 
-" Plug 'tmux-plugins/vim-tmux-focus-events'
-
 " GENERAL ************************************
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-easytags'
@@ -155,8 +160,6 @@ Plug 'mbbill/undotree'
 Plug 'jgdavey/vim-blockle'
 
 " AUTOCOMPLETE AND SNIPPETS ************************************
-" Autocomplete (2 lines below, choose one)
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 " Confrim autocompletion with tab
 Plug 'ervandew/supertab'
@@ -204,7 +207,8 @@ Plug 'tpope/vim-endwise'
 " Better highlighting for c++
 Plug 'octol/vim-cpp-enhanced-highlight'
 " Auto insert matching brackets
-Plug 'Townk/vim-autoclose'
+Plug 'Raimondi/delimitMate'
+" Plug 'Townk/vim-autoclose'
 " Slim support
 Plug 'slim-template/vim-slim'
 " HTML support
@@ -225,10 +229,16 @@ Plug 'mileszs/ack.vim'
 Plug 'vim-ruby/vim-ruby'
 
 " NEOVIM ONLY ************************************
+" Yank history
+Plug 'Shougo/neoyank.vim'
 Plug 'benekastah/neomake'
 Plug 'kassio/neoterm'
 Plug 'janko-m/vim-test'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " <!!!!!!!!**************!!!!!!!!>
+
+" Dependency for neoyank (and some more kombajnish unused things), this isn'
+Plug 'Shougo/unite.vim'
 
 " Haml support
 Plug 'tpope/vim-haml'
@@ -254,6 +264,14 @@ let g:jsx_ext_required = 0
 " let g:SuperTabDefaultCompletionType = '<C-n>'
 " " <!!!!!!!!**************!!!!!!!!>
 
+" NEOYANK CONFIG ************************************
+nnoremap <leader>3 :Unite history/yank -default-action=append<Cr>
+" <!!!!!!!!**************!!!!!!!!>
+
+" SUPERTAB CONFIG ************************************
+let g:SuperTabDefaultCompletionType = "<c-n>"
+" <!!!!!!!!**************!!!!!!!!>
+
 " VIM-AUTOCLOSE CONFIG ************************************
 " It fixes need to press ESC twice to exit insert mode when YCM/deoplete popup is present
 let g:AutoClosePumvisible = {"ENTER": "<C-Y>", "ESC": "<ESC>"}
@@ -263,8 +281,8 @@ let g:AutoClosePumvisible = {"ENTER": "<C-Y>", "ESC": "<ESC>"}
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_refresh_always = 1
 let g:deoplete#auto_refresh_delay = 30
-imap <c-k> <Tab>
-imap <c-j> <S-Tab>
+imap <c-j> <Tab>
+imap <c-k> <S-Tab>
 " <!!!!!!!!**************!!!!!!!!>
 
 " ULTISNIPS CONFIG ************************************
