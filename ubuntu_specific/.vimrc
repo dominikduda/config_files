@@ -21,7 +21,6 @@ set fileencoding=utf-8
 " <!!!!!!!!**************!!!!!!!!>
 " Removed in nvim, keeping for backwards compatibility
 " set nocompatible
-"
 
 " NOT SURE OR TOO LAZY TO CHECK ************************************
 set ttimeoutlen=0
@@ -29,6 +28,8 @@ set smarttab
 set softtabstop=2
 " <!!!!!!!!**************!!!!!!!!>
 
+" Maximum jump when scrolling horizontally
+set sidescroll=1
 " Always show at least 5 columns on the left/right side of cursor
 set sidescrolloff=5
 " Always show at least 1 line above/below the cursor
@@ -456,6 +457,11 @@ let g:neoterm_position = 'horizontal'
 
 " FUGITIVE CONFIG ************************************
 set diffopt+=vertical
+noremap <Left> :diffget //2<Cr>:diffupdate<Cr>
+noremap <Right> :diffget //3<Cr>:diffupdate<Cr>
+noremap <Up> u:diffupdate<Cr>
+noremap <leader><Up> :set cursorline!<Cr>:set sidescrolloff=100<Cr>:Gdiff<Cr>
+noremap <leader><Down> :set cursorline!<Cr>:set sidescrolloff=5<Cr>:diffoff<Cr><C-w>h:q!<Cr><C-w>l:q!<Cr>
 " <!!!!!!!!**************!!!!!!!!>
 
 " TERMINAL MODE SHORTCUTS ************************************
