@@ -19,7 +19,7 @@ root: ~/github/ab
 # tmux_command: byobu
 
 # Specifies (by name or index) which window will be selected on project startup. If not set, the first window is used.
-# startup_window: logs
+startup_window: nvim_and_helper_console
 
 # Controls whether the tmux session should be attached to automatically. Defaults to true.
 # attach: false
@@ -29,10 +29,15 @@ root: ~/github/ab
       # layout: main-vertical
 
 windows:
-  - editor: nvim
-  - consoles:
-      layout: main-vertical
-      panes:
-        - foreman start
-        - git status
-        - foreman run rails c
+    - nvim_and_helper_console:
+        layout: horizontal
+        panes:
+            - nvim
+            - gst
+    - consoles:
+        layout: horizontal
+        panes:
+            - ab_grepped_log
+            - ab_s_log
+
+# make sure those aliases are defined in .zshrc

@@ -209,7 +209,6 @@ Plug 'tpope/vim-endwise'
 Plug 'octol/vim-cpp-enhanced-highlight'
 " Auto insert matching brackets
 Plug 'Raimondi/delimitMate'
-" Plug 'Townk/vim-autoclose'
 " Slim support
 Plug 'slim-template/vim-slim'
 " HTML support
@@ -273,15 +272,10 @@ nnoremap <leader>3 :Unite history/yank -default-action=append<Cr>
 let g:SuperTabDefaultCompletionType = "<c-n>"
 " <!!!!!!!!**************!!!!!!!!>
 
-" VIM-AUTOCLOSE CONFIG ************************************
-" It fixes need to press ESC twice to exit insert mode when YCM/deoplete popup is present
-let g:AutoClosePumvisible = {"ENTER": "<C-Y>", "ESC": "<ESC>"}
-" <!!!!!!!!**************!!!!!!!!>
-
 " DEOPLETE CONFIG ************************************
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_refresh_always = 1
-let g:deoplete#auto_refresh_delay = 30
+let g:deoplete#auto_refresh_delay = 25
 imap <c-j> <Tab>
 imap <c-k> <S-Tab>
 " <!!!!!!!!**************!!!!!!!!>
@@ -370,7 +364,7 @@ nmap <leader>1 :NERDTreeToggle<CR>
 nmap <leader>\ :TagbarToggle<CR>
 let g:tagbar_autoclose = 1
 let g:tagbar_width = 39
-let g:tagbar_sort = 0
+let g:tagbar_sort = 1
 let g:tagbar_type_ruby = {
     \ 'kinds' : [
         \ 'm:modules',

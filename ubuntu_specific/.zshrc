@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/dominikduda/.oh-my-zsh
+export ZSH=/home/dominikduda/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -53,7 +53,7 @@ plugins=(git zsh-autosuggestions z)
 
 # User configuration
 
-  export PATH=$PATH:"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+export PATH=$PATH:"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/bin/python3"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -82,11 +82,17 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+alias ab_s_log="spring stop; foreman start | tee ~/github/ab/log/rails.log"
+alias ab_grepped_log="spring stop; tail -f ~/github/ab/log/rails.log | grep 'Rendered\|Processing\|Parameters\|INFO\|FATAL\|Error\|ActionView\|ActiveRecord'"
+alias ab_c="spring stop; foreman run rails c"
+alias ab_m="spring stop; foreman run rake db:migrate"
+
 export EDITOR='nvim'
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export PATH="/home/dominikduda/.rvm/gems/ruby-2.1.5/bin:/home/dominikduda/.rvm/gems/ruby-2.1.5@global/bin:/home/dominikduda/.rvm/rubies/ruby-2.1.5/bin:/home/dominikduda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/heroku/bin:/home/dominikduda/.local/bin:/home/dominikduda/.rvm/bin"
 
 export NVM_DIR="/home/dominikduda/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -96,3 +102,5 @@ prompt_context() {
     prompt_segment black default "%(!.%{%F{yellow}%}.)@dd"
   fi
 }
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
