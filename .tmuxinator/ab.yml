@@ -32,8 +32,8 @@ windows:
     - nvim_and_helper_console:
         layout: horizontal
         panes:
-            - nvim
             - gst
+            - nvim
     - consoles:
         layout: horizontal
         panes:

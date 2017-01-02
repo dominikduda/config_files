@@ -28,6 +28,8 @@ set smarttab
 set softtabstop=2
 " <!!!!!!!!**************!!!!!!!!>
 
+" Change vertical buffer separator (last char)
+set fillchars+=vert:\│
 " Maximum jump when scrolling horizontally
 set sidescroll=1
 " Always show at least 5 columns on the left/right side of cursor
@@ -118,6 +120,13 @@ endif
 filetype off
 call plug#begin('~/.config/nvim/plug')
 
+" tmux focus events integraion (switching between vim pane and other console pane)
+Plug 'tmux-plugins/vim-tmux-focus-events'
+" .tmux.conf syntax highlighting
+Plug 'tmux-plugins/vim-tmux'
+" ascii art (useless)
+Plug 'vim-scripts/DrawIt'
+
 " GENERAL ************************************
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-easytags'
@@ -161,7 +170,6 @@ Plug 'mbbill/undotree'
 Plug 'jgdavey/vim-blockle'
 
 " AUTOCOMPLETE AND SNIPPETS ************************************
-" Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 " Confrim autocompletion with tab
 Plug 'ervandew/supertab'
 " Snippets for various languages pack
@@ -190,7 +198,7 @@ Plug 'tpope/vim-repeat'
 " Dim inactive windows
 Plug 'blueyed/vim-diminactive'
 " Airline
-Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline'
 " Airline themes
 Plug 'vim-airline/vim-airline-themes'
 " Detect trailing whitespaces
@@ -255,15 +263,6 @@ colorscheme dante_modified
 let g:jsx_ext_required = 0
 " <!!!!!!!!**************!!!!!!!!>
 
-" " YOUCOMPLETEME CONFIG ************************************
-" " Path to python interpreter for ycm
-" " let g:ycm_path_to_python_interpreter = '/usr/bin/python3'
-" " Make YCM compatible with UltiSnips using supertab (3 lines below)
-" let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
-" let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
-" let g:SuperTabDefaultCompletionType = '<C-n>'
-" " <!!!!!!!!**************!!!!!!!!>
-
 " NEOYANK CONFIG ************************************
 nnoremap <leader>3 :Unite history/yank -default-action=append<Cr>
 " <!!!!!!!!**************!!!!!!!!>
@@ -303,6 +302,8 @@ let g:neoterm_run_tests_bg = 1
 " <!!!!!!!!**************!!!!!!!!>
 
 " AIRLINE CONFIG ************************************
+" Caused errors after one of updates
+let g:airline#extensions#tagbar#enabled = 0
 set fillchars+=stl:\ ,stlnc:\
 let g:airline_powerline_fonts = 1
 let g:airline_theme='base16_summerfruit'
@@ -379,8 +380,6 @@ let g:tagbar_type_ruby = {
 
 " GITGUTTER CONFIG ************************************
 let g:gitgutter_sign_column_always = 1
-" View diff with <leader>1
-" nnoremap <expr> <leader>2 (g:gitgutter_highlight_lines) ? ':GitGutterLineHighlightsToggle<CR>:NERDTreeToggle<CR><C-w>l:q!<CR>' : ':GitGutterLineHighlightsToggle<CR>:Gvsplit<CR>:NERDTreeToggle<CR>'
 " uncomment 2 lines below in case of performance issues
 let g:gitgutter_realtime = 1
 let g:gitgutter_eager = 1
