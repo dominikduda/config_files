@@ -1,0 +1,18 @@
+red_dark: #e06c70
+red_light: #e06c75
+green_dark: #8dc062
+green_light: #98c379
+yellow_dark: #deb863
+yellow_light: #dfc07b
+blue_dark: #3ea4ed
+blue_light: #4babf0
+magenta_dark: #c678c3
+magenta_light: #c678c3
+cyan_dark: #65c2cd
+cyan_light: #65c2cd
+white_dark: #E5E5E5
+white_light: #FFFFFF
+
+text_color: #C7C7C7
+bold_color: #DCDCDC
+background_color: #162427
