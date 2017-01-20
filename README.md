@@ -10,7 +10,7 @@
 ![](https://github.com/dominikduda/config_files/256_color_palette.png)
 
 |Term|Hex    ||Term|Hex    |
-|---:|-------||---:|-------|
+|---:|-------|---|---:|-------|
 |0   |#000000||128 |#af00d7|
 |1   |#800000||129 |#af00ff|
 |2   |#008000||130 |#af5f00|
