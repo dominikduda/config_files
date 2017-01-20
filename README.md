@@ -7,7 +7,7 @@
 
 ##### Searchable list:
 
-![](https://github.com/dominikduda/config_files/256_color_palette.png)
+![](https://github.com/dominikduda/config_files/blob/master/256_color_palette.png)
 
 |Term|Hex    ||Term|Hex    |
 |---:|-------|---|---:|-------|
