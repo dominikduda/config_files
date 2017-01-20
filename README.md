@@ -5,9 +5,10 @@
 ### 256 color palette (for terminal)
 *[source](http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html)*
 
-##### Searchable list:
 
 ![](https://github.com/dominikduda/config_files/blob/master/256_color_palette.png)
+
+##### Searchable list:
 
 |Term|Hex    ||Term|Hex    |
 |---:|-------|---|---:|-------|
