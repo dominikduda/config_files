@@ -45,7 +45,7 @@ hi ErrorMsg guifg=#ffffff guibg=#cd0000 guisp=#cd0000 gui=NONE ctermfg=15 ctermb
 hi Ignore guifg=#737373 guibg=NONE guisp=NONE gui=NONE ctermfg=243 ctermbg=NONE cterm=NONE
 hi Debug guifg=#ff8000 guibg=NONE guisp=NONE gui=NONE ctermfg=208 ctermbg=NONE cterm=NONE
 hi PMenuSbar guifg=NONE guibg=#0a0a0a guisp=#0a0a0a gui=NONE ctermfg=NONE ctermbg=232 cterm=NONE
-hi Identifier guifg=#61d700 guibg=NONE guisp=NONE gui=NONE ctermfg=76 ctermbg=NONE cterm=NONE
+hi Identifier guifg=#61d700 guibg=NONE guisp=NONE gui=NONE ctermfg=77 ctermbg=NONE cterm=NONE
 hi Conditional guifg=#ffd500 guibg=NONE guisp=NONE gui=NONE ctermfg=220 ctermbg=NONE cterm=NONE
 hi SpecialChar guifg=#ff5f00 guibg=NONE guisp=NONE gui=NONE ctermfg=202 ctermbg=NONE cterm=NONE
 hi StorageClass guifg=#5eb341 guibg=NONE guisp=NONE gui=NONE ctermfg=107 ctermbg=NONE cterm=NONE
@@ -56,12 +56,12 @@ hi StatusLine guifg=#999999 guibg=NONE guisp=NONE gui=NONE ctermfg=246 ctermbg=N
 hi Label guifg=#ffd500 guibg=NONE guisp=NONE gui=NONE ctermfg=220 ctermbg=NONE cterm=NONE
 hi PMenuSel guifg=#ffffff guibg=#0000d7 guisp=#0000d7 gui=NONE ctermfg=15 ctermbg=20 cterm=NONE
 hi Search guifg=#1a1a1a guibg=#eec900 guisp=#eec900 gui=NONE ctermfg=220 ctermbg=NONE cterm=bold
-hi Delimiter guifg=#ff8000 guibg=NONE guisp=NONE gui=NONE ctermfg=208 ctermbg=NONE cterm=NONE
+hi Delimiter guifg=#ff8000 guibg=NONE guisp=NONE gui=NONE ctermfg=206=NONE cterm=NONE
 hi Statement guifg=#ffd500 guibg=NONE guisp=NONE gui=NONE ctermfg=220 ctermbg=NONE cterm=NONE
 hi Comment guifg=#10cccc guibg=NONE guisp=NONE gui=NONE ctermfg=44 ctermbg=NONE cterm=NONE
 hi Character guifg=#ff5f00 guibg=NONE guisp=NONE gui=NONE ctermfg=202 ctermbg=NONE cterm=NONE
-hi Number guifg=#ff0505 guibg=NONE guisp=NONE gui=NONE ctermfg=196 ctermbg=NONE cterm=NONE
-hi Boolean guifg=#cd2626 guibg=NONE guisp=NONE gui=NONE ctermfg=160 ctermbg=NONE cterm=NONE
+hi Number guifg=#ff0505 guibg=NONE guisp=NONE gui=NONE ctermfg=172 ctermbg=NONE cterm=NONE
+hi Boolean guifg=#cd2626 guibg=NONE guisp=NONE gui=NONE ctermfg=172 ctermbg=NONE cterm=NONE
 hi Operator guifg=#db34db guibg=NONE guisp=NONE gui=NONE ctermfg=170 ctermbg=NONE cterm=NONE
 hi CursorLine guifg=NONE guibg=#0e0e0e guisp=#0e0e0e gui=NONE ctermfg=NONE ctermbg=235 cterm=NONE
 hi Question guifg=#c0ff3e guibg=NONE guisp=NONE gui=bold ctermfg=191 ctermbg=NONE cterm=bold
@@ -80,15 +80,16 @@ hi SpellCap guifg=#000000 guibg=#ff6666 guisp=#ff6666 gui=NONE ctermfg=NONE cter
 hi VertSplit guifg=#666666 guibg=NONE guisp=NONE gui=bold ctermfg=241 ctermbg=NONE cterm=bold
 hi Exception guifg=#d6ac04 guibg=NONE guisp=NONE gui=NONE ctermfg=178 ctermbg=NONE cterm=NONE
 hi Keyword guifg=#ffd500 guibg=NONE guisp=NONE gui=NONE ctermfg=220 ctermbg=NONE cterm=NONE
-hi Type guifg=#61d700 guibg=NONE guisp=NONE gui=NONE ctermfg=76 ctermbg=NONE cterm=NONE
+hi Type guifg=#61d700 guibg=NONE guisp=NONE gui=NONE ctermfg=77 ctermbg=NONE cterm=NONE
 hi DiffChange guifg=#080808 guibg=#ffff5f guisp=#ffff5f gui=NONE ctermfg=232 ctermbg=227 cterm=NONE
 hi Cursor guifg=#000000 guibg=#cdaf95 guisp=#cdaf95 gui=NONE ctermfg=NONE ctermbg=180 cterm=NONE
 hi Error guifg=#bebebe guibg=#cd0000 guisp=#cd0000 gui=NONE ctermfg=7 ctermbg=160 cterm=NONE
 hi PMenu guifg=#080808 guibg=#545658 guisp=#545658 gui=NONE ctermfg=232 ctermbg=240 cterm=NONE
 hi SpecialKey guifg=#4d4d4d guibg=NONE guisp=NONE gui=NONE ctermfg=239 ctermbg=NONE cterm=NONE
-hi Constant guifg=#f50000 guibg=NONE guisp=NONE gui=NONE ctermfg=196 ctermbg=NONE cterm=NONE
+hi Constant guifg=#f50000 guibg=NONE guisp=NONE gui=NONE ctermfg=203 ctermbg=NONE cterm=NONE
 hi Tag guifg=#ff8000 guibg=NONE guisp=NONE gui=NONE ctermfg=208 ctermbg=NONE cterm=NONE
-hi String guifg=#ff0000 guibg=NONE guisp=NONE gui=NONE ctermfg=196 ctermbg=NONE cterm=NONE
+" hi String guifg=#ff0000 guibg=NONE guisp=NONE gui=NONE ctermfg=140 ctermbg=NONE cterm=NONE
+hi String guifg=#ff0000 guibg=NONE guisp=NONE gui=NONE ctermfg=140 ctermbg=NONE cterm=NONE
 hi PMenuThumb guifg=NONE guibg=#8b8b83 guisp=#8b8b83 gui=NONE ctermfg=NONE ctermbg=101 cterm=NONE
 hi Repeat guifg=#cdad00 guibg=NONE guisp=NONE gui=NONE ctermfg=178 ctermbg=NONE cterm=NONE
 hi SpellBad guifg=#000000 guibg=#ff6363 guisp=#ff6363 gui=NONE ctermfg=NONE ctermbg=9 cterm=NONE
