@@ -36,7 +36,7 @@ set sidescroll=1
 set sidescrolloff=5
 " Always show at least 1 line above/below the cursor
 set scrolloff=1
-" Use old regexp engine (on new one easytagsh highlighting was running deadly slow)
+" Use old regexp engine (on new one tags highlighting was running deadly slow)
 set regexpengine=0
 " AFAIK time to update gitgutter signs
 set updatetime=600
@@ -129,7 +129,7 @@ Plug 'vim-scripts/DrawIt'
 
 " GENERAL ************************************
 Plug 'xolox/vim-misc'
-Plug 'xolox/vim-easytags'
+Plug 'c0r73x/neotags.nvim'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
 Plug 'majutsushi/tagbar'
@@ -226,7 +226,7 @@ Plug 'godlygeek/tabular'
 " Coffe script support
 Plug 'kchmck/vim-coffee-script'
 " Project wide search
-Plug 'mileszs/ack.vim'
+Plug 'rking/ag.vim'
 
 " " GVIM ONLY ************************************
 " " Enabling fulscreen helper
@@ -263,12 +263,21 @@ colorscheme dante_modified
 let g:jsx_ext_required = 0
 " <!!!!!!!!**************!!!!!!!!>
 
+" CLEVER-F CONFIG ************************************
+let g:clever_f_ignore_case = 1
+" <!!!!!!!!**************!!!!!!!!>
+
 " NEOYANK CONFIG ************************************
 nnoremap <leader>3 :Unite history/yank -default-action=append<Cr>
 " <!!!!!!!!**************!!!!!!!!>
 
 " SUPERTAB CONFIG ************************************
 let g:SuperTabDefaultCompletionType = "<c-n>"
+" <!!!!!!!!**************!!!!!!!!>
+
+" NEOTAGS CONFIG ************************************
+let g:neotags_enabled = 0
+let g:neotags_highlight = 1
 " <!!!!!!!!**************!!!!!!!!>
 
 " DEOPLETE CONFIG ************************************
@@ -327,19 +336,6 @@ if executable('ag')
 endif
 " <!!!!!!!!**************!!!!!!!!>
 
-" EASYTAGS CONFIG ************************************
-"Async easytags
-let g:easytags_async = 1
-"Better performance
-let g:easytags_syntax_keyword = 'always'
-"tags filename and placement
-set tags=./tags;
-"create tag file per project
-let g:easytags_dynamic_files = 2
-"needed for upper line to work
-set cpoptions+=d
-" <!!!!!!!!**************!!!!!!!!>
-
 " DIMINACTIVE SETTINGS ************************************
 " Enable dimming non-file windows (like nerdtree, ag)
 let g:diminactive_buftype_blacklist = []
@@ -386,12 +382,9 @@ let g:gitgutter_eager = 1
 let g:gitgutter_async = 1
 " <!!!!!!!!**************!!!!!!!!>
 
-" ACK.VIM CONFIG ************************************
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
-endif
-command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
-nnoremap , :Ack!<SPACE>
+" AG.VIM CONFIG ************************************
+let g:ag_highlight=1
+nnoremap , :Ag<Space>-Q<Space>'
 " <!!!!!!!!**************!!!!!!!!>
 
 " PERSONAL CONFIG AND SHORTCUTS ************************************
@@ -404,6 +397,8 @@ nmap <C-k> ddkP
 nmap <C-j> ddp
 nnoremap ; :
 imap <C-l> <End>
+imap kk <Right>
+imap jj <Esc>
 " Copy to system clipboard
 vnoremap <C-c> "+y
 " Paste form system clipboard (2 lines below)
@@ -441,7 +436,9 @@ nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
 let test#strategy = 'neoterm'
+" let test#strategy = 'vimux'
 let g:neoterm_position = 'horizontal'
+" let g:test#preserve_screen = 1
 " <!!!!!!!!**************!!!!!!!!>
 
 " BLOCKLE CONFIG ************************************
@@ -492,29 +489,29 @@ let g:tsuquyomi_disable_quickfix = 1
 " let g:syntastic_typescript_tsc_fname = ''
 " let g:syntastic_typescript_checkers = ['tsuquyomi']
 autocmd FileType typescript setlocal completeopt+=menu,preview
-" <!!!!!!!!**************!!!!!!!!>
+" <!!!!!!!!**************!!!!!!!!c
 
-" " AB SPECIFIC ************************************
-" " Add empty line at end of file after save
-" set eol
-" let test#ruby#rspec#executable = 'foreman run rspec'
-" let g:test#runner_commands = ['Rspec']
-" " vim-rails priority rspec tests when using :A
-" let g:rails_projections = {
-"       \  'app/*.rb': {
-"       \     'alternate': 'spec/{}_spec.rb',
-"       \     'type': 'source'
-"       \   },
-"       \  'spec/*_spec.rb': {
-"       \     'alternate': 'app/{}.rb',
-"       \     'type': 'test'
-"       \   }
-"       \}
-" " Color 100th column
-" set colorcolumn=100
-" " <!!!!!!!!**************!!!!!!!!>
+" AB SPECIFIC ************************************
+" Add empty line at end of file after save
+set eol
+let test#ruby#rspec#executable = 'foreman run rspec'
+let g:test#runner_commands = ['Rspec']
+" vim-rails priority rspec tests when using :A
+let g:rails_projections = {
+      \  'app/*.rb': {
+      \     'alternate': 'spec/{}_spec.rb',
+      \     'type': 'source'
+      \   },
+      \  'spec/*_spec.rb': {
+      \     'alternate': 'app/{}.rb',
+      \     'type': 'test'
+      \   }
+      \}
+" Color 100th column
+set colorcolumn=100
+" <!!!!!!!!**************!!!!!!!!>
 
 autocmd! BufWritePost * Neomake
 "Auto remove trailing whitespaces on save
 autocmd BufWritePre * FixWhitespace
-set switchbuf=split
+set switchbuf=useopen
