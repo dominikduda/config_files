@@ -37,7 +37,7 @@ hi Title guifg=#7fffd4 guibg=NONE guisp=NONE gui=bold ctermfg=122 ctermbg=NONE c
 hi Folded guifg=#4876ff guibg=#ffffff guisp=#ffffff gui=NONE ctermfg=69 ctermbg=15 cterm=NONE
 hi PreCondit guifg=#104e8b guibg=NONE guisp=NONE gui=NONE ctermfg=24 ctermbg=NONE cterm=NONE
 hi Include guifg=#176ebf guibg=NONE guisp=NONE gui=NONE ctermfg=4 ctermbg=NONE cterm=NONE
-hi Float guifg=#ff0000 guibg=NONE guisp=NONE gui=NONE ctermfg=196 ctermbg=NONE cterm=NONE
+hi Float guifg=#ff0000 guibg=NONE guisp=NONE gui=NONE ctermfg=172 ctermbg=NONE cterm=NONE
 hi StatusLineNC guifg=#a8a8a8 guibg=NONE guisp=NONE gui=NONE ctermfg=248 ctermbg=NONE cterm=NONE
 hi NonText guifg=#333333 guibg=#080808 guisp=#080808 gui=NONE ctermfg=236 ctermbg=232 cterm=NONE
 hi DiffText guifg=#080808 guibg=#ffd700 guisp=#ffd700 gui=NONE ctermfg=232 ctermbg=220 cterm=NONE
