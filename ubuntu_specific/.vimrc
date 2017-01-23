@@ -413,8 +413,6 @@ set autoread
 au CursorHold * checktime
 " Toggle Undotree window
 nnoremap <F5> :UndotreeToggle<CR>
-" move Ag window to bottom after opened
-" autocmd FileType qf wincmd J
 " Use { to span next line to current
 nnoremap { J
 " Use J and K to jump between paragraphs in visual and normal modes (4 lines below)
@@ -427,6 +425,16 @@ nnoremap H ^
 nnoremap L $
 vnoremap H ^
 vnoremap L $
+" Switch buffer on alt + direction (4 lines below)
+nnoremap <A-h> <C-w>h
+nnoremap <A-j> <C-w>j
+nnoremap <A-k> <C-w>k
+nnoremap <A-l> <C-w>l
+" Resize buffer on ctrl + alt + direction (4 lines below)
+nnoremap <A-C-h> :vertical resize +1<CR>
+nnoremap <A-C-j> :resize -1<CR>
+nnoremap <A-C-k> :resize +1<CR>
+nnoremap <A-C-l> :vertical resize -1<CR>
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIM-TEST CONFIG ************************************
@@ -463,11 +471,6 @@ if has('nvim')
   :tnoremap <A-j> <C-\><C-n><C-w>j
   :tnoremap <A-k> <C-\><C-n><C-w>k
   :tnoremap <A-l> <C-\><C-n><C-w>l
-  :nnoremap <A-h> <C-w>h
-  :nnoremap <A-j> <C-w>j
-  " Its like this to swap to middle buffer when switching from term (left is usually nerdtree)
-  :nnoremap <A-k> <C-w>k
-  :nnoremap <A-l> <C-w>l
 endif
 " <!!!!!!!!**************!!!!!!!!>
 
@@ -491,25 +494,25 @@ let g:tsuquyomi_disable_quickfix = 1
 autocmd FileType typescript setlocal completeopt+=menu,preview
 " <!!!!!!!!**************!!!!!!!!c
 
-" AB SPECIFIC ************************************
-" Add empty line at end of file after save
-set eol
-let test#ruby#rspec#executable = 'foreman run rspec'
-let g:test#runner_commands = ['Rspec']
-" vim-rails priority rspec tests when using :A
-let g:rails_projections = {
-      \  'app/*.rb': {
-      \     'alternate': 'spec/{}_spec.rb',
-      \     'type': 'source'
-      \   },
-      \  'spec/*_spec.rb': {
-      \     'alternate': 'app/{}.rb',
-      \     'type': 'test'
-      \   }
-      \}
-" Color 100th column
-set colorcolumn=100
-" <!!!!!!!!**************!!!!!!!!>
+" " AB SPECIFIC ************************************
+" " Add empty line at end of file after save
+" set eol
+" let test#ruby#rspec#executable = 'foreman run rspec'
+" let g:test#runner_commands = ['Rspec']
+" " vim-rails priority rspec tests when using :A
+" let g:rails_projections = {
+"       \  'app/*.rb': {
+"       \     'alternate': 'spec/{}_spec.rb',
+"       \     'type': 'source'
+"       \   },
+"       \  'spec/*_spec.rb': {
+"       \     'alternate': 'app/{}.rb',
+"       \     'type': 'test'
+"       \   }
+"       \}
+" " Color 100th column
+" set colorcolumn=100
+" " <!!!!!!!!**************!!!!!!!!>
 
 autocmd! BufWritePost * Neomake
 "Auto remove trailing whitespaces on save
