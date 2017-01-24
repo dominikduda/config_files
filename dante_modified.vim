@@ -29,7 +29,8 @@ hi Normal guifg=#b3b1b3 guibg=#0a0a0a guisp=#0a0a0a gui=NONE ctermfg=249 ctermbg
 "hi TabLine -- no settings --
 "hi clear -- no settings --
 hi ColorColumn ctermbg=235
-hi IncSearch guifg=#ffae00 guibg=NONE guisp=NONE gui=bold ctermfg=214 ctermbg=NONE cterm=bold
+" hi IncSearch guifg=#ffae00 guibg=NONE guisp=NONE gui=bold ctermfg=214 ctermbg=NONE cterm=bold
+hi IncSearch guifg=#ffae00 guibg=NONE guisp=NONE gui=bold ctermfg=15 ctermbg=NONE cterm=bold
 hi WildMenu guifg=#000000 guibg=#eec900 guisp=#eec900 gui=NONE ctermfg=NONE ctermbg=220 cterm=NONE
 hi SpecialComment guifg=#ff5f00 guibg=NONE guisp=NONE gui=NONE ctermfg=202 ctermbg=NONE cterm=NONE
 hi Typedef guifg=#61d700 guibg=NONE guisp=NONE gui=NONE ctermfg=76 ctermbg=NONE cterm=NONE
@@ -55,7 +56,7 @@ hi LineNr guifg=#8b8b83 guibg=#141414 guisp=#141414 gui=NONE ctermfg=101 ctermbg
 hi StatusLine guifg=#999999 guibg=NONE guisp=NONE gui=NONE ctermfg=246 ctermbg=NONE cterm=NONE
 hi Label guifg=#ffd500 guibg=NONE guisp=NONE gui=NONE ctermfg=220 ctermbg=NONE cterm=NONE
 hi PMenuSel guifg=#ffffff guibg=#0000d7 guisp=#0000d7 gui=NONE ctermfg=15 ctermbg=20 cterm=NONE
-hi Search guifg=#1a1a1a guibg=#eec900 guisp=#eec900 gui=NONE ctermfg=220 ctermbg=NONE cterm=bold
+hi Search guifg=#1a1a1a guibg=#eec900 guisp=#eec900 gui=NONE ctermfg=15 ctermbg=NONE cterm=bold
 hi Delimiter guifg=#ff8000 guibg=NONE guisp=NONE gui=NONE ctermfg=206=NONE cterm=NONE
 hi Statement guifg=#ffd500 guibg=NONE guisp=NONE gui=NONE ctermfg=220 ctermbg=NONE cterm=NONE
 hi Comment guifg=#10cccc guibg=NONE guisp=NONE gui=NONE ctermfg=80 ctermbg=NONE cterm=NONE
@@ -88,7 +89,6 @@ hi PMenu guifg=#080808 guibg=#545658 guisp=#545658 gui=NONE ctermfg=232 ctermbg=
 hi SpecialKey guifg=#4d4d4d guibg=NONE guisp=NONE gui=NONE ctermfg=239 ctermbg=NONE cterm=NONE
 hi Constant guifg=#f50000 guibg=NONE guisp=NONE gui=NONE ctermfg=203 ctermbg=NONE cterm=NONE
 hi Tag guifg=#ff8000 guibg=NONE guisp=NONE gui=NONE ctermfg=208 ctermbg=NONE cterm=NONE
-" hi String guifg=#ff0000 guibg=NONE guisp=NONE gui=NONE ctermfg=140 ctermbg=NONE cterm=NONE
 hi String guifg=#ff0000 guibg=NONE guisp=NONE gui=NONE ctermfg=140 ctermbg=NONE cterm=NONE
 hi PMenuThumb guifg=NONE guibg=#8b8b83 guisp=#8b8b83 gui=NONE ctermfg=NONE ctermbg=101 cterm=NONE
 hi Repeat guifg=#cdad00 guibg=NONE guisp=NONE gui=NONE ctermfg=178 ctermbg=NONE cterm=NONE
@@ -112,4 +112,6 @@ hi! link NonText LineNr
 hi rubymodulenametag guifg=#61d700 guibg=NONE guisp=NONE gui=NONE ctermfg=76 ctermbg=NONE cterm=underline
 hi rubyclassnametag guifg=#61d700 guibg=NONE guisp=NONE gui=NONE ctermfg=76 ctermbg=NONE cterm=underline
 hi rubymethodnametag guifg=#4040d6 guibg=NONE guisp=NONE gui=underline ctermfg=33 ctermbg=NONE cterm=underline
+hi rspecGroupMethods guifg=#4040d6 guibg=NONE guisp=NONE gui=underline ctermfg=33 ctermbg=NONE
+hi rubyRailsMethod guifg=#4040d6 guibg=NONE guisp=NONE gui=underline ctermfg=110 ctermbg=NONE
 

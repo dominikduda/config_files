@@ -30,6 +30,10 @@ set softtabstop=2
 
 " Change vertical buffer separator (last char)
 set fillchars+=vert:\│
+" Display window title in window bar (terminal have to allow it)
+set title
+" Display path to current file in window bar
+set title titlestring=%<%F%=
 " Maximum jump when scrolling horizontally
 set sidescroll=1
 " Always show at least 5 columns on the left/right side of cursor
@@ -157,6 +161,8 @@ Plug 'tpope/vim-rake'
 " <!!!!!!!!**************!!!!!!!!>
 
 " Syntax
+" Support for a lot of languages (syntax, indent and much more)
+Plug 'sheerun/vim-polyglot'
 Plug 'scrooloose/syntastic'
 " Live markdown preview
 Plug 'shime/vim-livedown', { 'do': 'npm install -g livedown' }
@@ -176,6 +182,11 @@ Plug 'ervandew/supertab'
 Plug 'honza/vim-snippets'
 " Snippet engine
 Plug 'SirVer/ultisnips'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Deoplete extension for ruby methods
+Plug 'fishbullet/deoplete-ruby'
+" Deoplete extension (more tag sources)
+Plug 'Shougo/neoinclude.vim'
 " <!!!!!!!!**************!!!!!!!!>
 
 " Repeat plugin commands with .
@@ -233,17 +244,11 @@ Plug 'rking/ag.vim'
 " Plug 'lambdalisue/vim-fullscreen'
 " " <!!!!!!!!**************!!!!!!!!>
 
-" Ruby support
-Plug 'vim-ruby/vim-ruby'
-
-" NEOVIM ONLY ************************************
 " Yank history
 Plug 'Shougo/neoyank.vim'
 Plug 'benekastah/neomake'
 Plug 'kassio/neoterm'
 Plug 'janko-m/vim-test'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" <!!!!!!!!**************!!!!!!!!>
 
 " Dependency for neoyank (and some more kombajnish unused things), this isn'
 Plug 'Shougo/unite.vim'
@@ -313,6 +318,12 @@ let g:neoterm_run_tests_bg = 1
 " AIRLINE CONFIG ************************************
 " Caused errors after one of updates
 let g:airline#extensions#tagbar#enabled = 0
+let g:airline#extensions#hunks#enabled = 0
+let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
+let g:airline#extensions#syntastic#enabled = 0
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#branch#format = 2
+let g:airline#extensions#branch#displayed_head_limit = 15
 set fillchars+=stl:\ ,stlnc:\
 let g:airline_powerline_fonts = 1
 let g:airline_theme='base16_summerfruit'
@@ -435,6 +446,12 @@ nnoremap <A-C-h> :vertical resize +1<CR>
 nnoremap <A-C-j> :resize -1<CR>
 nnoremap <A-C-k> :resize +1<CR>
 nnoremap <A-C-l> :vertical resize -1<CR>
+" Move vertically by rows rather than lines (useful with long lines + wrap on)
+nnoremap j gj
+nnoremap k gk
+" Center screen on next/previous selection.
+nnoremap n nzz
+nnoremap N Nzz
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIM-TEST CONFIG ************************************
@@ -472,17 +489,6 @@ if has('nvim')
   :tnoremap <A-k> <C-\><C-n><C-w>k
   :tnoremap <A-l> <C-\><C-n><C-w>l
 endif
-" <!!!!!!!!**************!!!!!!!!>
-
-" TAB LENGTHS ************************************
-autocmd Filetype slim setlocal ts=2 sts=2 sw=2
-autocmd Filetype html setlocal ts=2 sts=2 sw=2
-autocmd Filetype haml setlocal ts=2 sts=2 sw=2
-autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
-autocmd Filetype coffee setlocal ts=2 sts=2 sw=2
-autocmd Filetype sass setlocal ts=4 sts=4 sw=4
-autocmd Filetype yaml setlocal ts=2 sts=2 sw=2
-autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
 " <!!!!!!!!**************!!!!!!!!>
 
 " TYPESCRIPT SETTINGS ************************************
