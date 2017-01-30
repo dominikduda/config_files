@@ -281,8 +281,8 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 " <!!!!!!!!**************!!!!!!!!>
 
 " NEOTAGS CONFIG ************************************
-let g:neotags_enabled = 0
-let g:neotags_highlight = 1
+let g:neotags_enabled = 1
+let g:neotags_highlight = 0
 " <!!!!!!!!**************!!!!!!!!>
 
 " DEOPLETE CONFIG ************************************
@@ -321,7 +321,7 @@ let g:airline#extensions#tagbar#enabled = 0
 let g:airline#extensions#hunks#enabled = 0
 let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
 let g:airline#extensions#syntastic#enabled = 0
-let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#branch#enabled = 0
 let g:airline#extensions#branch#format = 2
 let g:airline#extensions#branch#displayed_head_limit = 15
 set fillchars+=stl:\ ,stlnc:\
@@ -407,14 +407,15 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 nmap <C-k> ddkP
 nmap <C-j> ddp
 nnoremap ; :
-imap <C-l> <End>
-imap kk <Right>
-imap jj <Esc>
+inoremap <C-l> <End>
+
+inoremap kk <Right>
+inoremap jj <Esc>
 " Copy to system clipboard
 vnoremap <C-c> "+y
 " Paste form system clipboard (2 lines below)
 nmap <C-v> "+p
-imap <C-v> <Esc>"+pa
+inoremap <C-v> <Esc>"+pa
 " Change current line color when entering insert mode
 autocmd InsertEnter * highlight  CursorLine ctermbg=52
 " Revert current line color to default when leaving insert mode
