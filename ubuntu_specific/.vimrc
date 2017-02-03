@@ -357,7 +357,7 @@ autocmd BufNew * DimInactive
 " <!!!!!!!!**************!!!!!!!!>
 
 " NERDTREE CONFIG ************************************
-let g:NERDTreeWinSize = 43
+let g:NERDTreeWinSize = 30
 "close vim if only NERDTree is opened
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " start with nerdtree open if no file were specified (2 lines below)
