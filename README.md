@@ -2,6 +2,31 @@
 - `pip3 install --upgrade neovim` -> newest python support
 - `gem install neovim` -> ruby support
 
+### To create custom tmux layout based on current pane arrangement
+1. `tmux list-windows` in tmux console
+
+output will look like this:
+```
+1: tmux* (5 panes) [155x62] [layout 4551,155x62,0,0{77x62,0,0,39,77x62,78,0[77x31,78,0,43,77x15,78,32,44,77x14,78,48{38x14,78,48,45,38x14,117,48,46}]}] @9 (active)
+```
+2. copy starting after `layout` (without space) finishing before last `]`
+3. paste it to tmuxinator config as window layout
+
+on above example:
+```
+windows:
+    - just_an_example:
+        layout: 4551,155x62,0,0{77x62,0,0,39,77x62,78,0[77x31,78,0,43,77x15,78,32,44,77x14,78,48{38x14,78,48,45,38x14,117,48,46}]}
+        panes:
+            - nvim
+            - git status
+            - ls
+            - cd /
+            - nano
+```
+
+
+
 ### 256 color palette (for terminal)
 *[source](http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html)*
 
