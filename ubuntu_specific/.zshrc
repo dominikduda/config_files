@@ -1,6 +1,7 @@
 # Path to your oh-my-zsh installation.
 export ZSH=/home/dominikduda/.oh-my-zsh
 
+plugins=(git zsh-autosuggestions z zsh-syntax-highlighting alias-tips)
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -49,7 +50,6 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions z)
 
 # User configuration
 
@@ -83,10 +83,10 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias ab_s_log="spring stop; foreman start | tee ~/github/ab/log/rails.log"
+alias ab_s_log="spring stop; rails s -p 5000 | tee ~/github/ab/log/rails.log"
 alias ab_grepped_log="spring stop; tail -f ~/github/ab/log/rails.log | grep 'Rendered\|Processing\|Parameters\|INFO\|FATAL\|Error\|ActionView\|ActiveRecord'"
-alias ab_c="spring stop; foreman run rails c"
-alias ab_m="spring stop; foreman run rake db:migrate"
+alias ab_c="spring stop; rails c"
+alias ab_m="spring stop; rake db:migrate"
 
 export EDITOR='nvim'
 
@@ -107,3 +107,6 @@ prompt_context() {
 
 # This is necessary to make work git info on tmux-powerline
 PROMPT="$PROMPT"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
+
+# Override git branch segment from prompt with empty function to disable it
+prompt_git() {}
