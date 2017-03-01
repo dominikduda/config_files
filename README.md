@@ -1,12 +1,12 @@
-### After oh-my-zsh installation
+## After oh-my-zsh installation
 1. `git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting` to install zsh-syntax-highlighting to oh-my-zsh plugins directory
 2. `git clone https://github.com/djui/alias-tips.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/alias-tips` to install alias-tips to oh-my-zsh plugins directory
 
-### After nvim installation:
+## After nvim installation:
 - `pip3 install --upgrade neovim` -> newest python support
 - `gem install neovim` -> ruby support
 
-### To create custom tmux layout based on current pane arrangement
+## To create custom tmux layout based on current pane arrangement
 1. `tmux list-windows` in tmux console
 
 output will look like this:
@@ -31,7 +31,7 @@ windows:
 
 
 
-### 256 color palette (for terminal)
+## 256 color palette (for terminal)
 *[source](http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html)*
 
 ![](https://github.com/dominikduda/config_files/blob/master/256_color_palette.png)
