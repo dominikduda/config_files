@@ -15,4 +15,4 @@ white_light: #FFFFFF
 
 text_color: #C7C7C7
 bold_color: #DCDCDC
-background_color: #162427
+background_color: #06313A
