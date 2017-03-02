@@ -113,6 +113,6 @@ hi rubyclassnametag guifg=#61d700 guibg=NONE guisp=NONE gui=NONE ctermfg=76 cter
 hi rubymethodnametag guifg=#4040d6 guibg=NONE guisp=NONE gui=underline ctermfg=33 ctermbg=NONE cterm=underline
 hi rspecGroupMethods guifg=#4040d6 guibg=NONE guisp=NONE gui=underline ctermfg=33 ctermbg=NONE
 hi rubyRailsMethod guifg=#4040d6 guibg=NONE guisp=NONE gui=underline ctermfg=110 ctermbg=NONE
-
+hi CursorLineNR guifg=#4040d6 guibg=NONE guisp=NONE gui=underline ctermfg=234 ctermbg=243 cterm=bold
 
 hi SpellBad guifg=#000000 guibg=#ff6363 guisp=#ff6363 gui=NONE ctermfg=0 ctermbg=178 cterm=NONE
