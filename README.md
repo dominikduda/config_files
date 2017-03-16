@@ -7,6 +7,13 @@
 - `pip3 install --upgrade neovim` -> newest python support
 - `gem install neovim` -> ruby support
 
+## After postgres installation:
+1. Assign port to every version of postgres using `port` variable in `/etc/postgresql/PG_VERSION_HERE/main/postgresql.conf` (Ports-versions pairs are convention used in other config files)
+  - 9.3 - 5432
+  - 9.5 - 5433
+  - 9.6 - 5434
+2. Set all methods to `trust` in `/etc/postgresql/PG_VERSION_HERE/main/pg_hba.conf`
+
 ## To create custom tmux layout based on current pane arrangement
 1. `tmux list-windows` in tmux console
 
