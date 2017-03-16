@@ -7,10 +7,13 @@ root: ~/github/ab
 # socket_name: foo
 
 # Runs before everything. Use it to start daemons etc.
-# pre: sudo /etc/rc.d/mysqld start
+# Sets current postgres version and cluster (so all pg_related helper apps versions match psql server app (like pg_dump, pg_restore))
+# Strings separated by space are respectively: postgres version, host:port, database (* = anything)
+pre: echo '9.6 localhost:5434  *' > ~/.postgresqlrc
 
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
-# pre_window: rbenv shell 2.0.0-p247
+# Disables spring, sets default postgres port
+pre_window: export DISABLE_SPRING=1; export PGPORT=5434
 
 # Pass command line options to tmux. Useful for specifying a different tmux.conf.
 # tmux_options: -f ~/.tmux.mac.conf
@@ -19,22 +22,27 @@ root: ~/github/ab
 # tmux_command: byobu
 
 # Specifies (by name or index) which window will be selected on project startup. If not set, the first window is used.
-startup_window: nvim_and_helper_console
+# startup_window: editor
+startup_pane: 1
 
 # Controls whether the tmux session should be attached to automatically. Defaults to true.
 # attach: false
 
 # Runs after everything. Use it to attach to tmux with custom options etc.
 # post: tmux -CC attach -t ab
-      # layout: main-vertical
 
 windows:
     - consoles_and_editor:
         layout: 5ba1,311x63,0,0{196x63,0,0[196x13,0,0,71,196x49,0,14,74],114x63,197,0[114x25,197,0,72,114x37,197,26,73]}
         panes:
+          - helper:
+            - clear
             - gst
+          - editor:
             - nvim
+          - filtered_logs:
             - ab_grepped_log
+          - logs:
             - ab_s_log
 
 # make sure those aliases are defined in .zshrc
