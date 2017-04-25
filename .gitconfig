@@ -17,3 +17,5 @@
 	newHighlight = green bold 22
 [init]
 	templatedir = /home/dominikduda/.git-templates
+[push]
+        default = simple
