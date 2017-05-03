@@ -1,4 +1,34 @@
-set shell=/bin/zsh
+" spellcheckmode plugin START
+let g:spellcheckmode_enabled = 0
+let g:spellcheckmode_toggle_cursorline = 1
+let g:spellcheckmode_toggle_syntax = 1
+
+function! s:spellcheckmode_toggle()
+  if g:spellcheckmode_enabled
+    call s:spellcheckmode_disable()
+  else
+    call s:spellcheckmode_enable()
+  endif
+endfunc
+
+function! s:spellcheckmode_enable()
+  let g:spellcheckmode_enabled = 1
+  set spell
+  if g:spellcheckmode_toggle_cursorline | set nocursorline | endif
+  if g:spellcheckmode_toggle_syntax | syntax off | endif
+endfunc
+
+function! s:spellcheckmode_disable()
+  let g:spellcheckmode_enabled = 0
+  set nospell
+  if g:spellcheckmode_toggle_cursorline | set cursorline | endif
+  if g:spellcheckmode_toggle_syntax | syntax on | endif
+endfunc
+
+command! SpellCheckModeToggle call s:spellcheckmode_toggle()
+
+nnoremap <leader><Space> :SpellCheckModeToggle<CR>
+" spellcheckmode plugin END
 
 " |-----------------------------------------------------------------------------------------|
 " | FORMATTING INFO                                                                         |
@@ -23,13 +53,17 @@ set fileencoding=utf-8
 " set nocompatible
 
 " NOT SURE OR TOO LAZY TO CHECK ************************************
+autocmd QuickFixCmdPost *grep* cwindow
+set switchbuf=useopen
 set ttimeoutlen=0
 set smarttab
 set softtabstop=2
 " <!!!!!!!!**************!!!!!!!!>
 
-" Change vertical buffer separator (last char)
-set fillchars+=vert:\│
+" Set preview window height to 15 lines (for example fugitive :Gstatus uses it)
+set previewheight=15
+" Do not show mode in the status line (it cleaned last message)
+set noshowmode
 " Display window title in window bar (terminal have to allow it)
 set title
 " Display path to current file in window bar
@@ -43,7 +77,7 @@ set scrolloff=1
 " Use old regexp engine (on new one tags highlighting was running deadly slow)
 set regexpengine=0
 " AFAIK time to update gitgutter signs
-set updatetime=600
+set updatetime=400
 " Mouse support
 set mouse=a
 " Only redraw when it is needed
@@ -52,12 +86,8 @@ set lazyredraw
 set timeoutlen=900
 " Show absolute line number in current line
 set number
-" Show relative line number
-" set relativenumber
 " Wrapped line symbol
 set showbreak=▶▶▶
-" Text (e. g. comment) break point
-set textwidth=120
 " Disable jumping to matching parenthesis after typing it
 set noshowmatch
 " Disable creating swap files
@@ -68,6 +98,8 @@ set novisualbell
 set laststatus=2
 " Show commands as they are entered
 set showcmd
+" Text (e. g. comment) break point
+set textwidth=0
 " Create vsplit on right side
 set splitright
 " Create hsplit on bottom
@@ -80,7 +112,7 @@ set nobackup
 set hlsearch
 " Ignore case of searched characters
 set ignorecase
-" Override the 'ignorecase' option if the search pattern contains upper case characters.
+" Override the 'ignorecase' option if the search replace contains upper case characters.
 set smartcase
 " Search as you type
 set incsearch
@@ -105,33 +137,45 @@ set backspace=indent,eol,start
 " Color syntax
 syntax on
 
-" GVIM ************************************
-" < may find use in the future >
-if has('gui_running')
-  " Font settings
-  set guifont=Hack\ 10
-  " Remove right-hand scroll bar
-  set guioptions-=r
-  " Remove left-hand scroll bar
-  set guioptions-=L
-  " Remove toolbar
-  set guioptions-=T
-  " Start maximized
-  set lines=150 columns=300
-endif
-" <!!!!!!!!**************!!!!!!!!>
-
 filetype off
 call plug#begin('~/.config/nvim/plug')
 
-" tmux focus events integraion (switching between vim pane and other console pane)
+" Navigation and information for yaml files (current node path, jump to parent, jump to key)
+Plug 'lmeijvogel/vim-yaml-helper'
+
+" Flash yanked area
+Plug 'haya14busa/vim-operator-flashy'
+" vim-operator-flashy dependency
+Plug 'kana/vim-operator-user'
+
+" Set different syntax type in part of file (for example SQL embeded in ruby file)
+Plug 'joker1007/vim-ruby-heredoc-syntax'
+
+" Asynchronous Lint Engine
+Plug 'w0rp/ale'
+
+" TMUX INTEGRATION ************************************
+" Execute commands from vim in tmux pane easily (mainly for running tests)
+Plug 'benmills/vimux'
+" Treat tmux panes like vim splits
+Plug 'christoomey/vim-tmux-navigator'
+" Tmux focus events integraion (switching between vim pane and other console pane)
 Plug 'tmux-plugins/vim-tmux-focus-events'
 " .tmux.conf syntax highlighting
 Plug 'tmux-plugins/vim-tmux'
+" <!!!!!!!!**************!!!!!!!!>
+
+" CLIPS syntax
+Plug 'vim-scripts/clips.vim'
+
+" Color parentheses based on nest depth
+Plug 'kien/rainbow_parentheses.vim'
+
 " ascii art (useless)
 Plug 'vim-scripts/DrawIt'
 
 " GENERAL ************************************
+Plug 'dominikduda/vim_current_word'
 Plug 'xolox/vim-misc'
 Plug 'c0r73x/neotags.nvim'
 Plug 'scrooloose/nerdtree'
@@ -152,7 +196,7 @@ Plug 'JazzCore/ctrlp-cmatcher'
 " <!!!!!!!!**************!!!!!!!!>
 
 " RAILS ************************************
-" Enable 'bunle' in vim and more
+" Enable 'bundle' in vim and more
 Plug 'tpope/vim-bundler'
 " Add rails-releated shortcuts to vim
 Plug 'tpope/vim-rails'
@@ -163,7 +207,6 @@ Plug 'tpope/vim-rake'
 " Syntax
 " Support for a lot of languages (syntax, indent and much more)
 Plug 'sheerun/vim-polyglot'
-Plug 'scrooloose/syntastic'
 " Live markdown preview
 Plug 'shime/vim-livedown', { 'do': 'npm install -g livedown' }
 " Enable 'Rvm use' in vim
@@ -182,6 +225,7 @@ Plug 'ervandew/supertab'
 Plug 'honza/vim-snippets'
 " Snippet engine
 Plug 'SirVer/ultisnips'
+" Dark powered autocompletion ];-|
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Deoplete extension for ruby methods
 Plug 'fishbullet/deoplete-ruby'
@@ -199,13 +243,6 @@ Plug 'tpope/vim-repeat'
 " Plug 'mxw/vim-jsx'
 " " <!!!!!!!!**************!!!!!!!!>
 
-" " TYPESCRIPT ************************************
-" Plug 'Quramy/tsuquyomi'
-" Plug 'leafgarland/typescript-vim'
-" " Async execution library, required by tsuquyomi
-" Plug 'Shougo/vimproc.vim'
-" " <!!!!!!!!**************!!!!!!!!>
-
 " Dim inactive windows
 Plug 'blueyed/vim-diminactive'
 " Airline
@@ -220,8 +257,6 @@ Plug 'terryma/vim-expand-region'
 Plug 'terryma/vim-multiple-cursors'
 " Maximize/minimize window on f3
 Plug 'szw/vim-maximizer'
-" Rubocop
-Plug 'ngmy/vim-rubocop'
 " Auto add ends, endfuncion, endif
 Plug 'tpope/vim-endwise'
 " Better highlighting for c++
@@ -239,15 +274,9 @@ Plug 'kchmck/vim-coffee-script'
 " Project wide search
 Plug 'rking/ag.vim'
 
-" " GVIM ONLY ************************************
-" " Enabling fulscreen helper
-" Plug 'lambdalisue/vim-fullscreen'
-" " <!!!!!!!!**************!!!!!!!!>
-
 " Yank history
 Plug 'Shougo/neoyank.vim'
-Plug 'benekastah/neomake'
-Plug 'kassio/neoterm'
+" Run tests from inside vim
 Plug 'janko-m/vim-test'
 
 " Dependency for neoyank (and some more kombajnish unused things), this isn'
@@ -268,12 +297,102 @@ colorscheme dante_modified
 let g:jsx_ext_required = 0
 " <!!!!!!!!**************!!!!!!!!>
 
+" VIM-MULTIPLE-CURSORS CONFIG ************************************
+" Pressing ESC with multiple cursors will exit visual mode instead of deleting all cursors (so they can be further used)
+let g:multi_cursor_exit_from_visual_mode = 0
+" <!!!!!!!!**************!!!!!!!!>
+
+autocmd CursorHold *.yml YamlGetFullPath
+let g:vim_yaml_helper_show_root = 1
+" <!!!!!!!!**************!!!!!!!!>
+
+" VIM-TRAILING-WHITESPACE CONFIG ************************************
+autocmd BufWritePre * FixWhitespace
+" <!!!!!!!!**************!!!!!!!!>
+
+" CLIPS SYNTAX CONFIG ************************************
+autocmd BufReadPost *.clp setlocal ts=8 sts=8 sw=8
+" <!!!!!!!!**************!!!!!!!!>
+
+" VIM_CURRENT_WORD CONFIG ************************************
+hi CurrentWord ctermbg=53
+hi CurrentWordTwins ctermbg=237
+" <!!!!!!!!**************!!!!!!!!>
+
+" VIM-RUBY-HEREDOC-SYNTAX CONFIG ************************************
+" Change syntax highlighter from 'ruby' to 'SQL' between 'END_OF_SQL' heredoc (5 lines below)
+let g:ruby_heredoc_syntax_filetypes = {
+        \ "sql" : {
+        \   "start" : "END_OF_SQL",
+        \},
+  \}
+" <!!!!!!!!**************!!!!!!!!>
+
+" VIM-OPERATOR-FLASHY CONFIG ************************************
+highlight Flashy ctermbg=255 cterm=NONE
+map y <Plug>(operator-flashy)
+nmap Y <Plug>(operator-flashy)$
+" <!!!!!!!!**************!!!!!!!!>
+
+" VIM-TMUX-NAVIGATOR CONFIG ************************************
+" Disable tmux navigator when zooming the vim pane
+let g:tmux_navigator_disable_when_zoomed = 1
+let g:tmux_navigator_no_mappings = 1
+noremap <silent> <A-h> :TmuxNavigateLeft<CR>
+noremap <silent> <A-j> :TmuxNavigateDown<CR>
+noremap <silent> <A-k> :TmuxNavigateUp<CR>
+noremap <silent> <A-l> :TmuxNavigateRight<CR>
+" <!!!!!!!!**************!!!!!!!!>
+
+" VIM-EXPAND-REGION CONFIG ************************************
+" Press v in visual mode to expand region (first press will select word which cursor is currently on)
+vmap v <Plug>(expand_region_expand)
+" <!!!!!!!!**************!!!!!!!!>
+
+" ALE CONFIG ************************************
+autocmd InsertLeave * ALELint
+let g:ale_set_highlights = 0
+let g:ale_sign_error = 'X➜'
+let g:ale_sign_warning = '!➜'
+let g:ale_lint_delay = 400
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_text_changed =  1
+" <!!!!!!!!**************!!!!!!!!>
+
+" RAINBOW-PARENTHESES CONFIG ************************************
+au VimEnter * RainbowParenthesesActivate
+au BufReadPost * RainbowParenthesesLoadRound
+au BufReadPost * RainbowParenthesesLoadSquare
+au BufReadPost * RainbowParenthesesLoadBraces
+let g:rbpt_colorpairs = [
+    \ ['129', 'RoyalBlue3'],
+    \ ['32', 'RoyalBlue3'],
+    \ ['118', 'firebrick3'],
+    \ ['226', 'RoyalBlue3'],
+    \ ['202', 'DarkOrchid3'],
+    \ ['160', 'DarkOrchid3'],
+    \ ['129', 'RoyalBlue3'],
+    \ ['32', 'RoyalBlue3'],
+    \ ['118', 'firebrick3'],
+    \ ['226', 'RoyalBlue3'],
+    \ ['202', 'DarkOrchid3'],
+    \ ['160', 'DarkOrchid3'],
+    \ ['129', 'RoyalBlue3'],
+    \ ['32', 'RoyalBlue3'],
+    \ ['118', 'firebrick3'],
+    \ ['226', 'RoyalBlue3'],
+    \ ['202', 'DarkOrchid3'],
+    \ ['160', 'DarkOrchid3'],
+    \ ]
+let g:rbpt_max = 18
+" <!!!!!!!!**************!!!!!!!!>
+
 " CLEVER-F CONFIG ************************************
 let g:clever_f_ignore_case = 1
 " <!!!!!!!!**************!!!!!!!!>
 
 " NEOYANK CONFIG ************************************
-nnoremap <leader>3 :Unite history/yank -default-action=append<Cr>
+nnoremap <leader>2 :Unite history/yank -default-action=append<Cr>
 " <!!!!!!!!**************!!!!!!!!>
 
 " SUPERTAB CONFIG ************************************
@@ -281,14 +400,24 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 " <!!!!!!!!**************!!!!!!!!>
 
 " NEOTAGS CONFIG ************************************
+let g:neotags_ctags_bin = '/usr/local/bin/ctags'
 let g:neotags_enabled = 1
 let g:neotags_highlight = 0
+let g:neotags_file = './tags'
+let g:neotags_recursive = 1
+let g:neotags_events_update = ['BufWritePost']
 " <!!!!!!!!**************!!!!!!!!>
 
 " DEOPLETE CONFIG ************************************
+let deoplete#tag#cache_limit_size = 50000000
+let g:deoplete#auto_complete_delay=2
+let g:deoplete#enable_ignore_case = 0
+let g:deoplete#enable_smart_case = 1
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_refresh_always = 1
-let g:deoplete#auto_refresh_delay = 25
+let g:deoplete#auto_refresh_delay = 15
+let g:deoplete#max_abbr_width = 0
+let g:deoplete#max_menu_width = 0
 imap <c-j> <Tab>
 imap <c-k> <S-Tab>
 " <!!!!!!!!**************!!!!!!!!>
@@ -301,18 +430,10 @@ let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 " <!!!!!!!!**************!!!!!!!!>
 
 " LIVEDOWN CONFIG ************************************
-nmap gm :LivedownToggle<CR>
 " The system command to launch a browser
 let g:livedown_browser = 'google-chrome'
 " Should the browser window pop-up upon previewing
 let g:livedown_open = 1
-" <!!!!!!!!**************!!!!!!!!>
-
-" NEOTERM CONFIG ************************************
-nmap <leader>2 :Ttoggle<CR>
-" let g:neoterm_size = 20
-let g:neoterm_keep_term_open = 1
-let g:neoterm_run_tests_bg = 1
 " <!!!!!!!!**************!!!!!!!!>
 
 " AIRLINE CONFIG ************************************
@@ -330,11 +451,10 @@ let g:airline_theme='base16_summerfruit'
 " <!!!!!!!!**************!!!!!!!!>
 
 " CTRLP CONFIG ************************************
+let g:ctrlp_max_files = 0
 let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_cmd = 'CtrlP'
 map <C-l> :CtrlPMRU<CR>
-"show hidden files
-let g:ctrlp_show_hidden = 1
 "Speed fixes http://stackoverflow.com/questions/21346068/slow-performance-on-ctrlp-it-doesnt-work-to-ignore-some-folders
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 " Use ag instead of grep if installed
@@ -352,24 +472,22 @@ endif
 let g:diminactive_buftype_blacklist = []
 " tmux integration
 let g:diminactive_enable_focus = 1
-" Fixes not-dimming properly when file is opened from nerdtree
-autocmd BufNew * DimInactive
 " <!!!!!!!!**************!!!!!!!!>
 
 " NERDTREE CONFIG ************************************
 let g:NERDTreeWinSize = 30
-"close vim if only NERDTree is opened
+" close vim if only NERDTree is opened
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " start with nerdtree open if no file were specified (2 lines below)
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " NerdTree toggle
 nmap <leader>1 :NERDTreeToggle<CR>
+nnoremap <leader>f :NERDTreeFind<CR>zz
 " <!!!!!!!!**************!!!!!!!!>
 
 " TAGBAR CONFIG ************************************
-" autocmd BufEnter * nested :call tagbar#autoopen(0)
-nmap <leader>\ :TagbarToggle<CR>
+nmap <leader>3 :TagbarToggle<CR>
 let g:tagbar_autoclose = 1
 let g:tagbar_width = 39
 let g:tagbar_sort = 1
@@ -387,7 +505,6 @@ let g:tagbar_type_ruby = {
 
 " GITGUTTER CONFIG ************************************
 let g:gitgutter_sign_column_always = 1
-" uncomment 2 lines below in case of performance issues
 let g:gitgutter_realtime = 1
 let g:gitgutter_eager = 1
 let g:gitgutter_async = 1
@@ -395,7 +512,46 @@ let g:gitgutter_async = 1
 
 " AG.VIM CONFIG ************************************
 let g:ag_highlight=1
-nnoremap , :Ag<Space>-Q<Space>'
+" Search projectwide
+nnoremap , :Ag!<Space>-Q<Space>''<Left>
+" Search selected text project wide (+ possibility to pass path)
+vnoremap , y:Ag!<Space>-Q<Space>'<C-r>"'<Space>
+let g:ag_apply_qmappings=0
+" <!!!!!!!!**************!!!!!!!!>
+
+
+" VIM-TEST CONFIG ************************************
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>a :TestSuite<CR>
+nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>g :TestVisit<CR>
+let test#strategy = 'vimux'
+" <!!!!!!!!**************!!!!!!!!>
+
+" FUGITIVE CONFIG ************************************
+set diffopt+=vertical
+noremap <Left> :diffget //2<Cr>:diffupdate<Cr>
+noremap <Right> :diffget //3<Cr>:diffupdate<Cr>
+noremap <Up> u:diffupdate<Cr>
+noremap <leader><Up> :set cursorline!<Cr>:set sidescrolloff=100<Cr>:Gdiff<Cr>/HEAD<Cr>zz
+noremap <leader><Down> :set cursorline!<Cr>:set sidescrolloff=5<Cr>:diffoff<Cr><C-w>h:q!<Cr><C-w>l:q!<Cr>:w<Cr>
+" <!!!!!!!!**************!!!!!!!!>
+
+" AB SPECIFIC ************************************
+let g:test#runner_commands = ['Rspec']
+let g:rails_projections = {
+      \  'app/*.rb': {
+      \     'alternate': 'spec/{}_spec.rb',
+      \     'type': 'source'
+      \   },
+      \  'spec/*_spec.rb': {
+      \     'alternate': 'app/{}.rb',
+      \     'type': 'test'
+      \   }
+      \}
+" Color 200th column
+set colorcolumn=200
 " <!!!!!!!!**************!!!!!!!!>
 
 " PERSONAL CONFIG AND SHORTCUTS ************************************
@@ -408,120 +564,76 @@ nmap <C-k> ddkP
 nmap <C-j> ddp
 nnoremap ; :
 inoremap <C-l> <End>
-
 inoremap kk <Right>
 inoremap jj <Esc>
 " Copy to system clipboard
 vnoremap <C-c> "+y
 " Paste form system clipboard (2 lines below)
-nmap <C-v> "+p
+nmap <C-v> "+P
+" Replace currenctly selected text with one from clipboard
+vmap <C-v> x"+P
 inoremap <C-v> <Esc>"+pa
 " Change current line color when entering insert mode
 autocmd InsertEnter * highlight  CursorLine ctermbg=52
+" Change current line number color when entering insert mode
+autocmd InsertEnter * highlight  CursorLineNR ctermbg=124
 " Revert current line color to default when leaving insert mode
-autocmd InsertLeave * highlight  CursorLine ctermbg=235
+autocmd InsertLeave * highlight  CursorLine ctermbg=232
+" Revert current line number color to default when leaving insert mode
+autocmd InsertLeave * highlight  CursorLineNR ctermbg=243
 " check file change every 4 seconds ('CursorHold') and reload the buffer upon detecting change (2 lines below)
 set autoread
 au CursorHold * checktime
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " Toggle Undotree window
 nnoremap <F5> :UndotreeToggle<CR>
-" Use { to span next line to current
+" Use { to connect next line to current
 nnoremap { J
-" Use J and K to jump between paragraphs in visual and normal modes (4 lines below)
-nnoremap J }
-nnoremap K {
-vnoremap J }
-vnoremap K {
-" Use H and L to jump to beginning and end of line in normal and visual modes (4 lines below)
-nnoremap H ^
-nnoremap L $
-vnoremap H ^
-vnoremap L $
-" Switch buffer on alt + direction (4 lines below)
-nnoremap <A-h> <C-w>h
-nnoremap <A-j> <C-w>j
-nnoremap <A-k> <C-w>k
-nnoremap <A-l> <C-w>l
+" Use J and K to jump between paragraphs in visual, normal, during yank and delete (8 lines below)
+noremap J }
+noremap K {
+nmap yJ y}
+nmap yK y{
+nmap dJ d}
+nmap dK d{
+vmap J }
+vmap K {
+" Use H and L to jump to beginning and end of line in normal, visual, during yank and delete (8 lines below)
+nmap H ^
+nmap L $
+nmap yL y$
+nmap yH y^
+nmap dL d$
+nmap dH d^
+vmap H ^
+vmap L $
 " Resize buffer on ctrl + alt + direction (4 lines below)
 nnoremap <A-C-h> :vertical resize +1<CR>
 nnoremap <A-C-j> :resize -1<CR>
 nnoremap <A-C-k> :resize +1<CR>
 nnoremap <A-C-l> :vertical resize -1<CR>
-" Move vertically by rows rather than lines (useful with long lines + wrap on)
+" Move vertically by rows rather than lines, useful with long lines + wrap on (2 lines below)
 nnoremap j gj
 nnoremap k gk
+" Move vertically by lines rather than rows in quickfix window (2 lines below)
+autocmd BufReadPost quickfix nnoremap <buffer> j j
+autocmd BufReadPost quickfix nnoremap <buffer> k k
 " Center screen on next/previous selection.
 nnoremap n nzz
 nnoremap N Nzz
+" Move preview window to full width row at bottom when opened (7 lines below)
+au BufEnter ?* call PreviewHeightWorkAround()
+func! PreviewHeightWorkAround()
+  if &previewwindow
+    exec 'wincmd J'
+    exec 'setlocal winheight='.&previewheight
+  endif
+endfunc
+" Replace currenctly selected text with one from clipboard
+vmap <C-v> x"+p
+" Select whole file
+" nmap <C-a> ggVG
+" Save all files when nvim looses focus (ignores unnamed buffers warnings)
+autocmd FocusLost * silent! wa
+let mapleader = " "
 " <!!!!!!!!**************!!!!!!!!>
-
-" VIM-TEST CONFIG ************************************
-nmap <silent> <leader>t :TestNearest<CR>
-nmap <silent> <leader>T :TestFile<CR>
-nmap <silent> <leader>a :TestSuite<CR>
-nmap <silent> <leader>l :TestLast<CR>
-nmap <silent> <leader>g :TestVisit<CR>
-let test#strategy = 'neoterm'
-" let test#strategy = 'vimux'
-let g:neoterm_position = 'horizontal'
-" let g:test#preserve_screen = 1
-" <!!!!!!!!**************!!!!!!!!>
-
-" BLOCKLE CONFIG ************************************
-" let g:blockle_mapping = '<C-b>'
-" <!!!!!!!!**************!!!!!!!!>
-
-" FUGITIVE CONFIG ************************************
-set diffopt+=vertical
-noremap <Left> :diffget //2<Cr>:diffupdate<Cr>
-noremap <Right> :diffget //3<Cr>:diffupdate<Cr>
-noremap <Up> u:diffupdate<Cr>
-noremap <leader><Up> :set cursorline!<Cr>:set sidescrolloff=100<Cr>:Gdiff<Cr>
-noremap <leader><Down> :set cursorline!<Cr>:set sidescrolloff=5<Cr>:diffoff<Cr><C-w>h:q!<Cr><C-w>l:q!<Cr>
-" <!!!!!!!!**************!!!!!!!!>
-
-" TERMINAL MODE SHORTCUTS ************************************
-if has('nvim')
-  " Exit terminal mode with esc
-  :tnoremap <Esc> <C-\><C-n>"
-  " Improve windows navigation by using 'alt + *' combination even when terminal window is active
-  :tnoremap <A-h> <C-\><C-n><C-w>h
-  :tnoremap <A-j> <C-\><C-n><C-w>j
-  :tnoremap <A-k> <C-\><C-n><C-w>k
-  :tnoremap <A-l> <C-\><C-n><C-w>l
-endif
-" <!!!!!!!!**************!!!!!!!!>
-
-" TYPESCRIPT SETTINGS ************************************
-let g:neomake_javascript_enabled_makers = ['eslint']
-let g:tsuquyomi_disable_quickfix = 1
-" let g:neomake_typescript_enabled_makers = []
-" let g:syntastic_typescript_tsc_fname = ''
-" let g:syntastic_typescript_checkers = ['tsuquyomi']
-autocmd FileType typescript setlocal completeopt+=menu,preview
-" <!!!!!!!!**************!!!!!!!!c
-
-" " AB SPECIFIC ************************************
-" " Add empty line at end of file after save
-" set eol
-" let test#ruby#rspec#executable = 'foreman run rspec'
-" let g:test#runner_commands = ['Rspec']
-" " vim-rails priority rspec tests when using :A
-" let g:rails_projections = {
-"       \  'app/*.rb': {
-"       \     'alternate': 'spec/{}_spec.rb',
-"       \     'type': 'source'
-"       \   },
-"       \  'spec/*_spec.rb': {
-"       \     'alternate': 'app/{}.rb',
-"       \     'type': 'test'
-"       \   }
-"       \}
-" " Color 100th column
-" set colorcolumn=100
-" " <!!!!!!!!**************!!!!!!!!>
-
-autocmd! BufWritePost * Neomake
-"Auto remove trailing whitespaces on save
-autocmd BufWritePre * FixWhitespace
-set switchbuf=useopen
