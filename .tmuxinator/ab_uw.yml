@@ -1,7 +1,8 @@
-# ~/.tmuxinator/ab.yml
+# ~/.tmuxinator/ab_uw.yml
 
-name: ab
-root: ~/github/ab
+name: ab_uw
+# This stopped working after tmux upgrade, use 'pre' instead
+# root: ~/github/ab
 
 # Optional tmux socket
 # socket_name: foo
@@ -9,7 +10,7 @@ root: ~/github/ab
 # Runs before everything. Use it to start daemons etc.
 # Sets current postgres version and cluster (so all pg_related helper apps versions match psql server app (like pg_dump, pg_restore))
 # Strings separated by space are respectively: postgres version, host:port, database (* = anything)
-pre: echo '9.6 localhost:5434  *' > ~/.postgresqlrc
+pre: cd ~/github/ab; echo '9.6 localhost:5434  *' > ~/.postgresqlrc
 
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
 # Disables spring, sets default postgres port
@@ -19,11 +20,11 @@ pre_window: export DISABLE_SPRING=1; export PGPORT=5434
 # tmux_options: -f ~/.tmux.mac.conf
 
 # Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
-# tmux_command: byobu
+# tmux_command: tmux-next
 
 # Specifies (by name or index) which window will be selected on project startup. If not set, the first window is used.
-# startup_window: editor
-startup_pane: 1
+startup_window: editor
+startup_pane: 0
 
 # Controls whether the tmux session should be attached to automatically. Defaults to true.
 # attach: false
@@ -33,11 +34,12 @@ startup_pane: 1
 
 windows:
     - consoles_and_editor:
-        layout: 5ba1,311x63,0,0{196x63,0,0[196x13,0,0,71,196x49,0,14,74],114x63,197,0[114x25,197,0,72,114x37,197,26,73]}
+        layout: 1c9a,244x54,0,0{188x54,0,0[188x9,0,0,206,188x44,0,10,207],55x54,189,0[55x21,189,0,208,55x32,189,22,209]}
         panes:
           - helper:
+            - git fetch --prune
             - clear
-            - gst
+            - git status
           - editor:
             - nvim
           - filtered_logs:
