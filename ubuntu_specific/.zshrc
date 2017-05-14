@@ -83,10 +83,10 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias ab_s_log="spring stop; rails s -p 5000 | tee ~/github/ab/log/rails.log"
-alias ab_grepped_log="spring stop; tail -f ~/github/ab/log/rails.log | grep 'Rendered\|Processing\|Parameters\|INFO\|FATAL\|Error\|ActionView\|ActiveRecord'"
-alias ab_c="spring stop; rails c"
-alias ab_m="spring stop; rake db:migrate"
+alias ab_s_log="rails s -p 5000 | tee ~/github/ab/log/rails.log"
+alias ab_grepped_log="tail -f ~/github/ab/log/rails.log | grep 'Rendered\|Processing\|Parameters\|INFO\|FATAL\|Error\|ActionView\|ActiveRecord'"
+alias ab_c="rails c"
+alias ab_m="rake db:migrate"
 
 export EDITOR='nvim'
 
