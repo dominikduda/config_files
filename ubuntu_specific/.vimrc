@@ -108,7 +108,7 @@
     " Allow backspacing over everything in insert mode
         set backspace=indent,eol,start
     " Color syntax
-    syntax on
+        syntax on
 
 filetype off
 call plug#begin('~/.config/nvim/plug')
