@@ -1,8 +1,8 @@
-# ~/.tmuxinator/ab_uw.yml
+# ~/.tmuxinator/md_uw.yml
 
-name: ab_uw
+name: md_uw
 # This stopped working after tmux upgrade, use 'pre' instead
-# root: ~/github/ab
+# root: ~/github/material-determination
 
 # Optional tmux socket
 # socket_name: foo
@@ -10,21 +10,21 @@ name: ab_uw
 # Runs before everything. Use it to start daemons etc.
 # Sets current postgres version and cluster (so all pg_related helper apps versions match psql server app (like pg_dump, pg_restore))
 # Strings separated by space are respectively: postgres version, host:port, database (* = anything)
-pre: cd ~/github/ab ; echo '9.6 localhost:5434  *' > ~/.postgresqlrc
+pre: cd ~/github/material-determination; echo '9.6 localhost:5434  *' > ~/.postgresqlrc
 
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
 # Disables spring, sets default postgres port
-pre_window: export DISABLE_SPRING=1 ; export PGPORT=5434
+pre_window: export DISABLE_SPRING=1; export PGPORT=5434; nvm use 5
 
 # Pass command line options to tmux. Useful for specifying a different tmux.conf.
 # tmux_options: -f ~/.tmux.mac.conf
 
 # Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
-# tmux_command: tmux-next
+# tmux_command: byobu
 
 # Specifies (by name or index) which window will be selected on project startup. If not set, the first window is used.
-startup_window: editor
-startup_pane: 0
+startup_window: consoles_and_editor
+startup_pane: 2
 
 # Controls whether the tmux session should be attached to automatically. Defaults to true.
 # attach: false
@@ -34,17 +34,27 @@ startup_pane: 0
 
 windows:
     - consoles_and_editor:
-        layout: 1c9a,244x54,0,0{188x54,0,0[188x9,0,0,206,188x44,0,10,207],55x54,189,0[55x21,189,0,208,55x32,189,22,209]}
+        layout: f589,231x48,0,0{164x48,0,0[164x10,0,0,13,164x37,0,11,15],66x48,165,0,16}
         panes:
           - helper:
             - git fetch --prune
             - clear
             - git status
+            - echo 'REMEMBER TO EXECUTE "setup_md.sh" UNLESS YOU HAVE DONE IT ALREADY'
           - editor:
             - nvim
-          - filtered_logs:
-            - ab_grepped_log
-          - logs:
+          - gulp:
+            - nvm use 5
+            - gulp
+    - ab_stuff:
+        layout: 6d34,231x48,0,0{136x48,0,0,14,94x48,137,0,17}
+        panes:
+          - helper:
+            - cd ~/github/ab
+            - clear
+            - git status
+          - ab_console:
+            - cd ~/github/ab
             - ab_s_log
 
 # make sure those aliases are defined in .zshrc

@@ -20,3 +20,5 @@
 [push]
         ; refuse to push if upstream name is different from local, push the current branch back to the branch whose changes are usually integrated into the current branch
         default = simple
+[github]
+	user = gospodorz@gmail.com
