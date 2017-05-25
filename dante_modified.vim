@@ -13,10 +13,10 @@ let g:colors_name = "dante_modified"
 
 hi cMember cterm=underline
 
-
 "hi SignColumn -- no settings --
-hi Normal guifg=#b3b1b3 guibg=#0a0a0a guisp=#0a0a0a gui=NONE ctermfg=249 ctermbg=232 cterm=NONE
-"hi SpellRare -- no settings --
+" hi Normal guifg=#b3b1b3 guibg=#0a0a0a guisp=#0a0a0a gui=NONE ctermfg=249 ctermbg=232 cterm=NONE
+" hi Normal guifg=#b3b1b3 guibg=#0a0a0a guisp=#0a0a0a gui=NONE ctermfg=249 ctermbg=233 cterm=NONE
+hi Normal guifg=#b3b1b3 guibg=#0a0a0a guisp=#0a0a0a gui=NONE ctermfg=250 ctermbg=233 cterm=NONE
 "hi EnumerationValue -- no settings --
 "hi TabLineSel -- no settings --
 "hi Union -- no settings --
@@ -40,9 +40,8 @@ hi ColorColumn ctermbg=234
 hi Comment guifg=#10cccc guibg=NONE guisp=NONE gui=NONE ctermfg=80 ctermbg=NONE cterm=NONE
 hi Conditional guifg=#ffd500 guibg=NONE guisp=NONE gui=NONE ctermfg=220 ctermbg=NONE cterm=NONE
 hi Constant guifg=#f50000 guibg=NONE guisp=NONE gui=NONE ctermfg=203 ctermbg=NONE cterm=NONE
-hi Cursor guifg=#000000 guibg=#cdaf95 guisp=#cdaf95 gui=NONE ctermfg=NONE ctermbg=180 cterm=NONE
 hi CursorColumn guifg=NONE guibg=#0e0e0e guisp=#0e0e0e gui=NONE ctermfg=NONE ctermbg=234 cterm=NONE
-hi CursorLine guifg=NONE guibg=#0e0e0e guisp=#0e0e0e gui=NONE ctermfg=NONE ctermbg=234 cterm=NONE
+hi CursorLine guifg=NONE guibg=#0e0e0e guisp=#0e0e0e gui=NONE ctermfg=NONE ctermbg=235 cterm=NONE
 hi Debug guifg=#ff8000 guibg=NONE guisp=NONE gui=NONE ctermfg=208 ctermbg=NONE cterm=NONE
 hi Define guifg=#1766b0 guibg=NONE guisp=NONE gui=NONE ctermfg=62 ctermbg=NONE cterm=NONE
 hi Delimiter guifg=#ff8000 guibg=NONE guisp=NONE gui=NONE ctermfg=206=NONE cterm=NONE
@@ -60,11 +59,11 @@ hi Folded guifg=#4876ff guibg=#ffffff guisp=#ffffff gui=NONE ctermfg=69 ctermbg=
 hi Function guifg=#4040d6 guibg=NONE guisp=NONE gui=NONE ctermfg=33 ctermbg=NONE cterm=NONE
 hi Identifier guifg=#61d700 guibg=NONE guisp=NONE gui=NONE ctermfg=77 ctermbg=NONE cterm=NONE
 hi Ignore guifg=#737373 guibg=NONE guisp=NONE gui=NONE ctermfg=243 ctermbg=NONE cterm=NONE
-hi IncSearch guifg=#ffae00 guibg=NONE guisp=NONE gui=bold ctermfg=15 ctermbg=NONE cterm=bold
+hi IncSearch guifg=#ffae00 guibg=NONE guisp=NONE gui=bold ctermfg=15 ctermbg=NONE cterm=bold,underline
 hi Include guifg=#176ebf guibg=NONE guisp=NONE gui=NONE ctermfg=4 ctermbg=NONE cterm=NONE
 hi Keyword guifg=#ffd500 guibg=NONE guisp=NONE gui=NONE ctermfg=220 ctermbg=NONE cterm=NONE
 hi Label guifg=#ffd500 guibg=NONE guisp=NONE gui=NONE ctermfg=220 ctermbg=NONE cterm=NONE
-hi LineNr guifg=#8b8b83 guibg=#141414 guisp=#141414 gui=NONE ctermfg=101 ctermbg=233 cterm=NONE
+hi LineNr guifg=#8b8b83 guibg=#141414 guisp=#141414 gui=NONE ctermfg=101 ctermbg=232 cterm=NONE
 hi Macro guifg=#104e8b guibg=NONE guisp=NONE gui=NONE ctermfg=24 ctermbg=NONE cterm=NONE
 hi ModeMsg guifg=NONE guibg=NONE guisp=NONE gui=bold ctermfg=NONE ctermbg=NONE cterm=bold
 hi MoreMsg guifg=#c0ff3e guibg=NONE guisp=NONE gui=bold ctermfg=191 ctermbg=NONE cterm=bold
@@ -79,15 +78,15 @@ hi PreCondit guifg=#104e8b guibg=NONE guisp=NONE gui=NONE ctermfg=24 ctermbg=NON
 hi PreProc guifg=#008cc4 guibg=NONE guisp=NONE gui=NONE ctermfg=4 ctermbg=NONE cterm=NONE
 hi Question guifg=#c0ff3e guibg=NONE guisp=NONE gui=bold ctermfg=191 ctermbg=NONE cterm=bold
 hi Repeat guifg=#cdad00 guibg=NONE guisp=NONE gui=NONE ctermfg=178 ctermbg=NONE cterm=NONE
-hi Search guifg=#1a1a1a guibg=#eec900 guisp=#eec900 gui=NONE ctermfg=15 ctermbg=NONE cterm=bold
+hi Search guifg=#1a1a1a guibg=#eec900 guisp=#eec900 gui=NONE ctermfg=15 ctermbg=NONE cterm=bold,underline
 hi Special guifg=#ff8400 guibg=NONE guisp=NONE gui=NONE ctermfg=208 ctermbg=NONE cterm=NONE
 hi SpecialChar guifg=#ff5f00 guibg=NONE guisp=NONE gui=NONE ctermfg=202 ctermbg=NONE cterm=NONE
 hi SpecialComment guifg=#ff5f00 guibg=NONE guisp=NONE gui=NONE ctermfg=202 ctermbg=NONE cterm=NONE
 hi SpecialKey guifg=#4d4d4d guibg=NONE guisp=NONE gui=NONE ctermfg=239 ctermbg=NONE cterm=NONE
-hi SpellCap guifg=#000000 guibg=#ff6666 guisp=#ff6666 gui=NONE ctermfg=NONE ctermbg=9 cterm=NONE
 hi Statement guifg=#ffd500 guibg=NONE guisp=NONE gui=NONE ctermfg=220 ctermbg=NONE cterm=NONE
 hi StatusLine guifg=#999999 guibg=NONE guisp=NONE gui=NONE ctermfg=246 ctermbg=NONE cterm=NONE
 hi StatusLineNC guifg=#a8a8a8 guibg=NONE guisp=NONE gui=NONE ctermfg=248 ctermbg=NONE cterm=NONE
+hi VertSplit guifg=#666666 guibg=NONE guisp=NONE gui=bold ctermfg=24 ctermbg=24 cterm=bold
 hi StorageClass guifg=#5eb341 guibg=NONE guisp=NONE gui=NONE ctermfg=107 ctermbg=NONE cterm=NONE
 hi String guifg=#ff0000 guibg=NONE guisp=NONE gui=NONE ctermfg=140 ctermbg=NONE cterm=NONE
 hi Structure guifg=#5eb341 guibg=NONE guisp=NONE gui=NONE ctermfg=107 ctermbg=NONE cterm=NONE
@@ -97,7 +96,6 @@ hi Todo guifg=#ffffff guibg=#0b91d9 guisp=#0b91d9 gui=italic ctermfg=15 ctermbg=
 hi Type guifg=#61d700 guibg=NONE guisp=NONE gui=NONE ctermfg=77 ctermbg=NONE cterm=NONE
 hi Typedef guifg=#61d700 guibg=NONE guisp=NONE gui=NONE ctermfg=76 ctermbg=NONE cterm=NONE
 hi Underlined guifg=#6a5acd guibg=NONE guisp=NONE gui=underline ctermfg=62 ctermbg=NONE cterm=underline
-hi VertSplit guifg=#666666 guibg=NONE guisp=NONE gui=bold ctermfg=241 ctermbg=NONE cterm=bold
 hi Visual guifg=#080808 guibg=#bfbfbf guisp=#bfbfbf gui=NONE ctermfg=232 ctermbg=7 cterm=NONE
 hi VisualNOS guifg=NONE guibg=NONE guisp=NONE gui=bold,underline ctermfg=NONE ctermbg=NONE cterm=bold,underline
 hi WarningMsg guifg=#cd0000 guibg=NONE guisp=NONE gui=bold ctermfg=160 ctermbg=NONE cterm=bold
@@ -106,13 +104,17 @@ hi cursorim guifg=#192224 guibg=#536991 guisp=#536991 gui=NONE ctermfg=235 cterm
 hi lcursor guifg=#000000 guibg=#cdaf95 guisp=#cdaf95 gui=NONE ctermfg=NONE ctermbg=180 cterm=NONE
 hi lcursor guifg=#000000 guibg=#cdaf95 guisp=#cdaf95 gui=NONE ctermfg=NONE ctermbg=180 cterm=NONE
 
-" custom:
+" Custom:
 hi! link NonText LineNr
 hi rubymodulenametag guifg=#61d700 guibg=NONE guisp=NONE gui=NONE ctermfg=76 ctermbg=NONE cterm=underline
 hi rubyclassnametag guifg=#61d700 guibg=NONE guisp=NONE gui=NONE ctermfg=76 ctermbg=NONE cterm=underline
 hi rubymethodnametag guifg=#4040d6 guibg=NONE guisp=NONE gui=underline ctermfg=33 ctermbg=NONE cterm=underline
 hi rspecGroupMethods guifg=#4040d6 guibg=NONE guisp=NONE gui=underline ctermfg=33 ctermbg=NONE
 hi rubyRailsMethod guifg=#4040d6 guibg=NONE guisp=NONE gui=underline ctermfg=110 ctermbg=NONE
-hi CursorLineNR guifg=#4040d6 guibg=NONE guisp=NONE gui=underline ctermfg=234 ctermbg=243 cterm=bold
+hi CursorLineNR guifg=#4040d6 guibg=NONE guisp=NONE gui=underline ctermfg=232 ctermbg=246 cterm=NONE
+hi MatchParen ctermbg=NONE ctermfg=15 cterm=underline,bold
 
-hi SpellBad guifg=#000000 guibg=#ff6363 guisp=#ff6363 gui=NONE ctermfg=0 ctermbg=178 cterm=NONE
+" Spell
+hi! SpellCap guifg=#000000 guibg=#ff6666 guisp=#ff6666 gui=NONE ctermfg=NONE ctermbg=NONE cterm=NONE
+hi! SpellBad guifg=#000000 guibg=#ff6363 guisp=#ff6363 gui=NONE ctermfg=NONE ctermbg=NONE cterm=underline
+hi! SpellRare guifg=#000000 guibg=#ff6363 guisp=#ff6363 gui=NONE ctermfg=NONE ctermbg=NONE cterm=underline
