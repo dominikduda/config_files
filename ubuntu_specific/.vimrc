@@ -307,7 +307,7 @@ call plug#end()
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIM-RUBY-HEREDOC-SYNTAX CONFIG ************************************
-    " Change syntax highlighter from 'ruby' to 'SQL' between 'END_OF_SQL' heredoc (5 lines below)
+    " Change syntax highlighter from 'ruby' to 'SQL' between 'END_OF_SQL' heredoc
         let g:ruby_heredoc_syntax_filetypes = {
                 \ "sql" : {
                 \   "start" : "END_OF_SQL",
@@ -403,7 +403,7 @@ call plug#end()
     let g:neotags_highlight = 0
     let g:neotags_file = './tags'
     let g:neotags_recursive = 1
-    " let g:neotags_events_update = ['BufWritePost']
+    let g:neotags_events_update = ['BufWritePost']
 " <!!!!!!!!**************!!!!!!!!>
 
 " DEOPLETE CONFIG ************************************
@@ -573,7 +573,7 @@ call plug#end()
     " Change current line number color when entering/leaving insert mode
         autocmd InsertEnter * highlight  CursorLineNR ctermbg=124
         autocmd InsertLeave * highlight  CursorLineNR ctermbg=246
-    " Check file change every 4 seconds ('CursorHold') and reload the buffer upon detecting change (2 lines below)
+    " Check file change every 4 seconds ('CursorHold') and reload the buffer upon detecting change
         set autoread
         au CursorHold * checktime
     " Toggle Undotree window
@@ -628,4 +628,13 @@ call plug#end()
         vnoremap q <Esc>
     " Replace selected phrace globally in file
         vnoremap R y:%s/<C-r>"//gc<Left><Left><Left>
+    " Function and corresponding command to update plugins with fix_vim_syntax_files.sh ran pre and post
+      function! s:update_plugins()
+        :! fix_vim_syntax_files.sh
+        :PlugUpdate
+        :echom 'blocked for 10 seconds'
+        exec input('Press Enter when update is finished')
+        :! fix_vim_syntax_files.sh
+      endfunction
+      command! UpdatePlugins call s:update_plugins()
 " <!!!!!!!!**************!!!!!!!!>
