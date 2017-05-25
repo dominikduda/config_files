@@ -629,12 +629,12 @@ call plug#end()
     " Replace selected phrace globally in file
         vnoremap R y:%s/<C-r>"//gc<Left><Left><Left>
     " Function and corresponding command to update plugins with fix_vim_syntax_files.sh ran pre and post
-      function! s:update_plugins()
-        :! fix_vim_syntax_files.sh
-        :PlugUpdate
-        :echom 'blocked for 10 seconds'
-        exec input('Press Enter when update is finished')
-        :! fix_vim_syntax_files.sh
-      endfunction
-      command! UpdatePlugins call s:update_plugins()
+        function! s:update_plugins()
+          :! fix_vim_syntax_files.sh
+          :PlugUpdate
+          :echom 'blocked for 10 seconds'
+          exec input('Press Enter when update is finished')
+          :! fix_vim_syntax_files.sh
+        endfunction
+        command! UpdatePlugins call s:update_plugins()
 " <!!!!!!!!**************!!!!!!!!>
