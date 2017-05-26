@@ -69,4 +69,5 @@ function main {
   fix_recursively_in_catalog $1
 }
 
+# Use path to your vim plugins directory
 main ~/.config/nvim/plug/
