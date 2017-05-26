@@ -20,9 +20,12 @@
     set switchbuf=useopen
     set ttimeoutlen=0
     set smarttab
+    " set nowrap
     set softtabstop=2
 " <!!!!!!!!**************!!!!!!!!>
 
+    " One of the things which prevents line from auto-breaking at certain length in insert mode
+        set formatoptions-=t
     " This have to be at the top to work apparently
         let mapleader=" "
     " Enable spell checking
@@ -71,10 +74,10 @@
         set laststatus=2
     " Show commands as they are entered
         set showcmd
-    " Text (e. g. comment) break point
-        set textwidth=0
+    " Text (e. g. comment) break point (simply big-enough number)
+        set textwidth=2000
     " Create vsplit on right side
-          set splitright
+        set splitright
     " Create hsplit on bottom
         set splitbelow
     " Hide buffers instead of closing them
@@ -416,6 +419,7 @@ call plug#end()
     let g:deoplete#auto_refresh_delay = 2
     let g:deoplete#max_abbr_width = 0
     let g:deoplete#max_menu_width = 0
+    let g:deoplete#max_list = 10
     imap <c-j> <Tab>
     imap <c-k> <S-Tab>
 " <!!!!!!!!**************!!!!!!!!>
@@ -524,6 +528,7 @@ call plug#end()
 " <!!!!!!!!**************!!!!!!!!>
 
 " FUGITIVE CONFIG ************************************
+    autocmd FileType gitcommit setlocal colorcolumn=72
     set diffopt+=vertical
     noremap <Left> :diffget //2<Cr>:diffupdate<Cr>
     noremap <Right> :diffget //3<Cr>:diffupdate<Cr>
