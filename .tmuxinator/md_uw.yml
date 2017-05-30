@@ -52,6 +52,8 @@ windows:
           - helper:
             - cd ~/github/ab
             - clear
+            - echo 'Waiting for setup_md.sh script to finish'
+            - sleep 5
             - git status
           - ab_console:
             - cd ~/github/ab
