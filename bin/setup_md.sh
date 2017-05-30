@@ -17,7 +17,7 @@ function setup {
 }
 
 if grep "setup_md.sh -> true" ran_scripts; then
-  echo 'The script was already executed!'
+  echo 'The "setup_md.sh" script was already executed!'
 else
   setup
 fi
