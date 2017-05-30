@@ -52,10 +52,10 @@ windows:
           - helper:
             - cd ~/github/ab
             - clear
-            - setup_md.sh
             - git status
           - ab_console:
             - cd ~/github/ab
+            - setup_md.sh
             - ab_s_log
 
 # make sure those aliases are defined in .zshrc
