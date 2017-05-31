@@ -40,7 +40,6 @@ windows:
             - git fetch --prune
             - clear
             - git status
-            - echo 'REMEMBER TO EXECUTE "setup_md.sh" UNLESS YOU HAVE DONE IT ALREADY'
           - editor:
             - nvim
           - gulp:
