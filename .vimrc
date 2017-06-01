@@ -631,7 +631,7 @@ call plug#end()
         nmap <silent> cp :let @+ = expand("%")<CR>:echom('Current file path copied to clipboard')<CR>
     " Exit copy mode
         vnoremap q <Esc>
-    " Replace selected phrace globally in file
+    " Replace selected phrase globally in file
         vnoremap R y:%s/<C-r>"//gc<Left><Left><Left>
     " Function and corresponding command to update plugins with fix_vim_syntax_files.sh ran pre and post
         function! s:update_plugins()
@@ -642,4 +642,8 @@ call plug#end()
           :! fix_vim_syntax_files.sh
         endfunction
         command! UpdatePlugins call s:update_plugins()
+    " Append clipboard with selected text
+        vnoremap ac y:let @+ .= '<C-r>"'<Cr>
+    " Append clipboard with input text
+        nnoremap <Leader>ac :let @+ .= ''<Left>
 " <!!!!!!!!**************!!!!!!!!>
