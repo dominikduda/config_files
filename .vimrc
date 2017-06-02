@@ -115,7 +115,6 @@
 
 filetype off
 call plug#begin('~/.config/nvim/plug')
-
     " Posting/updating/opening gists from vim
         Plug 'mattn/gist-vim'
     " gist-vim dependency
@@ -132,18 +131,12 @@ call plug#begin('~/.config/nvim/plug')
         Plug 'haya14busa/vim-operator-flashy'
     " vim-operator-flashy dependency
         Plug 'kana/vim-operator-user'
-    " Set different syntax type in part of file (for example SQL embeded in ruby file)
-        Plug 'joker1007/vim-ruby-heredoc-syntax'
     " Asynchronous Lint Engine
         Plug 'w0rp/ale'
-    " CLIPS syntax
-        Plug 'vim-scripts/clips.vim'
     " Color parentheses based on nest depth
         Plug 'kien/rainbow_parentheses.vim'
     " ascii art (useless)
         Plug 'vim-scripts/DrawIt'
-    " Support for a lot of languages (syntax, indent and much more)
-        Plug 'sheerun/vim-polyglot'
     " Live markdown preview
         Plug 'shime/vim-livedown', { 'do': 'npm install -g livedown' }
     " Enable 'Rvm use' in vim
@@ -192,6 +185,8 @@ call plug#begin('~/.config/nvim/plug')
         Plug 'Shougo/unite.vim'
     " Haml support
         Plug 'tpope/vim-haml'
+    " Backbone support
+        Plug 'mklabs/vim-backbone'
 
 " TMUX INTEGRATION ************************************
     " Execute commands from vim in tmux pane easily (mainly for running tests)
@@ -212,6 +207,17 @@ call plug#begin('~/.config/nvim/plug')
     Plug 'tpope/vim-surround'
     Plug 'majutsushi/tagbar'
     Plug 'rhysd/clever-f.vim'
+" <!!!!!!!!**************!!!!!!!!>
+
+" SYNTAX ************************************
+    " Set different syntax type in part of file (for example SQL embeded in ruby file)
+        Plug 'joker1007/vim-ruby-heredoc-syntax'
+    " CLIPS syntax
+        Plug 'vim-scripts/clips.vim'
+    " Support for a lot of languages (syntax, indent and much more)
+        Plug 'sheerun/vim-polyglot'
+    " Support for javascript libraries (JQ, backbone)
+        Plug 'othree/javascript-libraries-syntax.vim'
 " <!!!!!!!!**************!!!!!!!!>
 
 " GIT INTEGRATION ************************************
@@ -260,6 +266,10 @@ call plug#end()
     colorscheme dante_modified
     " JS thing
         let g:jsx_ext_required = 0
+" <!!!!!!!!**************!!!!!!!!>
+
+" VIM-POLYGLOT CONFIG ************************************
+      let g:polyglot_disabled = ['javascript']
 " <!!!!!!!!**************!!!!!!!!>
 
 " GIST-VIM CONFIG ************************************
@@ -393,7 +403,8 @@ call plug#end()
 " <!!!!!!!!**************!!!!!!!!>
 
 " NEOTAGS CONFIG ************************************
-    let g:neotags_ctags_bin = '/home/dominikduda/github/ctags/ctags'
+    let g:neotags_ctags_timeout = 5
+    let g:neotags_ctags_bin = 'ctags -R'
     let g:neotags_ctags_args = [
                 \ '--recurse=yes',
                 \ '--sort=yes',
@@ -406,7 +417,7 @@ call plug#end()
     let g:neotags_highlight = 0
     let g:neotags_file = './tags'
     let g:neotags_recursive = 1
-    let g:neotags_events_update = ['BufWritePost']
+    let g:neotags_events_update = ['FocusLost']
 " <!!!!!!!!**************!!!!!!!!>
 
 " DEOPLETE CONFIG ************************************
@@ -537,20 +548,27 @@ call plug#end()
     noremap <leader><Down> :set cursorline!<Cr>:set sidescrolloff=5<Cr>:diffoff<Cr><C-w>h:q!<Cr><C-w>l:q!<Cr>:w<Cr>
 " <!!!!!!!!**************!!!!!!!!>
 
-" AB SPECIFIC ************************************
-    let g:test#runner_commands = ['Rspec']
-    let g:rails_projections = {
-          \  'app/*.rb': {
-          \     'alternate': 'spec/{}_spec.rb',
-          \     'type': 'source'
-          \   },
-          \  'spec/*_spec.rb': {
-          \     'alternate': 'app/{}.rb',
-          \     'type': 'test'
-          \   }
-          \}
-    " Color 200th column
-        set colorcolumn=200
+" PROJECT SPECIFIC ************************************
+    if $CURRENT_PROJECT_NAME == 'AB'
+      let g:test#runner_commands = ['Rspec']
+      let g:rails_projections = {
+            \  'app/*.rb': {
+            \     'alternate': 'spec/{}_spec.rb',
+            \     'type': 'source'
+            \   },
+            \  'spec/*_spec.rb': {
+            \     'alternate': 'app/{}.rb',
+            \     'type': 'test'
+            \   }
+            \}
+      " Color 200th column
+          set colorcolumn=200
+    endif
+    if $CURRENT_PROJECT_NAME == 'MD'
+        let g:neotags_enabled = 0
+        " Custom test command for javascript in MD
+            autocmd FileType javascript nmap <buffer> <leader>t :VimuxRunCommand('clear; gulp test')<Cr>
+    endif
 " <!!!!!!!!**************!!!!!!!!>
 
 " PERSONAL CONFIG AND SHORTCUTS ************************************
