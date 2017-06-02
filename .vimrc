@@ -187,6 +187,8 @@ call plug#begin('~/.config/nvim/plug')
         Plug 'tpope/vim-haml'
     " Backbone support
         Plug 'mklabs/vim-backbone'
+    " Open files from nerd tree with default application for file extension (e. g. images)
+        Plug 'ivalkeen/nerdtree-execute'
 
 " TMUX INTEGRATION ************************************
     " Execute commands from vim in tmux pane easily (mainly for running tests)
