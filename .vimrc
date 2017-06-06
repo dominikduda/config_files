@@ -218,8 +218,8 @@ call plug#begin('~/.config/nvim/plug')
         Plug 'vim-scripts/clips.vim'
     " Support for a lot of languages (syntax, indent and much more)
         Plug 'sheerun/vim-polyglot'
-    " Support for javascript libraries (JQ, backbone)
-        Plug 'othree/javascript-libraries-syntax.vim'
+    " Javascript syntax
+        Plug 'jelera/vim-javascript-syntax'
 " <!!!!!!!!**************!!!!!!!!>
 
 " GIT INTEGRATION ************************************
@@ -256,7 +256,6 @@ call plug#begin('~/.config/nvim/plug')
     " Deoplete extension (more tag sources)
         Plug 'Shougo/neoinclude.vim'
 " <!!!!!!!!**************!!!!!!!!>
-"
 call plug#end()
 
 " NOT SURE OR TOO LAZY TO CHECK ************************************
@@ -271,7 +270,8 @@ call plug#end()
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIM-POLYGLOT CONFIG ************************************
-      let g:polyglot_disabled = ['javascript']
+    " Javascript syntax higlighter breaks rainbow_parentheses.vim - using alternative
+        let g:polyglot_disabled = ['javascript']
 " <!!!!!!!!**************!!!!!!!!>
 
 " GIST-VIM CONFIG ************************************
@@ -406,7 +406,7 @@ call plug#end()
 
 " NEOTAGS CONFIG ************************************
     let g:neotags_ctags_timeout = 5
-    let g:neotags_ctags_bin = 'ctags -R'
+    let g:neotags_ctags_bin = 'ctags'
     let g:neotags_ctags_args = [
                 \ '--recurse=yes',
                 \ '--sort=yes',
@@ -419,7 +419,7 @@ call plug#end()
     let g:neotags_highlight = 0
     let g:neotags_file = './tags'
     let g:neotags_recursive = 1
-    let g:neotags_events_update = ['FocusLost']
+    let g:neotags_events_update = ['BufReadPost']
 " <!!!!!!!!**************!!!!!!!!>
 
 " DEOPLETE CONFIG ************************************
@@ -567,7 +567,18 @@ call plug#end()
           set colorcolumn=200
     endif
     if $CURRENT_PROJECT_NAME == 'MD'
-        let g:neotags_enabled = 0
+        let g:deoplete#enable_ignore_case = 1
+        let g:neotags_ctags_args = [
+                    \ '--recurse=yes',
+                    \ '--sort=yes',
+                    \ '--fields=+l',
+                    \ '--c-kinds=+p',
+                    \ '--c++-kinds=+p',
+                    \ '--extras=+q',
+                    \ '--exclude=.git',
+                    \ '--exclude=node_modules',
+                    \ '--exclude=dist'
+                    \ ]
         " Custom test command for javascript in MD
             autocmd FileType javascript nmap <buffer> <leader>t :VimuxRunCommand('clear; gulp test')<Cr>
     endif
