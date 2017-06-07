@@ -34,8 +34,7 @@ startup_pane: 2
 
 windows:
     - consoles_and_editor:
-        # layout: f589,231x48,0,0{164x48,0,0[164x10,0,0,13,164x37,0,11,15],66x48,165,0,16}
-        layout: c0b0,231x48,0,0{164x48,0,0[164x8,0,0,1,164x39,0,9,3],66x48,165,0[66x10,165,0,9,66x37,165,11,14]}
+        layout: e16a,231x48,0,0{164x48,0,0[164x10,0,0,26,164x37,0,11,28],66x48,165,0[66x8,165,0,29,66x8,165,9,30,66x30,165,18,31]}
         panes:
           - helper:
             - git fetch --prune
@@ -45,6 +44,8 @@ windows:
             - nvim
           - geckodriver:
             - java -jar -Dwebdriver.gecko.driver=./geckodriver selenium-server-standalone-3.0.1.jar
+          - json-server:
+            - node server.js
           - gulp:
             - nvm use 5
             - gulp
