@@ -388,8 +388,14 @@ call plug#end()
                           \ ['226', 'RoyalBlue3'],
                           \ ['202', 'DarkOrchid3'],
                           \ ['160', 'DarkOrchid3'],
+                          \ ['129', 'RoyalBlue3'],
+                          \ ['32', 'RoyalBlue3'],
+                          \ ['118', 'firebrick3'],
+                          \ ['226', 'RoyalBlue3'],
+                          \ ['202', 'DarkOrchid3'],
+                          \ ['160', 'DarkOrchid3'],
                           \ ]
-    let g:rbpt_max = 18
+    let g:rbpt_max = 24
 " <!!!!!!!!**************!!!!!!!!>
 
 " CLEVER-F CONFIG ************************************
@@ -580,7 +586,7 @@ call plug#end()
                     \ '--exclude=dist'
                     \ ]
         " Custom test command for javascript in MD
-            autocmd FileType javascript nmap <buffer> <leader>t :VimuxRunCommand('clear; gulp test')<Cr>
+            autocmd BufRead,BufNewFile *.spec.js nmap <buffer> <leader>t :VimuxRunCommand('clear; gulp test')<Cr>
     endif
 " <!!!!!!!!**************!!!!!!!!>
 
