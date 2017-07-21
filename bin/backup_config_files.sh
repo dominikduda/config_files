@@ -13,8 +13,9 @@ cp ~/.tmux-powerlinerc ~/github/config_files/.tmux-powerlinerc
 cp ~/.tmux/plugins/tmux-powerline/themes/ddtheme.sh ~/github/config_files/.tmux/plugins/tmux-powerline/themes/ddtheme.sh
 
 # tmuxinator
-cp ~/.tmuxinator/ab_uw.yml ~/github/config_files/.tmuxinator/ab_uw.yml
-cp ~/.tmuxinator/md_uw.yml ~/github/config_files/.tmuxinator/md_uw.yml
+cp -r ~/.tmuxinator/. ~/github/config_files/.tmuxinator
+# cp ~/.tmuxinator/ab_uw.yml ~/github/config_files/.tmuxinator/ab_uw.yml
+# cp ~/.tmuxinator/md_uw.yml ~/github/config_files/.tmuxinator/md_uw.yml
 
 # bin
 cp ~/bin/fix_vim_syntax_files.sh ~/github/config_files/bin/fix_vim_syntax_files.sh
