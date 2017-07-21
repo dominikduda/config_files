@@ -1,6 +1,6 @@
-# ~/.tmuxinator/ab_uw.yml
+# ~/.tmuxinator/food_job.yml
 
-name: ab_uw
+name: food_job
 # This stopped working after tmux upgrade, use 'pre' instead
 # root: ~/github/ab
 
@@ -10,11 +10,11 @@ name: ab_uw
 # Runs before everything. Use it to start daemons etc.
 # Sets current postgres version and cluster (so all pg_related helper apps versions match psql server app (like pg_dump, pg_restore))
 # Strings separated by space are respectively: postgres version, host:port, database (* = anything)
-pre: cd ~/github/ab ; echo '9.6 localhost:5434  *' > ~/.postgresqlrc
+pre: cd ~/github/food_job ; echo '9.6 localhost:5434  *' > ~/.postgresqlrc
 
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
 # Disables spring, sets default postgres port
-pre_window: export DISABLE_SPRING=1 ; export CURRENT_PROJECT_NAME='AB' ; export PGPORT=5434
+pre_window: export DISABLE_SPRING=1 ; export CURRENT_PROJECT_NAME='FOOD_JOB' ; export PGPORT=5434
 
 # Pass command line options to tmux. Useful for specifying a different tmux.conf.
 # tmux_options: -f ~/.tmux.mac.conf
@@ -32,19 +32,19 @@ startup_pane: 0
 # Runs after everything. Use it to attach to tmux with custom options etc.
 # post: tmux -CC attach -t ab
 
+
 windows:
     - consoles_and_editor:
-        layout: edc7,231x48,0,0{181x48,0,0[181x10,0,0,22,181x37,0,11,23],49x48,182,0[49x18,182,0,24,49x29,182,19,25]}
+        layout: 6006,244x54,0,0{162x54,0,0[162x11,0,0,8,162x42,0,12,9],81x54,163,0[81x35,163,0,10,81x18,163,36,11]}
         panes:
-          - helper:
-            - git fetch --prune
-            - clear
-            - git status
-          - editor:
-            - nvim
-          - filtered_logs:
-            - ab_grepped_log
-          - logs:
-            - ab_s_log
+            - helper:
+                - git fetch --prune
+                - clear
+                - gst
+            - editor:
+                - nvim
+            - server:
+                - npm start
+            - redis:
+                ~/bin/redis/src/redis-server
 
-# make sure those aliases are defined in .zshrc

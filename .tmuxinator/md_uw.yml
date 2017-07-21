@@ -15,7 +15,6 @@ pre: cd ~/github/material-determination; echo '9.6 localhost:5434  *' > ~/.postg
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
 # Disables spring, sets default postgres port
 pre_window: export DISABLE_SPRING=1; export CURRENT_PROJECT_NAME=MD; export PGPORT=5434; nvm use 5
-
 # Pass command line options to tmux. Useful for specifying a different tmux.conf.
 # tmux_options: -f ~/.tmux.mac.conf
 
@@ -34,7 +33,7 @@ startup_pane: 2
 
 windows:
     - consoles_and_editor:
-        layout: e16a,231x48,0,0{164x48,0,0[164x10,0,0,26,164x37,0,11,28],66x48,165,0[66x8,165,0,29,66x8,165,9,30,66x30,165,18,31]}
+        layout: 2dfd,244x54,0,0{171x54,0,0[171x14,0,0,7,171x39,0,15,9],72x54,172,0[72x14,172,0,11,72x39,172,15,12]}
         panes:
           - helper:
             - git fetch --prune
@@ -42,10 +41,8 @@ windows:
             - git status
           - editor:
             - nvim
-          - geckodriver:
-            - java -jar -Dwebdriver.gecko.driver=./geckodriver selenium-server-standalone-3.0.1.jar
           - json-server:
-            - node server.js
+            - node test/json_server/server.js
           - gulp:
             - nvm use 5
             - gulp
