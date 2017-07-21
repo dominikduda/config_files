@@ -24,6 +24,10 @@
     set softtabstop=2
 " <!!!!!!!!**************!!!!!!!!>
 
+    " Custom spell file (use :mkspell! % in the file to reload)
+        set spellfile=~/.config/nvim/spell/techspeak.utf-8.add
+    " Saves file automatically on most needed events
+        set autowrite
     " One of the things which prevents line from auto-breaking at certain length in insert mode
         set formatoptions-=t
     " This have to be at the top to work apparently
@@ -115,6 +119,14 @@
 
 filetype off
 call plug#begin('~/.config/nvim/plug')
+    " Autoformat code using linter
+        Plug 'sbdchd/neoformat'
+    " Higlight matching html tags
+        Plug 'Valloric/MatchTagAlways'
+    " todo-list management
+        Plug 'rlue/vim-getting-things-down'
+    " Rainbow parens propagating from the cursor
+        Plug 'bounceme/poppy.vim'
     " Posting/updating/opening gists from vim
         Plug 'mattn/gist-vim'
     " gist-vim dependency
@@ -136,7 +148,7 @@ call plug#begin('~/.config/nvim/plug')
     " Color parentheses based on nest depth
         Plug 'kien/rainbow_parentheses.vim'
     " ascii art (useless)
-        Plug 'vim-scripts/DrawIt'
+        " Plug 'vim-scripts/DrawIt'
     " Live markdown preview
         Plug 'shime/vim-livedown', { 'do': 'npm install -g livedown' }
     " Enable 'Rvm use' in vim
@@ -212,14 +224,18 @@ call plug#begin('~/.config/nvim/plug')
 " <!!!!!!!!**************!!!!!!!!>
 
 " SYNTAX ************************************
+    " jsx syntax
+        Plug 'mxw/vim-jsx'
     " Set different syntax type in part of file (for example SQL embeded in ruby file)
         Plug 'joker1007/vim-ruby-heredoc-syntax'
     " CLIPS syntax
         Plug 'vim-scripts/clips.vim'
     " Support for a lot of languages (syntax, indent and much more)
-        Plug 'sheerun/vim-polyglot'
+        Plug 'sheerun/vim-polyglot', { 'do': 'rm ~/.config/nvim/plug/vim-polyglot/after/ftplugin/javascript.vim' }
     " Javascript syntax
         Plug 'jelera/vim-javascript-syntax'
+    " jsx syntax
+        " Plug 'mxw/vim-jsx'
 " <!!!!!!!!**************!!!!!!!!>
 
 " GIT INTEGRATION ************************************
@@ -265,13 +281,56 @@ call plug#end()
     let &t_Co=256
     set t_Co=16
     colorscheme dante_modified
-    " JS thing
+" <!!!!!!!!**************!!!!!!!!>
+
+" MATCHTAGALWAYS CONFIG ************************************
+    " Highlight jsx syntax even if file extension is not .js
         let g:jsx_ext_required = 0
+" <!!!!!!!!**************!!!!!!!!>
+
+" MATCHTAGALWAYS CONFIG ************************************
+    let g:mta_filetypes = {
+        \ 'html' : 1,
+        \ 'xhtml' : 1,
+        \ 'xml' : 1,
+        \ 'javascript' : 1,
+        \}
+    let g:mta_set_default_matchtag_color = 0
+    highlight MatchTag ctermbg=NONE ctermfg=226 cterm=bold
+    let g:mta_use_matchparen_group = 0
+" <!!!!!!!!**************!!!!!!!!>
+
+" VIM-GETTING-THINGS-DOWN CONFIG ************************************
+    let g:gtdown_cycle_states = ['TODO', 'WIP', 'DONE', 'WAIT']
+    let g:gtdown_default_fold_level = 2222
+    let g:gtdown_show_progress = 1
+    let g:gtdown_fold_list_items = 0
+    command! TODO :call getting_things_down#show_todo()
+    augroup gtDown
+        " Cycle through TODO keywords
+            autocmd BufReadPre TODO.md nmap <buffer> <silent> <leader>s :call getting_things_down#cycle_status()<CR>
+        " Toggle TODO tasks
+            autocmd BufReadPre TODO.md nnoremap <buffer> <silent> <leader>t :call getting_things_down#toggle_task()<CR>
+            autocmd BufReadPre TODO.md vnoremap <buffer> <silent> <leader>t :call getting_things_down#toggle_task()<CR>
+        " Change default task colors
+            autocmd BufReadPre TODO.md hi! markdownTodoReadyN ctermfg=227
+            autocmd BufReadPre TODO.md hi! markdownTodoDoneN ctermfg=40
+            autocmd BufReadPre TODO.md hi! markdownTodoWaitingN ctermfg=160
+    augroup END
+" <!!!!!!!!**************!!!!!!!!>
+
+" POPPY.VIM CONFIG ************************************
+    " As there is no 'enable' variable
+        au! cursormoved * call PoppyInit()
+    " Highlight only 1 level of parens
+        let g:poppy_point_enable = 1
+    " Used higlight groups
+        let g:poppyhigh = ['MatchParen']
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIM-POLYGLOT CONFIG ************************************
     " Javascript syntax higlighter breaks rainbow_parentheses.vim - using alternative
-        let g:polyglot_disabled = ['javascript']
+        let g:polyglot_disabled = ['javascript', 'markdown', 'jsx']
 " <!!!!!!!!**************!!!!!!!!>
 
 " GIST-VIM CONFIG ************************************
@@ -287,7 +346,7 @@ call plug#end()
     let g:indent_guides_guide_size = 2
     let g:indent_guides_enable_on_vim_startup = 1
     let g:indent_guides_exclude_filetypes = ['help', 'nerdtree']
-    let g:indent_guides_default_mapping = 1
+    let g:indent_guides_default_mapping = 0
 " <!!!!!!!!**************!!!!!!!!>
 
 " COMFORTABLE-MOTION CONFIG ************************************
@@ -331,7 +390,7 @@ call plug#end()
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIM-OPERATOR-FLASHY CONFIG ************************************
-    highlight Flashy ctermbg=255 cterm=NONE
+    highlight Flashy ctermbg=NONE cterm=reverse
     map y <Plug>(operator-flashy)
     nmap Y <Plug>(operator-flashy)$
 " <!!!!!!!!**************!!!!!!!!>
@@ -398,6 +457,20 @@ call plug#end()
     let g:rbpt_max = 24
 " <!!!!!!!!**************!!!!!!!!>
 
+" VIM-COMMENTARY CONFIG ************************************
+    " Defining maps defined by plugin so it wont overwrite custom ones (it checks whether they re defined)
+        xmap gc  <Plug>Commentary
+        nmap gc  <Plug>Commentary
+        omap gc  <Plug>Commentary
+        nmap gcc <Plug>CommentaryLine
+        if maparg('c','n') ==# ''
+          nmap cgc <Plug>ChangeCommentary
+        endif
+        nmap gcu <Plug>Commentary<Plug>Commentary
+    " Keep cursor position after commenting from visual mode
+        vmap gc <Plug>Commentarygv<Esc>
+" <!!!!!!!!**************!!!!!!!!>
+
 " CLEVER-F CONFIG ************************************
     let g:clever_f_ignore_case = 1
 " <!!!!!!!!**************!!!!!!!!>
@@ -430,7 +503,7 @@ call plug#end()
 
 " DEOPLETE CONFIG ************************************
     let deoplete#tag#cache_limit_size = 50000000
-    let g:deoplete#auto_complete_delay=2
+    let g:deoplete#auto_complete_delay = 2
     let g:deoplete#enable_ignore_case = 0
     let g:deoplete#enable_smart_case = 1
     let g:deoplete#enable_at_startup = 1
@@ -438,16 +511,18 @@ call plug#end()
     let g:deoplete#auto_refresh_delay = 2
     let g:deoplete#max_abbr_width = 0
     let g:deoplete#max_menu_width = 0
-    let g:deoplete#max_list = 10
+    let g:deoplete#max_list = 50
     imap <c-j> <Tab>
     imap <c-k> <S-Tab>
 " <!!!!!!!!**************!!!!!!!!>
 
 " ULTISNIPS CONFIG ************************************
+    " Add html snippets to js files (needed e. g. in react)
+        autocmd FileType javascript UltiSnipsAddFiletypes html
     " Better key bindings for UltiSnipsExpandTrigger
         let g:UltiSnipsExpandTrigger = "<C-e>"
-        let g:UltiSnipsJumpForwardTrigger = "<tab>"
-        let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+        let g:UltiSnipsJumpForwardTrigger = "<C-j>"
+        let g:UltiSnipsJumpBackwardTrigger = "<C-k>"
 " <!!!!!!!!**************!!!!!!!!>
 
 " LIVEDOWN CONFIG ************************************
@@ -468,7 +543,7 @@ call plug#end()
     let g:airline#extensions#branch#displayed_head_limit = 15
     set fillchars+=stl:\ ,stlnc:\
     let g:airline_powerline_fonts = 1
-    let g:airline_theme='base16_summerfruit'
+    let g:airline_theme='wombat'
 " <!!!!!!!!**************!!!!!!!!>
 
 " CTRLP CONFIG ************************************
@@ -586,7 +661,20 @@ call plug#end()
                     \ '--exclude=dist'
                     \ ]
         " Custom test command for javascript in MD
-            autocmd BufRead,BufNewFile *.spec.js nmap <buffer> <leader>t :VimuxRunCommand('clear; gulp test')<Cr>
+            autocmd BufRead,BufNewFile *.js nmap <buffer> <leader>t :VimuxRunCommand('clear; gulp test')<Cr>
+    endif
+    if $CURRENT_PROJECT_NAME == 'FOOD_JOB'
+        let g:neotags_ctags_args = [
+                    \ '--recurse=yes',
+                    \ '--sort=yes',
+                    \ '--fields=+l',
+                    \ '--c-kinds=+p',
+                    \ '--c++-kinds=+p',
+                    \ '--extras=+q',
+                    \ '--exclude=.git',
+                    \ '--exclude=node_modules',
+                    \ '--exclude=dist'
+                    \ ]
     endif
 " <!!!!!!!!**************!!!!!!!!>
 
@@ -623,14 +711,14 @@ call plug#end()
     " Use { to connect next line to current
         nnoremap { J
     " Use J and K to jump between paragraphs in visual, normal, during yank and delete
-        noremap J }
-        noremap K {
+        noremap J }zz
+        noremap K {zz
         nmap yJ y}
         nmap yK y{
         nmap dJ d}
         nmap dK d{
-        vmap J }
-        vmap K {
+        vmap J }zz
+        vmap K {zz
     " Use H and L to jump to beginning and end of line in normal, visual, during yank and delete
         nmap H ^
         nmap L $
@@ -679,8 +767,6 @@ call plug#end()
           :! fix_vim_syntax_files.sh
         endfunction
         command! UpdatePlugins call s:update_plugins()
-    " Append clipboard with selected text
-        vnoremap ac y:let @+ .= '<C-r>"'<Cr>
-    " Append clipboard with input text
-        nnoremap <Leader>ac :let @+ .= ''<Left>
+    " Keep cursor position after yanking in visual mode
+        vmap y ygv<Esc>
 " <!!!!!!!!**************!!!!!!!!>
