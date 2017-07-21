@@ -83,6 +83,8 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+alias v="nvim"
+
 alias ab_s_log="rails s -p 5000 | tee ~/github/ab/log/rails.log"
 alias ab_grepped_log="tail -f ~/github/ab/log/rails.log | grep 'Rendered\|Processing\|Parameters\|INFO\|FATAL\|Error\|ActionView\|ActiveRecord'"
 alias ab_c="rails c"
