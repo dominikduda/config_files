@@ -83,6 +83,10 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+open() {
+  gnome-open $1 &> /dev/null
+}
+
 alias v="nvim"
 
 alias ab_s_log="rails s -p 5000 | tee ~/github/ab/log/rails.log"
