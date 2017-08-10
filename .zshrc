@@ -88,6 +88,8 @@ open() {
 }
 
 alias v="nvim"
+alias sv="sudo nvim"
+
 
 alias ab_s_log="rails s -p 5000 | tee ~/github/ab/log/rails.log"
 alias ab_grepped_log="tail -f ~/github/ab/log/rails.log | grep 'Rendered\|Processing\|Parameters\|INFO\|FATAL\|Error\|ActionView\|ActiveRecord'"
