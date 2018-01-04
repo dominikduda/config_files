@@ -20,10 +20,11 @@
     set switchbuf=useopen
     set ttimeoutlen=0
     set smarttab
-    " set nowrap
     set softtabstop=2
 " <!!!!!!!!**************!!!!!!!!>
 
+    " Disable shape-changing cursor (underline, bar)
+        set guicursor=n-v-c-sm:block,i-ci-ve:block,r-cr-o:block
     " Custom spell file (use :mkspell! % in the file to reload)
         set spellfile=~/.config/nvim/spell/techspeak.utf-8.add
     " Saves file automatically on most needed events
@@ -33,7 +34,7 @@
     " This have to be at the top to work apparently
         let mapleader=" "
     " Enable spell checking
-        set spell
+        " set spell
     " Start vim with folds unfolded (20 is just sample big-enough number)
         set foldlevel=20
     " Display special_character:as (first is non breaking space)
@@ -47,7 +48,7 @@
     " Display window title in window bar (terminal have to allow it)
         set title
     " Display path to current file in window bar
-        set title titlestring=%<%F%=
+        set titlestring=%<%F%=
     " Maximum jump when scrolling horizontally
         set sidescroll=1
     " Always show at least 5 columns on the left/right side of cursor
@@ -119,14 +120,22 @@
 
 filetype off
 call plug#begin('~/.config/nvim/plug')
+    " Automatically close html/xhtml tags
+        Plug 'alvan/vim-closetag'
+    " Split/join multiline entities (blocks, ifs, method invocations)
+        Plug 'AndrewRadev/splitjoin.vim', { 'branch': 'master' }
+    " Lot of new text objects, adds cin(, da, and more
+        Plug 'wellle/targets.vim'
+    " Convert betwen snake/camel/mixed/... case, :Subvert command, replacing many combinations of word
+        Plug 'tpope/tpope-vim-abolish'
+    " Add indent text object
+        Plug 'michaeljsmith/vim-indent-object'
     " Autoformat code using linter
         Plug 'sbdchd/neoformat'
     " Higlight matching html tags
         Plug 'Valloric/MatchTagAlways'
     " todo-list management
         Plug 'rlue/vim-getting-things-down'
-    " Rainbow parens propagating from the cursor
-        Plug 'bounceme/poppy.vim'
     " Posting/updating/opening gists from vim
         Plug 'mattn/gist-vim'
     " gist-vim dependency
@@ -147,8 +156,6 @@ call plug#begin('~/.config/nvim/plug')
         Plug 'w0rp/ale'
     " Color parentheses based on nest depth
         Plug 'kien/rainbow_parentheses.vim'
-    " ascii art (useless)
-        " Plug 'vim-scripts/DrawIt'
     " Live markdown preview
         Plug 'shime/vim-livedown', { 'do': 'npm install -g livedown' }
     " Enable 'Rvm use' in vim
@@ -216,7 +223,7 @@ call plug#begin('~/.config/nvim/plug')
 " GENERAL ************************************
     Plug 'dominikduda/vim_current_word'
     Plug 'xolox/vim-misc'
-    Plug 'c0r73x/neotags.nvim'
+    Plug 'ludovicchabant/vim-gutentags'
     Plug 'scrooloose/nerdtree'
     Plug 'tpope/vim-surround'
     Plug 'majutsushi/tagbar'
@@ -224,8 +231,6 @@ call plug#begin('~/.config/nvim/plug')
 " <!!!!!!!!**************!!!!!!!!>
 
 " SYNTAX ************************************
-    " jsx syntax
-        Plug 'mxw/vim-jsx'
     " Set different syntax type in part of file (for example SQL embeded in ruby file)
         Plug 'joker1007/vim-ruby-heredoc-syntax'
     " CLIPS syntax
@@ -235,13 +240,15 @@ call plug#begin('~/.config/nvim/plug')
     " Javascript syntax
         Plug 'jelera/vim-javascript-syntax'
     " jsx syntax
-        " Plug 'mxw/vim-jsx'
+        Plug 'MaxMEllon/vim-jsx-pretty'
 " <!!!!!!!!**************!!!!!!!!>
 
 " GIT INTEGRATION ************************************
-    Plug 'airblade/vim-gitgutter'
-    Plug 'tpope/vim-fugitive'
-    Plug 'Xuyuanp/nerdtree-git-plugin'
+      Plug 'airblade/vim-gitgutter'
+      Plug 'tpope/vim-fugitive'
+      " Extension to vim-fugitive open files on github and more
+          Plug 'tpope/vim-rhubarb'
+      Plug 'Xuyuanp/nerdtree-git-plugin'
 " <!!!!!!!!**************!!!!!!!!>
 
 " SMART SEARCH ************************************
@@ -259,6 +266,7 @@ call plug#begin('~/.config/nvim/plug')
 " <!!!!!!!!**************!!!!!!!!>
 
 " AUTOCOMPLETE AND SNIPPETS ************************************
+    Plug 'epilande/vim-react-snippets'
     " Confrim autocompletion with tab
         Plug 'ervandew/supertab'
     " Snippets for various languages pack
@@ -278,18 +286,28 @@ call plug#end()
     filetype plugin indent on
     set wildignore+=*/tmp/*,*.so,*.swp,*.zipo
     set omnifunc=syntaxcomplete#Complete
-    let &t_Co=256
-    set t_Co=16
+    set t_Co=256
     colorscheme dante_modified
+" <!!!!!!!!**************!!!!!!!!>
+
+" SPLITJOIN.VIM CONFIG ************************************
+    let g:splitjoin_ruby_curly_braces = 0
+    let g:splitjoin_ruby_hanging_args = 0
+    let g:splitjoin_split_mapping = ''
+    let g:splitjoin_join_mapping = ''
+    nmap <Leader>j :SplitjoinJoin<cr>
+    nmap <Leader>s :SplitjoinSplit<cr>
+" <!!!!!!!!**************!!!!!!!!>
+
+" VIM-GUTENTAGS CONFIG ************************************
+    let g:gutentags_ctags_exclude = ["node_modules", ".git"]
 " <!!!!!!!!**************!!!!!!!!>
 
 " MATCHTAGALWAYS CONFIG ************************************
     " Highlight jsx syntax even if file extension is not .js
         let g:jsx_ext_required = 0
-" <!!!!!!!!**************!!!!!!!!>
-
-" MATCHTAGALWAYS CONFIG ************************************
     let g:mta_filetypes = {
+        \ 'eruby' : 1,
         \ 'html' : 1,
         \ 'xhtml' : 1,
         \ 'xml' : 1,
@@ -301,7 +319,7 @@ call plug#end()
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIM-GETTING-THINGS-DOWN CONFIG ************************************
-    let g:gtdown_cycle_states = ['TODO', 'WIP', 'DONE', 'WAIT']
+    let g:gtdown_cycle_states = ['TODO', 'WIP', 'DONE', 'WAIT', 'CANCELLED']
     let g:gtdown_default_fold_level = 2222
     let g:gtdown_show_progress = 1
     let g:gtdown_fold_list_items = 0
@@ -319,18 +337,9 @@ call plug#end()
     augroup END
 " <!!!!!!!!**************!!!!!!!!>
 
-" POPPY.VIM CONFIG ************************************
-    " As there is no 'enable' variable
-        au! cursormoved * call PoppyInit()
-    " Highlight only 1 level of parens
-        let g:poppy_point_enable = 1
-    " Used higlight groups
-        let g:poppyhigh = ['MatchParen']
-" <!!!!!!!!**************!!!!!!!!>
-
 " VIM-POLYGLOT CONFIG ************************************
     " Javascript syntax higlighter breaks rainbow_parentheses.vim - using alternative
-        let g:polyglot_disabled = ['javascript', 'markdown', 'jsx']
+        let g:polyglot_disabled = ['javascript', 'markdown', 'jsx', 'yaml']
 " <!!!!!!!!**************!!!!!!!!>
 
 " GIST-VIM CONFIG ************************************
@@ -364,7 +373,8 @@ call plug#end()
 
 " VIM-YAML-HELPER CONFIG ************************************
     let g:vim_yaml_helper#always_get_root = 1
-    let g:vim_yaml_helper#auto_display_path = 1
+    let g:vim_yaml_helper#auto_display_path = 0
+    autocmd! CursorMoved *.yml YamlDisplayFullPath
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIM-TRAILING-WHITESPACE CONFIG ************************************
@@ -424,10 +434,10 @@ call plug#end()
 " <!!!!!!!!**************!!!!!!!!>
 
 " RAINBOW-PARENTHESES CONFIG ************************************
-    au VimEnter * RainbowParenthesesActivate
-    au BufReadPost * RainbowParenthesesLoadRound
-    au BufReadPost * RainbowParenthesesLoadSquare
-    au BufReadPost * RainbowParenthesesLoadBraces
+    autocmd VimEnter * RainbowParenthesesActivate
+    autocmd BufReadPost * RainbowParenthesesLoadRound
+    autocmd BufReadPost * RainbowParenthesesLoadSquare
+    autocmd BufReadPost * RainbowParenthesesLoadBraces
     let g:rbpt_colorpairs = [
                           \ ['129', 'RoyalBlue3'],
                           \ ['32', 'RoyalBlue3'],
@@ -459,7 +469,6 @@ call plug#end()
 
 " VIM-COMMENTARY CONFIG ************************************
     " Defining maps defined by plugin so it wont overwrite custom ones (it checks whether they re defined)
-        xmap gc  <Plug>Commentary
         nmap gc  <Plug>Commentary
         omap gc  <Plug>Commentary
         nmap gcc <Plug>CommentaryLine
@@ -478,42 +487,25 @@ call plug#end()
 " NEOYANK CONFIG ************************************
     nnoremap <leader>2 :Unite history/yank -default-action=append<Cr>
 " <!!!!!!!!**************!!!!!!!!>
-
+"
 " SUPERTAB CONFIG ************************************
     let g:SuperTabDefaultCompletionType = "<c-n>"
 " <!!!!!!!!**************!!!!!!!!>
 
-" NEOTAGS CONFIG ************************************
-    let g:neotags_ctags_timeout = 5
-    let g:neotags_ctags_bin = 'ctags'
-    let g:neotags_ctags_args = [
-                \ '--recurse=yes',
-                \ '--sort=yes',
-                \ '--fields=+l',
-                \ '--c-kinds=+p',
-                \ '--c++-kinds=+p',
-                \ '--extras=+q'
-                \ ]
-    let g:neotags_enabled = 1
-    let g:neotags_highlight = 0
-    let g:neotags_file = './tags'
-    let g:neotags_recursive = 1
-    let g:neotags_events_update = ['BufReadPost']
-" <!!!!!!!!**************!!!!!!!!>
-
 " DEOPLETE CONFIG ************************************
+    let g:deoplete#auto_complete_start_length = 1
     let deoplete#tag#cache_limit_size = 50000000
     let g:deoplete#auto_complete_delay = 2
     let g:deoplete#enable_ignore_case = 0
     let g:deoplete#enable_smart_case = 1
     let g:deoplete#enable_at_startup = 1
     let g:deoplete#enable_refresh_always = 1
-    let g:deoplete#auto_refresh_delay = 2
+    let g:deoplete#auto_refresh_delay = 1
     let g:deoplete#max_abbr_width = 0
     let g:deoplete#max_menu_width = 0
     let g:deoplete#max_list = 50
-    imap <c-j> <Tab>
-    imap <c-k> <S-Tab>
+    imap <C-j> <Tab>
+    imap <C-k> <S-Tab>
 " <!!!!!!!!**************!!!!!!!!>
 
 " ULTISNIPS CONFIG ************************************
@@ -521,8 +513,8 @@ call plug#end()
         autocmd FileType javascript UltiSnipsAddFiletypes html
     " Better key bindings for UltiSnipsExpandTrigger
         let g:UltiSnipsExpandTrigger = "<C-e>"
-        let g:UltiSnipsJumpForwardTrigger = "<C-j>"
-        let g:UltiSnipsJumpBackwardTrigger = "<C-k>"
+        let g:UltiSnipsJumpForwardTrigger = "<A-l>"
+        let g:UltiSnipsJumpBackwardTrigger = "<A-h>"
 " <!!!!!!!!**************!!!!!!!!>
 
 " LIVEDOWN CONFIG ************************************
@@ -547,6 +539,8 @@ call plug#end()
 " <!!!!!!!!**************!!!!!!!!>
 
 " CTRLP CONFIG ************************************
+    " '>' signs in beginning of line
+        hi! CtrlPLinePre ctermfg=240
     let g:ctrlp_max_files = 0
     let g:ctrlp_map = '<c-p>'
     let g:ctrlp_cmd = 'CtrlP'
@@ -555,12 +549,15 @@ call plug#end()
         let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
     " Use ag instead of grep if installed
         if executable('ag')
-          set grepprg=ag\ --nogroup\ --nocolor
-          " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-          let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-          " ag is fast enough that CtrlP doesn't need to cache
-          let g:ctrlp_use_caching = 0
+            set grepprg=ag\ --nogroup\ --nocolor
+            " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+            let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+            " ag is fast enough that CtrlP doesn't need to cache
+            let g:ctrlp_use_caching = 0
         endif
+    " Show only files from current working dir in mru mode
+        let g:ctrlp_mruf_relative = 1
+        let g:ctrlp_mruf_exclude = '\.git/.*'
 " <!!!!!!!!**************!!!!!!!!>
 
 " DIMINACTIVE SETTINGS ************************************
@@ -597,7 +594,7 @@ call plug#end()
 " <!!!!!!!!**************!!!!!!!!>
 
 " GITGUTTER CONFIG ************************************
-    let g:gitgutter_sign_column_always = 1
+    set signcolumn=no
     let g:gitgutter_realtime = 1
     let g:gitgutter_eager = 1
     let g:gitgutter_async = 1
@@ -621,6 +618,10 @@ call plug#end()
     let test#strategy = 'vimux'
 " <!!!!!!!!**************!!!!!!!!>
 
+" VIMUX CONFIG ************************************
+    let g:vimuxUseNearestPane = 0
+" <!!!!!!!!**************!!!!!!!!>
+
 " FUGITIVE CONFIG ************************************
     autocmd FileType gitcommit setlocal colorcolumn=72
     set diffopt+=vertical
@@ -631,7 +632,28 @@ call plug#end()
     noremap <leader><Down> :set cursorline!<Cr>:set sidescrolloff=5<Cr>:diffoff<Cr><C-w>h:q!<Cr><C-w>l:q!<Cr>:w<Cr>
 " <!!!!!!!!**************!!!!!!!!>
 
+" VIM-CLOSETAG CONFIG ************************************
+    let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.js,*.jsx'
+" <!!!!!!!!**************!!!!!!!!>
+
 " PROJECT SPECIFIC ************************************
+    if $CURRENT_PROJECT_NAME == 'SUBSTER_BOOKING'
+        let g:ale_linters = {
+        \   'javascript': ['prettier'],
+        \}
+        let g:deoplete#enable_ignore_case = 1
+        let g:neotags_ctags_args = [
+                    \ '--recurse=yes',
+                    \ '--sort=yes',
+                    \ '--fields=+l',
+                    \ '--c-kinds=+p',
+                    \ '--c++-kinds=+p',
+                    \ '--extras=+q',
+                    \ '--exclude=.git',
+                    \ '--exclude=node_modules',
+                    \ '--exclude=dist'
+                    \ ]
+    endif
     if $CURRENT_PROJECT_NAME == 'AB'
       let g:test#runner_commands = ['Rspec']
       let g:rails_projections = {
@@ -676,6 +698,32 @@ call plug#end()
                     \ '--exclude=dist'
                     \ ]
     endif
+    if $CURRENT_PROJECT_NAME == 'CRAFTED'
+        let g:neotags_ctags_args = [
+                    \ '--recurse=yes',
+                    \ '--sort=yes',
+                    \ '--fields=+l',
+                    \ '--c-kinds=+p',
+                    \ '--c++-kinds=+p',
+                    \ '--extras=+q',
+                    \ '--exclude=.git',
+                    \ '--exclude="./app/assets/javascripts/lib"',
+                    \ '--exclude=dist'
+                    \ ]
+    endif
+    if $CURRENT_PROJECT_NAME == 'REACT_TRAINING'
+        let g:neotags_ctags_args = [
+                    \ '--recurse=yes',
+                    \ '--sort=yes',
+                    \ '--fields=+l',
+                    \ '--c-kinds=+p',
+                    \ '--c++-kinds=+p',
+                    \ '--extras=+q',
+                    \ '--exclude=.git',
+                    \ '--exclude=*.js',
+                    \ '--exclude=dist'
+                    \ ]
+    endif
 " <!!!!!!!!**************!!!!!!!!>
 
 " PERSONAL CONFIG AND SHORTCUTS ************************************
@@ -684,89 +732,110 @@ call plug#end()
         \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
         \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
     " ctrl + j/k to move line
-        nmap <C-k> ddkP
-        nmap <C-j> ddp
+        noremap <C-k> ddkP
+        noremap <C-j> ddp
     nnoremap ; :
     inoremap <C-l> <End>
     inoremap kk <Right>
-    inoremap jj <Esc>
-    " Copy to system clipboard
-        vnoremap <C-c> "+y
-    " Paste form system clipboard
-        noremap <C-v> "+P
-    " Replace currently selected text with one from clipboard
-        vnoremap <C-v> x"+P
-        inoremap <C-v> <Esc>"+pa
-    " Change current line color when entering/leaving insert mode
-        autocmd InsertEnter * highlight  CursorLine ctermbg=52
-        autocmd InsertLeave * highlight  CursorLine ctermbg=235
-    " Change current line number color when entering/leaving insert mode
-        autocmd InsertEnter * highlight  CursorLineNR ctermbg=124
-        autocmd InsertLeave * highlight  CursorLineNR ctermbg=246
-    " Check file change every 4 seconds ('CursorHold') and reload the buffer upon detecting change
-        set autoread
-        au CursorHold * checktime
-    " Toggle Undotree window
-        nnoremap <F5> :UndotreeToggle<CR>
-    " Use { to connect next line to current
-        nnoremap { J
-    " Use J and K to jump between paragraphs in visual, normal, during yank and delete
-        noremap J }zz
-        noremap K {zz
-        nmap yJ y}
-        nmap yK y{
-        nmap dJ d}
-        nmap dK d{
-        vmap J }zz
-        vmap K {zz
-    " Use H and L to jump to beginning and end of line in normal, visual, during yank and delete
-        nmap H ^
-        nmap L $
-        nmap yL y$
-        nmap yH y^
-        nmap dL d$
-        nmap dH d^
-        vmap H ^
-        vmap L $
-    " Resize buffer on ctrl + alt + direction
-        nnoremap <A-C-h> :vertical resize +1<CR>
-        nnoremap <A-C-j> :resize -1<CR>
-        nnoremap <A-C-k> :resize +1<CR>
-        nnoremap <A-C-l> :vertical resize -1<CR>
-    " Move vertically by rows rather than lines, useful with long lines + wrap on
-        nnoremap j gj
-        nnoremap k gk
-    " Move vertically by lines rather than rows in quickfix window
-        autocmd BufReadPost quickfix nnoremap <buffer> j j
-        autocmd BufReadPost quickfix nnoremap <buffer> k k
-    " Center screen on next/previous selection.
-        nnoremap n nzz
-        nnoremap N Nzz
-    " Move preview window to full width row at bottom when opened
-        au BufEnter ?* call PreviewHeightWorkAround()
-        func! PreviewHeightWorkAround()
-          if &previewwindow
-            exec 'wincmd J'
-            exec 'setlocal winheight='.&previewheight
-          endif
-        endfunc
-    " Save all files when nvim looses focus (ignores unnamed buffers warnings)
-        autocmd FocusLost * silent! wa
-    " Copy path to current file to clipboard (starting from root of the project)
-        nmap <silent> cp :let @+ = expand("%")<CR>:echom('Current file path copied to clipboard')<CR>
-    " Exit copy mode
-        vnoremap q <Esc>
-    " Replace selected phrase globally in file
-        vnoremap R y:%s/<C-r>"//gc<Left><Left><Left>
-    " Function and corresponding command to update plugins with fix_vim_syntax_files.sh ran pre and post
-        function! s:update_plugins()
-          :! fix_vim_syntax_files.sh
-          :PlugUpdate
-          :echom 'blocked for 10 seconds'
-          exec input('Press Enter when update is finished')
-          :! fix_vim_syntax_files.sh
-        endfunction
-        command! UpdatePlugins call s:update_plugins()
-    " Keep cursor position after yanking in visual mode
-        vmap y ygv<Esc>
+    inoremap <A-j> <Esc>
+      " Copy to system clipboard
+          vnoremap <C-c> "+y
+      " Paste form system Crlipboard
+          noremap <C-v> "+P
+      " Replace currently selected text with one from clipboard
+          vnoremap <C-v> x"+P
+          inoremap <C-v> <Esc>"+pa
+      " Change current line color when entering/leaving insert mode
+          autocmd InsertEnter * highlight  CursorLine ctermbg=52
+          autocmd InsertLeave * highlight  CursorLine ctermbg=235
+      " Change current line number color when entering/leaving insert mode
+          autocmd InsertEnter * highlight  CursorLineNR ctermbg=124
+          autocmd InsertLeave * highlight  CursorLineNR ctermbg=246
+      " Check file change every 4 seconds ('CursorHold') and reload the buffer upon detecting change
+          set autoread
+          autocmd CursorHold * checktime
+      " Toggle Undotree window
+          nnoremap <F5> :UndotreeToggle<CR>
+      " Use { to connect next line to current
+          nnoremap { J
+      " Use J and K to jump between paragraphs in visual, normal, during yank and delete
+          noremap J }
+          noremap K {
+          nmap yJ y}
+          nmap yK y{
+          nmap dJ d}
+          nmap dK d{
+          vmap J }
+          vmap K {
+      " Use H and L to jump to beginning and end of line in normal, visual, during yank and delete
+          nmap H ^
+          nmap L $
+          nmap yL y$
+          nmap yH y^
+          nmap dL d$
+          nmap dH d^
+          vmap H ^
+          vmap L $
+      " Resize buffer on ctrl + alt + direction
+          nnoremap <A-C-h> :vertical resize +1<CR>
+          nnoremap <A-C-j> :resize -1<CR>
+          nnoremap <A-C-k> :resize +1<CR>
+          nnoremap <A-C-l> :vertical resize -1<CR>
+      " Move vertically by rows rather than lines, useful with long lines + wrap on
+          nnoremap j gj
+          nnoremap k gk
+      " Move vertically by lines rather than rows in quickfix window
+          autocmd BufReadPost quickfix nnoremap <buffer> j j
+          autocmd BufReadPost quickfix nnoremap <buffer> k k
+      " Center screen on next/previous selection.
+          nnoremap n nzz
+          nnoremap N Nzz
+      " Move preview window to full width row at bottom when opened
+          autocmd BufEnter ?* call PreviewHeightWorkAround()
+          func! PreviewHeightWorkAround()
+            if &previewwindow
+              exec 'wincmd J'
+              exec 'setlocal winheight='.&previewheight
+            endif
+          endfunc
+      " Save all files when nvim looses focus (ignores unnamed buffers warnings)
+          autocmd FocusLost * silent! wa
+      " Copy path to current file to clipboard (starting from root of the project)
+          nmap <silent> cp :let @+ = expand("%")<CR>:echom('Current file path copied to clipboard')<CR>
+      " Exit copy mode
+          vnoremap q <Esc>
+      " Replace selected phrase globally in file
+          vnoremap R y:%s/<C-r>"//gc<Left><Left><Left>
+      " Function and corresponding command to update plugins with fix_vim_syntax_files.sh ran pre and post
+          function! s:update_plugins()
+            :! fix_vim_syntax_files.sh
+            :PlugUpdate
+            :echom 'blocked for 10 seconds'
+            exec input('Press Enter when update is finished')
+            :! fix_vim_syntax_files.sh
+          endfunction
+          command! UpdatePlugins call s:update_plugins()
+      " Keep cursor position after yanking in visual mode
+          vmap y ygv<Esc>
+      " Index of tmux pane to run tests in
+          let g:VimuxRunnerIndex = $VIMUX_RUNNER_PANE_INDEX
 " <!!!!!!!!**************!!!!!!!!>
+
+" Called Called once right before you start selecting multiple cursors
+function! Multiple_cursors_before()
+  if exists(':NeoCompleteLock')==2
+    exe 'NeoCompleteLock'
+  endif
+endfunction
+
+" Called once only when the multiple selection is canceled (default <Esc>)
+function! Multiple_cursors_after()
+  if exists(':NeoCompleteUnlock')==2
+    exe 'NeoCompleteUnlock'
+  endif
+endfunction
+
+autocmd BufReadPre * if (&modifiable) | setlocal signcolumn=yes | endif
+  autocmd FileType slim setlocal colorcolumn=100
+  autocmd FileType yaml setlocal colorcolumn=100
+
