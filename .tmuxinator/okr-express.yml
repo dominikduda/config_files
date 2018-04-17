@@ -1,0 +1,60 @@
+# ~/.tmuxinator/okr-express.yml
+
+name: okr-express
+# This stopped working after tmux upgrade, use 'pre' instead
+# root: ~/github/ab
+
+# Optional tmux socket
+# socket_name: foo
+
+# Runs before everything. Use it to start daemons etc.
+# Sets current postgres version and cluster (so all pg_related helper apps versions match psql server app (like pg_dump, pg_restore))
+# Strings separated by space are respectively: postgres version, host:port, database (* = anything)
+pre: |
+  cd ~/github/okr-express
+  mailcatcher
+  export DISABLE_AUTO_TITLE=true
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+pre_window: |
+  export PGPORT=5434
+  export DISABLE_SPRING=1
+  export CURRENT_PROJECT_NAME='OKR_EXPRESS'
+  export VIMUX_RUNNER_PANE_INDEX='4'
+  rvm use 2.5.1
+  tmux source ~/.tmux.conf
+
+# Pass command line options to tmux. Useful for specifying a different tmux.conf.
+# tmux_options: -f ~/.tmux.mac.conf
+
+# Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
+# tmux_command: tmux-next
+
+# Specifies (by name or index) which window will be selected on project startup. If not set, the first window is used.
+startup_window: editor
+startup_pane: 0
+
+# Controls whether the tmux session should be attached to automatically. Defaults to true.
+# attach: false
+
+# Runs after everything. Use it to attach to tmux with custom options etc.
+# post: tmux -CC attach -t ab
+
+
+windows:
+    - backend:
+        layout: 193c,231x50,0,0{46x50,0,0[46x4,0,0,25,46x12,0,5,31,46x32,0,18,28],184x50,47,0[184x12,47,0,29,184x37,47,13,30]}
+        panes:
+            - redis:
+                - redis-server
+            - sidekiq:
+                - bundle exec sidekiq
+            - rails_server:
+                - bundle exec rails s
+            - helper:
+                - git fetch --prune
+                - clear
+                - gst
+            - editor:
+                - ls
+
