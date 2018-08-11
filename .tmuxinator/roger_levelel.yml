@@ -1,0 +1,60 @@
+# ~/.tmuxinator/roger_levelel.yml
+
+name: roger_levelel
+# This stopped working after tmux upgrade, use 'pre' instead
+# root: ~/github/ab
+
+# Optional tmux socket
+# socket_name: foo
+
+# Runs before everything. Use it to start daemons etc.
+# Sets current postgres version and cluster (so all pg_related helper apps versions match psql server app (like pg_dump, pg_restore))
+# Strings separated by space are respectively: postgres version, host:port, database (* = anything)
+pre: |
+  cd ~/github/roger_levelel
+  export DISABLE_AUTO_TITLE=true
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+pre_window: |
+  rvm use 2.5.1
+  export CURRENT_PROJECT_NAME='ROGER_LEVELEL'
+  export VIMUX_RUNNER_PANE_INDEX='1'
+  tmux source ~/.tmux.conf
+
+# Pass command line options to tmux. Useful for specifying a different tmux.conf.
+# tmux_options: -f ~/.tmux.mac.conf
+
+# Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
+# tmux_command: tmux-next
+
+# Specifies (by name or index) which window will be selected on project startup. If not set, the first window is used.
+startup_window: editor
+startup_pane: 0
+
+# Controls whether the tmux session should be attached to automatically. Defaults to true.
+# attach: false
+
+# Runs after everything. Use it to attach to tmux with custom options etc.
+# post: tmux -CC attach -t ab
+
+windows:
+    - helper_and_editor:
+        layout: ead3,311x64,0,0[311x11,0,0,24,311x52,0,12,26]
+        panes:
+            - helper:
+                - clear
+                - gst
+            - editor:
+    - app_and_logs:
+        layout: 2795,311x64,0,0[311x11,0,0,25,311x52,0,12{155x52,0,12,27,155x52,156,12,28}]
+        panes:
+            - app:
+                - ruby main.rb
+            - helper:
+                - sleep 2
+                - clear
+                - tail -f files/important.log
+            - editor:
+                - sleep 2
+                - clear
+                - tail -f files/info.log
