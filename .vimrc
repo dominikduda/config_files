@@ -215,7 +215,7 @@ call plug#begin('~/.config/nvim/plug')
     " Numbered console logs, current selection to labeled debug string
         Plug 'bergercookie/vim-debugstring'
     " Fix all imports
-        Plug 'Galooshi/vim-import-js', { 'do': 'npm install -g import-js' }
+        Plug 'Galooshi/vim-import-js', { 'do': 'npm install -g import-js@3.0.0' }
     " GraphQL syntax and indent
         Plug 'jparise/vim-graphql'
 " <!!!!!!!!**************!!!!!!!!>
