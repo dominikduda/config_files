@@ -24,3 +24,4 @@ cp ~/bin/backup_config_files.sh ~/github/config_files/bin/backup_config_files.sh
 cp ~/.config/redshift.conf ~/github/config_files/.config/redshift.conf
 cp ~/.gitconfig ~/github/config_files/.gitconfig
 cp ~/.gitignore ~/github/config_files/.gitignore
+cp ~/.importjs.js.example ~/github/config_files/.importjs.js.example

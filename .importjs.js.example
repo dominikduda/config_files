@@ -1,0 +1,7 @@
+module.exports = {
+  importStatementFormatter: function importStatementFormatter({ importStatement }) {
+    return importStatement.replace(/;$/, '');
+  },
+  environments: ['jasmine'],
+  globals: ['Factory']
+}
