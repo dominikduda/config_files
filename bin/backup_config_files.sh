@@ -22,7 +22,5 @@ cp ~/bin/backup_config_files.sh ~/github/config_files/bin/backup_config_files.sh
 
 # other
 cp ~/.config/redshift.conf ~/github/config_files/.config/redshift.conf
-cp ~/.eslintrc.json ~/github/config_files/eslintrc.json
 cp ~/.gitconfig ~/github/config_files/.gitconfig
 cp ~/.gitignore ~/github/config_files/.gitignore
-cp ~/.rubocop.yml ~/github/config_files/.rubocop.yml
