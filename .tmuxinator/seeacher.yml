@@ -1,6 +1,6 @@
-# ~/.tmuxinator/roger_levelel.yml
+# ~/.tmuxinator/seeacher.yml
 
-name: roger_levelel
+name: seeacher
 # This stopped working after tmux upgrade, use 'pre' instead
 # root: ~/github/ab
 
@@ -11,14 +11,16 @@ name: roger_levelel
 # Sets current postgres version and cluster (so all pg_related helper apps versions match psql server app (like pg_dump, pg_restore))
 # Strings separated by space are respectively: postgres version, host:port, database (* = anything)
 pre: |
-  cd ~/github/roger_levelel
+  cd ~/github/seeacher
   export DISABLE_AUTO_TITLE=true
 
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
 pre_window: |
+  export PGPORT=5434
+  export DISABLE_SPRING=1
+  export CURRENT_PROJECT_NAME='SEEACHER'
+  export VIMUX_RUNNER_PANE_INDEX='2'
   rvm use 2.5.1
-  export CURRENT_PROJECT_NAME='ROGER_LEVELEL'
-  export VIMUX_RUNNER_PANE_INDEX='1'
   tmux source ~/.tmux.conf
 
 # Pass command line options to tmux. Useful for specifying a different tmux.conf.
@@ -38,23 +40,14 @@ startup_pane: 0
 # post: tmux -CC attach -t ab
 
 windows:
-    - helper_and_editor:
-        layout: ead3,311x64,0,0[311x11,0,0,24,311x52,0,12,26]
+    - backend:
+        layout: 54dd,311x63,0,0{86x63,0,0,26,224x63,87,0[224x19,87,0,27,224x43,87,20,28]}
         panes:
+            - rails_server:
+                - bundle exec rails s
             - helper:
+                - git fetch --prune
                 - clear
                 - gst
             - editor:
-    - app_and_logs:
-        layout: 2795,311x64,0,0[311x11,0,0,25,311x52,0,12{155x52,0,12,27,155x52,156,12,28}]
-        panes:
-            - app:
-                - ruby main.rb
-            - helper:
-                - sleep 2
-                - clear
-                - tail -n 100 -f files/important.log
-            - editor:
-                - sleep 2
-                - clear
-                - tail -n 100 -f files/info.log
+                - ls

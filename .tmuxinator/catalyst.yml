@@ -20,7 +20,7 @@ pre_window: |
   rvm use 2.5.0
   nvm use 8.9.1
   export CURRENT_PROJECT_NAME='CATALYST'
-  export VIMUX_RUNNER_PANE_INDEX='2'
+  export VIMUX_RUNNER_PANE_INDEX='3'
   tmux source ~/.tmux.conf
 
 # Pass command line options to tmux. Useful for specifying a different tmux.conf.
@@ -41,8 +41,10 @@ startup_pane: 0
 
 windows:
     - frontend:
-        layout: 2b4a,254x51,0,0{58x51,0,0,1,195x51,59,0[195x12,59,0,3,195x38,59,13,4]}
+        layout: 4ecf,283x58,0,0{65x58,0,0[65x14,0,0,14,65x43,0,15,20],217x58,66,0[217x10,66,0,16,217x47,66,11,17]}
         panes:
+            - build_watcher:
+                - cat_webpack_build_watcher.sh
             - server:
                 - npm i
                 - npm start
@@ -51,7 +53,6 @@ windows:
                 - clear
                 - gst
             - editor:
-                - nvim
     - backend:
         layout: 3cad,254x51,0,0{58x51,0,0,6,195x51,59,0[195x13,59,0,7,195x37,59,14,8]}
         panes:
@@ -64,4 +65,3 @@ windows:
                 - gst
             - editor:
                 - cd ..
-                - nvim
