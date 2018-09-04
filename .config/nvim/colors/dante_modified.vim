@@ -72,7 +72,7 @@ hi Number guifg=#ff0505 guibg=NONE guisp=NONE gui=NONE ctermfg=172 ctermbg=NONE 
 hi Operator guifg=#db34db guibg=NONE guisp=NONE gui=NONE ctermfg=170 ctermbg=NONE cterm=NONE
 hi PMenu guifg=#080808 guibg=#545658 guisp=#545658 gui=NONE ctermfg=232 ctermbg=240 cterm=NONE
 hi PMenuSbar guifg=NONE guibg=#0a0a0a guisp=#0a0a0a gui=NONE ctermfg=NONE ctermbg=232 cterm=NONE
-hi PMenuSel guifg=#ffffff guibg=#0000d7 guisp=#0000d7 gui=NONE ctermfg=15 ctermbg=20 cterm=NONE
+hi PMenuSel guifg=#fffff guibg=#0000d7 guisp=#0000d7 gui=NONE ctermfg=15 ctermbg=20 cterm=NONE
 hi PMenuThumb guifg=NONE guibg=#8b8b83 guisp=#8b8b83 gui=NONE ctermfg=NONE ctermbg=101 cterm=NONE
 hi PreCondit guifg=#104e8b guibg=NONE guisp=NONE gui=NONE ctermfg=24 ctermbg=NONE cterm=NONE
 hi PreProc guifg=#008cc4 guibg=NONE guisp=NONE gui=NONE ctermfg=4 ctermbg=NONE cterm=NONE
@@ -104,6 +104,7 @@ hi cursorim guifg=#192224 guibg=#536991 guisp=#536991 gui=NONE ctermfg=235 cterm
 hi lcursor guifg=#000000 guibg=#cdaf95 guisp=#cdaf95 gui=NONE ctermfg=NONE ctermbg=180 cterm=NONE
 hi lcursor guifg=#000000 guibg=#cdaf95 guisp=#cdaf95 gui=NONE ctermfg=NONE ctermbg=180 cterm=NONE
 
+
 " Custom:
 hi! link NonText LineNr
 hi rubymodulenametag guifg=#61d700 guibg=NONE guisp=NONE gui=NONE ctermfg=76 ctermbg=NONE cterm=underline
@@ -113,6 +114,43 @@ hi rspecGroupMethods guifg=#4040d6 guibg=NONE guisp=NONE gui=underline ctermfg=3
 hi rubyRailsMethod guifg=#4040d6 guibg=NONE guisp=NONE gui=underline ctermfg=110 ctermbg=NONE
 hi CursorLineNR guifg=#4040d6 guibg=NONE guisp=NONE gui=underline ctermfg=232 ctermbg=246 cterm=NONE
 hi MatchParen ctermbg=NONE ctermfg=15 cterm=underline,bold
+
+" JS and JSX
+hi! link jsArrowFunction Function
+hi! link jsModuleBraces jsImport
+hi! link jsClassProperty Function
+hi! link jsDestructuringBraces Type
+hi! link jsStorageClass Type
+hi! link jsObjectKey Constant
+hi! link jsNull StorageClass
+hi! link jsClassDefinition Type
+hi! link jsClassKeyword Define
+hi! link jsExtendsKeyword Type
+hi! link jsClassMethodType Define
+hi! link jsTemplateBraces Delimiter
+hi! link jsOperator Statement
+hi! link xmlEqual Directory
+hi! link xmlAttrib Directory
+hi! link xmlTagName Type
+hi! link xmlTag Type
+hi! link xmlEndTag Type
+hi! link jsGlobalObjects Type
+hi! link jsFuncArgs Include
+hi! link jsFuncCall Normal
+hi! link jsThis StorageClass
+hi! link jsDecoratorFunction Exception
+hi! link jsDecorator Exception
+hi! link jsExportDefault Include
+hi jsObjectBraces guifg=#bebebe guibg=#cd0000 guisp=#cd0000 gui=NONE ctermfg=160 ctermbg=NONE cterm=NONE
+hi jsParensIfElse guifg=#bebebe guibg=#cd0000 guisp=#cd0000 gui=NONE ctermfg=226 ctermbg=NONE cterm=NONE
+hi jsIfElseBraces guifg=#bebebe guibg=#cd0000 guisp=#cd0000 gui=NONE ctermfg=226 ctermbg=NONE cterm=NONE
+hi jsFuncBraces guifg=#bebebe guibg=#cd0000 guisp=#cd0000 gui=NONE ctermfg=32 ctermbg=NONE cterm=NONE
+hi jsFuncParens guifg=#bebebe guibg=#cd0000 guisp=#cd0000 gui=NONE ctermfg=32 ctermbg=NONE cterm=NONE
+hi jsClassBraces guifg=#bebebe guibg=#cd0000 guisp=#cd0000 gui=NONE ctermfg=118 ctermbg=NONE cterm=NONE
+hi jsBraces guifg=#bebebe guibg=#cd0000 guisp=#cd0000 gui=NONE ctermfg=202 ctermbg=NONE cterm=NONE
+hi jsParens guifg=#bebebe guibg=#cd0000 guisp=#cd0000 gui=NONE ctermfg=129 ctermbg=NONE cterm=NONE
+hi! link jsSwitchBraces jsIfElseBraces
+hi! link jsParensSwitch jsIfElseBraces
 
 " Spell
 hi! SpellCap guifg=#000000 guibg=#ff6666 guisp=#ff6666 gui=NONE ctermfg=NONE ctermbg=NONE cterm=NONE
