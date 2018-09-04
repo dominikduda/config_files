@@ -23,6 +23,8 @@
     set softtabstop=2
 " <!!!!!!!!**************!!!!!!!!>
 
+    " Does not break hard/symbolic links on file save
+        set backupcopy=yes
     " Disable shape-changing cursor (underline, bar)
         set guicursor=n-v-c-sm:block,i-ci-ve:block,r-cr-o:block
     " Custom spell file (use :mkspell! % in the file to reload)
@@ -58,7 +60,7 @@
     " Use old regexp engine (on new one tags highlighting was running deadly slow)
         set regexpengine=0
     " AFAIK time to update gitgutter signs
-        set updatetime=400
+        set updatetime=200
     " Mouse support
         set mouse=a
     " Only redraw when it is needed
@@ -120,6 +122,14 @@
 
 filetype off
 call plug#begin('~/.config/nvim/plug')
+    " Play sound on keypress and enter (ala typewriter)
+        Plug 'skywind3000/vim-keysound'
+    " * and # from visual
+        Plug 'haya14busa/vim-asterisk'
+    " Show nth out of x inc search results message
+        Plug 'osyo-manga/vim-anzu'
+    " Matching parens/tags features
+        Plug 'andymass/vim-matchup'
     " Automatically close html/xhtml tags
         Plug 'alvan/vim-closetag'
     " Split/join multiline entities (blocks, ifs, method invocations)
@@ -132,27 +142,21 @@ call plug#begin('~/.config/nvim/plug')
         Plug 'michaeljsmith/vim-indent-object'
     " Autoformat code using linter
         Plug 'sbdchd/neoformat'
-    " Higlight matching html tags
-        Plug 'Valloric/MatchTagAlways'
     " todo-list management
         Plug 'rlue/vim-getting-things-down'
     " Posting/updating/opening gists from vim
         Plug 'mattn/gist-vim'
-    " gist-vim dependency
+    " Gist-vim dependency
         Plug 'mattn/webapi-vim'
-    " Add words found in tmux panes to auto completion list
-        Plug 'wellle/tmux-complete.vim'
-    " Physics based scrolling
-        Plug 'yuttie/comfortable-motion.vim'
     " Navigation and information for yaml files (current node path, jump to parent, jump to key)
         Plug 'lmeijvogel/vim-yaml-helper'
     " Indent depth indicators
         Plug 'nathanaelkane/vim-indent-guides'
     " Flash yanked area
         Plug 'haya14busa/vim-operator-flashy'
-    " vim-operator-flashy dependency
+    " Vim-operator-flashy dependency
         Plug 'kana/vim-operator-user'
-    " Asynchronous Lint Engine
+    " Asynchronous lint engine
         Plug 'w0rp/ale'
     " Color parentheses based on nest depth
         Plug 'kien/rainbow_parentheses.vim'
@@ -161,15 +165,13 @@ call plug#begin('~/.config/nvim/plug')
     " Enable 'Rvm use' in vim
         Plug 'tpope/vim-rvm'
     " Comments
-        Plug 'tpope/vim-commentary'
+        Plug 'scrooloose/nerdcommenter'
     " Undo history tree
         Plug 'mbbill/undotree'
     " Change ruby blocks between do end and { }
         Plug 'jgdavey/vim-blockle'
     " Repeat plugin commands with .
         Plug 'tpope/vim-repeat'
-    " Dim inactive windows
-        Plug 'blueyed/vim-diminactive'
     " Airline
         Plug 'vim-airline/vim-airline'
     " Airline themes
@@ -204,10 +206,21 @@ call plug#begin('~/.config/nvim/plug')
         Plug 'Shougo/unite.vim'
     " Haml support
         Plug 'tpope/vim-haml'
-    " Backbone support
-        Plug 'mklabs/vim-backbone'
     " Open files from nerd tree with default application for file extension (e. g. images)
         Plug 'ivalkeen/nerdtree-execute'
+
+" JS UTILS ************************************
+    " Backbone support
+        Plug 'mklabs/vim-backbone'
+    " To defintion/import movement
+        Plug 'moll/vim-node'
+    " Numbered console logs, current selection to labeled debug string
+        Plug 'bergercookie/vim-debugstring'
+    " Fix all imports
+        Plug 'Galooshi/vim-import-js', { 'do': 'npm install -g import-js' }
+    " GraphQL syntax and indent
+        Plug 'jparise/vim-graphql'
+" <!!!!!!!!**************!!!!!!!!>
 
 " TMUX INTEGRATION ************************************
     " Execute commands from vim in tmux pane easily (mainly for running tests)
@@ -227,7 +240,6 @@ call plug#begin('~/.config/nvim/plug')
     Plug 'scrooloose/nerdtree'
     Plug 'tpope/vim-surround'
     Plug 'majutsushi/tagbar'
-    Plug 'rhysd/clever-f.vim'
 " <!!!!!!!!**************!!!!!!!!>
 
 " SYNTAX ************************************
@@ -237,10 +249,10 @@ call plug#begin('~/.config/nvim/plug')
         Plug 'vim-scripts/clips.vim'
     " Support for a lot of languages (syntax, indent and much more)
         Plug 'sheerun/vim-polyglot', { 'do': 'rm ~/.config/nvim/plug/vim-polyglot/after/ftplugin/javascript.vim' }
-    " Javascript syntax
-        Plug 'jelera/vim-javascript-syntax'
     " jsx syntax
-        Plug 'MaxMEllon/vim-jsx-pretty'
+        Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
+        Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
+        Plug 'gavocanov/vim-js-indent'
 " <!!!!!!!!**************!!!!!!!!>
 
 " GIT INTEGRATION ************************************
@@ -266,7 +278,12 @@ call plug#begin('~/.config/nvim/plug')
 " <!!!!!!!!**************!!!!!!!!>
 
 " AUTOCOMPLETE AND SNIPPETS ************************************
-    Plug 'epilande/vim-react-snippets'
+    " Add words found in tmux panes to auto completion list
+        Plug 'wellle/tmux-complete.vim'
+    " Port of Damians snippets for VScode
+        Plug 'dominikduda/vim_es7_javascript_react_snippets'
+    " Intelligent js complete source
+        Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
     " Confrim autocompletion with tab
         Plug 'ervandew/supertab'
     " Snippets for various languages pack
@@ -290,6 +307,53 @@ call plug#end()
     colorscheme dante_modified
 " <!!!!!!!!**************!!!!!!!!>
 
+" DEOPLETE-TERNJS CONFIG ************************************
+    " Remove .tern-port on vim start if exists (echos never worked)
+        function! TernPrep()
+            if !empty(glob(join([getcwd(), ".tern-port"], "/")))
+                echo ".tern-port exists, deleting with result:"
+                echo delete(fnameescape(join([getcwd(), ".tern-port"], "/"))) == 0 ? "Success" : "Fail"
+            endif
+        endfunction
+        autocmd VimEnter * :call TernPrep()
+    let g:deoplete#sources#ternjs#filetypes = [
+        \ 'jsx',
+        \ 'javascript',
+        \ 'html',
+        \ 'css',
+        \ 'coffe',
+        \ 'eruby',
+        \ 'javascript.jsx',
+        \ 'vue',
+        \ ]
+" <!!!!!!!!**************!!!!!!!!>
+
+" VIM-ASTERISK CONFIG ************************************
+    vmap * <Plug>(asterisk-g*)
+    vmap # <Plug>(asterisk-g#)
+" <!!!!!!!!**************!!!!!!!!>
+
+" VIM-ANZU CONFIG ************************************
+    nmap * <Plug>(anzu-star-with-echo)
+    nmap # <Plug>(anzu-sharp-with-echo)
+    let g:anzu_status_format = "▶%p◀ (%i/%l)"
+    set statusline=%{anzu#search_status()}
+" <!!!!!!!!**************!!!!!!!!>
+
+" VIM-MATCHUP CONFIG ************************************
+    " don't recognize anything in comments
+        let g:matchup_delim_noskips = 2
+    let g:matchup_matchparen_deferred = 1
+    let g:matchup_matchparen_deferred_show_delay = 250
+    let g:matchup_matchparen_deferred_hide_delay = 750
+    let g:matchup_matchparen_hi_surround_always = 1
+    let g:matchup_matchparen_timeout = 500
+    let g:matchup_matchparen_insert_timeout = 1000
+    highlight MatchWord ctermbg=NONE ctermfg=226 cterm=bold
+    highlight MatchParen ctermbg=NONE ctermfg=226 cterm=bold,underline
+    highlight MatchParenCur ctermbg=NONE ctermfg=226 cterm=bold,underline
+" <!!!!!!!!**************!!!!!!!!>
+
 " SPLITJOIN.VIM CONFIG ************************************
     let g:splitjoin_ruby_curly_braces = 0
     let g:splitjoin_ruby_hanging_args = 0
@@ -300,22 +364,10 @@ call plug#end()
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIM-GUTENTAGS CONFIG ************************************
-    let g:gutentags_ctags_exclude = ["node_modules", ".git"]
-" <!!!!!!!!**************!!!!!!!!>
-
-" MATCHTAGALWAYS CONFIG ************************************
-    " Highlight jsx syntax even if file extension is not .js
-        let g:jsx_ext_required = 0
-    let g:mta_filetypes = {
-        \ 'eruby' : 1,
-        \ 'html' : 1,
-        \ 'xhtml' : 1,
-        \ 'xml' : 1,
-        \ 'javascript' : 1,
-        \}
-    let g:mta_set_default_matchtag_color = 0
-    highlight MatchTag ctermbg=NONE ctermfg=226 cterm=bold
-    let g:mta_use_matchparen_group = 0
+    let g:gutentags_ctags_exclude = [
+        \ "node_modules",
+        \ ".git"
+        \ ]
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIM-GETTING-THINGS-DOWN CONFIG ************************************
@@ -339,7 +391,8 @@ call plug#end()
 
 " VIM-POLYGLOT CONFIG ************************************
     " Javascript syntax higlighter breaks rainbow_parentheses.vim - using alternative
-        let g:polyglot_disabled = ['javascript', 'markdown', 'jsx', 'yaml']
+        let g:polyglot_disabled = ['javascript', 'javascript.jsx', 'markdown', 'yaml']
+        " let g:polyglot_disabled = ['markdown', 'yaml']
 " <!!!!!!!!**************!!!!!!!!>
 
 " GIST-VIM CONFIG ************************************
@@ -356,14 +409,6 @@ call plug#end()
     let g:indent_guides_enable_on_vim_startup = 1
     let g:indent_guides_exclude_filetypes = ['help', 'nerdtree']
     let g:indent_guides_default_mapping = 0
-" <!!!!!!!!**************!!!!!!!!>
-
-" COMFORTABLE-MOTION CONFIG ************************************
-    let g:comfortable_motion_no_default_key_mappings = 1
-    nnoremap <silent> <C-e> :call comfortable_motion#flick(40)<CR>
-    nnoremap <silent> <C-y> :call comfortable_motion#flick(-40)<CR>
-    nnoremap <silent> <C-d> :call comfortable_motion#flick(100)<CR>
-    nnoremap <silent> <C-u> :call comfortable_motion#flick(-100)<CR>
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIM-MULTIPLE-CURSORS CONFIG ************************************
@@ -415,16 +460,34 @@ call plug#end()
     noremap <silent> <A-l> :TmuxNavigateRight<CR>
 " <!!!!!!!!**************!!!!!!!!>
 
+" VIM-KEYSOUND CONFIG ************************************
+  let g:keysound_enable = 1
+  let g:keysound_theme = 'typewriter'
+" <!!!!!!!!**************!!!!!!!!>
+
+" VIM-DEBUGSTRING CONFIG ************************************
+    vnoremap <Leader>ds y:AddDebugStringExpr('<C-r>"')<Enter>
+" <!!!!!!!!**************!!!!!!!!>
+
 " VIM-EXPAND-REGION CONFIG ************************************
     " Press v in visual mode to expand region (first press will select word which cursor is currently on)
         vmap v <Plug>(expand_region_expand)
 " <!!!!!!!!**************!!!!!!!!>
 
 " ALE CONFIG ************************************
+    let g:ale_fixers = {}
+    let g:ale_fixers['javascript'] = ['eslint']
+    let g:ale_fixers['javascript.jsx'] = ['eslint']
+    highlight link ALEStyleErrorSign todo
+    let g:ale_type_map = {'eslint': {'E': 'ES'}}
+    let g:ale_echo_msg_error_str = 'E'
+    let g:ale_echo_msg_warning_str = 'W'
+    let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
     autocmd InsertLeave * ALELint
     let g:ale_set_highlights = 0
     let g:ale_sign_error = 'X➜'
     let g:ale_sign_warning = '!➜'
+    let g:ale_sign_style_error = 'S➜'
     let g:ale_lint_delay = 400
     let g:ale_lint_on_save = 1
     let g:ale_lint_on_text_changed =  1
@@ -438,6 +501,7 @@ call plug#end()
     autocmd BufReadPost * RainbowParenthesesLoadRound
     autocmd BufReadPost * RainbowParenthesesLoadSquare
     autocmd BufReadPost * RainbowParenthesesLoadBraces
+    autocmd BufReadPost *.js RainbowParenthesesToggleAll
     let g:rbpt_colorpairs = [
                           \ ['129', 'RoyalBlue3'],
                           \ ['32', 'RoyalBlue3'],
@@ -467,17 +531,15 @@ call plug#end()
     let g:rbpt_max = 24
 " <!!!!!!!!**************!!!!!!!!>
 
-" VIM-COMMENTARY CONFIG ************************************
-    " Defining maps defined by plugin so it wont overwrite custom ones (it checks whether they re defined)
-        nmap gc  <Plug>Commentary
-        omap gc  <Plug>Commentary
-        nmap gcc <Plug>CommentaryLine
-        if maparg('c','n') ==# ''
-          nmap cgc <Plug>ChangeCommentary
-        endif
-        nmap gcu <Plug>Commentary<Plug>Commentary
-    " Keep cursor position after commenting from visual mode
-        vmap gc <Plug>Commentarygv<Esc>
+" NERDCOMMENTER CONFIG ************************************
+    let g:NERDCreateDefaultMappings = 0
+    let g:NERDSpaceDelims = 1
+    let g:NERDDefaultAlign = 'left'
+    let g:NERDCustomDelimiters = { 'javascript.jsx': { 'left': '//', 'leftAlt': '{/*', 'rightAlt': '*/}' } }
+    nmap gcc <plug>NERDCommenterToggle
+    nmap gcj <plug>NERDCommenterAltDelims<plug>NERDCommenterToggle<plug>NERDCommenterAltDelims
+    vmap gcc <plug>NERDCommenterToggle
+    vmap gcj <Esc><plug>NERDCommenterAltDelimsgv<plug>NERDCommenterToggle<plug>NERDCommenterAltDelims
 " <!!!!!!!!**************!!!!!!!!>
 
 " CLEVER-F CONFIG ************************************
@@ -499,7 +561,8 @@ call plug#end()
     let g:deoplete#enable_ignore_case = 0
     let g:deoplete#enable_smart_case = 1
     let g:deoplete#enable_at_startup = 1
-    let g:deoplete#enable_refresh_always = 1
+    " let g:deoplete#enable_refresh_always = 1
+    let g:deoplete#enable_refresh_always = 0
     let g:deoplete#auto_refresh_delay = 1
     let g:deoplete#max_abbr_width = 0
     let g:deoplete#max_menu_width = 0
@@ -594,7 +657,7 @@ call plug#end()
 " <!!!!!!!!**************!!!!!!!!>
 
 " GITGUTTER CONFIG ************************************
-    set signcolumn=no
+    set signcolumn=yes
     let g:gitgutter_realtime = 1
     let g:gitgutter_eager = 1
     let g:gitgutter_async = 1
@@ -637,81 +700,14 @@ call plug#end()
 " <!!!!!!!!**************!!!!!!!!>
 
 " PROJECT SPECIFIC ************************************
-    if $CURRENT_PROJECT_NAME == 'SUBSTER_BOOKING'
-        let g:ale_linters = {
-        \   'javascript': ['prettier'],
-        \}
+    if $CURRENT_PROJECT_NAME == 'CATALYST'
+        autocmd FileType javascript setlocal colorcolumn=101
+        autocmd FileType javascript.jsx setlocal colorcolumn=101
         let g:deoplete#enable_ignore_case = 1
-        let g:neotags_ctags_args = [
-                    \ '--recurse=yes',
-                    \ '--sort=yes',
-                    \ '--fields=+l',
-                    \ '--c-kinds=+p',
-                    \ '--c++-kinds=+p',
-                    \ '--extras=+q',
-                    \ '--exclude=.git',
-                    \ '--exclude=node_modules',
-                    \ '--exclude=dist'
-                    \ ]
-    endif
-    if $CURRENT_PROJECT_NAME == 'AB'
-      let g:test#runner_commands = ['Rspec']
-      let g:rails_projections = {
-            \  'app/*.rb': {
-            \     'alternate': 'spec/{}_spec.rb',
-            \     'type': 'source'
-            \   },
-            \  'spec/*_spec.rb': {
-            \     'alternate': 'app/{}.rb',
-            \     'type': 'test'
-            \   }
-            \}
-      " Color 200th column
-          set colorcolumn=200
-    endif
-    if $CURRENT_PROJECT_NAME == 'MD'
-        let g:deoplete#enable_ignore_case = 1
-        let g:neotags_ctags_args = [
-                    \ '--recurse=yes',
-                    \ '--sort=yes',
-                    \ '--fields=+l',
-                    \ '--c-kinds=+p',
-                    \ '--c++-kinds=+p',
-                    \ '--extras=+q',
-                    \ '--exclude=.git',
-                    \ '--exclude=node_modules',
-                    \ '--exclude=dist'
-                    \ ]
-        " Custom test command for javascript in MD
-            autocmd BufRead,BufNewFile *.js nmap <buffer> <leader>t :VimuxRunCommand('clear; gulp test')<Cr>
-    endif
-    if $CURRENT_PROJECT_NAME == 'FOOD_JOB'
-        let g:neotags_ctags_args = [
-                    \ '--recurse=yes',
-                    \ '--sort=yes',
-                    \ '--fields=+l',
-                    \ '--c-kinds=+p',
-                    \ '--c++-kinds=+p',
-                    \ '--extras=+q',
-                    \ '--exclude=.git',
-                    \ '--exclude=node_modules',
-                    \ '--exclude=dist'
-                    \ ]
-    endif
-    if $CURRENT_PROJECT_NAME == 'CRAFTED'
-        let g:neotags_ctags_args = [
-                    \ '--recurse=yes',
-                    \ '--sort=yes',
-                    \ '--fields=+l',
-                    \ '--c-kinds=+p',
-                    \ '--c++-kinds=+p',
-                    \ '--extras=+q',
-                    \ '--exclude=.git',
-                    \ '--exclude="./app/assets/javascripts/lib"',
-                    \ '--exclude=dist'
-                    \ ]
-    endif
-    if $CURRENT_PROJECT_NAME == 'REACT_TRAINING'
+        " Search projectwide
+            nnoremap , :Ag!<Space>-Q<Space>--ignore node_modules<Space>''<Left>
+        " Search selected text project wide (+ possibility to pass path)
+            vnoremap , y:Ag!<Space>-Q<Space>--ignore node_modules<Space>'<C-r>"'<Space>
         let g:neotags_ctags_args = [
                     \ '--recurse=yes',
                     \ '--sort=yes',
@@ -721,8 +717,23 @@ call plug#end()
                     \ '--extras=+q',
                     \ '--exclude=.git',
                     \ '--exclude=*.js',
+                    \ '--exclude="./app/assets/javascripts/lib"',
                     \ '--exclude=dist'
                     \ ]
+        let g:ale_linters = {
+        \   'javascript': ['eslint'],
+        \}
+        let g:rbpt_max = 0
+        " Custom test command for javascript in MD
+          autocmd BufRead,BufNewFile *.js nmap <buffer> <leader>t cp:VimuxRunCommand('clear; echo -e npm run test -- --cf <C-r>+; npm run test -- --cf <C-r>+')<Cr>
+        let g:gutentags_ctags_exclude = [
+            \ "node_modules",
+            \ ".git",
+            \ "client/package.json",
+            \ "client/package-lock.json",
+            \ "client/coverage",
+            \ "public"
+            \ ]
     endif
 " <!!!!!!!!**************!!!!!!!!>
 
@@ -777,10 +788,10 @@ call plug#end()
           vmap H ^
           vmap L $
       " Resize buffer on ctrl + alt + direction
-          nnoremap <A-C-h> :vertical resize +1<CR>
-          nnoremap <A-C-j> :resize -1<CR>
-          nnoremap <A-C-k> :resize +1<CR>
-          nnoremap <A-C-l> :vertical resize -1<CR>
+          nnoremap <A-C-h> :vertical resize +4<CR>
+          nnoremap <A-C-j> :resize -4<CR>
+          nnoremap <A-C-k> :resize +4<CR>
+          nnoremap <A-C-l> :vertical resize -4<CR>
       " Move vertically by rows rather than lines, useful with long lines + wrap on
           nnoremap j gj
           nnoremap k gk
@@ -819,23 +830,34 @@ call plug#end()
           vmap y ygv<Esc>
       " Index of tmux pane to run tests in
           let g:VimuxRunnerIndex = $VIMUX_RUNNER_PANE_INDEX
+      " Take most characters literally in incsearch
+          map / /\V
+          map ? ?\V
+      " Search react component usages
+          noremap <leader>u lbvey:Ag! --ignore node_modules --ignore tests '<<C-r>0\b'<CR>
+      " Jumps to definition of javascript thing under cursor and persists current inc search value
+          noremap gd :let @t = @/<CR>*ggn$hgfggn:let @/ = @t<CR>
+      " Flash window if changed from another vim one
+          function! SiemanoFlash()
+            2match Statement /./
+            redraw
+            sleep 30m
+            2match none
+          endfunction
+          autocmd WinEnter * call SiemanoFlash()
 " <!!!!!!!!**************!!!!!!!!>
 
-" Called Called once right before you start selecting multiple cursors
-function! Multiple_cursors_before()
-  if exists(':NeoCompleteLock')==2
-    exe 'NeoCompleteLock'
-  endif
-endfunction
+" TODO: use this to temporairly disable some plugins
+  " Called Called once right before you start selecting multiple cursors
+  " function! Multiple_cursors_before()
+  "   if exists(':NeoCompleteLock')==2
+  "     exe 'NeoCompleteLock'
+  "   endif
+  " endfunction
 
-" Called once only when the multiple selection is canceled (default <Esc>)
-function! Multiple_cursors_after()
-  if exists(':NeoCompleteUnlock')==2
-    exe 'NeoCompleteUnlock'
-  endif
-endfunction
-
-autocmd BufReadPre * if (&modifiable) | setlocal signcolumn=yes | endif
-  autocmd FileType slim setlocal colorcolumn=100
-  autocmd FileType yaml setlocal colorcolumn=100
-
+  " Called once only when the multiple selection is canceled (default <Esc>)
+  " function! Multiple_cursors_after()
+  "   if exists(':NeoCompleteUnlock')==2
+  "     exe 'NeoCompleteUnlock'
+  "   endif
+  " endfunction
