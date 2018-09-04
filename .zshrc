@@ -83,24 +83,41 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# Ignore ctrl+d (so I wont exit tmux panes accidentally)
+set -o ignoreeof
+
 open() {
   gnome-open $1 &> /dev/null
 }
 
 alias v="nvim"
 alias sv="sudo nvim"
+alias dcd="docker-compose -f docker-compose.dev.yml"
+alias dc="docker-compose"
+alias de='docker exec -it catalyst_puma_1'
+alias docker_clean="
+  docker-compose down;
+  docker volume prune --force;
+  docker system prune -a --volumes --force;
+  setopt rm_star_silent
+  rm -rf ~/github/catalyst/public/generated/*
+  setopt no_rm_star_silent
+"
+alias cat_npm_log="npm start | tee /tmp/cat_npm.log"
+alias cat_npm_grepped_log="tail -f /tmp/cat_npm.log | grep 'built'"
 
-
-alias ab_s_log="rails s -p 5000 | tee ~/github/ab/log/rails.log"
-alias ab_grepped_log="tail -f ~/github/ab/log/rails.log | grep 'Rendered\|Processing\|Parameters\|INFO\|FATAL\|Error\|ActionView\|ActiveRecord'"
-alias ab_c="rails c"
-alias ab_m="rake db:migrate"
+export IGNOREEOF=10
 
 export EDITOR='nvim'
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 export PATH="/home/dominikduda/.rvm/gems/ruby-2.1.5/bin:/home/dominikduda/.rvm/gems/ruby-2.1.5@global/bin:/home/dominikduda/.rvm/rubies/ruby-2.1.5/bin:/home/dominikduda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/heroku/bin:/home/dominikduda/.local/bin:/home/dominikduda/.rvm/bin"
+
+# Android studio requires
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 export NVM_DIR="/home/dominikduda/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -118,3 +135,5 @@ PROMPT="$PROMPT"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" 
 
 # Override git branch segment from prompt with empty function to disable it
 prompt_git() {}
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
