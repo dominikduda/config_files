@@ -99,8 +99,6 @@
         set smartcase
     " Search as you type
         set incsearch
-    " Copy indent from current line when starting new line
-        set autoindent
     " Spaces instead of tabs in insert mode
         set expandtab
     " Default tab width
@@ -248,11 +246,10 @@ call plug#begin('~/.config/nvim/plug')
     " CLIPS syntax
         Plug 'vim-scripts/clips.vim'
     " Support for a lot of languages (syntax, indent and much more)
-        Plug 'sheerun/vim-polyglot', { 'do': 'rm ~/.config/nvim/plug/vim-polyglot/after/ftplugin/javascript.vim' }
+        Plug 'sheerun/vim-polyglot', { 'do': 'rm ~/.config/nvim/plug/vim-polyglot/after/indent/jsx.vim' }
     " jsx syntax
         Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
         Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
-        Plug 'gavocanov/vim-js-indent'
 " <!!!!!!!!**************!!!!!!!!>
 
 " GIT INTEGRATION ************************************
@@ -298,9 +295,9 @@ call plug#begin('~/.config/nvim/plug')
         Plug 'Shougo/neoinclude.vim'
 " <!!!!!!!!**************!!!!!!!!>
 call plug#end()
+filetype plugin indent on
 
 " NOT SURE OR TOO LAZY TO CHECK ************************************
-    filetype plugin indent on
     set wildignore+=*/tmp/*,*.so,*.swp,*.zipo
     set omnifunc=syntaxcomplete#Complete
     set t_Co=256
@@ -391,8 +388,7 @@ call plug#end()
 
 " VIM-POLYGLOT CONFIG ************************************
     " Javascript syntax higlighter breaks rainbow_parentheses.vim - using alternative
-        let g:polyglot_disabled = ['javascript', 'javascript.jsx', 'markdown', 'yaml']
-        " let g:polyglot_disabled = ['markdown', 'yaml']
+        " let g:polyglot_disabled = ['javascript', 'javascript.jsx', 'markdown', 'yaml']
 " <!!!!!!!!**************!!!!!!!!>
 
 " GIST-VIM CONFIG ************************************
@@ -466,7 +462,7 @@ call plug#end()
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIM-DEBUGSTRING CONFIG ************************************
-    vnoremap <Leader>ds y:AddDebugStringExpr('<C-r>"')<Enter>
+    vnoremap <Leader>ds y:AddDebugStringExpr('<C-r>"')<Enter>==
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIM-EXPAND-REGION CONFIG ************************************
@@ -708,18 +704,6 @@ call plug#end()
             nnoremap , :Ag!<Space>-Q<Space>--ignore node_modules<Space>''<Left>
         " Search selected text project wide (+ possibility to pass path)
             vnoremap , y:Ag!<Space>-Q<Space>--ignore node_modules<Space>'<C-r>"'<Space>
-        let g:neotags_ctags_args = [
-                    \ '--recurse=yes',
-                    \ '--sort=yes',
-                    \ '--fields=+l',
-                    \ '--c-kinds=+p',
-                    \ '--c++-kinds=+p',
-                    \ '--extras=+q',
-                    \ '--exclude=.git',
-                    \ '--exclude=*.js',
-                    \ '--exclude="./app/assets/javascripts/lib"',
-                    \ '--exclude=dist'
-                    \ ]
         let g:ale_linters = {
         \   'javascript': ['eslint'],
         \}
