@@ -232,6 +232,8 @@ call plug#begin('~/.config/nvim/plug')
 " <!!!!!!!!**************!!!!!!!!>
 
 " GENERAL ************************************
+    " Graphical indicator of current line relation to file length
+        Plug 'drzel/vim-line-no-indicator'
     Plug 'dominikduda/vim_current_word'
     Plug 'xolox/vim-misc'
     Plug 'ludovicchabant/vim-gutentags'
@@ -302,6 +304,16 @@ filetype plugin indent on
     set omnifunc=syntaxcomplete#Complete
     set t_Co=256
     colorscheme dante_modified
+" <!!!!!!!!**************!!!!!!!!>
+
+" VIM-LINE-NO-INDICATOR CONFIG ************************************
+    let g:line_no_indicator_chars = [
+        \ '   ', '▏  ', '▎  ', '▍  ', '▌  ',
+        \ '▋  ', '▊  ', '▉  ', '█  ', '█▏ ',
+        \ '█▎ ', '█▍ ', '█▌ ', '█▋ ', '█▊ ',
+        \ '█▉ ', '██ ', '██▏', '██▎', '██▍',
+        \ '██▌', '██▋', '██▊', '██▉', '███'
+        \ ]
 " <!!!!!!!!**************!!!!!!!!>
 
 " DEOPLETE-TERNJS CONFIG ************************************
@@ -572,8 +584,8 @@ filetype plugin indent on
         autocmd FileType javascript UltiSnipsAddFiletypes html
     " Better key bindings for UltiSnipsExpandTrigger
         let g:UltiSnipsExpandTrigger = "<C-e>"
-        let g:UltiSnipsJumpForwardTrigger = "<A-l>"
-        let g:UltiSnipsJumpBackwardTrigger = "<A-h>"
+        let g:UltiSnipsJumpForwardTrigger = "<C-e>"
+        let g:UltiSnipsJumpBackwardTrigger = "<C-h>"
 " <!!!!!!!!**************!!!!!!!!>
 
 " LIVEDOWN CONFIG ************************************
@@ -595,6 +607,7 @@ filetype plugin indent on
     set fillchars+=stl:\ ,stlnc:\
     let g:airline_powerline_fonts = 1
     let g:airline_theme='wombat'
+    let g:airline_section_z = '0 %#__accent_bold#%{LineNoIndicator()}▏%#__restore__#%L  ➜▌%2c'
 " <!!!!!!!!**************!!!!!!!!>
 
 " CTRLP CONFIG ************************************
