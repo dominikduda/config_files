@@ -92,6 +92,8 @@ open() {
 
 alias v="nvim"
 alias sv="sudo nvim"
+alias vimrc="nvim ~/.vimrc"
+
 alias dcd="docker-compose -f docker-compose.dev.yml"
 alias dc="docker-compose"
 alias de='docker exec -it catalyst_puma_1'
