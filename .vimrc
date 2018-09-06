@@ -838,9 +838,9 @@ filetype plugin indent on
           noremap gd :let @t = @/<CR>*ggn$hgfggn:let @/ = @t<CR>
       " Flash window if changed from another vim one
           function! SiemanoFlash()
-            2match Statement /./
+            2match IncSearch /./
             redraw
-            sleep 30m
+            sleep 10m
             2match none
           endfunction
           autocmd WinEnter * call SiemanoFlash()
