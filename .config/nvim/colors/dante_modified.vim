@@ -16,7 +16,7 @@ hi cMember cterm=underline
 "hi SignColumn -- no settings --
 " hi Normal guifg=#b3b1b3 guibg=#0a0a0a guisp=#0a0a0a gui=NONE ctermfg=249 ctermbg=232 cterm=NONE
 " hi Normal guifg=#b3b1b3 guibg=#0a0a0a guisp=#0a0a0a gui=NONE ctermfg=249 ctermbg=233 cterm=NONE
-hi Normal guifg=#b3b1b3 guibg=#0a0a0a guisp=#0a0a0a gui=NONE ctermfg=250 ctermbg=233 cterm=NONE
+hi Normal guifg=#b3b1b3 guibg=guisp=#0a0a0a gui=NONE ctermfg=250 ctermbg=233 cterm=NONE
 "hi EnumerationValue -- no settings --
 "hi TabLineSel -- no settings --
 "hi Union -- no settings --
@@ -40,7 +40,7 @@ hi ColorColumn ctermbg=234
 hi Comment guifg=#10cccc guibg=NONE guisp=NONE gui=NONE ctermfg=80 ctermbg=NONE cterm=NONE
 hi Conditional guifg=#ffd500 guibg=NONE guisp=NONE gui=NONE ctermfg=220 ctermbg=NONE cterm=NONE
 hi Constant guifg=#f50000 guibg=NONE guisp=NONE gui=NONE ctermfg=203 ctermbg=NONE cterm=NONE
-hi CursorColumn guifg=NONE guibg=#0e0e0e guisp=#0e0e0e gui=NONE ctermfg=NONE ctermbg=234 cterm=NONE
+hi CursorColumn guifg=NONE guibg=#0e0e0e guisp=#0e0e0e gui=NONE ctermfg=NONE ctermbg=235 cterm=NONE
 hi CursorLine guifg=NONE guibg=#0e0e0e guisp=#0e0e0e gui=NONE ctermfg=NONE ctermbg=235 cterm=NONE
 hi Debug guifg=#ff8000 guibg=NONE guisp=NONE gui=NONE ctermfg=208 ctermbg=NONE cterm=NONE
 hi Define guifg=#1766b0 guibg=NONE guisp=NONE gui=NONE ctermfg=62 ctermbg=NONE cterm=NONE
@@ -136,8 +136,8 @@ hi! link xmlTag Type
 hi! link xmlEndTag Type
 hi! link jsGlobalObjects Type
 hi! link jsFuncArgs Include
-hi! link jsFuncCall Normal
 hi! link jsThis StorageClass
+hi! link jsFuncCall Number
 hi! link jsDecoratorFunction Exception
 hi! link jsDecorator Exception
 hi! link jsExportDefault Include
