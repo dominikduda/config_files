@@ -40,7 +40,7 @@
     " Start vim with folds unfolded (20 is just sample big-enough number)
         set foldlevel=20
     " Display special_character:as (first is non breaking space)
-        set listchars=nbsp:•,tab:↹⇉
+        set listchars=nbsp:•,tab:⎔➤
     " Enable displaying special characters
         set list
     " Set preview window height to 15 lines (for example fugitive :Gstatus uses it)
@@ -232,6 +232,8 @@ call plug#begin('~/.config/nvim/plug')
 " <!!!!!!!!**************!!!!!!!!>
 
 " GENERAL ************************************
+    " Signed bookmarks persisting over vim quit
+        Plug 'MattesGroeger/vim-bookmarks'
     " Graphical indicator of current line relation to file length
         Plug 'drzel/vim-line-no-indicator'
     Plug 'dominikduda/vim_current_word'
@@ -343,10 +345,13 @@ filetype plugin indent on
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIM-ANZU CONFIG ************************************
-    nmap * <Plug>(anzu-star-with-echo)
-    nmap # <Plug>(anzu-sharp-with-echo)
-    let g:anzu_status_format = "▶%p◀ (%i/%l)"
-    set statusline=%{anzu#search_status()}
+    nmap * <Plug>(anzu-star-with-echo)zz:set cursorcolumn<CR><Plug>(anzu-echo-search-status)
+    nmap # <Plug>(anzu-sharp-with-echo)zz:set cursorcolumn<CR><Plug>(anzu-echo-search-status)
+    let g:airline#extensions#anzu#enabled = 0
+    let g:anzu_status_format = "%#Search#▶%p◀ (%i/%l)"
+    nmap N <Plug>(anzu-N-with-echo)zz:set cursorcolumn<CR><Plug>(anzu-echo-search-status)
+    nmap n <Plug>(anzu-n-with-echo)zz:set cursorcolumn<CR><Plug>(anzu-echo-search-status)
+    autocmd CursorMoved,CursorHold,InsertEnter * set nocursorcolumn
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIM-MATCHUP CONFIG ************************************
@@ -795,9 +800,6 @@ filetype plugin indent on
       " Move vertically by lines rather than rows in quickfix window
           autocmd BufReadPost quickfix nnoremap <buffer> j j
           autocmd BufReadPost quickfix nnoremap <buffer> k k
-      " Center screen on next/previous selection.
-          nnoremap n nzz
-          nnoremap N Nzz
       " Move preview window to full width row at bottom when opened
           autocmd BufEnter ?* call PreviewHeightWorkAround()
           func! PreviewHeightWorkAround()
