@@ -308,6 +308,37 @@ filetype plugin indent on
     colorscheme dante_modified
 " <!!!!!!!!**************!!!!!!!!>
 
+" VIM-BOOKMARKS CONFIG ************************************
+  let g:bookmark_center = 1
+  let g:bookmark_save_per_working_dir = 0
+  let g:bookmark_manage_per_buffer = 0
+  " Unmap default mappings when entering nerd tree and map when entering other buffer
+      function! BookmarkMapKeys()
+          nmap mm :BookmarkToggle<CR>
+          nmap mi :BookmarkAnnotate<CR>
+          nmap mn :BookmarkNext<CR>
+          nmap mp :BookmarkPrev<CR>
+          nmap ma :BookmarkShowAll<CR>
+          nmap mc :BookmarkClear<CR>
+          nmap mx :BookmarkClearAll<CR>
+          nmap mkk :BookmarkMoveUp
+          nmap mjj :BookmarkMoveDown
+      endfunction
+      function! BookmarkUnmapKeys()
+          unmap mm
+          unmap mi
+          unmap mn
+          unmap mp
+          unmap ma
+          unmap mc
+          unmap mx
+          unmap mkk
+          unmap mjj
+      endfunction
+      autocmd BufEnter * :call BookmarkMapKeys()
+      autocmd BufEnter NERD_tree_* :call BookmarkUnmapKeys()
+" <!!!!!!!!**************!!!!!!!!>
+
 " VIM-LINE-NO-INDICATOR CONFIG ************************************
     let g:line_no_indicator_chars = [
         \ '   ', '▏  ', '▎  ', '▍  ', '▌  ',
@@ -345,12 +376,12 @@ filetype plugin indent on
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIM-ANZU CONFIG ************************************
-    nmap * <Plug>(anzu-star-with-echo)zz:set cursorcolumn<CR><Plug>(anzu-echo-search-status)
-    nmap # <Plug>(anzu-sharp-with-echo)zz:set cursorcolumn<CR><Plug>(anzu-echo-search-status)
+    nmap <silent> * <Plug>(anzu-star-with-echo)zz:set cursorcolumn<CR><Plug>(anzu-echo-search-status)
+    nmap <silent> # <Plug>(anzu-sharp-with-echo)zz:set cursorcolumn<CR><Plug>(anzu-echo-search-status)
     let g:airline#extensions#anzu#enabled = 0
     let g:anzu_status_format = "%#Search#▶%p◀ (%i/%l)"
-    nmap N <Plug>(anzu-N-with-echo)zz:set cursorcolumn<CR><Plug>(anzu-echo-search-status)
-    nmap n <Plug>(anzu-n-with-echo)zz:set cursorcolumn<CR><Plug>(anzu-echo-search-status)
+    nmap <silent> N <Plug>(anzu-N-with-echo)zz:set cursorcolumn<CR><Plug>(anzu-echo-search-status)
+    nmap <silent> n <Plug>(anzu-n-with-echo)zz:set cursorcolumn<CR><Plug>(anzu-echo-search-status)
     autocmd CursorMoved,CursorHold,InsertEnter * set nocursorcolumn
 " <!!!!!!!!**************!!!!!!!!>
 
@@ -651,6 +682,9 @@ filetype plugin indent on
     " NerdTree toggle
         nmap <leader>1 :NERDTreeToggle<CR>
     noremap <leader>f :NERDTreeFind<CR>zz
+    let NERDTreeMinimalUI = 1
+    let NERDTreeStatusline=""
+    autocmd BufEnter NERD_tree_* setlocal signcolumn=no
 " <!!!!!!!!**************!!!!!!!!>
 
 " TAGBAR CONFIG ************************************
