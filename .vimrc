@@ -40,7 +40,7 @@
     " Start vim with folds unfolded (20 is just sample big-enough number)
         set foldlevel=20
     " Display special_character:as (first is non breaking space)
-        set listchars=nbsp:•,tab:⎔➤
+        set listchars=nbsp:•,tab:⎔➤,eol:↲
     " Enable displaying special characters
         set list
     " Set preview window height to 15 lines (for example fugitive :Gstatus uses it)
@@ -120,6 +120,7 @@
 
 filetype off
 call plug#begin('~/.config/nvim/plug')
+        Plug 'kristijanhusak/vim-carbon-now-sh'
     " Play sound on keypress and enter (ala typewriter)
         Plug 'skywind3000/vim-keysound'
     " * and # from visual
@@ -378,7 +379,6 @@ filetype plugin indent on
 " VIM-ANZU CONFIG ************************************
     nmap <silent> * <Plug>(anzu-star-with-echo)zz:set cursorcolumn<CR><Plug>(anzu-echo-search-status)
     nmap <silent> # <Plug>(anzu-sharp-with-echo)zz:set cursorcolumn<CR><Plug>(anzu-echo-search-status)
-    let g:airline#extensions#anzu#enabled = 0
     let g:anzu_status_format = "%#Search#▶%p◀ (%i/%l)"
     nmap <silent> N <Plug>(anzu-N-with-echo)zz:set cursorcolumn<CR><Plug>(anzu-echo-search-status)
     nmap <silent> n <Plug>(anzu-n-with-echo)zz:set cursorcolumn<CR><Plug>(anzu-echo-search-status)
@@ -392,8 +392,8 @@ filetype plugin indent on
     let g:matchup_matchparen_deferred_show_delay = 250
     let g:matchup_matchparen_deferred_hide_delay = 750
     let g:matchup_matchparen_hi_surround_always = 1
-    let g:matchup_matchparen_timeout = 500
-    let g:matchup_matchparen_insert_timeout = 1000
+    let g:matchup_matchparen_timeout = 100
+    let g:matchup_matchparen_insert_timeout = 50
     highlight MatchWord ctermbg=NONE ctermfg=226 cterm=bold
     highlight MatchParen ctermbg=NONE ctermfg=226 cterm=bold,underline
     highlight MatchParenCur ctermbg=NONE ctermfg=226 cterm=bold,underline
@@ -644,6 +644,22 @@ filetype plugin indent on
     let g:airline_powerline_fonts = 1
     let g:airline_theme='wombat'
     let g:airline_section_z = '0 %#__accent_bold#%{LineNoIndicator()}▏%#__restore__#%L  ➜▌%2c'
+    let g:airline_mode_map = {
+            \ '__' : '-',
+            \ 'n'  : 'N',
+            \ 'i'  : 'I',
+            \ 'R'  : 'R',
+            \ 'c'  : 'C',
+            \ 'v'  : 'V',
+            \ 'V'  : 'V',
+            \ '' : 'V',
+            \ 's'  : 'S',
+            \ 'S'  : 'S',
+            \ '' : 'S',
+            \ 't'  : 'T',
+            \ }
+    let g:airline#extensions#ale#enabled = 0
+    let g:airline#extensions#anzu#enabled = 0
 " <!!!!!!!!**************!!!!!!!!>
 
 " CTRLP CONFIG ************************************
@@ -725,7 +741,6 @@ filetype plugin indent on
     nmap <silent> <leader>T :TestFile<CR>
     nmap <silent> <leader>a :TestSuite<CR>
     nmap <silent> <leader>l :TestLast<CR>
-    nmap <silent> <leader>g :TestVisit<CR>
     let test#strategy = 'vimux'
 " <!!!!!!!!**************!!!!!!!!>
 
@@ -734,6 +749,17 @@ filetype plugin indent on
 " <!!!!!!!!**************!!!!!!!!>
 
 " FUGITIVE CONFIG ************************************
+    nmap <leader>g :Gstatus<CR>
+    function RemapJAndKUnlessComitting()
+      let s:current_file_name = expand('%:t')
+      if s:current_file_name == "COMMIT_EDITMSG"
+        startinsert
+      else
+        nmap <buffer> j <C-N>zb
+        nmap <buffer> k <C-P>zb
+      endif
+    endfunction
+    autocmd FileType gitcommit call RemapJAndKUnlessComitting()
     autocmd FileType gitcommit setlocal colorcolumn=72
     set diffopt+=vertical
     noremap <Left> :diffget //2<Cr>:diffupdate<Cr>
@@ -894,3 +920,4 @@ filetype plugin indent on
   "     exe 'NeoCompleteUnlock'
   "   endif
   " endfunction
+
