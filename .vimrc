@@ -39,12 +39,10 @@
         " set spell
     " Start vim with folds unfolded (20 is just sample big-enough number)
         set foldlevel=20
-    " Display special_character:as (first is non breaking space)
-        set listchars=nbsp:•,tab:⎔➤,eol:↲
     " Enable displaying special characters
         set list
     " Set preview window height to 15 lines (for example fugitive :Gstatus uses it)
-        set previewheight=15
+        set previewheight=24
     " Do not show mode in the status line (it cleaned last message)
         set noshowmode
     " Display window title in window bar (terminal have to allow it)
@@ -520,8 +518,8 @@ filetype plugin indent on
 
 " ALE CONFIG ************************************
     let g:ale_fixers = {}
-    let g:ale_fixers['javascript'] = ['eslint']
-    let g:ale_fixers['javascript.jsx'] = ['eslint']
+    let g:ale_fixers['javascript'] = ['importjs', 'eslint']
+    let g:ale_fixers['javascript.jsx'] = ['importjs', 'eslint']
     highlight link ALEStyleErrorSign todo
     let g:ale_type_map = {'eslint': {'E': 'ES'}}
     let g:ale_echo_msg_error_str = 'E'
@@ -538,6 +536,7 @@ filetype plugin indent on
     " Jump betwen lint errors
         nmap <silent> [l <Plug>(ale_previous_wrap)
         nmap <silent> ]l <Plug>(ale_next_wrap)
+    nmap <leader>l :ALEFix<CR>
 " <!!!!!!!!**************!!!!!!!!>
 
 " RAINBOW-PARENTHESES CONFIG ************************************
@@ -682,6 +681,9 @@ filetype plugin indent on
     " Show only files from current working dir in mru mode
         let g:ctrlp_mruf_relative = 1
         let g:ctrlp_mruf_exclude = '\.git/.*'
+    let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
+    let g:ctrlp_by_filename = 3
+    highlight  CtrlPPrtCursor ctermbg=124
 " <!!!!!!!!**************!!!!!!!!>
 
 " DIMINACTIVE SETTINGS ************************************
@@ -740,7 +742,6 @@ filetype plugin indent on
     nmap <silent> <leader>t :TestNearest<CR>
     nmap <silent> <leader>T :TestFile<CR>
     nmap <silent> <leader>a :TestSuite<CR>
-    nmap <silent> <leader>l :TestLast<CR>
     let test#strategy = 'vimux'
 " <!!!!!!!!**************!!!!!!!!>
 
@@ -749,8 +750,8 @@ filetype plugin indent on
 " <!!!!!!!!**************!!!!!!!!>
 
 " FUGITIVE CONFIG ************************************
-    nmap <leader>g :Gstatus<CR>
-    function RemapJAndKUnlessComitting()
+    nmap <leader>g :Gstatus<CR>j
+    function! RemapJAndKUnlessComitting()
       let s:current_file_name = expand('%:t')
       if s:current_file_name == "COMMIT_EDITMSG"
         startinsert
@@ -762,11 +763,22 @@ filetype plugin indent on
     autocmd FileType gitcommit call RemapJAndKUnlessComitting()
     autocmd FileType gitcommit setlocal colorcolumn=72
     set diffopt+=vertical
-    noremap <Left> :diffget //2<Cr>:diffupdate<Cr>
-    noremap <Right> :diffget //3<Cr>:diffupdate<Cr>
-    noremap <Up> u:diffupdate<Cr>
-    noremap <leader><Up> :set cursorline!<Cr>:set sidescrolloff=100<Cr>:Gdiff<Cr>/HEAD<Cr>zz
-    noremap <leader><Down> :set cursorline!<Cr>:set sidescrolloff=5<Cr>:diffoff<Cr><C-w>h:q!<Cr><C-w>l:q!<Cr>:w<Cr>
+    " noremap <Left> :diffget //2<Cr>:diffupdate<Cr>
+    " noremap <Right> :diffget //3<Cr>:diffupdate<Cr>
+    " noremap <Up> u:diffupdate<Cr>
+    " noremap <leader><Up> :set cursorline!<Cr>:set sidescrolloff=100<Cr>:Gdiff<Cr>/HEAD<Cr>zz
+    " noremap <leader><Down> :set cursorline!<Cr>:set sidescrolloff=5<Cr>:diffoff<Cr><C-w>h:q!<Cr><C-w>l:q!<Cr>:w<Cr>
+    hi! link gitCommitSelected gitcommitSelectedType
+    hi! link gitCommitHeader Include
+    hi! link gitCommitOnBranch Include
+    hi! link gitCommitComment Include
+    hi! link gitcommitDiscardedType Constant
+    hi! link gitcommitDiscarded Constant
+    hi! link gitcommitHead String
+    hi! link gitcommitUntracked String
+    hi gitcommitUntrackedFile guifg=#b3b1b3 guibg=guisp=#0a0a0a gui=NONE ctermfg=250 ctermbg=NONE cterm=NONE
+    hi gitcommitDiscardedFile guifg=#b3b1b3 guibg=guisp=#0a0a0a gui=NONE ctermfg=250 ctermbg=NONE cterm=NONE
+    hi gitcommitSelectedFile guifg=#b3b1b3 guibg=guisp=#0a0a0a gui=NONE ctermfg=250 ctermbg=NONE cterm=NONE
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIM-CLOSETAG CONFIG ************************************
@@ -783,8 +795,9 @@ filetype plugin indent on
         " Search selected text project wide (+ possibility to pass path)
             vnoremap , y:Ag!<Space>-Q<Space>--ignore node_modules<Space>'<C-r>"'<Space>
         let g:ale_linters = {
-        \   'javascript': ['eslint'],
+        \   'javascript': ['eslint', 'importjs'],
         \}
+        " let g:ale_fixers = {'javascript.jsx': ['eslint', 'ImportJSFix'], 'javascript': ['eslint', 'ImportJSFix']}
         let g:rbpt_max = 0
         " Custom test command for javascript in MD
           autocmd BufRead,BufNewFile *.js nmap <buffer> <leader>t cp:VimuxRunCommand('clear; echo -e npm run test -- --cf <C-r>+; npm run test -- --cf <C-r>+')<Cr>
@@ -904,6 +917,19 @@ filetype plugin indent on
             2match none
           endfunction
           autocmd WinEnter * call SiemanoFlash()
+      " Display special_characters, show eol only in visual mode
+          function! ShowEOL(...)
+            let a:force_enable = get(a:, 1, 0)
+            if mode() == "v" || mode() == "V" || mode() == "\<C-V>" || a:force_enable
+              set listchars=nbsp:•,tab:⎔➤,eol:↲
+            else
+              set listchars=nbsp:•,tab:⎔➤
+            endif
+          endfunction
+          autocmd CursorMoved,CursorHold * call ShowEOL()
+          noremap v :call ShowEOL(1)<CR>v
+          noremap V :call ShowEOL(1)<CR>V
+          noremap <C-q> :call ShowEOL(1)<CR><C-q>
 " <!!!!!!!!**************!!!!!!!!>
 
 " TODO: use this to temporairly disable some plugins
@@ -920,4 +946,3 @@ filetype plugin indent on
   "     exe 'NeoCompleteUnlock'
   "   endif
   " endfunction
-
