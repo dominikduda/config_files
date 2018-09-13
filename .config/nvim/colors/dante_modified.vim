@@ -84,8 +84,8 @@ hi Special guifg=#ff8400 guibg=NONE guisp=NONE gui=NONE ctermfg=208 ctermbg=NONE
 hi SpecialChar guifg=#ff5f00 guibg=NONE guisp=NONE gui=NONE ctermfg=202 ctermbg=NONE cterm=NONE
 hi SpecialComment guifg=#ff5f00 guibg=NONE guisp=NONE gui=NONE ctermfg=202 ctermbg=NONE cterm=NONE
 hi Statement guifg=#ffd500 guibg=NONE guisp=NONE gui=NONE ctermfg=220 ctermbg=NONE cterm=NONE
-hi StatusLine guifg=#999999 guibg=NONE guisp=NONE gui=NONE ctermfg=246 ctermbg=NONE cterm=NONE
-hi StatusLineNC guifg=#a8a8a8 guibg=NONE guisp=NONE gui=NONE ctermfg=248 ctermbg=NONE cterm=NONE
+hi StatusLine guifg=#999999 guibg=NONE guisp=NONE gui=NONE ctermfg=24 ctermbg=24 cterm=NONE
+hi StatusLineNC guifg=#a8a8a8 guibg=NONE guisp=NONE gui=NONE ctermfg=24 ctermbg=24 cterm=NONE
 hi VertSplit guifg=#666666 guibg=NONE guisp=NONE gui=bold ctermfg=24 ctermbg=24 cterm=bold
 hi StorageClass guifg=#5eb341 guibg=NONE guisp=NONE gui=NONE ctermfg=107 ctermbg=NONE cterm=NONE
 hi String guifg=#ff0000 guibg=NONE guisp=NONE gui=NONE ctermfg=140 ctermbg=NONE cterm=NONE

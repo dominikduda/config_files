@@ -335,12 +335,12 @@ filetype plugin indent on
           unmap mjj
       endfunction
       autocmd BufEnter * :call BookmarkMapKeys()
-      autocmd BufEnter NERD_tree_* :call BookmarkUnmapKeys()
+      autocmd BufEnter,WinEnter NERD_tree_* :call BookmarkUnmapKeys()
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIM-LINE-NO-INDICATOR CONFIG ************************************
     let g:line_no_indicator_chars = [
-        \ '   ', '▏  ', '▎  ', '▍  ', '▌  ',
+        \ '▏  ', '▎  ', '▍  ', '▌  ',
         \ '▋  ', '▊  ', '▉  ', '█  ', '█▏ ',
         \ '█▎ ', '█▍ ', '█▌ ', '█▋ ', '█▊ ',
         \ '█▉ ', '██ ', '██▏', '██▎', '██▍',
@@ -434,7 +434,7 @@ filetype plugin indent on
 
 " VIM-POLYGLOT CONFIG ************************************
     " Javascript syntax higlighter breaks rainbow_parentheses.vim - using alternative
-        " let g:polyglot_disabled = ['javascript', 'javascript.jsx', 'markdown', 'yaml']
+        let g:polyglot_disabled = ['javascript', 'javascript.jsx', 'markdown', 'yaml']
 " <!!!!!!!!**************!!!!!!!!>
 
 " GIST-VIM CONFIG ************************************
@@ -643,6 +643,7 @@ filetype plugin indent on
     let g:airline_powerline_fonts = 1
     let g:airline_theme='wombat'
     let g:airline_section_z = '0 %#__accent_bold#%{LineNoIndicator()}▏%#__restore__#%L  ➜▌%2c'
+    let g:airline_section_x = ''
     let g:airline_mode_map = {
             \ '__' : '-',
             \ 'n'  : 'N',
@@ -703,6 +704,8 @@ filetype plugin indent on
     let NERDTreeMinimalUI = 1
     let NERDTreeStatusline=""
     autocmd BufEnter NERD_tree_* setlocal signcolumn=no
+    " Fix file backgorund overriding cursorline after nvim update
+      highlight NERDTreeFile guifg=#b3b1b3 guibg=guisp=#0a0a0a gui=NONE ctermfg=250 ctermbg=NONE cterm=NONE
 " <!!!!!!!!**************!!!!!!!!>
 
 " TAGBAR CONFIG ************************************
@@ -927,9 +930,9 @@ filetype plugin indent on
             endif
           endfunction
           autocmd CursorMoved,CursorHold * call ShowEOL()
-          noremap v :call ShowEOL(1)<CR>v
-          noremap V :call ShowEOL(1)<CR>V
-          noremap <C-q> :call ShowEOL(1)<CR><C-q>
+          nnoremap v :call ShowEOL(1)<CR>v
+          nnoremap V :call ShowEOL(1)<CR>V
+          nnoremap <C-q> :call ShowEOL(1)<CR><C-q>
 " <!!!!!!!!**************!!!!!!!!>
 
 " TODO: use this to temporairly disable some plugins
