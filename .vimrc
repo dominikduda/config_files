@@ -16,7 +16,6 @@
 " <!!!!!!!!**************!!!!!!!!>
 
 " NOT SURE OR TOO LAZY TO CHECK ************************************
-    autocmd QuickFixCmdPost *grep* cwindow
     set switchbuf=useopen
     set ttimeoutlen=0
     set smarttab
@@ -68,7 +67,7 @@
     " Show absolute line number in current line
         set number
     " Wrapped line symbol
-        set showbreak=▶▶▶
+        set showbreak=⤷▶
     " Disable jumping to matching parenthesis after typing it
         set noshowmatch
     " Disable creating swap files
@@ -105,8 +104,8 @@
         set smartindent
     " Show column and row numbers
         set ruler
-    " Color 120th column
-        set colorcolumn=120
+    " Color 100th column
+        set colorcolumn=100
     " Amount of possible undos
         set undolevels=100
     " Highlight current line
@@ -118,7 +117,12 @@
 
 filetype off
 call plug#begin('~/.config/nvim/plug')
-        Plug 'kristijanhusak/vim-carbon-now-sh'
+    " Spell checker
+        Plug 'kamykn/spelunker.vim'
+    " Search + global replace
+        Plug 'dyng/ctrlsf.vim'
+    " Additional window movements
+        Plug 'andymass/vim-tradewinds'
     " Play sound on keypress and enter (ala typewriter)
         Plug 'skywind3000/vim-keysound'
     " * and # from visual
@@ -147,8 +151,6 @@ call plug#begin('~/.config/nvim/plug')
         Plug 'mattn/webapi-vim'
     " Navigation and information for yaml files (current node path, jump to parent, jump to key)
         Plug 'lmeijvogel/vim-yaml-helper'
-    " Indent depth indicators
-        Plug 'nathanaelkane/vim-indent-guides'
     " Flash yanked area
         Plug 'haya14busa/vim-operator-flashy'
     " Vim-operator-flashy dependency
@@ -266,6 +268,7 @@ call plug#begin('~/.config/nvim/plug')
 " SMART SEARCH ************************************
     Plug 'kien/ctrlp.vim'
     Plug 'JazzCore/ctrlp-cmatcher'
+    Plug 'jasoncodes/ctrlp-modified.vim'
 " <!!!!!!!!**************!!!!!!!!>
 
 " RAILS ************************************
@@ -307,35 +310,53 @@ filetype plugin indent on
     colorscheme dante_modified
 " <!!!!!!!!**************!!!!!!!!>
 
+" SPELUNKER CONFIG ************************************
+    nmap zs Zg
+    nmap za ZL
+    nmap zc Zl
+    " Override highlight setting.
+        highlight SpelunkerSpellBad cterm=underline
+        highlight SpelunkerComplexOrCompoundWord cterm=underline
+" <!!!!!!!!**************!!!!!!!!>
+
+" VIM-TRADEWINDS CONFIG ************************************
+    let g:tradewinds_no_maps = 1
+    nmap <C-w>h <plug>(tradewinds-h)
+    nmap <C-w>j <plug>(tradewinds-j)
+    nmap <C-w>k <plug>(tradewinds-k)
+    nmap <C-w>l <plug>(tradewinds-l)
+" <!!!!!!!!**************!!!!!!!!>
+
 " VIM-BOOKMARKS CONFIG ************************************
-  let g:bookmark_center = 1
-  let g:bookmark_save_per_working_dir = 0
-  let g:bookmark_manage_per_buffer = 0
-  " Unmap default mappings when entering nerd tree and map when entering other buffer
-      function! BookmarkMapKeys()
-          nmap mm :BookmarkToggle<CR>
-          nmap mi :BookmarkAnnotate<CR>
-          nmap mn :BookmarkNext<CR>
-          nmap mp :BookmarkPrev<CR>
-          nmap ma :BookmarkShowAll<CR>
-          nmap mc :BookmarkClear<CR>
-          nmap mx :BookmarkClearAll<CR>
-          nmap mkk :BookmarkMoveUp
-          nmap mjj :BookmarkMoveDown
-      endfunction
-      function! BookmarkUnmapKeys()
-          unmap mm
-          unmap mi
-          unmap mn
-          unmap mp
-          unmap ma
-          unmap mc
-          unmap mx
-          unmap mkk
-          unmap mjj
-      endfunction
-      autocmd BufEnter * :call BookmarkMapKeys()
-      autocmd BufEnter,WinEnter NERD_tree_* :call BookmarkUnmapKeys()
+    let g:bookmark_center = 1
+    let g:bookmark_save_per_working_dir = 0
+    let g:bookmark_manage_per_buffer = 0
+    " Unmap default mappings when entering nerd tree and map when entering other buffer
+        function! BookmarkMapKeys()
+            nmap mm :BookmarkToggle<CR>
+            nmap mi :BookmarkAnnotate<CR>
+            nmap mn :BookmarkNext<CR>
+            nmap mp :BookmarkPrev<CR>
+            nmap ma :BookmarkShowAll<CR>
+            nmap mc :BookmarkClear<CR>
+            nmap mx :BookmarkClearAll<CR>
+            nmap mkk :BookmarkMoveUp
+            nmap mjj :BookmarkMoveDown
+        endfunction
+        function! BookmarkUnmapKeys()
+            silent! unmap mm
+            silent! unmap mg
+            silent! unmap mi
+            silent! unmap mn
+            silent! unmap mp
+            silent! unmap ma
+            silent! unmap mc
+            silent! unmap mx
+            silent! unmap mkk
+            silent! unmap mjj
+        endfunction
+        autocmd BufEnter * :call BookmarkMapKeys()
+        autocmd BufEnter NERD_tree_* :call BookmarkUnmapKeys()
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIM-LINE-NO-INDICATOR CONFIG ************************************
@@ -444,15 +465,6 @@ filetype plugin indent on
     let g:gist_update_on_write = 1
 " <!!!!!!!!**************!!!!!!!!>
 
-" VIM-INDENT-GUIDES CONFIG ************************************
-    autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=242
-    autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=244
-    let g:indent_guides_guide_size = 2
-    let g:indent_guides_enable_on_vim_startup = 1
-    let g:indent_guides_exclude_filetypes = ['help', 'nerdtree']
-    let g:indent_guides_default_mapping = 0
-" <!!!!!!!!**************!!!!!!!!>
-
 " VIM-MULTIPLE-CURSORS CONFIG ************************************
     " Pressing ESC with multiple cursors will exit visual mode instead of deleting all cursors (so they can be further used)
         let g:multi_cursor_exit_from_visual_mode = 0
@@ -473,8 +485,9 @@ filetype plugin indent on
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIM_CURRENT_WORD CONFIG ************************************
-    hi CurrentWord ctermbg=53
-    hi CurrentWordTwins ctermbg=237
+    let g:vim_current_word#enabled = 1
+    hi CurrentWord ctermbg=NONE ctermbg=52
+    hi CurrentWordTwins ctermbg=53
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIM-RUBY-HEREDOC-SYNTAX CONFIG ************************************
@@ -504,7 +517,7 @@ filetype plugin indent on
 
 " VIM-KEYSOUND CONFIG ************************************
   let g:keysound_enable = 1
-  let g:keysound_theme = 'typewriter'
+  let g:keysound_theme = 'mario'
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIM-DEBUGSTRING CONFIG ************************************
@@ -517,6 +530,10 @@ filetype plugin indent on
 " <!!!!!!!!**************!!!!!!!!>
 
 " ALE CONFIG ************************************
+    let g:ale_virtualtext_cursor = 1
+    let g:ale_virtualtext_prefix = '◀ '
+    let g:ale_virtualtext_delay = 110
+    hi! link ALEVirtualTextError VirtualText
     let g:ale_fixers = {}
     let g:ale_fixers['javascript'] = ['importjs', 'eslint']
     let g:ale_fixers['javascript.jsx'] = ['importjs', 'eslint']
@@ -536,7 +553,7 @@ filetype plugin indent on
     " Jump betwen lint errors
         nmap <silent> [l <Plug>(ale_previous_wrap)
         nmap <silent> ]l <Plug>(ale_next_wrap)
-    nmap <leader>l :ALEFix<CR>
+    nmap <leader>l :ALEFix<CR>:echo 'Fixing ur file'<CR>
 " <!!!!!!!!**************!!!!!!!!>
 
 " RAINBOW-PARENTHESES CONFIG ************************************
@@ -640,7 +657,6 @@ filetype plugin indent on
     let g:airline#extensions#branch#format = 2
     let g:airline#extensions#branch#displayed_head_limit = 15
     set fillchars+=stl:\ ,stlnc:\
-    let g:airline_powerline_fonts = 1
     let g:airline_theme='wombat'
     let g:airline_section_z = '0 %#__accent_bold#%{LineNoIndicator()}▏%#__restore__#%L  ➜▌%2c'
     let g:airline_section_x = ''
@@ -663,8 +679,6 @@ filetype plugin indent on
 " <!!!!!!!!**************!!!!!!!!>
 
 " CTRLP CONFIG ************************************
-    " '>' signs in beginning of line
-        hi! CtrlPLinePre ctermfg=240
     let g:ctrlp_max_files = 0
     let g:ctrlp_map = '<c-p>'
     let g:ctrlp_cmd = 'CtrlP'
@@ -683,15 +697,11 @@ filetype plugin indent on
         let g:ctrlp_mruf_relative = 1
         let g:ctrlp_mruf_exclude = '\.git/.*'
     let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
-    let g:ctrlp_by_filename = 3
+    let g:ctrlp_by_filename = 0
     highlight  CtrlPPrtCursor ctermbg=124
-" <!!!!!!!!**************!!!!!!!!>
-
-" DIMINACTIVE SETTINGS ************************************
-    " Enable dimming non-file windows (like nerdtree, ag)
-        let g:diminactive_buftype_blacklist = []
-    " tmux integration
-        let g:diminactive_enable_focus = 1
+    hi! link CtrlPMatch IncSearch
+    hi! link CtrlPPrtText Statement
+    hi! CtrlPLinePre guifg=#4040d6 guibg=NONE guisp=NONE gui=underline ctermfg=232 ctermbg=246 cterm=NONE
 " <!!!!!!!!**************!!!!!!!!>
 
 " NERDTREE CONFIG ************************************
@@ -704,8 +714,19 @@ filetype plugin indent on
     let NERDTreeMinimalUI = 1
     let NERDTreeStatusline=""
     autocmd BufEnter NERD_tree_* setlocal signcolumn=no
-    " Fix file backgorund overriding cursorline after nvim update
-      highlight NERDTreeFile guifg=#b3b1b3 guibg=guisp=#0a0a0a gui=NONE ctermfg=250 ctermbg=NONE cterm=NONE
+    hi! link NERDTreeDir Constant
+    hi! link NERDTreeCWD Type
+    hi! link NerdTreeFile Number
+    hi! link NERDTreeExecFile Include
+    hi! link NERDTreeFlags Function
+    hi! link NERDTreeDirSlash Statement
+    hi! link NERDTreeClosable Statement
+    hi! link NERDTreeOpenable String
+    hi! link NERDTreeGitStatusDirDirty Comment
+    hi! link NERDTreeGitStatusModified Comment
+    hi! link NERDTreeGitStatusChanged Comment
+    let g:NERDTreeDirArrowExpandable = '▷'
+    let g:NERDTreeDirArrowCollapsible = '▼'
 " <!!!!!!!!**************!!!!!!!!>
 
 " TAGBAR CONFIG ************************************
@@ -726,19 +747,35 @@ filetype plugin indent on
 " <!!!!!!!!**************!!!!!!!!>
 
 " GITGUTTER CONFIG ************************************
+    highlight GitGutterAdd    guifg=#009900 ctermfg=2
+    highlight GitGutterChange guifg=#bbbb00 ctermfg=3
+    highlight GitGutterDelete guifg=#ff2222 ctermfg=1
     set signcolumn=yes
     let g:gitgutter_realtime = 1
     let g:gitgutter_eager = 1
     let g:gitgutter_async = 1
 " <!!!!!!!!**************!!!!!!!!>
 
-" AG.VIM CONFIG ************************************
-    let g:ag_highlight=1
-    " Search projectwide
-        nnoremap , :Ag!<Space>-Q<Space>''<Left>
-    " Search selected text project wide (+ possibility to pass path)
-        vnoremap , y:Ag!<Space>-Q<Space>'<C-r>"'<Space>
-    let g:ag_apply_qmappings=0
+" CTRLSF.VIM CONFIG ************************************
+    let g:ctrlsf_mapping = {
+        \ "next": "J",
+        \ "prev": "K",
+        \ }
+    let g:ctrlsf_auto_focus = {
+        \ "at" : "start",
+        \ }
+        hi! link ctrlsfFilename Type
+        hi! link qfLineNr Constant
+        let g:ctrlsf_default_view_mode = 'compact'
+        let g:ctrlsf_indent = 0
+        autocmd BufReadPost ctrlsf nmap <buffer> j <C-j>
+        autocmd BufReadPost ctrlsf nmap <buffer> k <C-k>
+        vmap , <Plug>CtrlSFVwordPath
+        nmap , <Plug>CtrlSFPrompt
+        let g:ctrlsf_ignore_dir = ['node_modules', 'coverage']
+        let g:ctrlsf_extra_backend_args = {
+            \ 'ag': "--ignore={'*tags*','*package.json*','*package-lock.json*','*node_modules*'}",
+            \ }
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIM-TEST CONFIG ************************************
@@ -766,11 +803,6 @@ filetype plugin indent on
     autocmd FileType gitcommit call RemapJAndKUnlessComitting()
     autocmd FileType gitcommit setlocal colorcolumn=72
     set diffopt+=vertical
-    " noremap <Left> :diffget //2<Cr>:diffupdate<Cr>
-    " noremap <Right> :diffget //3<Cr>:diffupdate<Cr>
-    " noremap <Up> u:diffupdate<Cr>
-    " noremap <leader><Up> :set cursorline!<Cr>:set sidescrolloff=100<Cr>:Gdiff<Cr>/HEAD<Cr>zz
-    " noremap <leader><Down> :set cursorline!<Cr>:set sidescrolloff=5<Cr>:diffoff<Cr><C-w>h:q!<Cr><C-w>l:q!<Cr>:w<Cr>
     hi! link gitCommitSelected gitcommitSelectedType
     hi! link gitCommitHeader Include
     hi! link gitCommitOnBranch Include
@@ -792,18 +824,21 @@ filetype plugin indent on
     if $CURRENT_PROJECT_NAME == 'CATALYST'
         autocmd FileType javascript setlocal colorcolumn=101
         autocmd FileType javascript.jsx setlocal colorcolumn=101
+        autocmd FileType ruby setlocal colorcolumn=141
         let g:deoplete#enable_ignore_case = 1
         " Search projectwide
-            nnoremap , :Ag!<Space>-Q<Space>--ignore node_modules<Space>''<Left>
+            " nnoremap , :Ag!<Space>-Q<Space>--ignore node_modules<Space>''<Left>
         " Search selected text project wide (+ possibility to pass path)
-            vnoremap , y:Ag!<Space>-Q<Space>--ignore node_modules<Space>'<C-r>"'<Space>
+            " vnoremap , y:Ag!<Space>-Q<Space>--ignore node_modules<Space>'<C-r>"'<Space>
         let g:ale_linters = {
         \   'javascript': ['eslint', 'importjs'],
+        \   'ruby': ['rubocop'],
         \}
-        " let g:ale_fixers = {'javascript.jsx': ['eslint', 'ImportJSFix'], 'javascript': ['eslint', 'ImportJSFix']}
+        let g:ale_fixers = {'ruby': ['rubocop'], 'javascript': ['eslint', 'importjs']}
         let g:rbpt_max = 0
         " Custom test command for javascript in MD
           autocmd BufRead,BufNewFile *.js nmap <buffer> <leader>t cp:VimuxRunCommand('clear; echo -e npm run test -- --cf <C-r>+; npm run test -- --cf <C-r>+')<Cr>
+          autocmd BufRead,BufNewFile *.js nmap <silent> <buffer> <leader>w cp:VimuxRunCommand('clear; echo -e npm run test_watch -- --browsers HeadlessChrome karma.config.js --cf <C-r>+; npm run test_watch -- --browsers HeadlessChrome karma.config.js --cf <C-r>+')<Cr>
         let g:gutentags_ctags_exclude = [
             \ "node_modules",
             \ ".git",
@@ -876,14 +911,6 @@ filetype plugin indent on
       " Move vertically by lines rather than rows in quickfix window
           autocmd BufReadPost quickfix nnoremap <buffer> j j
           autocmd BufReadPost quickfix nnoremap <buffer> k k
-      " Move preview window to full width row at bottom when opened
-          autocmd BufEnter ?* call PreviewHeightWorkAround()
-          func! PreviewHeightWorkAround()
-            if &previewwindow
-              exec 'wincmd J'
-              exec 'setlocal winheight='.&previewheight
-            endif
-          endfunc
       " Save all files when nvim looses focus (ignores unnamed buffers warnings)
           autocmd FocusLost * silent! wa
       " Copy path to current file to clipboard (starting from root of the project)
@@ -911,12 +938,15 @@ filetype plugin indent on
       " Search react component usages
           noremap <leader>u lbvey:Ag! --ignore node_modules --ignore tests '<<C-r>0\b'<CR>
       " Jumps to definition of javascript thing under cursor and persists current inc search value
-          noremap gd :let @t = @/<CR>*ggn$hgfggn:let @/ = @t<CR>
+          noremap gd :let @t = @/<CR>*ggn/from<CR>$hgfggn:let @/ = @t<CR>
       " Flash window if changed from another vim one
           function! SiemanoFlash()
+            if expand('%:t') == "CtrlSF"
+              return
+            endif
             2match IncSearch /./
             redraw
-            sleep 10m
+            sleep 2m
             2match none
           endfunction
           autocmd WinEnter * call SiemanoFlash()
@@ -930,22 +960,34 @@ filetype plugin indent on
             endif
           endfunction
           autocmd CursorMoved,CursorHold * call ShowEOL()
+          autocmd InsertEnter * call ShowEOL(0)
           nnoremap v :call ShowEOL(1)<CR>v
           nnoremap V :call ShowEOL(1)<CR>V
           nnoremap <C-q> :call ShowEOL(1)<CR><C-q>
+    " Show quickfix window at the very bottom
+        autocmd QuickFixCmdPost wincmd J
+    " Auto align splits
+        autocmd VimResized * wincmd =
+    " Show current file bound in 2 colums
+        function! ToggleScrollBind()
+          if exists("g:scroll_bind_endabled") && g:scroll_bind_endabled
+            let g:scroll_bind_endabled = 0
+            :set noscrollbind
+            :wincmd w
+            :set noscrollbind
+            :q!
+            :wincmd w
+            echo 'Scroll binding disabled'
+          else
+            let g:scroll_bind_endabled = 1
+            :vs
+            call feedkeys("\<C-f>\<C-e>\<C-e>", 'tx')
+            :set scrollbind
+            :wincmd w
+            call feedkeys("gg", 'tx')
+            :set scrollbind
+            echo 'Created split scroll bounded to current one'
+          endif
+        endfunction
+        nmap <leader>b :call ToggleScrollBind()<CR>
 " <!!!!!!!!**************!!!!!!!!>
-
-" TODO: use this to temporairly disable some plugins
-  " Called Called once right before you start selecting multiple cursors
-  " function! Multiple_cursors_before()
-  "   if exists(':NeoCompleteLock')==2
-  "     exe 'NeoCompleteLock'
-  "   endif
-  " endfunction
-
-  " Called once only when the multiple selection is canceled (default <Esc>)
-  " function! Multiple_cursors_after()
-  "   if exists(':NeoCompleteUnlock')==2
-  "     exe 'NeoCompleteUnlock'
-  "   endif
-  " endfunction
