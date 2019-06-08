@@ -1,0 +1,789 @@
+]0;/home/dominikduda/exercism/r/hello-world]0;dominikduda@dominikduda-acer: ~/exercism/r/hello-world[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/hello-world[00m$ [K]0;dominikduda@dominikduda-acer: ~/exercism/r/hello-world[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/hello-world[00m$ ls
+hello-world.R  hello-world.Rproj  README.md  test_hello-world.R
+]0;/home/dominikduda/exercism/r/hello-world]0;dominikduda@dominikduda-acer: ~/exercism/r/hello-world[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/hello-world[00m$ v
+Traceback (most recent call last):
+  File "/usr/lib/python3.6/dbm/gnu.py", line 4, in <module>
+    from _gdbm import *
+ModuleNotFoundError: No module named '_gdbm'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/CommandNotFound/CommandNotFound.py", line 7, in <module>
+    import dbm.gnu as gdbm
+  File "/usr/lib/python3.6/dbm/gnu.py", line 6, in <module>
+    raise ImportError(str(msg) + ', please install the python3-gdbm package')
+ImportError: No module named '_gdbm', please install the python3-gdbm package
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/command-not-found", line 27, in <module>
+    from CommandNotFound.util import crash_guard
+  File "/usr/lib/python3/dist-packages/CommandNotFound/__init__.py", line 3, in <module>
+    from CommandNotFound.CommandNotFound import CommandNotFound
+  File "/usr/lib/python3/dist-packages/CommandNotFound/CommandNotFound.py", line 9, in <module>
+    import gdbm
+ModuleNotFoundError: No module named 'gdbm'
+]0;/home/dominikduda/exercism/r/hello-world]0;dominikduda@dominikduda-acer: ~/exercism/r/hello-world[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/hello-world[00m$ vi[K[Kv
+Traceback (most recent call last):
+  File "/usr/lib/python3.6/dbm/gnu.py", line 4, in <module>
+    from _gdbm import *
+ModuleNotFoundError: No module named '_gdbm'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/CommandNotFound/CommandNotFound.py", line 7, in <module>
+    import dbm.gnu as gdbm
+  File "/usr/lib/python3.6/dbm/gnu.py", line 6, in <module>
+    raise ImportError(str(msg) + ', please install the python3-gdbm package')
+ImportError: No module named '_gdbm', please install the python3-gdbm package
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/command-not-found", line 27, in <module>
+    from CommandNotFound.util import crash_guard
+  File "/usr/lib/python3/dist-packages/CommandNotFound/__init__.py", line 3, in <module>
+    from CommandNotFound.CommandNotFound import CommandNotFound
+  File "/usr/lib/python3/dist-packages/CommandNotFound/CommandNotFound.py", line 9, in <module>
+    import gdbm
+ModuleNotFoundError: No module named 'gdbm'
+]0;/home/dominikduda/exercism/r/hello-world]0;dominikduda@dominikduda-acer: ~/exercism/r/hello-world[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/hello-world[00m$ vi
+[23;0;0t[?2004l[?1004l[?25h]0;/home/dominikduda/exercism/r/hello-world]0;dominikduda@dominikduda-acer: ~/exercism/r/hello-world[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/hello-world[00m$ tmuxi[K[exited]
+]0;/home/dominikduda/exercism/r/hello-world]0;dominikduda@dominikduda-acer: ~/exercism/r/hello-world[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/hello-world[00m$ ls
+hello-world.R  hello-world.Rproj  README.md  test_hello-world.R
+]0;/home/dominikduda/exercism/r/hello-world]0;dominikduda@dominikduda-acer: ~/exercism/r/hello-world[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/hello-world[00m$ d[Kcd ..
+]0;/home/dominikduda/exercism/r]0;dominikduda@dominikduda-acer: ~/exercism/r[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r[00m$ ls
+[0m[01;34mhello-world[0m  [01;34mtwo-fer[0m
+]0;/home/dominikduda/exercism/r]0;dominikduda@dominikduda-acer: ~/exercism/r[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r[00m$ cd two-fer/
+]0;/home/dominikduda/exercism/r/two-fer]0;dominikduda@dominikduda-acer: ~/exercism/r/two-fer[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/two-fer[00m$ ls
+README.md  test_two-fer.R  two-fer.R
+]0;/home/dominikduda/exercism/r/two-fer]0;dominikduda@dominikduda-acer: ~/exercism/r/two-fer[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/two-fer[00m$ exercism submit ./two-fer.R 
+
+
+    Your solution has been submitted successfully.
+    View it at:
+
+    
+    https://exercism.io/my/solutions/3f2faae3f5dc46dd889d39f7d7edc7a9
+
+]0;/home/dominikduda/exercism/r/two-fer]0;dominikduda@dominikduda-acer: ~/exercism/r/two-fer[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/two-fer[00m$ cd ..
+]0;/home/dominikduda/exercism/r]0;dominikduda@dominikduda-acer: ~/exercism/r[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r[00m$ ls
+[0m[01;34mhello-world[0m  [01;34mtwo-fer[0m
+]0;/home/dominikduda/exercism/r]0;dominikduda@dominikduda-acer: ~/exercism/r[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r[00m$ exercism download --exercise=leap --track=r
+
+Downloaded to
+/home/dominikduda/exercism/r/leap
+]0;/home/dominikduda/exercism/r]0;dominikduda@dominikduda-acer: ~/exercism/r[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r[00m$ [K]0;dominikduda@dominikduda-acer: ~/exercism/r[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r[00m$ ls
+[0m[01;34mhello-world[0m  [01;34mleap[0m  [01;34mtwo-fer[0m
+]0;/home/dominikduda/exercism/r]0;dominikduda@dominikduda-acer: ~/exercism/r[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r[00m$ cd lea[Kap/
+]0;/home/dominikduda/exercism/r/leap]0;dominikduda@dominikduda-acer: ~/exercism/r/leap[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/leap[00m$ ls
+leap.R  README.md  test_leap.R
+]0;/home/dominikduda/exercism/r/leap]0;dominikduda@dominikduda-acer: ~/exercism/r/leap[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/leap[00m$ exercism submit ./leap.R 
+
+
+    Your solution has been submitted successfully.
+    View it at:
+
+    
+    https://exercism.io/my/solutions/09d31e6b6aec43ada6ab3a0682e430f5
+
+]0;/home/dominikduda/exercism/r/leap]0;dominikduda@dominikduda-acer: ~/exercism/r/leap[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/leap[00m$ exercism download --exercise=hamming  --track=r
+
+Downloaded to
+/home/dominikduda/exercism/r/hamming
+]0;/home/dominikduda/exercism/r/leap]0;dominikduda@dominikduda-acer: ~/exercism/r/leap[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/leap[00m$ ls
+leap.R  README.md  test_leap.R
+]0;/home/dominikduda/exercism/r/leap]0;dominikduda@dominikduda-acer: ~/exercism/r/leap[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/leap[00m$ cd ..
+]0;/home/dominikduda/exercism/r]0;dominikduda@dominikduda-acer: ~/exercism/r[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r[00m$ ls
+[0m[01;34mhamming[0m  [01;34mhello-world[0m  [01;34mleap[0m  [01;34mtwo-fer[0m
+]0;/home/dominikduda/exercism/r]0;dominikduda@dominikduda-acer: ~/exercism/r[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r[00m$ [K]0;dominikduda@dominikduda-acer: ~/exercism/r[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r[00m$ lscd ..[3Plsexercism download --exercise=hamming --track=r [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K^C
+]0;/home/dominikduda/exercism/r]0;dominikduda@dominikduda-acer: ~/exercism/r[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r[00m$ test
+]0;/home/dominikduda/exercism/r]0;dominikduda@dominikduda-acer: ~/exercism/r[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r[00m$ test_thaa[Kt
+Traceback (most recent call last):
+  File "/usr/lib/python3.6/dbm/gnu.py", line 4, in <module>
+    from _gdbm import *
+ModuleNotFoundError: No module named '_gdbm'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/CommandNotFound/CommandNotFound.py", line 7, in <module>
+    import dbm.gnu as gdbm
+  File "/usr/lib/python3.6/dbm/gnu.py", line 6, in <module>
+    raise ImportError(str(msg) + ', please install the python3-gdbm package')
+ImportError: No module named '_gdbm', please install the python3-gdbm package
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/command-not-found", line 27, in <module>
+    from CommandNotFound.util import crash_guard
+  File "/usr/lib/python3/dist-packages/CommandNotFound/__init__.py", line 3, in <module>
+    from CommandNotFound.CommandNotFound import CommandNotFound
+  File "/usr/lib/python3/dist-packages/CommandNotFound/CommandNotFound.py", line 9, in <module>
+    import gdbm
+ModuleNotFoundError: No module named 'gdbm'
+]0;/home/dominikduda/exercism/r]0;dominikduda@dominikduda-acer: ~/exercism/r[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r[00m$ s
+Traceback (most recent call last):
+  File "/usr/lib/python3.6/dbm/gnu.py", line 4, in <module>
+    from _gdbm import *
+ModuleNotFoundError: No module named '_gdbm'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/CommandNotFound/CommandNotFound.py", line 7, in <module>
+    import dbm.gnu as gdbm
+  File "/usr/lib/python3.6/dbm/gnu.py", line 6, in <module>
+    raise ImportError(str(msg) + ', please install the python3-gdbm package')
+ImportError: No module named '_gdbm', please install the python3-gdbm package
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/command-not-found", line 27, in <module>
+    from CommandNotFound.util import crash_guard
+  File "/usr/lib/python3/dist-packages/CommandNotFound/__init__.py", line 3, in <module>
+    from CommandNotFound.CommandNotFound import CommandNotFound
+  File "/usr/lib/python3/dist-packages/CommandNotFound/CommandNotFound.py", line 9, in <module>
+    import gdbm
+ModuleNotFoundError: No module named 'gdbm'
+]0;/home/dominikduda/exercism/r]0;dominikduda@dominikduda-acer: ~/exercism/r[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r[00m$ ls
+[0m[01;34mhamming[0m  [01;34mhello-world[0m  [01;34mleap[0m  [01;34mtwo-fer[0m
+]0;/home/dominikduda/exercism/r]0;dominikduda@dominikduda-acer: ~/exercism/r[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r[00m$ cd hamming/
+]0;/home/dominikduda/exercism/r/hamming]0;dominikduda@dominikduda-acer: ~/exercism/r/hamming[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/hamming[00m$ ls
+hamming.R  README.md  test_hamming.R
+]0;/home/dominikduda/exercism/r/hamming]0;dominikduda@dominikduda-acer: ~/exercism/r/hamming[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/hamming[00m$ exercism submit hamming.R 
+
+
+    Your solution has been submitted successfully.
+    View it at:
+
+    
+    https://exercism.io/my/solutions/98712ac5852d4bf3b1b11bc37fa5f5fa
+
+]0;/home/dominikduda/exercism/r/hamming]0;dominikduda@dominikduda-acer: ~/exercism/r/hamming[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/hamming[00m$ ls
+hamming.R  README.md  test_hamming.R
+]0;/home/dominikduda/exercism/r/hamming]0;dominikduda@dominikduda-acer: ~/exercism/r/hamming[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/hamming[00m$ cd ..
+]0;/home/dominikduda/exercism/r]0;dominikduda@dominikduda-acer: ~/exercism/r[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r[00m$ ls
+[0m[01;34mhamming[0m  [01;34mhello-world[0m  [01;34mleap[0m  [01;34mtwo-fer[0m
+]0;/home/dominikduda/exercism/r]0;dominikduda@dominikduda-acer: ~/exercism/r[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r[00m$ e^C
+]0;/home/dominikduda/exercism/r]0;dominikduda@dominikduda-acer: ~/exercism/r[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r[00m$ exercism download --exercise=rna-transcription  --track=r
+
+Downloaded to
+/home/dominikduda/exercism/r/rna-transcription
+]0;/home/dominikduda/exercism/r]0;dominikduda@dominikduda-acer: ~/exercism/r[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r[00m$ ls
+[0m[01;34mhamming[0m  [01;34mhello-world[0m  [01;34mleap[0m  [01;34mrna-transcription[0m  [01;34mtwo-fer[0m
+]0;/home/dominikduda/exercism/r]0;dominikduda@dominikduda-acer: ~/exercism/r[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r[00m$ [K]0;dominikduda@dominikduda-acer: ~/exercism/r[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r[00m$ ls
+[0m[01;34mhamming[0m  [01;34mhello-world[0m  [01;34mleap[0m  [01;34mrna-transcription[0m  [01;34mtwo-fer[0m
+]0;/home/dominikduda/exercism/r]0;dominikduda@dominikduda-acer: ~/exercism/r[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r[00m$ ls
+[0m[01;34mhamming[0m  [01;34mhello-world[0m  [01;34mleap[0m  [01;34mrna-transcription[0m  [01;34mtwo-fer[0m
+]0;/home/dominikduda/exercism/r]0;dominikduda@dominikduda-acer: ~/exercism/r[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r[00m$ rs[K[Kcd rna-transcription/
+]0;/home/dominikduda/exercism/r/rna-transcription]0;dominikduda@dominikduda-acer: ~/exercism/r/rna-transcription[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/rna-transcription[00m$ Rscript [K[K[K[K[K[K[K[Kls
+README.md  rna-transcription.R  test_rna-transcription.R
+]0;/home/dominikduda/exercism/r/rna-transcription]0;dominikduda@dominikduda-acer: ~/exercism/r/rna-transcription[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/rna-transcription[00m$ Rscript rna-transcription.R [K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Ktest_rna-transcription.R  [A
+Loading required package: methods
+hash-2.2.6.1 provided by Decision Patterns
+
+
+*> GAll tests passed for exercise: rna-transcription
+]0;/home/dominikduda/exercism/r/rna-transcription]0;dominikduda@dominikduda-acer: ~/exercism/r/rna-transcription[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/rna-transcription[00m$ j[Kexer[K[K[K[Kls
+README.md  rna-transcription.R  test_rna-transcription.R
+]0;/home/dominikduda/exercism/r/rna-transcription]0;dominikduda@dominikduda-acer: ~/exercism/r/rna-transcription[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/rna-transcription[00m$ exercism submit rna[K[K[Krna-transcription..R 
+
+
+    Your solution has been submitted successfully.
+    View it at:
+
+    
+    https://exercism.io/my/solutions/cfa68061f5504d788ea378f96a6f09df
+
+]0;/home/dominikduda/exercism/r/rna-transcription]0;dominikduda@dominikduda-acer: ~/exercism/r/rna-transcription[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/rna-transcription[00m$ k[Kexercism submit rna-transcription..R [A]0;dominikduda@dominikduda-acer: ~/exercism/r/rna-transcription[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/rna-transcription[00m$ ls[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CRscript test_rna-transcription.R  [A
+Loading required package: methods
+hash-2.2.6.1 provided by Decision Patterns
+
+All tests passed for exercise: rna-transcription
+]0;/home/dominikduda/exercism/r/rna-transcription]0;dominikduda@dominikduda-acer: ~/exercism/r/rna-transcription[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/rna-transcription[00m$ Rscript test_rna-transcription.R  [A
+Loading required package: methods
+hash-2.2.6.1 provided by Decision Patterns
+
+All tests passed for exercise: rna-transcription
+]0;/home/dominikduda/exercism/r/rna-transcription]0;dominikduda@dominikduda-acer: ~/exercism/r/rna-transcription[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/rna-transcription[00m$ Rscript test_rna-transcription.R  [A
+Loading required package: methods
+hash-2.2.6.1 provided by Decision Patterns
+
+Error: Test failed: 'RNA complement of guanine is cytosine'
+* to_rna(dna) not equal to "W".
+1/1 mismatches
+x[1]: "C"
+y[1]: "W"
+Execution halted
+]0;/home/dominikduda/exercism/r/rna-transcription]0;dominikduda@dominikduda-acer: ~/exercism/r/rna-transcription[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/rna-transcription[00m$ Rscript test_rna-transcription.R  [A
+Loading required package: methods
+hash-2.2.6.1 provided by Decision Patterns
+
+All tests passed for exercise: rna-transcription
+]0;/home/dominikduda/exercism/r/rna-transcription]0;dominikduda@dominikduda-acer: ~/exercism/r/rna-transcription[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/rna-transcription[00m$ 
+[K]0;dominikduda@dominikduda-acer: ~/exercism/r/rna-transcription[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/rna-transcription[00m$ gco exercism download --exer cise=difference-of-squares --track=r^C
+]0;/home/dominikduda/exercism/r/rna-transcription]0;dominikduda@dominikduda-acer: ~/exercism/r/rna-transcription[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/rna-transcription[00m$ ^C
+]0;/home/dominikduda/exercism/r/rna-transcription]0;dominikduda@dominikduda-acer: ~/exercism/r/rna-transcription[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/rna-transcription[00m$ ^C
+]0;/home/dominikduda/exercism/r/rna-transcription]0;dominikduda@dominikduda-acer: ~/exercism/r/rna-transcription[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/rna-transcription[00m$ exercism download --exercise =difference-of-squares --track=r
+
+Downloaded to
+/home/dominikduda/exercism/r/difference-of-squares
+]0;/home/dominikduda/exercism/r/rna-transcription]0;dominikduda@dominikduda-acer: ~/exercism/r/rna-transcription[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/rna-transcription[00m$ cd ..
+]0;/home/dominikduda/exercism/r]0;dominikduda@dominikduda-acer: ~/exercism/r[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r[00m$ ls
+[0m[01;34mdifference-of-squares[0m  [01;34mhamming[0m  [01;34mhello-world[0m  [01;34mleap[0m  [01;34mrna-transcription[0m  [01;34mtwo-fer[0m
+q[Kexercism submit[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kls
+[0m[01;34mdifference-of-squares[0m  [01;34mhamming[0m  [01;34mhello-world[0m  [01;34mleap[0m  [01;34mrna-transcription[0m  [01;34mtwo-fer[0m
+]0;/home/dominikduda/exercism/r]0;dominikduda@dominikduda-acer: ~/exercism/r[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r[00m$ cd ..
+]0;/home/dominikduda/exercism]0;dominikduda@dominikduda-acer: ~/exercism[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism[00m$ jjk[K[K[Kls
+[0m[01;34mr[0m
+]0;/home/dominikduda/exercism]0;dominikduda@dominikduda-acer: ~/exercism[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism[00m$ ls
+[0m[01;34mr[0m
+]0;/home/dominikduda/exercism]0;dominikduda@dominikduda-acer: ~/exercism[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism[00m$ cd r/
+]0;/home/dominikduda/exercism/r]0;dominikduda@dominikduda-acer: ~/exercism/r[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r[00m$ ls
+[0m[01;34mdifference-of-squares[0m  [01;34mhamming[0m  [01;34mhello-world[0m  [01;34mleap[0m  [01;34mrna-transcription[0m  [01;34mtwo-fer[0m
+]0;/home/dominikduda/exercism/r]0;dominikduda@dominikduda-acer: ~/exercism/r[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r[00m$ cd if[K[Kdifference-of-squares/
+]0;/home/dominikduda/exercism/r/difference-of-squares]0;dominikduda@dominikduda-acer: ~/exercism/r/difference-of-squares[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/difference-of-squares[00m$ ls
+difference-of-squares.R  README.md  test_difference-of-squares.R
+]0;/home/dominikduda/exercism/r/difference-of-squares]0;dominikduda@dominikduda-acer: ~/exercism/r/difference-of-squares[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/difference-of-squares[00m$ exercism submit differencce-of-squares.R 
+
+
+    Your solution has been submitted successfully.
+    View it at:
+
+    
+    https://exercism.io/my/solutions/f34ae6ecfabf4ffe9a868e08d484ed81
+
+]0;/home/dominikduda/exercism/r/difference-of-squares]0;dominikduda@dominikduda-acer: ~/exercism/r/difference-of-squares[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/difference-of-squares[00m$ exercism download --exer cise=raindrops --track=r
+
+Downloaded to
+/home/dominikduda/exercism/r/raindrops
+]0;/home/dominikduda/exercism/r/difference-of-squares]0;dominikduda@dominikduda-acer: ~/exercism/r/difference-of-squares[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/difference-of-squares[00m$ wq[K[Kfactorize(3)
+bash: syntax error near unexpected token `3'
+]0;/home/dominikduda/exercism/r/difference-of-squares]0;dominikduda@dominikduda-acer: ~/exercism/r/difference-of-squares[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/difference-of-squares[00m$ factorize(3)[C[C[1P)[1P)[1P)[1P)[1P)[1P)[1P)[1P)[1P)[1P)[1P)[C[Kls
+difference-of-squares.R  README.md  test_difference-of-squares.R
+]0;/home/dominikduda/exercism/r/difference-of-squares]0;dominikduda@dominikduda-acer: ~/exercism/r/difference-of-squares[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/difference-of-squares[00m$ ls
+difference-of-squares.R  README.md  test_difference-of-squares.R
+]0;/home/dominikduda/exercism/r/difference-of-squares]0;dominikduda@dominikduda-acer: ~/exercism/r/difference-of-squares[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/difference-of-squares[00m$ cd ..
+]0;/home/dominikduda/exercism/r]0;dominikduda@dominikduda-acer: ~/exercism/r[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r[00m$ ls
+[0m[01;34mdifference-of-squares[0m  [01;34mhamming[0m  [01;34mhello-world[0m  [01;34mleap[0m  [01;34mraindrops[0m  [01;34mrna-transcription[0m  [01;34mtwo-fer[0m
+]0;/home/dominikduda/exercism/r]0;dominikduda@dominikduda-acer: ~/exercism/r[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r[00m$ cd raindrops/
+]0;/home/dominikduda/exercism/r/raindrops]0;dominikduda@dominikduda-acer: ~/exercism/r/raindrops[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/raindrops[00m$ ls
+raindrops.R  README.md  test_raindrops.R
+]0;/home/dominikduda/exercism/r/raindrops]0;dominikduda@dominikduda-acer: ~/exercism/r/raindrops[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/raindrops[00m$ submit[K[K[K[K[K[Kexercism submit raindrops.R 
+
+
+    Your solution has been submitted successfully.
+    View it at:
+
+    
+    https://exercism.io/my/solutions/d676cc04b7ea4e93b7fddf40c4b30e5c
+
+]0;/home/dominikduda/exercism/r/raindrops]0;dominikduda@dominikduda-acer: ~/exercism/r/raindrops[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/raindrops[00m$ exercism download --exercise=grains  --track=r
+
+Downloaded to
+/home/dominikduda/exercism/r/grains
+]0;/home/dominikduda/exercism/r/raindrops]0;dominikduda@dominikduda-acer: ~/exercism/r/raindrops[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/raindrops[00m$ [K]0;dominikduda@dominikduda-acer: ~/exercism/r/raindrops[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/raindrops[00m$ k[Kls[K[Kls
+raindrops.R  README.md  test_raindrops.R
+]0;/home/dominikduda/exercism/r/raindrops]0;dominikduda@dominikduda-acer: ~/exercism/r/raindrops[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/raindrops[00m$ cd ..
+]0;/home/dominikduda/exercism/r]0;dominikduda@dominikduda-acer: ~/exercism/r[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r[00m$ ls
+[0m[01;34mdifference-of-squares[0m  [01;34mhamming[0m      [01;34mleap[0m       [01;34mrna-transcription[0m
+[01;34mgrains[0m                 [01;34mhello-world[0m  [01;34mraindrops[0m  [01;34mtwo-fer[0m
+]0;/home/dominikduda/exercism/r]0;dominikduda@dominikduda-acer: ~/exercism/r[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r[00m$ cd grains/
+]0;/home/dominikduda/exercism/r/grains]0;dominikduda@dominikduda-acer: ~/exercism/r/grains[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/grains[00m$ ls
+grains.R  README.md  test_grains.R
+]0;/home/dominikduda/exercism/r/grains]0;dominikduda@dominikduda-acer: ~/exercism/r/grains[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/grains[00m$ exercism submit grains.R 
+
+
+    Your solution has been submitted successfully.
+    View it at:
+
+    
+    https://exercism.io/my/solutions/afc3663c063644d080084b56bb452283
+
+]0;/home/dominikduda/exercism/r/grains]0;dominikduda@dominikduda-acer: ~/exercism/r/grains[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/grains[00m$ exercism download --exercise=bob --trac k=r
+
+Downloaded to
+/home/dominikduda/exercism/r/bob
+]0;/home/dominikduda/exercism/r/grains]0;dominikduda@dominikduda-acer: ~/exercism/r/grains[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/grains[00m$ ls
+grains.R  README.md  test_grains.R
+]0;/home/dominikduda/exercism/r/grains]0;dominikduda@dominikduda-acer: ~/exercism/r/grains[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/grains[00m$ cd ..
+]0;/home/dominikduda/exercism/r]0;dominikduda@dominikduda-acer: ~/exercism/r[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r[00m$ ls
+[0m[01;34mbob[0m                    [01;34mgrains[0m   [01;34mhello-world[0m  [01;34mraindrops[0m          [01;34mtwo-fer[0m
+[01;34mdifference-of-squares[0m  [01;34mhamming[0m  [01;34mleap[0m         [01;34mrna-transcription[0m
+[K]0;dominikduda@dominikduda-acer: ~/exercism/r[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r[00m$ ls
+[0m[01;34mbob[0m  [01;34mdifference-of-squares[0m  [01;34mgrains[0m  [01;34mhamming[0m  [01;34mhello-world[0m  [01;34mleap[0m  [01;34mraindrops[0m  [01;34mrna-transcription[0m  [01;34mtwo-fer[0m
+]0;/home/dominikduda/exercism/r]0;dominikduda@dominikduda-acer: ~/exercism/r[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r[00m$ cd bob/
+]0;/home/dominikduda/exercism/r/bob]0;dominikduda@dominikduda-acer: ~/exercism/r/bob[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/bob[00m$ ls
+bob.R  README.md  test_bob.R
+]0;/home/dominikduda/exercism/r/bob]0;dominikduda@dominikduda-acer: ~/exercism/r/bob[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/bob[00m$ exercism submit bob.R 
+
+
+    Your solution has been submitted successfully.
+    View it at:
+
+    
+    https://exercism.io/my/solutions/d5e3310f2c6e492ea85712c6374be031
+
+]0;/home/dominikduda/exercism/r/bob]0;dominikduda@dominikduda-acer: ~/exercism/r/bob[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/bob[00m$ 
+]0;/home/dominikduda/exercism/r/bob]0;dominikduda@dominikduda-acer: ~/exercism/r/bob[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/bob[00m$ exercism download --exercise=anagram --track=r
+
+Downloaded to
+/home/dominikduda/exercism/r/anagram
+ls
+bob.R  README.md  test_bob.R
+]0;/home/dominikduda/exercism/r/bob]0;dominikduda@dominikduda-acer: ~/exercism/r/bob[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/bob[00m$ cd ..
+]0;/home/dominikduda/exercism/r]0;dominikduda@dominikduda-acer: ~/exercism/r[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r[00m$ ls
+[0m[01;34managram[0m  [01;34mdifference-of-squares[0m  [01;34mhamming[0m      [01;34mleap[0m       [01;34mrna-transcription[0m
+[01;34mbob[0m      [01;34mgrains[0m                 [01;34mhello-world[0m  [01;34mraindrops[0m  [01;34mtwo-fer[0m
+]0;/home/dominikduda/exercism/r]0;dominikduda@dominikduda-acer: ~/exercism/r[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r[00m$ cd anagram/
+]0;/home/dominikduda/exercism/r/anagram]0;dominikduda@dominikduda-acer: ~/exercism/r/anagram[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/anagram[00m$ ls
+anagram.R  README.md  test_anagram.R
+]0;/home/dominikduda/exercism/r/anagram]0;dominikduda@dominikduda-acer: ~/exercism/r/anagram[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/anagram[00m$ exercism submit anagram.R 
+
+
+    Your solution has been submitted successfully.
+    View it at:
+
+    
+    https://exercism.io/my/solutions/810e205da88940ab8436561194d969df
+
+]0;/home/dominikduda/exercism/r/anagram]0;dominikduda@dominikduda-acer: ~/exercism/r/anagram[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/anagram[00m$ exercism download --exercise=space-age --track=r
+
+Downloaded to
+/home/dominikduda/exercism/r/space-age
+float(
+bash: syntax error near unexpected token `newline'
+]0;/home/dominikduda/exercism/r/anagram]0;dominikduda@dominikduda-acer: ~/exercism/r/anagram[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/anagram[00m$ 
+]0;/home/dominikduda/exercism/r/anagram]0;dominikduda@dominikduda-acer: ~/exercism/r/anagram[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/anagram[00m$ 31.688087814
+Traceback (most recent call last):
+  File "/usr/lib/python3.6/dbm/gnu.py", line 4, in <module>
+    from _gdbm import *
+ModuleNotFoundError: No module named '_gdbm'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/CommandNotFound/CommandNotFound.py", line 7, in <module>
+    import dbm.gnu as gdbm
+  File "/usr/lib/python3.6/dbm/gnu.py", line 6, in <module>
+    raise ImportError(str(msg) + ', please install the python3-gdbm package')
+ImportError: No module named '_gdbm', please install the python3-gdbm package
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/command-not-found", line 27, in <module>
+    from CommandNotFound.util import crash_guard
+  File "/usr/lib/python3/dist-packages/CommandNotFound/__init__.py", line 3, in <module>
+    from CommandNotFound.CommandNotFound import CommandNotFound
+  File "/usr/lib/python3/dist-packages/CommandNotFound/CommandNotFound.py", line 9, in <module>
+    import gdbm
+ModuleNotFoundError: No module named 'gdbm'
+]0;/home/dominikduda/exercism/r/anagram]0;dominikduda@dominikduda-acer: ~/exercism/r/anagram[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/anagram[00m$ 31.688087814
+Traceback (most recent call last):
+  File "/usr/lib/python3.6/dbm/gnu.py", line 4, in <module>
+    from _gdbm import *
+ModuleNotFoundError: No module named '_gdbm'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/CommandNotFound/CommandNotFound.py", line 7, in <module>
+    import dbm.gnu as gdbm
+  File "/usr/lib/python3.6/dbm/gnu.py", line 6, in <module>
+    raise ImportError(str(msg) + ', please install the python3-gdbm package')
+ImportError: No module named '_gdbm', please install the python3-gdbm package
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/command-not-found", line 27, in <module>
+    from CommandNotFound.util import crash_guard
+  File "/usr/lib/python3/dist-packages/CommandNotFound/__init__.py", line 3, in <module>
+    from CommandNotFound.CommandNotFound import CommandNotFound
+  File "/usr/lib/python3/dist-packages/CommandNotFound/CommandNotFound.py", line 9, in <module>
+    import gdbm
+ModuleNotFoundError: No module named 'gdbm'
+]0;/home/dominikduda/exercism/r/anagram]0;dominikduda@dominikduda-acer: ~/exercism/r/anagram[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/anagram[00m$ ls
+anagram.R  README.md  test_anagram.R
+]0;/home/dominikduda/exercism/r/anagram]0;dominikduda@dominikduda-acer: ~/exercism/r/anagram[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/anagram[00m$ ls
+anagram.R  README.md  test_anagram.R
+]0;/home/dominikduda/exercism/r/anagram]0;dominikduda@dominikduda-acer: ~/exercism/r/anagram[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/anagram[00m$ exercism submit anad[Kgram.R 
+
+
+    Your solution has been submitted successfully.
+    View it at:
+
+    
+    https://exercism.io/my/solutions/810e205da88940ab8436561194d969df
+
+]0;/home/dominikduda/exercism/r/anagram]0;dominikduda@dominikduda-acer: ~/exercism/r/anagram[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/anagram[00m$ cd ..
+]0;/home/dominikduda/exercism/r]0;dominikduda@dominikduda-acer: ~/exercism/r[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r[00m$ ls
+[0m[01;34managram[0m  [01;34mdifference-of-squares[0m  [01;34mhamming[0m      [01;34mleap[0m       [01;34mrna-transcription[0m  [01;34mtwo-fer[0m
+[01;34mbob[0m      [01;34mgrains[0m                 [01;34mhello-world[0m  [01;34mraindrops[0m  [01;34mspace-age[0m
+]0;/home/dominikduda/exercism/r]0;dominikduda@dominikduda-acer: ~/exercism/r[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r[00m$ cd space-age/
+]0;/home/dominikduda/exercism/r/space-age]0;dominikduda@dominikduda-acer: ~/exercism/r/space-age[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/space-age[00m$ ls
+README.md  space-age.R  test_space-age.R
+]0;/home/dominikduda/exercism/r/space-age]0;dominikduda@dominikduda-acer: ~/exercism/r/space-age[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/space-age[00m$ exercism submit space-age.R 
+
+
+    Your solution has been submitted successfully.
+    View it at:
+
+    
+    https://exercism.io/my/solutions/bb05a150131b46b0b73b1bf22451998a
+
+
+
+Downloaded to
+/home/dominikduda/exercism/r/sum-of-multiples
+
+]0;/home/dominikduda/exercism/r/space-age]0;dominikduda@dominikduda-acer: ~/exercism/r/space-age[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/space-age[00m$ 
+]0;/home/dominikduda/exercism/r/space-age]0;dominikduda@dominikduda-acer: ~/exercism/r/space-age[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/space-age[00m$ 
+]0;/home/dominikduda/exercism/r/space-age]0;dominikduda@dominikduda-acer: ~/exercism/r/space-age[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/space-age[00m$ e[Kls
+README.md  space-age.R  test_space-age.R
+]0;/home/dominikduda/exercism/r/space-age]0;dominikduda@dominikduda-acer: ~/exercism/r/space-age[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/space-age[00m$ cd ..
+]0;/home/dominikduda/exercism/r]0;dominikduda@dominikduda-acer: ~/exercism/r[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r[00m$ ls
+[0m[01;34managram[0m  [01;34mdifference-of-squares[0m  [01;34mhamming[0m      [01;34mleap[0m       [01;34mrna-transcription[0m  [01;34msum-of-multiples[0m
+[01;34mbob[0m      [01;34mgrains[0m                 [01;34mhello-world[0m  [01;34mraindrops[0m  [01;34mspace-age[0m          [01;34mtwo-fer[0m
+]0;/home/dominikduda/exercism/r]0;dominikduda@dominikduda-acer: ~/exercism/r[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r[00m$ cd sum-of-multiples/
+]0;/home/dominikduda/exercism/r/sum-of-multiples]0;dominikduda@dominikduda-acer: ~/exercism/r/sum-of-multiples[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/sum-of-multiples[00m$ ls
+README.md  sum-of-multiples.R  test_sum-of-multiples.R
+]0;/home/dominikduda/exercism/r/sum-of-multiples]0;dominikduda@dominikduda-acer: ~/exercism/r/sum-of-multiples[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/sum-of-multiples[00m$ exercism submit cu[K[Ksum-of-multiples.R 
+
+
+    Your solution has been submitted successfully.
+    View it at:
+
+    
+    https://exercism.io/my/solutions/ad692d72b9c443dfa48f0c81931a2cda
+
+]0;/home/dominikduda/exercism/r/sum-of-multiples]0;dominikduda@dominikduda-acer: ~/exercism/r/sum-of-multiples[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/sum-of-multiples[00m$ exer[K[K[K[Kexercism download --exercise=word-count --track=r
+
+Downloaded to
+/home/dominikduda/exercism/r/word-count
+[K]0;dominikduda@dominikduda-acer: ~/exercism/r/sum-of-multiples[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/sum-of-multiples[00m$ ls
+README.md  sum-of-multiples.R  test_sum-of-multiples.R
+]0;/home/dominikduda/exercism/r/sum-of-multiples]0;dominikduda@dominikduda-acer: ~/exercism/r/sum-of-multiples[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/sum-of-multiples[00m$ cd ..
+]0;/home/dominikduda/exercism/r]0;dominikduda@dominikduda-acer: ~/exercism/r[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r[00m$ ls
+[0m[01;34managram[0m  [01;34mdifference-of-squares[0m  [01;34mhamming[0m      [01;34mleap[0m       [01;34mrna-transcription[0m  [01;34msum-of-multiples[0m  [01;34mword-count[0m
+[01;34mbob[0m      [01;34mgrains[0m                 [01;34mhello-world[0m  [01;34mraindrops[0m  [01;34mspace-age[0m          [01;34mtwo-fer[0m
+]0;/home/dominikduda/exercism/r]0;dominikduda@dominikduda-acer: ~/exercism/r[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r[00m$ cd word-count/
+]0;/home/dominikduda/exercism/r/word-count]0;dominikduda@dominikduda-acer: ~/exercism/r/word-count[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/word-count[00m$ ls
+README.md  test_word-count.R  word-count.R
+]0;/home/dominikduda/exercism/r/word-count]0;dominikduda@dominikduda-acer: ~/exercism/r/word-count[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/word-count[00m$ exercism submit ./word-count.R 
+
+
+    Your solution has been submitted successfully.
+    View it at:
+
+    
+    https://exercism.io/my/solutions/8f8b1066e4f948c99a3e624b92b126d1
+
+]0;/home/dominikduda/exercism/r/word-count]0;dominikduda@dominikduda-acer: ~/exercism/r/word-count[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/word-count[00m$ exercism download --exercise=phone-number --track=r
+
+Downloaded to
+/home/dominikduda/exercism/r/phone-number
+ls
+README.md  test_word-count.R  word-count.R
+]0;/home/dominikduda/exercism/r/word-count]0;dominikduda@dominikduda-acer: ~/exercism/r/word-count[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/word-count[00m$ exercism submit ./word[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kcd ..
+]0;/home/dominikduda/exercism/r]0;dominikduda@dominikduda-acer: ~/exercism/r[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r[00m$ ls
+[0m[01;34managram[0m  [01;34mdifference-of-squares[0m  [01;34mhamming[0m      [01;34mleap[0m          [01;34mraindrops[0m          [01;34mspace-age[0m         [01;34mtwo-fer[0m
+[01;34mbob[0m      [01;34mgrains[0m                 [01;34mhello-world[0m  [01;34mphone-number[0m  [01;34mrna-transcription[0m  [01;34msum-of-multiples[0m  [01;34mword-count[0m
+]0;/home/dominikduda/exercism/r]0;dominikduda@dominikduda-acer: ~/exercism/r[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r[00m$ cd phone-number/
+]0;/home/dominikduda/exercism/r/phone-number]0;dominikduda@dominikduda-acer: ~/exercism/r/phone-number[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/phone-number[00m$ ls
+phone-number.R  README.md  test_phone-number.R
+]0;/home/dominikduda/exercism/r/phone-number]0;dominikduda@dominikduda-acer: ~/exercism/r/phone-number[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/phone-number[00m$ exe[K[K[K [K [K`__fzf_history__`[J[6n
+[G
+[G
+[G
+[G
+[G
+[G
+[G
+[G
+[G
+[G[?1000h[9A[G[K[6n[;m                                                                                                                                         [1B[;m                                                                                                                                         [1B[;m                                                                                                                                         [1B[;m                                                                                                                                         [1B[;m                                                                                                                                         [1B[;m                                                                                                                                         [1B[;m                                                                                                                                         [1B[;m                                                                                                                                         [1B[;m                                                                                                                                         [1B[;m                                                                                                                                         [;m                                                                                                                                         [;1;38;5;110m> [m[;1m[m[2C[1A[;m                                                                                                                                         [2C[;38;5;144m107/107 +S[m[;m                                                                                                                                         [2C[;38;5;144m107/107 +S[m[8A[;1;38;5;161;48;5;236m [m[;m [;m  100  ls[m[1B[;1;38;5;161;48;5;236m [m[;m [;m  101  exercism submit ./word-count.R [m[1B[;1;38;5;161;48;5;236m [m[;m [;m  102  exercism download --exercise=phone-number --track=r[m[1B[;1;38;5;161;48;5;236m [m[;m [;m  103  ls[m[1B[;1;38;5;161;48;5;236m [m[;m [;m  104  cd ..[m[1B[;1;38;5;161;48;5;236m [m[;m [;m  105  ls[m[1B[;1;38;5;161;48;5;236m [m[;m [;m  106  cd phone-number/[m[1B[;1;38;5;161;48;5;236m>[m[;1;38;5;254;48;5;236m [m[;1;38;5;254;48;5;236m  107  ls[m[2B[2C[;m                                                                                                                                         [;1;38;5;110m> [m[;1ms[m[3C[9A[;1;38;5;161;48;5;236m [m[;m [;m   78  exercism [m[;38;5;108ms[m[;mubmit anagram.R [m[1B[;1;38;5;161;48;5;236m [m[;m [;m   79  exercism download --exercise=[m[;38;5;108ms[m[;mpace-age --track=r[m[1B[;1;38;5;161;48;5;236m [m[;m [;m   83  exercism [m[;38;5;108ms[m[;mubmit anagram.R [m[;m                         [1B[;1;38;5;161;48;5;236m [m[;m [;m   86  cd [m[;38;5;108ms[m[;mpace-age/[m[1B[;1;38;5;161;48;5;236m [m[;m [;m   88  exercism [m[;38;5;108ms[m[;mubmit space-age.R [m[1B[;1;38;5;161;48;5;236m [m[;m [;m   92  cd [m[;38;5;108ms[m[;mum-of-multiples/[m[1B[;1;38;5;161;48;5;236m [m[;m [;m   94  exercism [m[;38;5;108ms[m[;mubmit sum-of-multiples.R [m[1B[;1;38;5;161;48;5;236m>[m[;1;38;5;254;48;5;236m [m[;1;38;5;254;48;5;236m  101  exercism [m[;1;38;5;151;48;5;236ms[m[;1;38;5;254;48;5;236mubmit ./word-count.R [m[1B[;m                                                                                                                                         [2C[;38;5;144m79/107 +S[m[1B[3C[3C[;m                                                                                                                                         [;1;38;5;110m> [m[;1msu[m[1A[;m                                                                                                                                         [2C[;38;5;144m18/107 +S[m[8A[;1;38;5;161;48;5;236m [m[;m [;m   64  exercism [m[;38;5;108ms[m[;m[m[;38;5;108mu[m[;mbmit grains.R [m[;m [1B[;1;38;5;161;48;5;236m [m[;m [;m   71  exercism [m[;38;5;108ms[m[;m[m[;38;5;108mu[m[;mbmit bob.R [m[;m                          [1B[;1;38;5;161;48;5;236m [m[;m [;m   78  exercism [m[;38;5;108ms[m[;m[m[;38;5;108mu[m[;mbmit anagram.R [m[1B[;1;38;5;161;48;5;236m [m[;m [;m   83  exercism [m[;38;5;108ms[m[;m[m[;38;5;108mu[m[;mbmit anagram.R [m[1B[;1;38;5;161;48;5;236m [m[;m [;m   88  exercism [m[;38;5;108ms[m[;m[m[;38;5;108mu[m[;mbmit space-age.R [m[1B[;1;38;5;161;48;5;236m [m[;m [;m   92  cd [m[;38;5;108ms[m[;m[m[;38;5;108mu[m[;mm-of-multiples/[m[1B[;1;38;5;161;48;5;236m [m[;m [;m   94  exercism [m[;38;5;108ms[m[;m[m[;38;5;108mu[m[;mbmit sum-of-multiples.R [m[1B[;1;38;5;161;48;5;236m>[m[;1;38;5;254;48;5;236m [m[;1;38;5;254;48;5;236m  101  exercism [m[;1;38;5;151;48;5;236ms[m[;1;38;5;254;48;5;236m[m[;1;38;5;151;48;5;236mu[m[;1;38;5;254;48;5;236mbmit ./word-count.R [m[2B[4C[;m                                                                                                                                         [;1;38;5;110m> [m[;1msub[m[1A[;m                                                                                                                                         [2C[;38;5;144m14/107 +S[m[8A[;1;38;5;161;48;5;236m [m[;m [;m   57  exercism [m[;38;5;108ms[m[;m[m[;38;5;108mu[m[;m[m[;38;5;108mb[m[;mmit raindrops.R [m[1B[;1;38;5;161;48;5;236m [m[;m [;m   64  exercism [m[;38;5;108ms[m[;m[m[;38;5;108mu[m[;m[m[;38;5;108mb[m[;mmit grains.R [m[1B[;1;38;5;161;48;5;236m [m[;m [;m   71  exercism [m[;38;5;108ms[m[;m[m[;38;5;108mu[m[;m[m[;38;5;108mb[m[;mmit bob.R [m[;m    [1B[;1;38;5;161;48;5;236m [m[;m [;m   78  exercism [m[;38;5;108ms[m[;m[m[;38;5;108mu[m[;m[m[;38;5;108mb[m[;mmit anagram.R [m[1B[;1;38;5;161;48;5;236m [m[;m [;m   83  exercism [m[;38;5;108ms[m[;m[m[;38;5;108mu[m[;m[m[;38;5;108mb[m[;mmit anagram.R [m[;m  [1B[;1;38;5;161;48;5;236m [m[;m [;m   88  exercism [m[;38;5;108ms[m[;m[m[;38;5;108mu[m[;m[m[;38;5;108mb[m[;mmit space-age.R [m[1B[;1;38;5;161;48;5;236m [m[;m [;m   94  exercism [m[;38;5;108ms[m[;m[m[;38;5;108mu[m[;m[m[;38;5;108mb[m[;mmit sum-of-multiples.R [m[1B[;1;38;5;161;48;5;236m>[m[;1;38;5;254;48;5;236m [m[;1;38;5;254;48;5;236m  101  exercism [m[;1;38;5;151;48;5;236ms[m[;1;38;5;254;48;5;236m[m[;1;38;5;151;48;5;236mu[m[;1;38;5;254;48;5;236m[m[;1;38;5;151;48;5;236mb[m[;1;38;5;254;48;5;236mmit ./word-count.R [m[2B[5C[;m                                                                                                                                         [;1;38;5;110m> [m[;1msubm[m[6C[1A[;m                                                                                                                                         [2C[;38;5;144m13/107 +S[m[8A[;1;38;5;161;48;5;236m [m[;m [;m   57  exercism [m[;38;5;108ms[m[;m[m[;38;5;108mu[m[;m[m[;38;5;108mb[m[;m[m[;38;5;108mm[m[;mit raindrops.R [m[1B[;1;38;5;161;48;5;236m [m[;m [;m   64  exercism [m[;38;5;108ms[m[;m[m[;38;5;108mu[m[;m[m[;38;5;108mb[m[;m[m[;38;5;108mm[m[;mit grains.R [m[1B[;1;38;5;161;48;5;236m [m[;m [;m   71  exercism [m[;38;5;108ms[m[;m[m[;38;5;108mu[m[;m[m[;38;5;108mb[m[;m[m[;38;5;108mm[m[;mit bob.R [m[1B[;1;38;5;161;48;5;236m [m[;m [;m   78  exercism [m[;38;5;108ms[m[;m[m[;38;5;108mu[m[;m[m[;38;5;108mb[m[;m[m[;38;5;108mm[m[;mit anagram.R [m[1B[;1;38;5;161;48;5;236m [m[;m [;m   83  exercism [m[;38;5;108ms[m[;m[m[;38;5;108mu[m[;m[m[;38;5;108mb[m[;m[m[;38;5;108mm[m[;mit anagram.R [m[1B[;1;38;5;161;48;5;236m [m[;m [;m   88  exercism [m[;38;5;108ms[m[;m[m[;38;5;108mu[m[;m[m[;38;5;108mb[m[;m[m[;38;5;108mm[m[;mit space-age.R [m[1B[;1;38;5;161;48;5;236m [m[;m [;m   94  exercism [m[;38;5;108ms[m[;m[m[;38;5;108mu[m[;m[m[;38;5;108mb[m[;m[m[;38;5;108mm[m[;mit sum-of-multiples.R [m[1B[;1;38;5;161;48;5;236m>[m[;1;38;5;254;48;5;236m [m[;1;38;5;254;48;5;236m  101  exercism [m[;1;38;5;151;48;5;236ms[m[;1;38;5;254;48;5;236m[m[;1;38;5;151;48;5;236mu[m[;1;38;5;254;48;5;236m[m[;1;38;5;151;48;5;236mb[m[;1;38;5;254;48;5;236m[m[;1;38;5;151;48;5;236mm[m[;1;38;5;254;48;5;236mit ./word-count.R [m[2B[6C[1A[;m                                                                                                                                         [2C[;38;5;144m13/107 +S[m[8A[;1;38;5;161;48;5;236m [m[;m [;m   57  exercism [m[;38;5;108ms[m[;m[m[;38;5;108mu[m[;m[m[;38;5;108mb[m[;m[m[;38;5;108mm[m[;m[m[;38;5;108mi[m[;mt raindrops.R [m[1B[;1;38;5;161;48;5;236m [m[;m [;m   64  exercism [m[;38;5;108ms[m[;m[m[;38;5;108mu[m[;m[m[;38;5;108mb[m[;m[m[;38;5;108mm[m[;m[m[;38;5;108mi[m[;mt grains.R [m[1B[;1;38;5;161;48;5;236m [m[;m [;m   71  exercism [m[;38;5;108ms[m[;m[m[;38;5;108mu[m[;m[m[;38;5;108mb[m[;m[m[;38;5;108mm[m[;m[m[;38;5;108mi[m[;mt bob.R [m[1B[;1;38;5;161;48;5;236m [m[;m [;m   78  exercism [m[;38;5;108ms[m[;m[m[;38;5;108mu[m[;m[m[;38;5;108mb[m[;m[m[;38;5;108mm[m[;m[m[;38;5;108mi[m[;mt anagram.R [m[1B[;1;38;5;161;48;5;236m [m[;m [;m   83  exercism [m[;38;5;108ms[m[;m[m[;38;5;108mu[m[;m[m[;38;5;108mb[m[;m[m[;38;5;108mm[m[;m[m[;38;5;108mi[m[;mt anagram.R [m[1B[;1;38;5;161;48;5;236m [m[;m [;m   88  exercism [m[;38;5;108ms[m[;m[m[;38;5;108mu[m[;m[m[;38;5;108mb[m[;m[m[;38;5;108mm[m[;m[m[;38;5;108mi[m[;mt space-age.R [m[1B[;1;38;5;161;48;5;236m [m[;m [;m   94  exercism [m[;38;5;108ms[m[;m[m[;38;5;108mu[m[;m[m[;38;5;108mb[m[;m[m[;38;5;108mm[m[;m[m[;38;5;108mi[m[;mt sum-of-multiples.R [m[1B[;1;38;5;161;48;5;236m>[m[;1;38;5;254;48;5;236m [m[;1;38;5;254;48;5;236m  101  exercism [m[;1;38;5;151;48;5;236ms[m[;1;38;5;254;48;5;236m[m[;1;38;5;151;48;5;236mu[m[;1;38;5;254;48;5;236m[m[;1;38;5;151;48;5;236mb[m[;1;38;5;254;48;5;236m[m[;1;38;5;151;48;5;236mm[m[;1;38;5;254;48;5;236m[m[;1;38;5;151;48;5;236mi[m[;1;38;5;254;48;5;236mt ./word-count.R [m[2B[;m                                                                                                                                         [;1;38;5;110m> [m[;1msubmi[m[7C[;m                                                                                                                                         [;1;38;5;110m> [m[;1msubmit[m[8C[1A[;m                                                                                                                                         [2C[;38;5;144m13/107 +S[m[8A[;1;38;5;161;48;5;236m [m[;m [;m   57  exercism [m[;38;5;108ms[m[;m[m[;38;5;108mu[m[;m[m[;38;5;108mb[m[;m[m[;38;5;108mm[m[;m[m[;38;5;108mi[m[;m[m[;38;5;108mt[m[;m raindrops.R [m[1B[;1;38;5;161;48;5;236m [m[;m [;m   64  exercism [m[;38;5;108ms[m[;m[m[;38;5;108mu[m[;m[m[;38;5;108mb[m[;m[m[;38;5;108mm[m[;m[m[;38;5;108mi[m[;m[m[;38;5;108mt[m[;m grains.R [m[1B[;1;38;5;161;48;5;236m [m[;m [;m   71  exercism [m[;38;5;108ms[m[;m[m[;38;5;108mu[m[;m[m[;38;5;108mb[m[;m[m[;38;5;108mm[m[;m[m[;38;5;108mi[m[;m[m[;38;5;108mt[m[;m bob.R [m[1B[;1;38;5;161;48;5;236m [m[;m [;m   78  exercism [m[;38;5;108ms[m[;m[m[;38;5;108mu[m[;m[m[;38;5;108mb[m[;m[m[;38;5;108mm[m[;m[m[;38;5;108mi[m[;m[m[;38;5;108mt[m[;m anagram.R [m[1B[;1;38;5;161;48;5;236m [m[;m [;m   83  exercism [m[;38;5;108ms[m[;m[m[;38;5;108mu[m[;m[m[;38;5;108mb[m[;m[m[;38;5;108mm[m[;m[m[;38;5;108mi[m[;m[m[;38;5;108mt[m[;m anagram.R [m[1B[;1;38;5;161;48;5;236m [m[;m [;m   88  exercism [m[;38;5;108ms[m[;m[m[;38;5;108mu[m[;m[m[;38;5;108mb[m[;m[m[;38;5;108mm[m[;m[m[;38;5;108mi[m[;m[m[;38;5;108mt[m[;m space-age.R [m[1B[;1;38;5;161;48;5;236m [m[;m [;m   94  exercism [m[;38;5;108ms[m[;m[m[;38;5;108mu[m[;m[m[;38;5;108mb[m[;m[m[;38;5;108mm[m[;m[m[;38;5;108mi[m[;m[m[;38;5;108mt[m[;m sum-of-multiples.R [m[1B[;1;38;5;161;48;5;236m>[m[;1;38;5;254;48;5;236m [m[;1;38;5;254;48;5;236m  101  exercism [m[;1;38;5;151;48;5;236ms[m[;1;38;5;254;48;5;236m[m[;1;38;5;151;48;5;236mu[m[;1;38;5;254;48;5;236m[m[;1;38;5;151;48;5;236mb[m[;1;38;5;254;48;5;236m[m[;1;38;5;151;48;5;236mm[m[;1;38;5;254;48;5;236m[m[;1;38;5;151;48;5;236mi[m[;1;38;5;254;48;5;236m[m[;1;38;5;151;48;5;236mt[m[;1;38;5;254;48;5;236m ./word-count.R [m[2B[8C[;m                                                                                                                                         [;1;38;5;110m> [m[;1msubmit[m[9A[A[J[?1000l!101[K[K]0;dominikduda@dominikduda-acer: ~/exercism/r/phone-number[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/phone-number[00m$ !101exercism submit ./word-count.R [1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1@p[1@h[1@o[1@n[1@e[9@-number.R
+Error: 
+
+    The file you are trying to submit cannot be found.
+
+        /home/dominikduda/exercism/r/phone-number/phone-number.R.R
+
+		
+]0;/home/dominikduda/exercism/r/phone-number]0;dominikduda@dominikduda-acer: ~/exercism/r/phone-number[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/phone-number[00m$ exercism submit ./phone-number.R.R [K[K[K
+
+
+    Your solution has been submitted successfully.
+    View it at:
+
+    
+    https://exercism.io/my/solutions/41469a491f5b4d1db2d4211663b8042e
+
+]0;/home/dominikduda/exercism/r/phone-number]0;dominikduda@dominikduda-acer: ~/exercism/r/phone-number[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/phone-number[00m$ exercism download --exercise=rotational-cipher --track=r
+
+Downloaded to
+/home/dominikduda/exercism/r/rotational-cipher
+[K]0;dominikduda@dominikduda-acer: ~/exercism/r/phone-number[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/phone-number[00m$ ;74RR;74R;1R^C
+]0;/home/dominikduda/exercism/r/phone-number]0;dominikduda@dominikduda-acer: ~/exercism/r/phone-number[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/phone-number[00m$ ^C
+]0;/home/dominikduda/exercism/r/phone-number]0;dominikduda@dominikduda-acer: ~/exercism/r/phone-number[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/phone-number[00m$ strsplit('a')
+bash: syntax error near unexpected token `'a''
+;74R;1R[K]0;dominikduda@dominikduda-acer: ~/exercism/r/phone-number[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/phone-number[00m$ ;74R;1Rc^C
+]0;/home/dominikduda/exercism/r/phone-number]0;dominikduda@dominikduda-acer: ~/exercism/r/phone-number[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/phone-number[00m$ ^C
+]0;/home/dominikduda/exercism/r/phone-number]0;dominikduda@dominikduda-acer: ~/exercism/r/phone-number[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/phone-number[00m$ wget ftp://xmlsoft.org/libxml2/libxml2-2.9.2.tar.gz
+--2019-05-14 00:06:46--  ftp://xmlsoft.org/libxml2/libxml2-2.9.2.tar.gz
+           => ‘libxml2-2.9.2.tar.gz’
+wget: /home/dominikduda/.netrc:4: unknown token "method"
+wget: /home/dominikduda/.netrc:4: unknown token "interactive"
+Resolving xmlsoft.org (xmlsoft.org)... 91.121.203.120
+Connecting to xmlsoft.org (xmlsoft.org)|91.121.203.120|:21... connected.
+Logging in as anonymous ... Logged in!
+==> SYST ... done.    ==> PWD ... done.
+==> TYPE I ... done.  ==> CWD (1) /libxml2 ... done.
+==> SIZE libxml2-2.9.2.tar.gz ... 5444991
+==> PASV ... done.    ==> RETR libxml2-2.9.2.tar.gz ... done.
+Length: 5444991 (5,2M) (unauthoritative)
+
+libxml2-2.9.2.tar.gz              0%[                                                     ]       0  --.-KB/s               libxml2-2.9.2.tar.gz              1%[                                                     ]  59,39K   296KB/s               libxml2-2.9.2.tar.gz              5%[=>                                                   ] 270,09K   674KB/s               libxml2-2.9.2.tar.gz             12%[=====>                                               ] 674,51K  1,09MB/s               libxml2-2.9.2.tar.gz             20%[=========>                                           ]   1,05M  1,31MB/s               libxml2-2.9.2.tar.gz             27%[=============>                                       ]   1,41M  1,40MB/s               libxml2-2.9.2.tar.gz             34%[=================>                                   ]   1,78M  1,48MB/s               libxml2-2.9.2.tar.gz             41%[=====================>                               ]   2,16M  1,54MB/s               libxml2-2.9.2.tar.gz             49%[=========================>                           ]   2,56M  1,59MB/s               libxml2-2.9.2.tar.gz             56%[============================>                        ]   2,91M  1,61MB/s               libxml2-2.9.2.tar.gz             63%[================================>                    ]   3,31M  1,64MB/s               libxml2-2.9.2.tar.gz             69%[====================================>                ]   3,63M  1,64MB/s               libxml2-2.9.2.tar.gz             76%[=======================================>             ]   4,00M  1,66MB/s               libxml2-2.9.2.tar.gz             84%[===========================================>         ]   4,38M  1,67MB/s               libxml2-2.9.2.tar.gz             91%[===============================================>     ]   4,77M  1,70MB/s               libxml2-2.9.2.tar.gz             98%[===================================================> ]   5,14M  1,70MB/s    eta 0s     libxml2-2.9.2.tar.gz            100%[====================================================>]   5,19M  1,71MB/s    in 3,0s    
+
+2019-05-14 00:06:50 (1,71 MB/s) - ‘libxml2-2.9.2.tar.gz’ saved [5444991]
+
+]0;/home/dominikduda/exercism/r/phone-number]0;dominikduda@dominikduda-acer: ~/exercism/r/phone-number[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/phone-number[00m$ c[Kls
+[0m[01;31mlibxml2-2.9.2.tar.gz[0m  phone-number.R  README.md  test_phone-number.R
+]0;/home/dominikduda/exercism/r/phone-number]0;dominikduda@dominikduda-acer: ~/exercism/r/phone-number[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/phone-number[00m$ unzim //[K[K./libxml2-2.9.2.tar.gz .
+Traceback (most recent call last):
+  File "/usr/lib/python3.6/dbm/gnu.py", line 4, in <module>
+    from _gdbm import *
+ModuleNotFoundError: No module named '_gdbm'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/CommandNotFound/CommandNotFound.py", line 7, in <module>
+    import dbm.gnu as gdbm
+  File "/usr/lib/python3.6/dbm/gnu.py", line 6, in <module>
+    raise ImportError(str(msg) + ', please install the python3-gdbm package')
+ImportError: No module named '_gdbm', please install the python3-gdbm package
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/command-not-found", line 27, in <module>
+    from CommandNotFound.util import crash_guard
+  File "/usr/lib/python3/dist-packages/CommandNotFound/__init__.py", line 3, in <module>
+    from CommandNotFound.CommandNotFound import CommandNotFound
+  File "/usr/lib/python3/dist-packages/CommandNotFound/CommandNotFound.py", line 9, in <module>
+    import gdbm
+ModuleNotFoundError: No module named 'gdbm'
+]0;/home/dominikduda/exercism/r/phone-number]0;dominikduda@dominikduda-acer: ~/exercism/r/phone-number[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/phone-number[00m$ open .
+Couldn't get a file descriptor referring to the console
+]0;/home/dominikduda/exercism/r/phone-number]0;dominikduda@dominikduda-acer: ~/exercism/r/phone-number[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/phone-number[00m$ gnomeopen .
+Traceback (most recent call last):
+  File "/usr/lib/python3.6/dbm/gnu.py", line 4, in <module>
+    from _gdbm import *
+ModuleNotFoundError: No module named '_gdbm'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/CommandNotFound/CommandNotFound.py", line 7, in <module>
+    import dbm.gnu as gdbm
+  File "/usr/lib/python3.6/dbm/gnu.py", line 6, in <module>
+    raise ImportError(str(msg) + ', please install the python3-gdbm package')
+ImportError: No module named '_gdbm', please install the python3-gdbm package
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/command-not-found", line 27, in <module>
+    from CommandNotFound.util import crash_guard
+  File "/usr/lib/python3/dist-packages/CommandNotFound/__init__.py", line 3, in <module>
+    from CommandNotFound.CommandNotFound import CommandNotFound
+  File "/usr/lib/python3/dist-packages/CommandNotFound/CommandNotFound.py", line 9, in <module>
+    import gdbm
+ModuleNotFoundError: No module named 'gdbm'
+]0;/home/dominikduda/exercism/r/phone-number]0;dominikduda@dominikduda-acer: ~/exercism/r/phone-number[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/phone-number[00m$ gopenn
+Traceback (most recent call last):
+  File "/usr/lib/python3.6/dbm/gnu.py", line 4, in <module>
+    from _gdbm import *
+ModuleNotFoundError: No module named '_gdbm'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/CommandNotFound/CommandNotFound.py", line 7, in <module>
+    import dbm.gnu as gdbm
+  File "/usr/lib/python3.6/dbm/gnu.py", line 6, in <module>
+    raise ImportError(str(msg) + ', please install the python3-gdbm package')
+ImportError: No module named '_gdbm', please install the python3-gdbm package
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/command-not-found", line 27, in <module>
+    from CommandNotFound.util import crash_guard
+  File "/usr/lib/python3/dist-packages/CommandNotFound/__init__.py", line 3, in <module>
+    from CommandNotFound.CommandNotFound import CommandNotFound
+  File "/usr/lib/python3/dist-packages/CommandNotFound/CommandNotFound.py", line 9, in <module>
+    import gdbm
+ModuleNotFoundError: No module named 'gdbm'
+]0;/home/dominikduda/exercism/r/phone-number]0;dominikduda@dominikduda-acer: ~/exercism/r/phone-number[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/phone-number[00m$ s[Kgopennnomeopen .[5P[C[C[C[C[C[C[24@unzim ./libxml2-2.9.2.tar.gz[C[Cls[Kwget ftp://xmlsoft.org/libxml2/libxml2-2.9.2.tar.gzexercism download --exercise=rotational-cipher --track=r[24Psubmit ./phone-number.R.R ls[K^C
+^C
+]0;/home/dominikduda/exercism/r/phone-number]0;dominikduda@dominikduda-acer: ~/exercism/r/phone-number[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/phone-number[00m$ r
+Traceback (most recent call last):
+  File "/usr/lib/python3.6/dbm/gnu.py", line 4, in <module>
+    from _gdbm import *
+ModuleNotFoundError: No module named '_gdbm'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/CommandNotFound/CommandNotFound.py", line 7, in <module>
+    import dbm.gnu as gdbm
+  File "/usr/lib/python3.6/dbm/gnu.py", line 6, in <module>
+    raise ImportError(str(msg) + ', please install the python3-gdbm package')
+ImportError: No module named '_gdbm', please install the python3-gdbm package
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/command-not-found", line 27, in <module>
+    from CommandNotFound.util import crash_guard
+  File "/usr/lib/python3/dist-packages/CommandNotFound/__init__.py", line 3, in <module>
+    from CommandNotFound.CommandNotFound import CommandNotFound
+  File "/usr/lib/python3/dist-packages/CommandNotFound/CommandNotFound.py", line 9, in <module>
+    import gdbm
+ModuleNotFoundError: No module named 'gdbm'
+]0;/home/dominikduda/exercism/r/phone-number]0;dominikduda@dominikduda-acer: ~/exercism/r/phone-number[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/phone-number[00m$ r --version
+Traceback (most recent call last):
+  File "/usr/lib/python3.6/dbm/gnu.py", line 4, in <module>
+    from _gdbm import *
+ModuleNotFoundError: No module named '_gdbm'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/CommandNotFound/CommandNotFound.py", line 7, in <module>
+    import dbm.gnu as gdbm
+  File "/usr/lib/python3.6/dbm/gnu.py", line 6, in <module>
+    raise ImportError(str(msg) + ', please install the python3-gdbm package')
+ImportError: No module named '_gdbm', please install the python3-gdbm package
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/command-not-found", line 27, in <module>
+    from CommandNotFound.util import crash_guard
+  File "/usr/lib/python3/dist-packages/CommandNotFound/__init__.py", line 3, in <module>
+    from CommandNotFound.CommandNotFound import CommandNotFound
+  File "/usr/lib/python3/dist-packages/CommandNotFound/CommandNotFound.py", line 9, in <module>
+    import gdbm
+ModuleNotFoundError: No module named 'gdbm'
+]0;/home/dominikduda/exercism/r/phone-number]0;dominikduda@dominikduda-acer: ~/exercism/r/phone-number[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/phone-number[00m$ R
+
+R version 3.2.3 (2015-12-10) -- "Wooden Christmas-Tree"
+Copyright (C) 2015 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> exit
+Error: object 'exit' not found
+> R --ver[K[K[K[K[K[K[K
+> 
+Save workspace image? [y/n/c]: y[Kn
+]0;/home/dominikduda/exercism/r/phone-number]0;dominikduda@dominikduda-acer: ~/exercism/r/phone-number[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/phone-number[00m$ R --version
+R version 3.2.3 (2015-12-10) -- "Wooden Christmas-Tree"
+Copyright (C) 2015 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under the terms of the
+GNU General Public License versions 2 or 3.
+For more information about these matters see
+http://www.gnu.org/licenses/.
+
+]0;/home/dominikduda/exercism/r/phone-number]0;dominikduda@dominikduda-acer: ~/exercism/r/phone-number[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/phone-number[00m$   install.packages("installr"); 
+bash: syntax error near unexpected token `"installr"'
+^C
+]0;/home/dominikduda/exercism/r/phone-number]0;dominikduda@dominikduda-acer: ~/exercism/r/phone-number[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/phone-number[00m$ ^C
+]0;/home/dominikduda/exercism/r/phone-number]0;dominikduda@dominikduda-acer: ~/exercism/r/phone-number[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/phone-number[00m$ 
+]0;/home/dominikduda/exercism/r/phone-number]0;dominikduda@dominikduda-acer: ~/exercism/r/phone-number[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/phone-number[00m$ 
+]0;/home/dominikduda/exercism/r/phone-number]0;dominikduda@dominikduda-acer: ~/exercism/r/phone-number[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/phone-number[00m$ 
+]0;/home/dominikduda/exercism/r/phone-number]0;dominikduda@dominikduda-acer: ~/exercism/r/phone-number[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/phone-number[00m$ SMAS
+Traceback (most recent call last):
+  File "/usr/lib/python3.6/dbm/gnu.py", line 4, in <module>
+    from _gdbm import *
+ModuleNotFoundError: No module named '_gdbm'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/CommandNotFound/CommandNotFound.py", line 7, in <module>
+    import dbm.gnu as gdbm
+  File "/usr/lib/python3.6/dbm/gnu.py", line 6, in <module>
+    raise ImportError(str(msg) + ', please install the python3-gdbm package')
+ImportError: No module named '_gdbm', please install the python3-gdbm package
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/command-not-found", line 27, in <module>
+    from CommandNotFound.util import crash_guard
+  File "/usr/lib/python3/dist-packages/CommandNotFound/__init__.py", line 3, in <module>
+    from CommandNotFound.CommandNotFound import CommandNotFound
+  File "/usr/lib/python3/dist-packages/CommandNotFound/CommandNotFound.py", line 9, in <module>
+    import gdbm
+ModuleNotFoundError: No module named 'gdbm'
+j j[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K;10R;1R; 10R;1R[K[A]0;dominikduda@dominikduda-acer: ~/exercism/r/phone-number[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/phone-number[000m$ ;10R;1R;10R;1Rjjjjjj^C
+]0;/home/dominikduda/exercism/r/phone-number]0;dominikduda@dominikduda-acer: ~/exercism/r/phone-number[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/phone-numbeer[00m$ ^C
+]0;/home/dominikduda/exercism/r/phone-number]0;dominikduda@dominikduda-acer: ~/exercism/r/phone-number[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/phone-numbeer[00m$ whatever
+Traceback (most recent call last):
+  File "/usr/lib/python3.6/dbm/gnu.py", line 4, in <module>
+    from _gdbm import *
+ModuleNotFoundError: No module named '_gdbm'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/CommandNotFound/CommandNotFound.py", line 7, in <module>
+    import dbm.gnu as gdbm
+  File "/usr/lib/python3.6/dbm/gnu.py", line 6, in <module>
+    raise ImportError(str(msg) + ', please install the python3-gdbm package')
+ImportError: No module named '_gdbm', please install the python3-gdbm package
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/command-not-found", line 27, in <module>
+    from CommandNotFound.util import crash_guard
+  File "/usr/lib/python3/dist-packages/CommandNotFound/__init__.py", line 3, in <module>
+    from CommandNotFound.CommandNotFound import CommandNotFound
+  File "/usr/lib/python3/dist-packages/CommandNotFound/CommandNotFound.py", line 9, in <module>
+    import gdbm
+ModuleNotFoundError: No module named 'gdbm'
+]0;/home/dominikduda/exercism/r/phone-number]0;dominikduda@dominikduda-acer: ~/exercism/r/phone-number[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/phone-numbeer[00m$ ls
+[0m[01;31mlibxml2-2.9.2.tar.gz[0m  README.md
+phone-number.R        test_phone-number.R
+]0;/home/dominikduda/exercism/r/phone-number]0;dominikduda@dominikduda-acer: ~/exercism/r/phone-number[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/exercism/r/phone-numbeer[00m$ jjkkkkkkkkkkjjhh

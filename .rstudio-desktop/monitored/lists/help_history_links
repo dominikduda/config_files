@@ -1,0 +1,15 @@
+help/library/candleFetcher/html/fetchCandles.html,"R: Hello, World!"
+help/library/candleFetcher/html/fetchCandles.html,R: Fetch Candles
+help/library/candleFetcher/html/00Index.html,R: Fetches candlestick history
+help/library/fImport/html/provider-listings.html,R: Provider Listing of Symbols and Descriptions
+help/library/fImport/html/00Index.html,R: Rmetrics - Importing Economic and Financial Data
+help/library/utils/html/read.table.html,R: Data Input
+help/library/base/html/cbind.html,R: Combine R Objects by Rows or Columns
+help/library/base/html/grep.html,R: Pattern Matching and Replacement
+help/library/base/html/apply.html,R: Apply Functions Over Array Margins
+help/library/base/html/lapply.html,R: Apply a Function over a List or Vector
+help/library/base/html/strptime.html,R: Date-time Conversion Functions to and from Character
+help/library/xts/html/xts.html,R: Create Or Test For An xts Time-Series Object
+help/library/graphics/html/plot.html,R: Generic X-Y Plotting
+help/library/fImport/html/import-fred.html,R: Import Market Data from the Fred
+help/library/quantmod/html/OHLC.Transformations.html,R: Extract and Transform OHLC Time-Series Columns

@@ -1,0 +1,19 @@
+require(devtools)
+library(magrittr)
+library(FinancialInstrument)
+library(PerformanceAnalytics)
+library(quantmod)
+library(TTR)
+# Github
+library(blotter)
+library(quantstrat)
+library(IKTrading)
+
+candles <- read.csv(file = "AUDUSD_5min.csv", sep = ",", header = TRUE)
+posix_times <- as.POSIXct(candles[, 1], format = '%d.%m.%Y %H:%M:%OS')
+time_series <- xts(x = candles[, 2:6], order.by = posix_times)
+
+plot(Cl(time_series))
+
+print('--------> Done!!')
+return(0)

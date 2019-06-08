@@ -4,6 +4,11 @@
 cp ~/.vimrc ~/github/config_files/.vimrc
 cp ~/.config/nvim/colors/dante_modified.vim ~/github/config_files/.config/nvim/colors/dante_modified.vim
 
+# RStudio
+cp -r ~/.rstudio-desktop ~/github/config_files/.rstudio-desktop
+cp -r ~/.config/RStudio ~/github/config_files/.config/RStudio
+
+
 # zsh
 cp ~/.zshrc ~/github/config_files/.zshrc
 

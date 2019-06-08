@@ -1,0 +1,15 @@
+~/github/quantstrat_hello_world/main.r
+~/Desktop/candlestick.r
+~/github/testR/.gitignore
+~/github/candleFetcher/man/fetchCandles.Rd
+~/github/candleFetcher/NAMESPACE
+~/github/candleFetcher/R/fetchCandles.R
+~/github/candleFetcher/man/hello.Rd
+~/github/candleFetcher/DESCRIPTION
+~/github/candleFetcher/R/hello.R
+~/github/candleFetcher/.Rbuildignore
+~/github/candleFetcher/.gitignore
+~/R/library/candleFetcher/R/hello.R
+~/R/library/candleFetcher/.Rbuildignore
+~/R/library/candleFetcher/DESCRIPTION
+~/R/library/candleFetcher/man/hello.Rd

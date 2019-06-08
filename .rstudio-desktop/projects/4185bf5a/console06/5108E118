@@ -1,0 +1,14 @@
+]0;/home/dominikduda/github/candleFetcher]0;dominikduda@dominikduda-acer: ~/github/candleFetcher[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/github/candleFetcher[00m$ [K]0;dominikduda@dominikduda-acer: ~/github/candleFetcher[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/github/candleFetcher[00m$ ls
+candleFetcher.Rproj  DESCRIPTION  [0m[01;34mman[0m  NAMESPACE  [01;34mR[0m
+]0;/home/dominikduda/github/candleFetcher]0;dominikduda@dominikduda-acer: ~/github/candleFetcher[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/github/candleFetcher[00m$ cd R/[K
+]0;/home/dominikduda/github/candleFetcher/R]0;dominikduda@dominikduda-acer: ~/github/candleFetcher/R[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/github/candleFetcher/R[00m$ ls
+hello.R
+]0;/home/dominikduda/github/candleFetcher/R]0;dominikduda@dominikduda-acer: ~/github/candleFetcher/R[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/github/candleFetcher/R[00m$ mv hello.R fetchCandles.R
+]0;/home/dominikduda/github/candleFetcher/R]0;dominikduda@dominikduda-acer: ~/github/candleFetcher/R[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/github/candleFetcher/R[00m$ cd ..
+]0;/home/dominikduda/github/candleFetcher]0;dominikduda@dominikduda-acer: ~/github/candleFetcher[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/github/candleFetcher[00m$ ls
+candleFetcher.Rproj  DESCRIPTION  [0m[01;34mman[0m  NAMESPACE  [01;34mR[0m
+]0;/home/dominikduda/github/candleFetcher]0;dominikduda@dominikduda-acer: ~/github/candleFetcher[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/github/candleFetcher[00m$ cd man/
+]0;/home/dominikduda/github/candleFetcher/man]0;dominikduda@dominikduda-acer: ~/github/candleFetcher/man[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/github/candleFetcher/man[00m$ ls
+hello.Rd
+]0;/home/dominikduda/github/candleFetcher/man]0;dominikduda@dominikduda-acer: ~/github/candleFetcher/man[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/github/candleFetcher/man[00m$ mr[Kv hello.Rd fetchCandles.Rd
+]0;/home/dominikduda/github/candleFetcher/man]0;dominikduda@dominikduda-acer: ~/github/candleFetcher/man[01;32mdominikduda@dominikduda-acer[00m:[01;34m~/github/candleFetcher/man[00m$ 
