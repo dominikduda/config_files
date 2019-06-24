@@ -16,7 +16,7 @@ hi cMember cterm=underline
 "hi SignColumn -- no settings --
 " hi Normal guifg=#b3b1b3 guibg=#0a0a0a guisp=#0a0a0a gui=NONE ctermfg=249 ctermbg=232 cterm=NONE
 " hi Normal guifg=#b3b1b3 guibg=#0a0a0a guisp=#0a0a0a gui=NONE ctermfg=249 ctermbg=233 cterm=NONE
-hi Normal guifg=#b3b1b3 guibg=guisp=#0a0a0a gui=NONE ctermfg=250 ctermbg=233 cterm=NONE
+hi Normal guifg=#b3b1b3 guibg=guisp=#0a0a0a gui=NONE ctermfg=251 ctermbg=232 cterm=NONE
 "hi EnumerationValue -- no settings --
 "hi TabLineSel -- no settings --
 "hi Union -- no settings --
@@ -36,12 +36,14 @@ hi CTagsGlobalVariable guifg=NONE guibg=NONE guisp=NONE gui=underline ctermfg=24
 hi CTagsImport guifg=NONE guibg=NONE guisp=NONE gui=underline ctermfg=249 ctermbg=240 cterm=NONE
 hi CTagsMember guifg=NONE guibg=NONE guisp=NONE gui=italic,underline ctermfg=249 ctermbg=249 cterm=NONE
 hi Character guifg=#ff5f00 guibg=NONE guisp=NONE gui=NONE ctermfg=202 ctermbg=NONE cterm=NONE
-hi ColorColumn ctermbg=234
+" hi ColorColumn ctermbg=236
+hi ColorColumn guifg=#8b8b83 guibg=#141414 guisp=#141414 gui=NONE ctermfg=232 ctermbg=233 cterm=NONE
 hi Comment guifg=#10cccc guibg=NONE guisp=NONE gui=NONE ctermfg=80 ctermbg=NONE cterm=NONE
 hi Conditional guifg=#ffd500 guibg=NONE guisp=NONE gui=NONE ctermfg=220 ctermbg=NONE cterm=NONE
 hi Constant guifg=#f50000 guibg=NONE guisp=NONE gui=NONE ctermfg=203 ctermbg=NONE cterm=NONE
 hi CursorColumn guifg=NONE guibg=#0e0e0e guisp=#0e0e0e gui=NONE ctermfg=NONE ctermbg=235 cterm=NONE
-hi CursorLine guifg=NONE guibg=#0e0e0e guisp=#0e0e0e gui=NONE ctermfg=NONE ctermbg=235 cterm=NONE
+" hi CursorLine guifg=NONE guibg=#0e0e0e guisp=#0e0e0e gui=NONE ctermfg=NONE ctermbg=234 cterm=NONE
+hi CursorLine guifg=NONE guibg=#0e0e0e guisp=#0e0e0e gui=NONE ctermfg=NONE ctermbg=234 cterm=NONE
 hi Debug guifg=#ff8000 guibg=NONE guisp=NONE gui=NONE ctermfg=208 ctermbg=NONE cterm=NONE
 hi Define guifg=#1766b0 guibg=NONE guisp=NONE gui=NONE ctermfg=62 ctermbg=NONE cterm=NONE
 hi Delimiter guifg=#ff8000 guibg=NONE guisp=NONE gui=NONE ctermfg=206=NONE cterm=NONE
@@ -67,7 +69,8 @@ hi Macro guifg=#104e8b guibg=NONE guisp=NONE gui=NONE ctermfg=24 ctermbg=NONE ct
 hi ModeMsg guifg=NONE guibg=NONE guisp=NONE gui=bold ctermfg=NONE ctermbg=NONE cterm=bold
 hi MoreMsg guifg=#c0ff3e guibg=NONE guisp=NONE gui=bold ctermfg=191 ctermbg=NONE cterm=bold
 hi LineNr guifg=#8b8b83 guibg=#141414 guisp=#141414 gui=NONE ctermfg=101 ctermbg=232 cterm=NONE
-hi NonText guifg=#333333 guibg=#080808 guisp=#080808 gui=NONE ctermfg=239 ctermbg=NONE cterm=NONE
+" hi NonText guifg=#333333 guibg=#080808 guisp=#080808 gui=NONE ctermfg=239 ctermbg=NONE cterm=NONE
+hi! link NonText LineNr
 hi SpecialKey guifg=#4d4d4d guibg=NONE guisp=NONE gui=NONE ctermfg=101 ctermbg=NONE cterm=NONE
 hi Number guifg=#ff0505 guibg=NONE guisp=NONE gui=NONE ctermfg=172 ctermbg=NONE cterm=NONE
 hi Operator guifg=#db34db guibg=NONE guisp=NONE gui=NONE ctermfg=170 ctermbg=NONE cterm=NONE
@@ -79,12 +82,12 @@ hi PreCondit guifg=#104e8b guibg=NONE guisp=NONE gui=NONE ctermfg=24 ctermbg=NON
 hi PreProc guifg=#008cc4 guibg=NONE guisp=NONE gui=NONE ctermfg=4 ctermbg=NONE cterm=NONE
 hi Question guifg=#c0ff3e guibg=NONE guisp=NONE gui=bold ctermfg=191 ctermbg=NONE cterm=bold
 hi Repeat guifg=#cdad00 guibg=NONE guisp=NONE gui=NONE ctermfg=178 ctermbg=NONE cterm=NONE
-hi Search guifg=#1a1a1a guibg=#eec900 guisp=#eec900 gui=NONE ctermfg=15 ctermbg=NONE cterm=bold
+hi Search guifg=#1a1a1a guibg=#eec900 guisp=#eec900 gui=NONE ctermfg=15 ctermbg=NONE cterm=underline,bold
 hi Special guifg=#ff8400 guibg=NONE guisp=NONE gui=NONE ctermfg=208 ctermbg=NONE cterm=NONE
 hi SpecialChar guifg=#ff5f00 guibg=NONE guisp=NONE gui=NONE ctermfg=202 ctermbg=NONE cterm=NONE
 hi SpecialComment guifg=#ff5f00 guibg=NONE guisp=NONE gui=NONE ctermfg=202 ctermbg=NONE cterm=NONE
 hi Statement guifg=#ffd500 guibg=NONE guisp=NONE gui=NONE ctermfg=220 ctermbg=NONE cterm=NONE
-hi StatusLine guifg=#999999 guibg=NONE guisp=NONE gui=NONE ctermfg=24 ctermbg=24 cterm=NONE
+hi StatusLine guifg=#999999 guibg=NONE guisp=NONE gui=NONE ctermfg=0 ctermbg=24 cterm=NONE
 hi StatusLineNC guifg=#a8a8a8 guibg=NONE guisp=NONE gui=NONE ctermfg=24 ctermbg=24 cterm=NONE
 hi VertSplit guifg=#666666 guibg=NONE guisp=NONE gui=bold ctermfg=24 ctermbg=24 cterm=bold
 hi StorageClass guifg=#5eb341 guibg=NONE guisp=NONE gui=NONE ctermfg=107 ctermbg=NONE cterm=NONE
@@ -99,7 +102,8 @@ hi Underlined guifg=#6a5acd guibg=NONE guisp=NONE gui=underline ctermfg=62 cterm
 hi Visual guifg=#080808 guibg=#bfbfbf guisp=#bfbfbf gui=NONE ctermfg=232 ctermbg=7 cterm=NONE
 hi VisualNOS guifg=NONE guibg=NONE guisp=NONE gui=bold,underline ctermfg=NONE ctermbg=NONE cterm=bold,underline
 hi WarningMsg guifg=#cd0000 guibg=NONE guisp=NONE gui=bold ctermfg=160 ctermbg=NONE cterm=bold
-hi WildMenu guifg=#000000 guibg=#eec900 guisp=#eec900 gui=NONE ctermfg=NONE ctermbg=220 cterm=NONE
+hi! link WildMenu IncSearch
+
 hi cursorim guifg=#192224 guibg=#536991 guisp=#536991 gui=NONE ctermfg=235 ctermbg=60 cterm=NONE
 hi lcursor guifg=#000000 guibg=#cdaf95 guisp=#cdaf95 gui=NONE ctermfg=NONE ctermbg=180 cterm=NONE
 hi lcursor guifg=#000000 guibg=#cdaf95 guisp=#cdaf95 gui=NONE ctermfg=NONE ctermbg=180 cterm=NONE
@@ -114,12 +118,14 @@ hi rspecGroupMethods guifg=#4040d6 guibg=NONE guisp=NONE gui=underline ctermfg=3
 hi rubyRailsMethod guifg=#4040d6 guibg=NONE guisp=NONE gui=underline ctermfg=110 ctermbg=NONE
 hi CursorLineNR guifg=#4040d6 guibg=NONE guisp=NONE gui=underline ctermfg=232 ctermbg=246 cterm=NONE
 hi MatchParen ctermbg=NONE ctermfg=15 cterm=underline,bold
+hi VirtualText guifg=#8b8b83 guibg=#141414 guisp=#141414 gui=NONE ctermfg=101 ctermbg=NONE cterm=NONE
 
 " JS and JSX
 hi! link jsArrowFunction Function
 hi! link jsModuleBraces jsImport
 hi! link jsClassProperty Function
 hi! link jsDestructuringBraces Type
+hi! link jsDestructuringAssignment Type
 hi! link jsStorageClass Type
 hi! link jsObjectKey Constant
 hi! link jsNull StorageClass
@@ -151,6 +157,17 @@ hi jsBraces guifg=#bebebe guibg=#cd0000 guisp=#cd0000 gui=NONE ctermfg=202 cterm
 hi jsParens guifg=#bebebe guibg=#cd0000 guisp=#cd0000 gui=NONE ctermfg=129 ctermbg=NONE cterm=NONE
 hi! link jsSwitchBraces jsIfElseBraces
 hi! link jsParensSwitch jsIfElseBraces
+
+" ruby
+hi! link rubyCurlyBlockDelimiter jsObjectBraces
+hi! link rubyBlockParameterList Type
+hi! link rubyArrayDelimiter jsParens
+
+" R
+hi! link rOperator Delimiter
+hi! link rAssign Delimiter
+hi! link rDollar Statement
+hi! link rPreProc Include
 
 " Spell
 hi! SpellCap guifg=#000000 guibg=#ff6666 guisp=#ff6666 gui=NONE ctermfg=NONE ctermbg=NONE cterm=NONE
