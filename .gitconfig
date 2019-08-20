@@ -10,6 +10,7 @@
         sshow = "!f() { git stash show stash^{/$*} -p; }; f"
         ; apply stash with name/regex
         sapply = "!f() { git stash apply stash^{/$*}; }; f"
+        filteredDiff = "diff -- . ':(exclude)package-lock.json' ':(exclude)client/package-lock.json'"
 [color "diff-highlight"]
 	oldNormal = red bold
 	oldHighlight = red bold 52
@@ -22,3 +23,5 @@
         default = simple
 [github]
 	user = gospodorz@gmail.com
+[pull]
+	rebase = true

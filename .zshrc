@@ -85,10 +85,19 @@ source $ZSH/oh-my-zsh.sh
 
 # Ignore ctrl+d (so I wont exit tmux panes accidentally)
 set -o ignoreeof
+# Do not append duplicates to .zsh_history
+setopt    EXTENDED_HISTORY
+setopt    HIST_IGNORE_ALL_DUPS
+setopt    HIST_IGNORE_DUPS
+setopt    HIST_NO_STORE
+setopt    HIST_REDUCE_BLANKS
+setopt    HIST_VERIFY
 
 open() {
   gnome-open $1 &> /dev/null
 }
+
+alias gd="git filteredDiff"
 
 alias v="nvim"
 alias sv="sudo nvim"
@@ -97,7 +106,7 @@ alias vimrc="nvim ~/.vimrc"
 alias dcd="docker-compose -f docker-compose.dev.yml"
 alias dc="docker-compose"
 alias de='docker exec -it catalyst_puma_1'
-alias docker_clean="
+alias catalyst_clean_all="
   docker-compose down;
   docker volume prune --force;
   docker system prune -a --volumes --force;
@@ -105,6 +114,13 @@ alias docker_clean="
   rm -rf ~/github/catalyst/public/generated/*
   setopt no_rm_star_silent
 "
+
+alias catalyst_clean_generated="
+  setopt rm_star_silent
+  rm -rf ~/github/catalyst/public/generated/*
+  setopt no_rm_star_silent
+"
+
 alias cat_npm_log="npm start | tee /tmp/cat_npm.log"
 alias cat_npm_grepped_log="tail -f /tmp/cat_npm.log | grep 'built'"
 
