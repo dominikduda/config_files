@@ -98,6 +98,7 @@ open() {
 }
 
 alias gd="git filteredDiff"
+alias gds="git diff --staged"
 
 alias v="nvim"
 alias sv="sudo nvim"

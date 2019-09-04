@@ -117,6 +117,10 @@
 
 filetype off
 call plug#begin('~/.config/nvim/plug')
+    " Go to snapshot command provider
+        Plug 'tapayne88/vim-jest-snapshot'
+    " Coding time-tracking
+        Plug 'wakatime/vim-wakatime'
     " Spell checker
         Plug 'kamykn/spelunker.vim'
     " Search + global replace
@@ -208,6 +212,11 @@ call plug#begin('~/.config/nvim/plug')
     " Open files from nerd tree with default application for file extension (e. g. images)
         Plug 'ivalkeen/nerdtree-execute'
 
+" R support ************************************
+    Plug 'jalvesaq/Nvim-R'
+    Plug 'gaalcaras/ncm-R'
+" <!!!!!!!!**************!!!!!!!!>
+
 " JS UTILS ************************************
     " Backbone support
         Plug 'mklabs/vim-backbone'
@@ -237,7 +246,8 @@ call plug#begin('~/.config/nvim/plug')
         Plug 'MattesGroeger/vim-bookmarks'
     " Graphical indicator of current line relation to file length
         Plug 'drzel/vim-line-no-indicator'
-    Plug 'dominikduda/vim_current_word'
+    Plug 'dominikduda/vim_current_word', { 'branch': 'development' }
+    Plug 'dominikduda/vim_yank_with_context'
     Plug 'xolox/vim-misc'
     Plug 'ludovicchabant/vim-gutentags'
     Plug 'scrooloose/nerdtree'
@@ -310,6 +320,72 @@ filetype plugin indent on
     colorscheme dante_modified
 " <!!!!!!!!**************!!!!!!!!>
 
+" VIM-JEST-SNAPSHOT CONFIG ************************************
+    command! SnapshotGo call snapshot#show()
+" <!!!!!!!!**************!!!!!!!!>
+
+" NVIM-R CONFIG ************************************
+    " Arbitrary var
+        let g:r_setup_finished = 0
+    let g:rout_follow_colorscheme = 1
+    let g:Rout_more_colors = 1
+    let R_objbr_allnames = 1
+    let R_objbr_h = 3
+    let R_assign_map = '<M-->'
+    function! SetupRBindings()
+        if g:r_setup_finished
+          return
+        endif
+        tnoremap <A-5> <space>%>%<space>
+        tnoremap <A--> <space><-<space>
+        " Following is only way to escape insert mode using mapping in terminall buffer: <C-\><C-n>
+            tnoremap <A-h> <C-\><C-n>:TmuxNavigateLeft<CR>
+            tnoremap <A-k> <C-\><C-n>:TmuxNavigateUp<CR>
+        vmap <leader>r <Plug>RESendSelection
+        nmap <leader>r <Plug>RClearAll<Plug>RSendFile
+        nmap <leader>c <Plug>RClearAll
+        autocmd WinEnter term://* call feedkeys("i", 'tx')
+    endfunction
+    function! SetupR()
+        if g:r_setup_finished
+            return
+        endif
+        call feedkeys("\\rf", 'tx')
+        redraw
+        echo "R setup started"
+        sleep 1500m
+        call feedkeys("\\ro", 'tx')
+        redraw
+        sleep 500m
+        call feedkeys("\<A-l>", 'tx')
+        redraw
+        " andymass/vim-tradewinds dependency
+            call feedkeys("\<C-w>h", 'tx')
+            redraw
+        " Console dimensions
+            :resize 50
+            redraw
+            :vertical resize 120
+            redraw
+        setlocal nonumber
+        call feedkeys("\<A-k>", 'tx')
+        setlocal nonumber
+        redraw
+        sleep 500m
+        call feedkeys("\<Enter>", 'tx')
+        redraw
+        sleep 500m
+        call feedkeys("\<Enter>", 'tx')
+        redraw
+        call feedkeys("\<A-h>", 'tx')
+        redraw
+        let g:r_setup_finished = 1
+        echo "R setup done"
+    endfunction
+    autocmd BufReadPre *.R call SetupRBindings()
+    autocmd BufEnter *.R call SetupR()
+" <!!!!!!!!**************!!!!!!!!>
+
 " SPELUNKER CONFIG ************************************
     nmap zs Zg
     nmap za ZL
@@ -317,6 +393,12 @@ filetype plugin indent on
     " Override highlight setting.
         highlight SpelunkerSpellBad cterm=underline
         highlight SpelunkerComplexOrCompoundWord cterm=underline
+    " Disable default autogroup
+        let g:spelunker_disable_auto_group = 1
+    augroup spelunker
+      autocmd!
+      autocmd InsertLeave * call spelunker#check()
+    augroup END
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIM-TRADEWINDS CONFIG ************************************
@@ -413,6 +495,7 @@ filetype plugin indent on
     let g:matchup_matchparen_hi_surround_always = 1
     let g:matchup_matchparen_timeout = 100
     let g:matchup_matchparen_insert_timeout = 50
+    " autocmd CursorHold * MatchupWhereAmI
     highlight MatchWord ctermbg=NONE ctermfg=226 cterm=bold
     highlight MatchParen ctermbg=NONE ctermfg=226 cterm=bold,underline
     highlight MatchParenCur ctermbg=NONE ctermfg=226 cterm=bold,underline
@@ -535,6 +618,13 @@ filetype plugin indent on
     let g:ale_virtualtext_delay = 110
     hi! link ALEVirtualTextError VirtualText
     let g:ale_fixers = {}
+    let g:ale_fixers['r'] = ['styler']
+    let g:ale_r_lintr_options = '
+          \ with_defaults(
+          \  line_length_linter = line_length_linter(100),
+          \  camel_case_linter = NULL,
+          \  snake_case_linter = snake_case_linter
+          \ )'
     let g:ale_fixers['javascript'] = ['importjs', 'eslint']
     let g:ale_fixers['javascript.jsx'] = ['importjs', 'eslint']
     highlight link ALEStyleErrorSign todo
@@ -550,6 +640,9 @@ filetype plugin indent on
     let g:ale_lint_delay = 400
     let g:ale_lint_on_save = 1
     let g:ale_lint_on_text_changed =  1
+    let g:ale_linters = {
+          \  'r': ['lintr']
+          \ }
     " Jump betwen lint errors
         nmap <silent> [l <Plug>(ale_previous_wrap)
         nmap <silent> ]l <Plug>(ale_next_wrap)
@@ -779,6 +872,7 @@ filetype plugin indent on
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIM-TEST CONFIG ************************************
+    let test#enabled_runners = ["javascript#jest", "ruby#rspec"]
     nmap <silent> <leader>t :TestNearest<CR>
     nmap <silent> <leader>T :TestFile<CR>
     nmap <silent> <leader>a :TestSuite<CR>
@@ -827,18 +921,15 @@ filetype plugin indent on
         autocmd FileType ruby setlocal colorcolumn=141
         let g:deoplete#enable_ignore_case = 1
         " Search projectwide
-            " nnoremap , :Ag!<Space>-Q<Space>--ignore node_modules<Space>''<Left>
+            nnoremap , :Ag!<Space>-Q<Space>--ignore node_modules<Space>''<Left>
         " Search selected text project wide (+ possibility to pass path)
-            " vnoremap , y:Ag!<Space>-Q<Space>--ignore node_modules<Space>'<C-r>"'<Space>
+            vnoremap , y:Ag!<Space>-Q<Space>--ignore node_modules<Space>'<C-r>"'<Space>
         let g:ale_linters = {
         \   'javascript': ['eslint', 'importjs'],
         \   'ruby': ['rubocop'],
         \}
         let g:ale_fixers = {'ruby': ['rubocop'], 'javascript': ['eslint', 'importjs']}
         let g:rbpt_max = 0
-        " Custom test command for javascript in MD
-          autocmd BufRead,BufNewFile *.js nmap <buffer> <leader>t cp:VimuxRunCommand('clear; echo -e npm run test -- --cf <C-r>+; npm run test -- --cf <C-r>+')<Cr>
-          autocmd BufRead,BufNewFile *.js nmap <silent> <buffer> <leader>w cp:VimuxRunCommand('clear; echo -e npm run test_watch -- --browsers HeadlessChrome karma.config.js --cf <C-r>+; npm run test_watch -- --browsers HeadlessChrome karma.config.js --cf <C-r>+')<Cr>
         let g:gutentags_ctags_exclude = [
             \ "node_modules",
             \ ".git",
@@ -939,17 +1030,28 @@ filetype plugin indent on
           noremap <leader>u lbvey:Ag! --ignore node_modules --ignore tests '<<C-r>0\b'<CR>
       " Jumps to definition of javascript thing under cursor and persists current inc search value
           noremap gd :let @t = @/<CR>*ggn/from<CR>$hgfggn:let @/ = @t<CR>
+
       " Flash window if changed from another vim one
+          let g:timer = 0
+          function! NaraFlash(timerr)
+            2match none
+            call timer_stop(g:timer)
+          endfunction
+
           function! SiemanoFlash()
             if expand('%:t') == "CtrlSF"
               return
             endif
             2match IncSearch /./
             redraw
-            sleep 2m
-            2match none
+            let g:timer = timer_start(200, 'NaraFlash')
           endfunction
-          autocmd WinEnter * call SiemanoFlash()
+
+          " autocmd WinEnter * call SiemanoFlash()
+          " autocmd FocusGained * call SiemanoFlash()
+          " autocmd WinLeave * call NaraFlash(g:timer)
+          " autocmd FocusLost * call NaraFlash(g:timer)
+
       " Display special_characters, show eol only in visual mode
           function! ShowEOL(...)
             let a:force_enable = get(a:, 1, 0)
@@ -991,3 +1093,31 @@ filetype plugin indent on
         endfunction
         nmap <leader>b :call ToggleScrollBind()<CR>
 " <!!!!!!!!**************!!!!!!!!>
+
+
+" test abbreviations
+    inoremap <A-.> <C-]>
+    autocmd BufNew *.js,*.jsx iab dbg debugger
+    autocmd BufNew *.rb iab dbg binding.pry
+    autocmd BufNew *.rb iab org organization
+    autocmd BufNew *.rb inoremap <A-Bslash> <Space><Bar><Bar>=<Space>
+
+augroup LargeFile
+        let g:large_file = 3145728 " 3MB
+        " Set options:
+        "   eventignore+=FileType (no syntax highlighting etc
+        "   assumes FileType always on)
+        "   noswapfile (save copy of file)
+        "   bufhidden=unload (save memory when other file is viewed)
+        "   buftype=nowritefile (is read-only)
+        "   undolevels=-1 (no undo possible)
+        au BufReadPre *
+                \ let f=expand("<afile>") |
+                \ if getfsize(f) > g:large_file |
+                        \ set eventignore+=FileType |
+                        \ setlocal noswapfile bufhidden=unload buftype=nowrite undolevels=-1 |
+                \ else |
+                        \ set eventignore-=FileType |
+                \ endif
+augroup END
+
