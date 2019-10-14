@@ -1,6 +1,6 @@
-# ~/.tmuxinator/ab_uw.yml
+# ~/.tmuxinator/quantstrat_hello_world.yml
 
-name: ab_uw
+name: thedd_market_raport
 # This stopped working after tmux upgrade, use 'pre' instead
 # root: ~/github/ab
 
@@ -10,11 +10,15 @@ name: ab_uw
 # Runs before everything. Use it to start daemons etc.
 # Sets current postgres version and cluster (so all pg_related helper apps versions match psql server app (like pg_dump, pg_restore))
 # Strings separated by space are respectively: postgres version, host:port, database (* = anything)
-pre: cd ~/github/ab ; echo '9.6 localhost:5434  *' > ~/.postgresqlrc
+pre: |
+  cd ~/github/thedd_market_raport
+  export DISABLE_AUTO_TITLE=true
 
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
-# Disables spring, sets default postgres port
-pre_window: export DISABLE_SPRING=1 ; export CURRENT_PROJECT_NAME='AB' ; export PGPORT=5434
+pre_window: |
+  export CURRENT_PROJECT_NAME='THEDD_MARKET_RAPORT'
+  export VIMUX_RUNNER_PANE_INDEX='1'
+  tmux source ~/.tmux.conf
 
 # Pass command line options to tmux. Useful for specifying a different tmux.conf.
 # tmux_options: -f ~/.tmux.mac.conf
@@ -32,19 +36,15 @@ startup_pane: 0
 # Runs after everything. Use it to attach to tmux with custom options etc.
 # post: tmux -CC attach -t ab
 
-windows:
-    - consoles_and_editor:
-        layout: edc7,231x48,0,0{181x48,0,0[181x10,0,0,22,181x37,0,11,23],49x48,182,0[49x18,182,0,24,49x29,182,19,25]}
-        panes:
-          - helper:
-            - git fetch --prune
-            - clear
-            - git status
-          - editor:
-            - nvim
-          - filtered_logs:
-            - ab_grepped_log
-          - logs:
-            - ab_s_log
 
-# make sure those aliases are defined in .zshrc
+windows:
+    - R setup:
+        layout: 250e,380x77,0,0{102x77,0,0[102x50,0,0,5,102x26,0,51,8],277x77,103,0,7}
+        panes:
+            - R:
+                - radian
+            - helper:
+                - clear
+                - gst
+            - editor:
+                - v

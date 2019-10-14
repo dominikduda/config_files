@@ -17,7 +17,7 @@ pre: |
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
 pre_window: |
   export DISABLE_SPRING=1
-  rvm use 2.5.0
+  rvm use 2.5.1
   nvm use 8.9.1
   export CURRENT_PROJECT_NAME='CATALYST'
   export VIMUX_RUNNER_PANE_INDEX='3'
@@ -41,7 +41,7 @@ startup_pane: 0
 
 windows:
     - frontend:
-        layout: 4ecf,283x58,0,0{65x58,0,0[65x14,0,0,14,65x43,0,15,20],217x58,66,0[217x10,66,0,16,217x47,66,11,17]}
+        layout: 00ff,342x70,0,0{95x70,0,0[95x9,0,0,10,95x12,0,10,12,95x47,0,23,17],246x70,96,0,14}
         panes:
             - build_watcher:
                 - cat_webpack_build_watcher.sh
@@ -54,7 +54,7 @@ windows:
                 - gst
             - editor:
     - backend:
-        layout: 3cad,254x51,0,0{58x51,0,0,6,195x51,59,0[195x13,59,0,7,195x37,59,14,8]}
+        layout: d246,342x70,0,0{94x70,0,0[94x35,0,0,2,94x34,0,36,8],247x70,95,0,7}
         panes:
             - server:
                 - cd ..
@@ -64,4 +64,5 @@ windows:
                 - clear
                 - gst
             - editor:
+                - export VIMUX_RUNNER_PANE_INDEX='2'
                 - cd ..

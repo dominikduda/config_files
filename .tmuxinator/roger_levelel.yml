@@ -39,22 +39,23 @@ startup_pane: 0
 
 windows:
     - helper_and_editor:
-        layout: ead3,311x64,0,0[311x11,0,0,24,311x52,0,12,26]
+        layout: 7731,380x78,0,0{110x78,0,0,11,269x78,111,0,14}
         panes:
             - helper:
                 - clear
                 - gst
             - editor:
     - app_and_logs:
-        layout: 2795,311x64,0,0[311x11,0,0,25,311x52,0,12{155x52,0,12,27,155x52,156,12,28}]
+        layout: 8f77,380x78,0,0{106x78,0,0[106x20,0,0,33,106x30,0,21,36,106x26,0,52,37],273x78,107,0,35}
         panes:
             - app:
-                - ruby main.rb
-            - helper:
+                - echo 'ready'
+            - important_logs:
                 - sleep 2
                 - clear
                 - tail -n 100 -f files/important.log
-            - editor:
+            - normal_logs:
                 - sleep 2
                 - clear
                 - tail -n 100 -f files/info.log
+            - editor:
