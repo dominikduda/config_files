@@ -29,3 +29,31 @@ else
     echo "@>> Github SSH key is required for the script"
     exit
 fi
+
+echo "@>> Updating kernel"
+
+apt-add-repository ppa:teejee2008/ppa -y
+apt-get --assume-yes install ukuu
+ukuu --yes --install v5.4
+ukuu --yes --purge-old-kernels
+apt --assume-yes autoremove ukuu
+
+echo "@>> Installing nvidia driver"
+
+add-apt-repository ppa:graphics-drivers/ppa -y
+apt --assume-yes install nvidia-driver-435 nvidia-settings
+
+echo "@>> Installing NVM"
+
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash
+source ~/.bashrc
+nvm install node
+
+echo "@>> Installing and setting up git"
+
+apt --assume-yes install git
+npm install -g diff-so-fancy
+mkdir ~/github
+mkdir ~/github/config_files
+git clone https://github.com/dominikduda/config_files.git ~/github/config_files
+cp ~/github/config_files/.gitconfig ~/.gitconfig
