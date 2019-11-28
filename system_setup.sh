@@ -2,8 +2,7 @@
 # Run me in following way: `sudo bash script.sh`
 
 echo "@>> You should only run this script on freshly installed system!"
-
-read -p "@>> Do you confirm that its the case? ('YES'): "
+read -p "@>> Do you confirm that this is the case? ('YES'): "
 if [ $REPLY = "YES" ]; then
   echo "@>> Cool! Starting the script"
 else
