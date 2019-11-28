@@ -21,7 +21,7 @@ else
   exit
 fi
 
-ls ~/.ssh | grep --silent pub
+ls ~/.ssh | grep --silent id_rsa
 if [ $? -eq 0 ]; then
     echo "@>> SSH key is present, cool!"
 else
@@ -29,6 +29,13 @@ else
     echo "@>> Github SSH key is required for the script"
     exit
 fi
+
+echo "@>> Setup SSH keys"
+
+chmod 600 ~/.ssh/id_rsa
+chmod 600 ~/.ssh/id_rsa.pub
+ssh-agent -s
+ssh-add
 
 echo "@>> Updating kernel"
 
