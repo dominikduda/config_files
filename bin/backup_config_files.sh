@@ -30,3 +30,9 @@ cp ~/.config/redshift.conf ~/github/config_files/.config/redshift.conf
 cp ~/.gitconfig ~/github/config_files/.gitconfig
 cp ~/.gitignore ~/github/config_files/.gitignore
 cp ~/.importjs.js.example ~/github/config_files/.importjs.js.example
+
+# jforex
+cp ~/JForex/Templates/thedd.tmpl ~/github/config_files/JForex/Templates/thedd.tmpl
+
+# R
+cp ~/.Rprofile ~/github/config_files/.Rprofile
