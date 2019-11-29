@@ -57,11 +57,14 @@ nvm install node
 
 echo "@>> Installing and setting up git"
 
-apt --assume-yes install git
+sudo apt --assume-yes install git
 npm install -g diff-so-fancy
 mkdir ~/github
 mkdir ~/github/config_files
+ssh-keyscan github.com >> ~/.ssh/known_hosts
 git clone git@github.com:dominikduda/config_files.git ~/github/config_files
 cp ~/github/config_files/.gitconfig ~/.gitconfig
+
+source ~/.bashrc
 
 )
