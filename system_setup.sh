@@ -39,6 +39,7 @@ ssh-add
 
 echo "@>> Updating kernel"
 
+# this did not work last time
 sudo apt-add-repository ppa:teejee2008/ppa -y
 sudo apt-get --assume-yes install ukuu
 sudo ukuu --yes --install v5.1.21
@@ -65,6 +66,14 @@ mkdir ~/github/config_files
 ssh-keyscan github.com >> ~/.ssh/known_hosts
 git clone git@github.com:dominikduda/config_files.git ~/github/config_files
 cp ~/github/config_files/.gitconfig ~/.gitconfig
+
+echo "@>> configure system"
+
+gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
+
+sudo apt install tmux
+# finish nvim setup
+sudo add-apt-repository ppa:neovim-ppa/unstable -y
 
 source ~/.bashrc
 
