@@ -1,5 +1,6 @@
-#!/bin/bash
-# Run me in following way: `sudo bash script.sh`
+(
+
+# copy whole file and paste it into terminal
 
 echo "@>> You should only run this script on freshly installed system!"
 read -p "@>> Do you confirm that this is the case? ('YES'): "
@@ -9,6 +10,7 @@ else
   echo "@>> Aborting the script"
   exit
 fi
+
 
 # Check prerequisites
 
@@ -31,35 +33,35 @@ fi
 
 echo "@>> Setup SSH keys"
 
-chmod 600 ~/.ssh/id_rsa
-chmod 600 ~/.ssh/id_rsa.pub
-eval `ssh-agent`
+sudo chmod 600 ~/.ssh/id_rsa
+sudo chmod 600 ~/.ssh/id_rsa.pub
 ssh-add
 
 echo "@>> Updating kernel"
 
-apt-add-repository ppa:teejee2008/ppa -y
-apt-get --assume-yes install ukuu
-ukuu --yes --install v5.1.21
-# ukuu --yes --purge-old-kernels
-apt --assume-yes autoremove ukuu
+sudo apt-add-repository ppa:teejee2008/ppa -y
+sudo apt-get --assume-yes install ukuu
+sudo ukuu --yes --install v5.1.21
+sudo apt --assume-yes autoremove ukuu
 
 echo "@>> Installing nvidia driver"
 
-add-apt-repository ppa:graphics-drivers/ppa -y
-apt --assume-yes install nvidia-driver-435 nvidia-settings
+sudo add-apt-repository ppa:graphics-drivers/ppa -y
+sudo apt --assume-yes install nvidia-driver-435 nvidia-settings
 
 echo "@>> Installing NVM"
 
-sudo -u dominikduda curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash
 source ~/.bashrc
-sudo -u nvm install node
+nvm install node
 
 echo "@>> Installing and setting up git"
 
 apt --assume-yes install git
-sudo -u dominikduda npm install -g diff-so-fancy
-sudo -u dominikduda mkdir ~/github
-sudo -u dominikduda mkdir ~/github/config_files
-sudo -u dominikduda git clone https://github.com/dominikduda/config_files.git ~/github/config_files
-sudo -u dominikduda cp ~/github/config_files/.gitconfig ~/.gitconfig
+npm install -g diff-so-fancy
+mkdir ~/github
+mkdir ~/github/config_files
+git clone git@github.com:dominikduda/config_files.git ~/github/config_files
+cp ~/github/config_files/.gitconfig ~/.gitconfig
+
+)
