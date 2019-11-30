@@ -50,6 +50,16 @@ echo "@>> Installing nvidia driver"
 sudo add-apt-repository ppa:graphics-drivers/ppa -y
 sudo apt --assume-yes install nvidia-driver-435 nvidia-settings
 
+echo "@>> Installing RVM"
+
+sudo apt --assume-yes install gnupg2
+gpg2 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+curl -sSL https://get.rvm.io | bash -s stable
+source ~/.bashrc
+rvm install ruby-2.6
+/bin/bash --login
+rvm --default use 2.6
+
 echo "@>> Installing NVM"
 
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash
@@ -72,8 +82,23 @@ echo "@>> configure system"
 gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
 
 sudo apt install tmux
-# finish nvim setup
+
+# neovim setup
 sudo add-apt-repository ppa:neovim-ppa/unstable -y
+sudo apt-get update
+sudo apt --assume-yes install neovim
+sudo apt --assume-yes install python-dev python-pip python3-dev python3-pip
+sudo apt --assume-yes install python-neovim
+sudo apt --assume-yes install python3-neovim
+pip install pynvim
+pip3 install pynvim
+sudo apt --assume-yes install xclip
+npm install -g neovim
+gem install neovim
+sudo update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 60
+sudo update-alternatives --install /usr/bin/vim vim /usr/bin/nvim 60
+sudo update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 60
+
 
 source ~/.bashrc
 
