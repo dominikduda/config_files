@@ -95,10 +95,17 @@ pip3 install pynvim
 sudo apt --assume-yes install xclip
 npm install -g neovim
 gem install neovim
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 sudo update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 60
 sudo update-alternatives --install /usr/bin/vim vim /usr/bin/nvim 60
 sudo update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 60
-
+cp ~/github/config_files/.vimrc ~/.vimrc
+mkdir ~/.config/nvim
+ln -s ~/.vimrc ~/.config/nvim/init.vim
+mkdir ~/.config/nvim/colors
+cp ~/github/config_files/.config/nvim/colors/dante_modified.vim ~/.config/nvim/colors/dante_modified.vim
+vim +PlugInstall +qall
 
 source ~/.bashrc
 
