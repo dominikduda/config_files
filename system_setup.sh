@@ -86,6 +86,15 @@ fc-cache -f -v
 
 gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
 
+# zsh setup (reboot needed)
+cp ~/github/config_files/.zshrc ~/.zshrc
+sudo apt install zsh
+echo "n" | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+git clone https://github.com/djui/alias-tips.git ~/.oh-my-zsh/custom/plugins/alias-tips
+sudo chsh -s /bin/zsh
+
 sudo apt install tmux
 
 # neovim setup
