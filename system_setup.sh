@@ -79,6 +79,11 @@ cp ~/github/config_files/.gitconfig ~/.gitconfig
 
 echo "@>> configure system"
 
+# copy and refresh fonts
+mkdir ~/.fonts
+cp -a ~/github/config_files/input_font/. ~/.fonts/
+fc-cache -f -v
+
 gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
 
 sudo apt install tmux
@@ -106,6 +111,24 @@ ln -s ~/.vimrc ~/.config/nvim/init.vim
 mkdir ~/.config/nvim/colors
 cp ~/github/config_files/.config/nvim/colors/dante_modified.vim ~/.config/nvim/colors/dante_modified.vim
 vim +PlugInstall +qall
+
+# universal-ctags setup
+mkdir ~/Desktop/universal-ctags
+git clone https://github.com/universal-ctags/ctags.git ~/Desktop/universal-ctags
+sudo apt --assume-yes install \
+    gcc make \
+    pkg-config autoconf automake \
+    python3-docutils \
+    libseccomp-dev \
+    libjansson-dev \
+    libyaml-dev \
+    libxml2-dev
+cd ~/Desktop/universal-ctags
+./autogen.sh
+./configure
+make
+sudo make install
+cd ~/
 
 source ~/.bashrc
 
