@@ -21,13 +21,10 @@
     set softtabstop=2
 " <!!!!!!!!**************!!!!!!!!>
 
-    " Persist text when changing single line (for example cE)
-        " set cpoptions+=$
     " Does not break hard/symbolic links on file save
         set backupcopy=yes
     " Disable shape-changing cursor (underline, bar)
         set guicursor=n-v-c-sm:block,i-ci-ve:ver10,r-cr-o:ver10
-
     " Custom spell file (use :mkspell! % in the file to reload)
         set spellfile=~/.config/nvim/spell/techspeak.utf-8.add
     " Saves file automatically on most needed events
@@ -111,7 +108,7 @@
     " Amount of possible undos
         set undolevels=100
     " Highlight current line
-        " set cursorline
+        set cursorline
     " Allow backspacing over everything in insert mode
         set backspace=indent,eol,start
     " Color syntax
@@ -123,14 +120,10 @@ call plug#begin('~/.config/nvim/plug')
         Plug 'gillyb/stable-windows'
     " Go to snapshot command provider
         Plug 'tapayne88/vim-jest-snapshot'
-    " Coding time-tracking
-        " Plug 'wakatime/vim-wakatime'
     " Spell checker
         Plug 'kamykn/spelunker.vim'
     " Additional window movements
         Plug 'andymass/vim-tradewinds'
-    " Play sound on keypress and enter (ala typewriter)
-        " Plug 'skywind3000/vim-keysound'
     " * and # from visual
         Plug 'haya14busa/vim-asterisk'
     " Show nth out of x inc search results message
@@ -162,7 +155,7 @@ call plug#begin('~/.config/nvim/plug')
     " Vim-operator-flashy dependency
         Plug 'kana/vim-operator-user'
     " Asynchronous lint engine
-        " Plug 'w0rp/ale', { 'branch': 'master'}
+        Plug 'w0rp/ale', { 'branch': 'master'}
     " Color parentheses based on nest depth
         Plug 'kien/rainbow_parentheses.vim'
     " Live markdown preview
@@ -327,9 +320,7 @@ filetype plugin indent on
 " <!!!!!!!!**************!!!!!!!!>
 
 " NVIM-R CONFIG ************************************
-
     " Arbitrary var
-       "rm(list = ls())
         let g:r_setup_finished = 0
     let g:rout_follow_colorscheme = 1
     let g:Rout_more_colors = 1
@@ -347,48 +338,9 @@ filetype plugin indent on
         inoremap <A--> <space><-<space>
         tnoremap <A-5> <space>%>%<space>
         tnoremap <A--> <space><-<space>
-    "     " Following is only way to escape insert mode using mapping in terminall buffer: <C-\><C-n>
-    "         tnoremap <A-h> <C-\><C-n>:TmuxNavigateLeft<CR>
-    "         tnoremap <A-k> <C-\><C-n>:TmuxNavigateUp<CR>
-    "     vmap <leader>r <Plug>RESendSelection
-    "     nmap <leader>r <Plug>RClearAll<Plug>RSendFile
-    "     nmap <leader>c <Plug>RClearAll
-    "     autocmd WinEnter term://* call feedkeys("i", 'tx')
     endfunction
     function! SetupR()
       setlocal shiftwidth=2
-    "     if g:r_setup_finished
-    "         return
-    "     endif
-    "     call feedkeys("\\rf", 'tx')
-    "     redraw
-    "     echo "R setup started"
-    "     sleep 1500m
-    "     call feedkeys("\\ro", 'tx')
-    "     redraw
-    "     sleep 500m
-    "     call feedkeys("\<A-l>", 'tx')
-    "     redraw
-    "     " andymass/vim-tradewinds dependency
-    "         call feedkeys("\<C-w>h", 'tx')
-    "         redraw
-    "     " Console dimensions
-    "         :resize 50
-    "         redraw
-    "         :vertical resize 120
-    "         redraw
-    "     setlocal nonumber
-    "     call feedkeys("\<A-k>", 'tx')
-    "     setlocal nonumber
-    "     redraw
-    "     sleep 500m
-    "     call feedkeys("\<Enter>", 'tx')
-    "     redraw
-    "     sleep 500m
-    "     call feedkeys("\<Enter>", 'tx')
-    "     redraw
-    "     call feedkeys("\<A-h>", 'tx')
-    "     redraw
         let g:r_setup_finished = 1
     "     echo "R setup done"
     endfunction
@@ -405,10 +357,9 @@ filetype plugin indent on
         highlight SpelunkerComplexOrCompoundWord cterm=underline
     " Disable default autogroup
         let g:spelunker_disable_auto_group = 1
-    " call timer_start(900, {-> execute(':AirlineRefresh')}, { 'repeat': -1 })
     augroup spelunker
       autocmd!
-      " autocmd InsertLeave * call timer_start(2000, {-> execute('call spelunker#check()')}, { 'repeat': 0 })
+      autocmd InsertLeave * call timer_start(500), {-> execute('call spelunker#check()')}, { 'repeat': 0 })
     augroup END
 " <!!!!!!!!**************!!!!!!!!>
 
@@ -621,11 +572,6 @@ filetype plugin indent on
     noremap <silent> <A-l> :TmuxNavigateRight<CR>
 " <!!!!!!!!**************!!!!!!!!>
 
-" VIM-KEYSOUND CONFIG ************************************
-  " let g:keysound_enable = 1
-  " let g:keysound_theme = 'mario'
-" <!!!!!!!!**************!!!!!!!!>
-
 " VIM-DEBUGSTRING CONFIG ************************************
     vnoremap <Leader>ds y:AddDebugStringExpr('<C-r>"')<Enter>==
 " <!!!!!!!!**************!!!!!!!!>
@@ -636,41 +582,41 @@ filetype plugin indent on
 " <!!!!!!!!**************!!!!!!!!>
 
 " ALE CONFIG ************************************
-    " let g:ale_virtualtext_cursor = 1
-    " let g:ale_virtualtext_prefix = '◀ '
-    " let g:ale_virtualtext_delay = 110
-    " hi! link ALEVirtualTextError VirtualText
-    " let g:ale_fixers = {}
-    " let g:ale_fixers['r'] = ['styler']
-    " let g:ale_r_lintr_options = '
-    "       \ with_defaults(
-    "       \  object_usage_linter = NULL,
-    "       \  line_length_linter = line_length_linter(100),
-    "       \  camel_case_linter = NULL,
-    "       \  snake_case_linter = snake_case_linter
-    "       \ )'
-    " let g:ale_fixers['javascript'] = ['importjs', 'eslint']
-    " let g:ale_fixers['javascript.jsx'] = ['importjs', 'eslint']
-    " highlight link ALEStyleErrorSign todo
-    " let g:ale_type_map = {'eslint': {'E': 'ES'}}
-    " let g:ale_echo_msg_error_str = 'E'
-    " let g:ale_echo_msg_warning_str = 'W'
-    " let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-    " autocmd InsertLeave * ALELint
-    " let g:ale_set_highlights = 0
-    " let g:ale_sign_error = 'X➜'
-    " let g:ale_sign_warning = '!➜'
-    " let g:ale_sign_style_error = 'S➜'
-    " let g:ale_lint_delay = 400
-    " let g:ale_lint_on_save = 1
-    " let g:ale_lint_on_text_changed =  1
-    " let g:ale_linters = {
-    "       \  'r': ['lintr']
-    "       \ }
-    " " Jump betwen lint errors
-    "     nmap <silent> [l <Plug>(ale_previous_wrap)
-    "     nmap <silent> ]l <Plug>(ale_next_wrap)
-    " nmap <leader>l :ALEFix<CR>:call timer_start(500, {-> execute('call spelunker#check()')}, { 'repeat': 0 })<CR> :echo 'Fixing ur file'<CR>
+    let g:ale_virtualtext_cursor = 1
+    let g:ale_virtualtext_prefix = '◀ '
+    let g:ale_virtualtext_delay = 110
+    hi! link ALEVirtualTextError VirtualText
+    let g:ale_fixers = {}
+    let g:ale_fixers['r'] = ['styler']
+    let g:ale_r_lintr_options = '
+          \ with_defaults(
+          \  object_usage_linter = NULL,
+          \  line_length_linter = line_length_linter(100),
+          \  camel_case_linter = NULL,
+          \  snake_case_linter = snake_case_linter
+          \ )'
+    let g:ale_fixers['javascript'] = ['importjs', 'eslint']
+    let g:ale_fixers['javascript.jsx'] = ['importjs', 'eslint']
+    highlight link ALEStyleErrorSign todo
+    let g:ale_type_map = {'eslint': {'E': 'ES'}}
+    let g:ale_echo_msg_error_str = 'E'
+    let g:ale_echo_msg_warning_str = 'W'
+    let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+    autocmd InsertLeave * ALELint
+    let g:ale_set_highlights = 0
+    let g:ale_sign_error = 'X➜'
+    let g:ale_sign_warning = '!➜'
+    let g:ale_sign_style_error = 'S➜'
+    let g:ale_lint_delay = 400
+    let g:ale_lint_on_save = 1
+    let g:ale_lint_on_text_changed =  1
+    let g:ale_linters = {
+          \  'r': ['lintr']
+          \ }
+    " Jump betwen lint errors
+        nmap <silent> [l <Plug>(ale_previous_wrap)
+        nmap <silent> ]l <Plug>(ale_next_wrap)
+    nmap <leader>l :ALEFix<CR>:call timer_start(500, {-> execute('call spelunker#check()')}, { 'repeat': 0 })<CR> :echo 'Fixing ur file'<CR>
 " <!!!!!!!!**************!!!!!!!!>
 
 " RAINBOW-PARENTHESES CONFIG ************************************
@@ -734,20 +680,10 @@ filetype plugin indent on
 " DEOPLETE CONFIG ************************************
     let g:deoplete#auto_complete_start_length = 2
     let deoplete#tag#cache_limit_size = 500000000
-
-    " let g:deoplete#auto_complete_delay = 2
-    " let g:deoplete#auto_complete_delay = 0
-
     let g:deoplete#enable_ignore_case = 0
     let g:deoplete#enable_smart_case = 1
     let g:deoplete#enable_at_startup = 1
-
-    " let g:deoplete#enable_refresh_always = 0
     let g:deoplete#enable_refresh_always = 1
-
-    " let g:deoplete#auto_refresh_delay = 1
-    " let g:deoplete#auto_refresh_delay = 0
-
     let g:deoplete#max_abbr_width = 0
     let g:deoplete#max_menu_width = 0
     let g:deoplete#max_list = 20
@@ -913,7 +849,6 @@ filetype plugin indent on
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIMUX CONFIG ************************************
-    " let g:vimuxUseNearestPane = 0
     let g:vimuxUseNearestPane = 1
 " <!!!!!!!!**************!!!!!!!!>
 
@@ -983,11 +918,11 @@ filetype plugin indent on
           vnoremap <C-v> x"+P
           inoremap <C-v> <Esc>"+pa
       " Change current line color when entering/leaving insert mode
-          " autocmd InsertEnter * highlight  CursorLine ctermbg=52
-          " autocmd InsertLeave * highlight  CursorLine ctermbg=235
+          autocmd InsertEnter * highlight  CursorLine ctermbg=52
+          autocmd InsertLeave * highlight  CursorLine ctermbg=235
       " Change current line number color when entering/leaving insert mode
-          " autocmd InsertEnter * highlight  CursorLineNR ctermbg=124
-          " autocmd InsertLeave * highlight  CursorLineNR ctermbg=246
+          autocmd InsertEnter * highlight  CursorLineNR ctermbg=124
+          autocmd InsertLeave * highlight  CursorLineNR ctermbg=246
       " Check file change every 4 seconds ('CursorHold') and reload the buffer upon detecting change
           set autoread
           autocmd CursorHold * checktime
@@ -1076,8 +1011,8 @@ filetype plugin indent on
 
       " Display special_characters, show eol only in visual mode
           function! ShowEOL(...)
-            let a:force_enable = get(a:, 1, 0)
-            if mode() == "v" || mode() == "V" || mode() == "\<C-V>" || a:force_enable
+            let g:eol_enabled_xxx = get(a:, 1, 0)
+            if mode() == "v" || mode() == "V" || mode() == "\<C-V>" || g:eol_enabled_xxx
               set listchars=nbsp:•,tab:⎔➤,eol:↲
             else
               set listchars=nbsp:•,tab:⎔➤
