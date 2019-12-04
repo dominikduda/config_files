@@ -151,6 +151,7 @@ cd ~/
 source ~/.bashrc
 
 # custom monitor scaling
-xrandr --output HDMI-0 --mode 3440x1440 --scale 2x2 --pos 0x0 --output DP-2 --mode 3840x2160 --scale 1x1 --pos 6880x0
+mkdir ~/.config/autostart
+cp ~/github/config_files/.config/autostart/normalize_monitor_scales.desktop ~/.config/autostart/normalize_monitor_scales.desktop
 
 )
