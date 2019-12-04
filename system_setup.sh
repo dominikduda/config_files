@@ -11,7 +11,6 @@ else
   exit
 fi
 
-
 # Check prerequisites
 
 wget --quiet --spider http://google.com
@@ -103,6 +102,9 @@ dconf load /org/gnome/terminal/legacy/profiles:/ < ~/github/config_files/gnome-t
 
 sudo apt install tmux
 cp ~/github/config_files/.tmux.conf ~/.tmux.conf
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+tmux source ~/.tmux.conf
+~/.tmux/plugins/tpm/scripts/install_plugins.sh
 
 # neovim setup
 sudo add-apt-repository ppa:neovim-ppa/unstable -y
@@ -147,5 +149,8 @@ sudo make install
 cd ~/
 
 source ~/.bashrc
+
+# custom monitor scaling
+xrandr --output HDMI-0 --mode 3440x1440 --scale 2x2 --pos 0x0 --output DP-2 --mode 3840x2160 --scale 1x1 --pos 6880x0
 
 )
