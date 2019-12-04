@@ -95,7 +95,14 @@ git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.oh-my-zsh/cust
 git clone https://github.com/djui/alias-tips.git ~/.oh-my-zsh/custom/plugins/alias-tips
 sudo chsh -s /bin/zsh
 
+# import terminal profile
+
+dconf load /org/gnome/terminal/legacy/profiles:/ < ~/github/config_files/gnome-terminal-profiles.dconf
+
+# setup tmux
+
 sudo apt install tmux
+cp ~/github/config_files/.tmux.conf ~/.tmux.conf
 
 # neovim setup
 sudo add-apt-repository ppa:neovim-ppa/unstable -y
