@@ -18,14 +18,16 @@
 " NOT SURE OR TOO LAZY TO CHECK ************************************
     set switchbuf=useopen
     set ttimeoutlen=0
-    set smarttab
     set softtabstop=2
 " <!!!!!!!!**************!!!!!!!!>
 
+    " Persist text when changing single line (for example cE)
+        " set cpoptions+=$
     " Does not break hard/symbolic links on file save
         set backupcopy=yes
     " Disable shape-changing cursor (underline, bar)
-        set guicursor=n-v-c-sm:block,i-ci-ve:block,r-cr-o:block
+        set guicursor=n-v-c-sm:block,i-ci-ve:ver10,r-cr-o:ver10
+
     " Custom spell file (use :mkspell! % in the file to reload)
         set spellfile=~/.config/nvim/spell/techspeak.utf-8.add
     " Saves file automatically on most needed events
@@ -109,7 +111,7 @@
     " Amount of possible undos
         set undolevels=100
     " Highlight current line
-        set cursorline
+        " set cursorline
     " Allow backspacing over everything in insert mode
         set backspace=indent,eol,start
     " Color syntax
@@ -117,18 +119,18 @@
 
 filetype off
 call plug#begin('~/.config/nvim/plug')
+        Plug 'dominikduda/vim_timebox'
+        Plug 'gillyb/stable-windows'
     " Go to snapshot command provider
         Plug 'tapayne88/vim-jest-snapshot'
     " Coding time-tracking
-        Plug 'wakatime/vim-wakatime'
+        " Plug 'wakatime/vim-wakatime'
     " Spell checker
         Plug 'kamykn/spelunker.vim'
-    " Search + global replace
-        Plug 'dyng/ctrlsf.vim'
     " Additional window movements
         Plug 'andymass/vim-tradewinds'
     " Play sound on keypress and enter (ala typewriter)
-        Plug 'skywind3000/vim-keysound'
+        " Plug 'skywind3000/vim-keysound'
     " * and # from visual
         Plug 'haya14busa/vim-asterisk'
     " Show nth out of x inc search results message
@@ -160,7 +162,7 @@ call plug#begin('~/.config/nvim/plug')
     " Vim-operator-flashy dependency
         Plug 'kana/vim-operator-user'
     " Asynchronous lint engine
-        Plug 'w0rp/ale'
+        " Plug 'w0rp/ale', { 'branch': 'master'}
     " Color parentheses based on nest depth
         Plug 'kien/rainbow_parentheses.vim'
     " Live markdown preview
@@ -325,62 +327,70 @@ filetype plugin indent on
 " <!!!!!!!!**************!!!!!!!!>
 
 " NVIM-R CONFIG ************************************
+
     " Arbitrary var
+       "rm(list = ls())
         let g:r_setup_finished = 0
     let g:rout_follow_colorscheme = 1
     let g:Rout_more_colors = 1
     let R_objbr_allnames = 1
     let R_objbr_h = 3
-    let R_assign_map = '<M-->'
+    let R_assign = 0
     function! SetupRBindings()
+        nmap <leader>r :VimuxRunCommand "system('clear')"<cr>:VimuxRunCommand "rm(list = ls())"<cr>:VimuxRunCommand "source('main.R')"<cr>
+        nmap <leader>r :VimuxRunCommand "system('clear')"<cr>:VimuxRunCommand "rm(list = ls())"<cr>:VimuxRunCommand "source('main.R')"<cr>
+        nmap <leader>o :VimuxRunCommand "system('clear')"<cr>:VimuxRunCommand "ls(all.names = TRUE, sorted = TRUE)"<cr>
         if g:r_setup_finished
           return
         endif
+        inoremap <A-5> <space>%>%<space>
+        inoremap <A--> <space><-<space>
         tnoremap <A-5> <space>%>%<space>
         tnoremap <A--> <space><-<space>
-        " Following is only way to escape insert mode using mapping in terminall buffer: <C-\><C-n>
-            tnoremap <A-h> <C-\><C-n>:TmuxNavigateLeft<CR>
-            tnoremap <A-k> <C-\><C-n>:TmuxNavigateUp<CR>
-        vmap <leader>r <Plug>RESendSelection
-        nmap <leader>r <Plug>RClearAll<Plug>RSendFile
-        nmap <leader>c <Plug>RClearAll
-        autocmd WinEnter term://* call feedkeys("i", 'tx')
+    "     " Following is only way to escape insert mode using mapping in terminall buffer: <C-\><C-n>
+    "         tnoremap <A-h> <C-\><C-n>:TmuxNavigateLeft<CR>
+    "         tnoremap <A-k> <C-\><C-n>:TmuxNavigateUp<CR>
+    "     vmap <leader>r <Plug>RESendSelection
+    "     nmap <leader>r <Plug>RClearAll<Plug>RSendFile
+    "     nmap <leader>c <Plug>RClearAll
+    "     autocmd WinEnter term://* call feedkeys("i", 'tx')
     endfunction
     function! SetupR()
-        if g:r_setup_finished
-            return
-        endif
-        call feedkeys("\\rf", 'tx')
-        redraw
-        echo "R setup started"
-        sleep 1500m
-        call feedkeys("\\ro", 'tx')
-        redraw
-        sleep 500m
-        call feedkeys("\<A-l>", 'tx')
-        redraw
-        " andymass/vim-tradewinds dependency
-            call feedkeys("\<C-w>h", 'tx')
-            redraw
-        " Console dimensions
-            :resize 50
-            redraw
-            :vertical resize 120
-            redraw
-        setlocal nonumber
-        call feedkeys("\<A-k>", 'tx')
-        setlocal nonumber
-        redraw
-        sleep 500m
-        call feedkeys("\<Enter>", 'tx')
-        redraw
-        sleep 500m
-        call feedkeys("\<Enter>", 'tx')
-        redraw
-        call feedkeys("\<A-h>", 'tx')
-        redraw
+      setlocal shiftwidth=2
+    "     if g:r_setup_finished
+    "         return
+    "     endif
+    "     call feedkeys("\\rf", 'tx')
+    "     redraw
+    "     echo "R setup started"
+    "     sleep 1500m
+    "     call feedkeys("\\ro", 'tx')
+    "     redraw
+    "     sleep 500m
+    "     call feedkeys("\<A-l>", 'tx')
+    "     redraw
+    "     " andymass/vim-tradewinds dependency
+    "         call feedkeys("\<C-w>h", 'tx')
+    "         redraw
+    "     " Console dimensions
+    "         :resize 50
+    "         redraw
+    "         :vertical resize 120
+    "         redraw
+    "     setlocal nonumber
+    "     call feedkeys("\<A-k>", 'tx')
+    "     setlocal nonumber
+    "     redraw
+    "     sleep 500m
+    "     call feedkeys("\<Enter>", 'tx')
+    "     redraw
+    "     sleep 500m
+    "     call feedkeys("\<Enter>", 'tx')
+    "     redraw
+    "     call feedkeys("\<A-h>", 'tx')
+    "     redraw
         let g:r_setup_finished = 1
-        echo "R setup done"
+    "     echo "R setup done"
     endfunction
     autocmd BufReadPre *.R call SetupRBindings()
     autocmd BufEnter *.R call SetupR()
@@ -395,9 +405,10 @@ filetype plugin indent on
         highlight SpelunkerComplexOrCompoundWord cterm=underline
     " Disable default autogroup
         let g:spelunker_disable_auto_group = 1
+    " call timer_start(900, {-> execute(':AirlineRefresh')}, { 'repeat': -1 })
     augroup spelunker
       autocmd!
-      autocmd InsertLeave * call spelunker#check()
+      " autocmd InsertLeave * call timer_start(2000, {-> execute('call spelunker#check()')}, { 'repeat': 0 })
     augroup END
 " <!!!!!!!!**************!!!!!!!!>
 
@@ -464,7 +475,6 @@ filetype plugin indent on
         \ 'jsx',
         \ 'javascript',
         \ 'html',
-        \ 'css',
         \ 'coffe',
         \ 'eruby',
         \ 'javascript.jsx',
@@ -511,9 +521,22 @@ filetype plugin indent on
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIM-GUTENTAGS CONFIG ************************************
-    let g:gutentags_ctags_exclude = [
-        \ "node_modules",
-        \ ".git"
+  let g:gutentags_ctags_exclude = [
+      \ "node_modules",
+      \ ".git",
+      \ "client/package.json",
+      \ "client/package-lock.json",
+      \ "client/coverage",
+      \ "coverage",
+      \ "public",
+      \ "gem_licenses"
+      \ ]
+  let g:gutentags_add_default_project_roots = 0
+  let g:gutentags_project_root = ['package.json', '.git']
+  let g:gutentags_cache_dir = expand('~/.cache/vim/ctags/')
+  let g:gutentags_ctags_extra_args = [
+        \ '--tag-relative=yes',
+        \ '--fields=+ailmnS',
         \ ]
 " <!!!!!!!!**************!!!!!!!!>
 
@@ -599,8 +622,8 @@ filetype plugin indent on
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIM-KEYSOUND CONFIG ************************************
-  let g:keysound_enable = 1
-  let g:keysound_theme = 'mario'
+  " let g:keysound_enable = 1
+  " let g:keysound_theme = 'mario'
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIM-DEBUGSTRING CONFIG ************************************
@@ -613,40 +636,41 @@ filetype plugin indent on
 " <!!!!!!!!**************!!!!!!!!>
 
 " ALE CONFIG ************************************
-    let g:ale_virtualtext_cursor = 1
-    let g:ale_virtualtext_prefix = '◀ '
-    let g:ale_virtualtext_delay = 110
-    hi! link ALEVirtualTextError VirtualText
-    let g:ale_fixers = {}
-    let g:ale_fixers['r'] = ['styler']
-    let g:ale_r_lintr_options = '
-          \ with_defaults(
-          \  line_length_linter = line_length_linter(100),
-          \  camel_case_linter = NULL,
-          \  snake_case_linter = snake_case_linter
-          \ )'
-    let g:ale_fixers['javascript'] = ['importjs', 'eslint']
-    let g:ale_fixers['javascript.jsx'] = ['importjs', 'eslint']
-    highlight link ALEStyleErrorSign todo
-    let g:ale_type_map = {'eslint': {'E': 'ES'}}
-    let g:ale_echo_msg_error_str = 'E'
-    let g:ale_echo_msg_warning_str = 'W'
-    let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-    autocmd InsertLeave * ALELint
-    let g:ale_set_highlights = 0
-    let g:ale_sign_error = 'X➜'
-    let g:ale_sign_warning = '!➜'
-    let g:ale_sign_style_error = 'S➜'
-    let g:ale_lint_delay = 400
-    let g:ale_lint_on_save = 1
-    let g:ale_lint_on_text_changed =  1
-    let g:ale_linters = {
-          \  'r': ['lintr']
-          \ }
-    " Jump betwen lint errors
-        nmap <silent> [l <Plug>(ale_previous_wrap)
-        nmap <silent> ]l <Plug>(ale_next_wrap)
-    nmap <leader>l :ALEFix<CR>:echo 'Fixing ur file'<CR>
+    " let g:ale_virtualtext_cursor = 1
+    " let g:ale_virtualtext_prefix = '◀ '
+    " let g:ale_virtualtext_delay = 110
+    " hi! link ALEVirtualTextError VirtualText
+    " let g:ale_fixers = {}
+    " let g:ale_fixers['r'] = ['styler']
+    " let g:ale_r_lintr_options = '
+    "       \ with_defaults(
+    "       \  object_usage_linter = NULL,
+    "       \  line_length_linter = line_length_linter(100),
+    "       \  camel_case_linter = NULL,
+    "       \  snake_case_linter = snake_case_linter
+    "       \ )'
+    " let g:ale_fixers['javascript'] = ['importjs', 'eslint']
+    " let g:ale_fixers['javascript.jsx'] = ['importjs', 'eslint']
+    " highlight link ALEStyleErrorSign todo
+    " let g:ale_type_map = {'eslint': {'E': 'ES'}}
+    " let g:ale_echo_msg_error_str = 'E'
+    " let g:ale_echo_msg_warning_str = 'W'
+    " let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+    " autocmd InsertLeave * ALELint
+    " let g:ale_set_highlights = 0
+    " let g:ale_sign_error = 'X➜'
+    " let g:ale_sign_warning = '!➜'
+    " let g:ale_sign_style_error = 'S➜'
+    " let g:ale_lint_delay = 400
+    " let g:ale_lint_on_save = 1
+    " let g:ale_lint_on_text_changed =  1
+    " let g:ale_linters = {
+    "       \  'r': ['lintr']
+    "       \ }
+    " " Jump betwen lint errors
+    "     nmap <silent> [l <Plug>(ale_previous_wrap)
+    "     nmap <silent> ]l <Plug>(ale_next_wrap)
+    " nmap <leader>l :ALEFix<CR>:call timer_start(500, {-> execute('call spelunker#check()')}, { 'repeat': 0 })<CR> :echo 'Fixing ur file'<CR>
 " <!!!!!!!!**************!!!!!!!!>
 
 " RAINBOW-PARENTHESES CONFIG ************************************
@@ -708,18 +732,25 @@ filetype plugin indent on
 " <!!!!!!!!**************!!!!!!!!>
 
 " DEOPLETE CONFIG ************************************
-    let g:deoplete#auto_complete_start_length = 1
-    let deoplete#tag#cache_limit_size = 50000000
-    let g:deoplete#auto_complete_delay = 2
+    let g:deoplete#auto_complete_start_length = 2
+    let deoplete#tag#cache_limit_size = 500000000
+
+    " let g:deoplete#auto_complete_delay = 2
+    " let g:deoplete#auto_complete_delay = 0
+
     let g:deoplete#enable_ignore_case = 0
     let g:deoplete#enable_smart_case = 1
     let g:deoplete#enable_at_startup = 1
-    " let g:deoplete#enable_refresh_always = 1
-    let g:deoplete#enable_refresh_always = 0
-    let g:deoplete#auto_refresh_delay = 1
+
+    " let g:deoplete#enable_refresh_always = 0
+    let g:deoplete#enable_refresh_always = 1
+
+    " let g:deoplete#auto_refresh_delay = 1
+    " let g:deoplete#auto_refresh_delay = 0
+
     let g:deoplete#max_abbr_width = 0
     let g:deoplete#max_menu_width = 0
-    let g:deoplete#max_list = 50
+    let g:deoplete#max_list = 20
     imap <C-j> <Tab>
     imap <C-k> <S-Tab>
 " <!!!!!!!!**************!!!!!!!!>
@@ -751,8 +782,10 @@ filetype plugin indent on
     let g:airline#extensions#branch#displayed_head_limit = 15
     set fillchars+=stl:\ ,stlnc:\
     let g:airline_theme='wombat'
-    let g:airline_section_z = '0 %#__accent_bold#%{LineNoIndicator()}▏%#__restore__#%L  ➜▌%2c'
-    let g:airline_section_x = ''
+    let g:airline_section_z = '%#__accent_bold#%{LineNoIndicator()}▏%#__restore__#/%L  ➜▌%2c'
+    let g:airline_section_x = "%{vim_timebox#time_left()}"
+    " call timer_start(900, {-> execute(':AirlineRefresh')}, { 'repeat': -1 })
+
     let g:airline_mode_map = {
             \ '__' : '-',
             \ 'n'  : 'N',
@@ -880,7 +913,8 @@ filetype plugin indent on
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIMUX CONFIG ************************************
-    let g:vimuxUseNearestPane = 0
+    " let g:vimuxUseNearestPane = 0
+    let g:vimuxUseNearestPane = 1
 " <!!!!!!!!**************!!!!!!!!>
 
 " FUGITIVE CONFIG ************************************
@@ -920,24 +954,12 @@ filetype plugin indent on
         autocmd FileType javascript.jsx setlocal colorcolumn=101
         autocmd FileType ruby setlocal colorcolumn=141
         let g:deoplete#enable_ignore_case = 1
-        " Search projectwide
-            nnoremap , :Ag!<Space>-Q<Space>--ignore node_modules<Space>''<Left>
-        " Search selected text project wide (+ possibility to pass path)
-            vnoremap , y:Ag!<Space>-Q<Space>--ignore node_modules<Space>'<C-r>"'<Space>
         let g:ale_linters = {
         \   'javascript': ['eslint', 'importjs'],
         \   'ruby': ['rubocop'],
         \}
         let g:ale_fixers = {'ruby': ['rubocop'], 'javascript': ['eslint', 'importjs']}
         let g:rbpt_max = 0
-        let g:gutentags_ctags_exclude = [
-            \ "node_modules",
-            \ ".git",
-            \ "client/package.json",
-            \ "client/package-lock.json",
-            \ "client/coverage",
-            \ "public"
-            \ ]
     endif
 " <!!!!!!!!**************!!!!!!!!>
 
@@ -961,11 +983,11 @@ filetype plugin indent on
           vnoremap <C-v> x"+P
           inoremap <C-v> <Esc>"+pa
       " Change current line color when entering/leaving insert mode
-          autocmd InsertEnter * highlight  CursorLine ctermbg=52
-          autocmd InsertLeave * highlight  CursorLine ctermbg=235
+          " autocmd InsertEnter * highlight  CursorLine ctermbg=52
+          " autocmd InsertLeave * highlight  CursorLine ctermbg=235
       " Change current line number color when entering/leaving insert mode
-          autocmd InsertEnter * highlight  CursorLineNR ctermbg=124
-          autocmd InsertLeave * highlight  CursorLineNR ctermbg=246
+          " autocmd InsertEnter * highlight  CursorLineNR ctermbg=124
+          " autocmd InsertLeave * highlight  CursorLineNR ctermbg=246
       " Check file change every 4 seconds ('CursorHold') and reload the buffer upon detecting change
           set autoread
           autocmd CursorHold * checktime
@@ -1027,7 +1049,7 @@ filetype plugin indent on
           map / /\V
           map ? ?\V
       " Search react component usages
-          noremap <leader>u lbvey:Ag! --ignore node_modules --ignore tests '<<C-r>0\b'<CR>
+          noremap <leader>u lbvey:Ag! --ignore node_modules --ignore coverage --ignore tests '<<C-r>0\b'<CR>
       " Jumps to definition of javascript thing under cursor and persists current inc search value
           noremap gd :let @t = @/<CR>*ggn/from<CR>$hgfggn:let @/ = @t<CR>
 
@@ -1092,15 +1114,51 @@ filetype plugin indent on
           endif
         endfunction
         nmap <leader>b :call ToggleScrollBind()<CR>
+    " Search projectwide
+        nnoremap , :Ag!<Space>-Q<Space>--ignore node_modules --ignore coverage<Space>''<Left>
+    " Search selected text project wide (+ possibility to pass path)
+        vnoremap , y:Ag!<Space>-Q<Space>--ignore node_modules --ignore coverage<Space>'<C-r>"'<Space>
 " <!!!!!!!!**************!!!!!!!!>
 
 
-" test abbreviations
+function! EatWhiteSpace()
+    let c = nr2char(getchar(0))
+    return (c =~ '\s') ? '' : c
+endfunction
+
+  " js jest test abbrevs
+    autocmd BufEnter *.test.js iab <buffer> cwrs const { component, wrapper } = renderShallowWrapper()<c-r>=EatWhiteSpace()<cr>
+    autocmd BufEnter *.test.js iab <buffer> cwrd const { component, wrapper } = renderWrapper()<c-r>=EatWhiteSpace()<cr>
+    autocmd BufEnter *.test.js iab <buffer> crs const { component } = renderShallowWrapper()<c-r>=EatWhiteSpace()<cr>
+    autocmd BufEnter *.test.js iab <buffer> wrs const { wrapper } = renderShallowWrapper()<c-r>=EatWhiteSpace()<cr>
+    autocmd BufEnter *.test.js iab <buffer> crd const { component } = renderWrapper()<c-r>=EatWhiteSpace()<cr>
+    autocmd BufEnter *.test.js iab <buffer> wrd const { wrapper } = renderWrapper()<c-r>=EatWhiteSpace()<cr>
+    autocmd BufEnter *.test.js iab <buffer> com component<c-r>=EatWhiteSpace()<cr>
+
+    autocmd BufEnter *.test.js iab <buffer> ex expect(<c-r>=EatWhiteSpace()<cr>
+    autocmd BufEnter *.test.js iab <buffer> te toEqual(<c-r>=EatWhiteSpace()<cr>
+
+    autocmd BufEnter *.test.js iab <buffer> mrv mockReturnValue(<c-r>=EatWhiteSpace()<cr>
+    autocmd BufEnter *.test.js iab <buffer> mi mockImplementation(<c-r>=EatWhiteSpace()<cr>
+    autocmd BufEnter *.test.js iab <buffer> mib mockImplementation(() => {})<c-r>=EatWhiteSpace()<cr>
+
+    autocmd BufEnter *.test.js iab <buffer> thbc toHaveBeenCalled()<c-r>=EatWhiteSpace()<cr>
+    autocmd BufEnter *.test.js iab <buffer> thbct toHaveBeenCalledTimes(<c-r>=EatWhiteSpace()<cr>
+    autocmd BufEnter *.test.js iab <buffer> thbcw toHaveBeenCalledWith(<c-r>=EatWhiteSpace()<cr>
+    autocmd BufEnter *.test.js iab <buffer> jso jest.spyOn(<c-r>=EatWhiteSpace()<cr>
+    autocmd BufEnter *.test.js iab <buffer> jfn jest.fn()<c-r>=EatWhiteSpace()<cr>
+    autocmd BufEnter *.test.js iab <buffer> sst setState(<c-r>=EatWhiteSpace()<cr>
+
+  " js generic abbrevs
+    autocmd BufEnter *.js,*.jsx iab <buffer> dbg debugger<c-r>=EatWhiteSpace()<cr>
+    autocmd BufEnter *.js,*.jsx inoremap <A-=> ()<space>=><space>{}
+
+
+  " ruby generic abbrevs
+    autocmd BufEnter *.rb iab dbg binding.pry
+    autocmd BufEnter *.rb iab org organization
+    autocmd BufEnter *.rb inoremap <A-Bslash> <Space><Bar><Bar>=<Space>
     inoremap <A-.> <C-]>
-    autocmd BufNew *.js,*.jsx iab dbg debugger
-    autocmd BufNew *.rb iab dbg binding.pry
-    autocmd BufNew *.rb iab org organization
-    autocmd BufNew *.rb inoremap <A-Bslash> <Space><Bar><Bar>=<Space>
 
 augroup LargeFile
         let g:large_file = 3145728 " 3MB
@@ -1120,4 +1178,31 @@ augroup LargeFile
                         \ set eventignore-=FileType |
                 \ endif
 augroup END
+
+
+autocmd InsertEnter * set timeoutlen=250
+autocmd InsertLeave * set timeoutlen=900
+inoremap `` ~
+inoremap 11 !
+inoremap 22 @
+inoremap 33 #
+inoremap 44 $
+inoremap 55 %
+inoremap 66 ^
+inoremap 77 &
+inoremap 88 *
+inoremap 99 (
+inoremap 00 )
+inoremap -- _
+inoremap == +
+inoremap [[ {
+inoremap ]] }
+inoremap \\ \|
+inoremap ;; :
+inoremap '' "
+inoremap ,, <
+inoremap .. >
+inoremap // ?
+vmap s S
+
 
