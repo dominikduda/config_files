@@ -37,7 +37,7 @@ hi CTagsImport guifg=NONE guibg=NONE guisp=NONE gui=underline ctermfg=249 ctermb
 hi CTagsMember guifg=NONE guibg=NONE guisp=NONE gui=italic,underline ctermfg=249 ctermbg=249 cterm=NONE
 hi Character guifg=#ff5f00 guibg=NONE guisp=NONE gui=NONE ctermfg=202 ctermbg=NONE cterm=NONE
 " hi ColorColumn ctermbg=236
-hi ColorColumn guifg=#8b8b83 guibg=#141414 guisp=#141414 gui=NONE ctermfg=232 ctermbg=233 cterm=NONE
+hi ColorColumn guifg=#8b8b83 guibg=#141414 guisp=#141414 gui=NONE ctermfg=NONE ctermbg=233 cterm=NONE
 hi Comment guifg=#10cccc guibg=NONE guisp=NONE gui=NONE ctermfg=80 ctermbg=NONE cterm=NONE
 hi Conditional guifg=#ffd500 guibg=NONE guisp=NONE gui=NONE ctermfg=220 ctermbg=NONE cterm=NONE
 hi Constant guifg=#f50000 guibg=NONE guisp=NONE gui=NONE ctermfg=203 ctermbg=NONE cterm=NONE
@@ -107,7 +107,6 @@ hi! link WildMenu IncSearch
 hi cursorim guifg=#192224 guibg=#536991 guisp=#536991 gui=NONE ctermfg=235 ctermbg=60 cterm=NONE
 hi lcursor guifg=#000000 guibg=#cdaf95 guisp=#cdaf95 gui=NONE ctermfg=NONE ctermbg=180 cterm=NONE
 hi lcursor guifg=#000000 guibg=#cdaf95 guisp=#cdaf95 gui=NONE ctermfg=NONE ctermbg=180 cterm=NONE
-
 
 " Custom:
 " hi! link NonText LineNr

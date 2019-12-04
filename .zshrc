@@ -1,3 +1,4 @@
+if [ "$TMUX" = "" ]; then tmux; fi
 # Path to your oh-my-zsh installation.
 export ZSH=/home/dominikduda/.oh-my-zsh
 
@@ -97,7 +98,10 @@ open() {
   gnome-open $1 &> /dev/null
 }
 
-alias gd="git filteredDiff"
+# Fuzzy:
+alias gcof="git checkout \$(git branch -a | fzf)"
+
+alias gdf="git filteredDiff"
 alias gds="git diff --staged"
 
 alias v="nvim"
