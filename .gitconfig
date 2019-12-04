@@ -16,8 +16,6 @@
 	oldHighlight = red bold 52
 	newNormal = green bold
 	newHighlight = green bold 22
-[init]
-	templatedir = /home/dominikduda/.git-templates
 [push]
         ; refuse to push if upstream name is different from local, push the current branch back to the branch whose changes are usually integrated into the current branch
         default = simple
