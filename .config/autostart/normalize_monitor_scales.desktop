@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Exec=xrandr --output HDMI-0 --mode 3440x1440 --scale 2x2 --pos 0x0 --output DP-2 --mode 3840x2160 --scale 1x1 --pos 6880x0
+Exec=normalize_monitor_scales.sh
 Hidden=false
 NoDisplay=false
 X-GNOME-Autostart-enabled=true

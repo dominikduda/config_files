@@ -153,5 +153,7 @@ source ~/.bashrc
 # custom monitor scaling
 mkdir ~/.config/autostart
 cp ~/github/config_files/.config/autostart/normalize_monitor_scales.desktop ~/.config/autostart/normalize_monitor_scales.desktop
+cp ~/github/config_files/bin/normalize_monitor_scales.sh ~/bin/normalize_monitor_scales.sh
+chmod +x ~/bin/normalize_monitor_scales.sh
 
 )
