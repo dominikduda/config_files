@@ -76,16 +76,14 @@ ssh-keyscan github.com >> ~/.ssh/known_hosts
 git clone git@github.com:dominikduda/config_files.git ~/github/config_files
 cp ~/github/config_files/.gitconfig ~/.gitconfig
 
-echo "@>> configure system"
+echo "@>> setup custom fonts"
 
-# copy and refresh fonts
 mkdir ~/.fonts
 cp -a ~/github/config_files/input_font/. ~/.fonts/
 fc-cache -f -v
 
-gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
+echo "@>> setup zsh and oh-my-zsh"
 
-# zsh setup (reboot needed)
 cp ~/github/config_files/.zshrc ~/.zshrc
 sudo apt install zsh
 echo "n" | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -94,19 +92,19 @@ git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.oh-my-zsh/cust
 git clone https://github.com/djui/alias-tips.git ~/.oh-my-zsh/custom/plugins/alias-tips
 sudo chsh -s /bin/zsh
 
-# import terminal profile
-
-dconf load /org/gnome/terminal/legacy/profiles:/ < ~/github/config_files/gnome-terminal-profiles.dconf
-
-# setup tmux
+echo "@>> setup tmux"
+# todo powerline!
 
 sudo apt install tmux
 cp ~/github/config_files/.tmux.conf ~/.tmux.conf
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 tmux source ~/.tmux.conf
 ~/.tmux/plugins/tpm/scripts/install_plugins.sh
+cp ~/github/config_files/.tmux/plugins/tmux-powerline/themes/ddtheme.sh ~/.tmux/plugins/tmux-powerline/themes/ddtheme.sh
+cp ~/github/config_files/.tmux-powerlinerc ~/.tmux-powerlinerc
 
-# neovim setup
+echo "@>> setup neovim"
+
 sudo add-apt-repository ppa:neovim-ppa/unstable -y
 sudo apt-get update
 sudo apt --assume-yes install neovim
@@ -130,7 +128,8 @@ mkdir ~/.config/nvim/colors
 cp ~/github/config_files/.config/nvim/colors/dante_modified.vim ~/.config/nvim/colors/dante_modified.vim
 vim +PlugInstall +qall
 
-# universal-ctags setup
+echo "@>> setup universal-ctags"
+
 mkdir ~/Desktop/universal-ctags
 git clone https://github.com/universal-ctags/ctags.git ~/Desktop/universal-ctags
 sudo apt --assume-yes install \
@@ -148,12 +147,20 @@ make
 sudo make install
 cd ~/
 
-source ~/.bashrc
+
+echo "@>> configure system"
+
+gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
+
+# import terminal profile
+dconf load /org/gnome/terminal/legacy/profiles:/ < ~/github/config_files/gnome-terminal-profiles.dconf
 
 # custom monitor scaling
 mkdir ~/.config/autostart
 cp ~/github/config_files/.config/autostart/normalize_monitor_scales.desktop ~/.config/autostart/normalize_monitor_scales.desktop
 cp ~/github/config_files/bin/normalize_monitor_scales.sh ~/bin/normalize_monitor_scales.sh
 chmod +x ~/bin/normalize_monitor_scales.sh
+
+source ~/.bashrc
 
 )
