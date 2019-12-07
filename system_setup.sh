@@ -93,7 +93,6 @@ git clone https://github.com/djui/alias-tips.git ~/.oh-my-zsh/custom/plugins/ali
 sudo chsh -s /bin/zsh
 
 echo "@>> setup tmux"
-# todo powerline!
 
 sudo apt install tmux
 cp ~/github/config_files/.tmux.conf ~/.tmux.conf
@@ -102,6 +101,12 @@ tmux source ~/.tmux.conf
 ~/.tmux/plugins/tpm/scripts/install_plugins.sh
 cp ~/github/config_files/.tmux/plugins/tmux-powerline/themes/ddtheme.sh ~/.tmux/plugins/tmux-powerline/themes/ddtheme.sh
 cp ~/github/config_files/.tmux-powerlinerc ~/.tmux-powerlinerc
+
+echo "@>> setup tmuxinator"
+
+gem install tmuxinator
+touch ~/..tmuxinator
+cp -a ~/github/config_files/.tmuxinator/. ~/.tmuxinator/
 
 echo "@>> setup neovim"
 
