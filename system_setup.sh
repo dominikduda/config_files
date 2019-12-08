@@ -78,14 +78,26 @@ cp ~/github/config_files/.gitconfig ~/.gitconfig
 
 echo "@>> setup R"
 
-git clone git://github.com/viking/Renv.git ~/.Renv
-
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 sudo add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/' -y
 sudo apt update
 sudo apt --assume-yes install r-base
 cp ~/github/config_files/.Rprofile ~/.Rprofile
 pip3 install radian
+sudo Rscript -e "install.packages('pacman')"
+
+echo "@>> setup chart wallpaper"
+
+cp ~/github/config_files/bin/generate_wallpaper.sh ~/bin/generate_wallpaper.sh
+sudo curl -L "https://gist.githubusercontent.com/dominikduda/4ebab55329d7e8c9f2cbb05b82202705/raw/72e340bff29c16df0f9378c25bd1debefa35778a/generate_wallpaper.r" -o ~/bin/generate_wallpaper.r
+sudo ~/bin/generate_wallpaper.sh
+gsettings set org.gnome.desktop.background picture-uri ~/Pictures/wallpaper_chart.png
+gsettings set org.gnome.desktop.background picture-options 'stretched'
+gsettings set org.gnome.desktop.screensaver picture-uri ~/Pictures/wallpaper_chart.png
+gsettings set org.gnome.desktop.screensaver picture-options 'stretched'
+touch ~/crontab
+echo "@reboot sleep 10; ~/bin/generate_wallpaper.sh" >> ~/crontab
+crontab -u dominikduda ~/crontab
 
 echo "@>> setup custom fonts"
 
