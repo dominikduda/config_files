@@ -24,6 +24,7 @@ cp ~/bin/fix_vim_syntax_files.sh ~/github/config_files/bin/fix_vim_syntax_files.
 cp ~/bin/setup_md.sh ~/github/config_files/bin/setup_md.sh
 cp ~/bin/backup_config_files.sh ~/github/config_files/bin/backup_config_files.sh
 cp ~/bin/normalize_monitor_scales.sh ~/github/config_files/bin/normalize_monitor_scales.sh
+cp ~/bin/generate_wallpaper.sh ~/github/config_files/bin/generate_wallpaper.sh
 
 # autostart
 cp ~/.config/autostart/normalize_monitor_scales.desktop ~/github/config_files/.config/autostart/normalize_monitor_scales.desktop
