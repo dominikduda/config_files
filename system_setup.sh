@@ -82,6 +82,12 @@ mkdir ~/.fonts
 cp -a ~/github/config_files/input_font/. ~/.fonts/
 fc-cache -f -v
 
+echo "@>> update grub font"
+
+sudo grub-mkfont -s 55 -o /boot/grub/input_for_grub.pf2 ~/github/config_files/input_font/input_regular.ttf
+echo "GRUB_FONT=/boot/grub/input_for_grub.pf2" | sudo tee -a /etc/default/grub
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+
 echo "@>> setup zsh and oh-my-zsh"
 
 cp ~/github/config_files/.zshrc ~/.zshrc
@@ -175,6 +181,7 @@ mkdir ~/.config/autostart
 cp ~/github/config_files/.config/autostart/normalize_monitor_scales.desktop ~/.config/autostart/normalize_monitor_scales.desktop
 cp ~/github/config_files/bin/normalize_monitor_scales.sh ~/bin/normalize_monitor_scales.sh
 chmod +x ~/bin/normalize_monitor_scales.sh
+
 
 source ~/.bashrc
 
