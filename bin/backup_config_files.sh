@@ -8,7 +8,6 @@ cp ~/.config/nvim/colors/dante_modified.vim ~/github/config_files/.config/nvim/c
 cp -r ~/.rstudio-desktop ~/github/config_files/.rstudio-desktop
 cp -r ~/.config/RStudio ~/github/config_files/.config/RStudio
 
-
 # zsh
 cp ~/.zshrc ~/github/config_files/.zshrc
 
@@ -28,6 +27,10 @@ cp ~/bin/normalize_monitor_scales.sh ~/github/config_files/bin/normalize_monitor
 
 # autostart
 cp ~/.config/autostart/normalize_monitor_scales.desktop ~/github/config_files/.config/autostart/normalize_monitor_scales.desktop
+
+# custom app starters
+
+cp ~/.local/share/applications/whatsapp.desktop ~/github/config_files/.local/share/applications/whatsapp.desktop
 
 # other
 cp ~/.config/redshift.conf ~/github/config_files/.config/redshift.conf

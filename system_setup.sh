@@ -163,6 +163,10 @@ echo "@>> install chrome"
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo dpkg -i google-chrome-stable_current_amd64.deb
 
+echo "@>> setup whatsapp"
+
+cp ~/github/config_files/.local/share/applications/whatsapp.desktop ~/.local/share/applications/whatsapp.desktop
+
 echo "@>> install docker"
 
 sudo apt --assume-yes install docker.io
@@ -178,8 +182,26 @@ sudo apt --assume-yes install numix-icon-theme-circle
 gsettings set org.gnome.desktop.interface icon-theme "Numix-Circle"
 
 echo "@>> install slack"
+
 curl https://downloads.slack-edge.com/linux_releases/slack-desktop-4.0.2-amd64.deb -o ~/Downloads/slack.deb
 sudo apt --assume-yes install ~/Downloads/slack.deb
+
+echo "@>> install gnome-system-monitor from apt"
+
+sudo snap remove --purge gnome-system-monitor
+sudo apt --assume-yes install gnome-system-monitor
+
+echo "@>> install spotify"
+
+curl -sS https://download.spotify.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
+sudo apt update
+sudo apt --assume-yes install spotify-client
+
+echo "@>> set favourite icons"
+
+# ls /usr/share/applications
+dconf write /org/gnome/shell/favorite-apps "['google-chrome.desktop', 'nautilus.desktop', 'gnome-system-monitor.desktop', 'gnome-terminal.desktop', 'spotify.desktop', 'whatsapp.desktop', 'slack.desktop']"
 
 echo "@>> configure system"
 
