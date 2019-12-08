@@ -163,6 +163,12 @@ echo "@>> install chrome"
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo dpkg -i google-chrome-stable_current_amd64.deb
 
+echo "@>> setup numix circle icons"
+
+sudo add-apt-repository ppa:numix/ppa -y
+sudo apt --assume-yes install numix-icon-theme-circle
+gsettings set org.gnome.desktop.interface icon-theme "Numix-Circle"
+
 echo "@>> configure system"
 
 # flux
