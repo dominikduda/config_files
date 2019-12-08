@@ -221,9 +221,8 @@ echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sou
 sudo apt update
 sudo apt --assume-yes install spotify-client
 
-echo "@>> set favourite icons"
+echo "@>> set favourite bar"
 
-# ls /usr/share/applications
 dconf write /org/gnome/shell/favorite-apps "['google-chrome.desktop', 'nautilus.desktop', 'gnome-system-monitor.desktop', 'gnome-terminal.desktop', 'spotify.desktop', 'whatsapp.desktop', 'slack.desktop']"
 
 echo "@>> configure system"
@@ -245,6 +244,9 @@ cp ~/github/config_files/.config/autostart/normalize_monitor_scales.desktop ~/.c
 cp ~/github/config_files/bin/normalize_monitor_scales.sh ~/bin/normalize_monitor_scales.sh
 chmod +x ~/bin/normalize_monitor_scales.sh
 
+# setup profile picture
+echo "Icon=/var/lib/AccountsService/icons/dominikduda" | sudo tee -a /var/lib/AccountsService/users/dominikduda
+sudo cp ~/github/config_files/dd_logo_blue_bg.png /var/lib/AccountsService/icons/dominikduda
 
 source ~/.bashrc
 
