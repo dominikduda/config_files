@@ -177,6 +177,10 @@ sudo add-apt-repository ppa:numix/ppa -y
 sudo apt --assume-yes install numix-icon-theme-circle
 gsettings set org.gnome.desktop.interface icon-theme "Numix-Circle"
 
+echo "@>> install slack"
+curl https://downloads.slack-edge.com/linux_releases/slack-desktop-4.0.2-amd64.deb -o ~/Downloads/slack.deb
+sudo apt --assume-yes install ~/Downloads/slack.deb
+
 echo "@>> configure system"
 
 # flux
