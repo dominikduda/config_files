@@ -76,6 +76,17 @@ ssh-keyscan github.com >> ~/.ssh/known_hosts
 git clone git@github.com:dominikduda/config_files.git ~/github/config_files
 cp ~/github/config_files/.gitconfig ~/.gitconfig
 
+echo "@>> setup R"
+
+git clone git://github.com/viking/Renv.git ~/.Renv
+
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
+sudo add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/' -y
+sudo apt update
+sudo apt --assume-yes install r-base
+cp ~/github/config_files/.Rprofile ~/.Rprofile
+pip3 install radian
+
 echo "@>> setup custom fonts"
 
 mkdir ~/.fonts
