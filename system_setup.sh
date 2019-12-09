@@ -235,6 +235,7 @@ gsettings set org.gnome.mutter workspaces-only-on-primary false
 gsettings set org.gnome.desktop.peripherals.keyboard delay 150
 gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 20
 gsettings set org.gnome.desktop.interface cursor-size 40
+gsettings set org.gnome.nautilus.desktop trash-icon-visible false
 
 # import terminal profile
 dconf load /org/gnome/terminal/legacy/profiles:/ < ~/github/config_files/gnome-terminal-profiles.dconf
