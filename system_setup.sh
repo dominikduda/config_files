@@ -114,7 +114,7 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 echo "@>> setup zsh and oh-my-zsh"
 
 cp ~/github/config_files/.zshrc ~/.zshrc
-sudo apt install zsh
+sudo apt --assume-yes install zsh
 echo "n" | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
