@@ -123,7 +123,7 @@ sudo chsh -s /bin/zsh
 
 echo "@>> setup tmux"
 
-sudo apt install tmux
+sudo apt --assume-yes install tmux
 cp ~/github/config_files/.tmux.conf ~/.tmux.conf
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 tmux source ~/.tmux.conf
