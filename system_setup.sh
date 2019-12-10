@@ -56,7 +56,7 @@ gpg2 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D69
 curl -sSL https://get.rvm.io | bash -s stable
 source ~/.bashrc
 rvm install ruby-2.6
-/bin/bash --login
+source ~/.bashrc
 rvm --default use 2.6
 
 echo "@>> Installing NVM"
@@ -114,13 +114,13 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 echo "@>> setup zsh and oh-my-zsh"
 
-cp ~/github/config_files/.zshrc ~/.zshrc
 sudo apt --assume-yes install zsh
 echo "n" | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 git clone https://github.com/djui/alias-tips.git ~/.oh-my-zsh/custom/plugins/alias-tips
 sudo chsh -s /bin/zsh
+cp ~/github/config_files/.zshrc ~/.zshrc
 
 echo "@>> setup tmux"
 
