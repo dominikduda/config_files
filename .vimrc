@@ -359,7 +359,7 @@ filetype plugin indent on
         let g:spelunker_disable_auto_group = 1
     augroup spelunker
       autocmd!
-      autocmd InsertLeave * call timer_start(500), {-> execute('call spelunker#check()')}, { 'repeat': 0 })
+      " autocmd InsertLeave * call timer_start(500), {-> execute('call spelunker#check()')}, { 'repeat': 0 })
     augroup END
 " <!!!!!!!!**************!!!!!!!!>
 
