@@ -258,6 +258,6 @@ sudo cp ~/github/config_files/dd_logo_blue_bg.png /var/lib/AccountsService/icons
 
 source ~/.bashrc
 
-) >> ~/Desktop/system_setup_logs.txt
+) 2>&1 | tee ~/Desktop/system_setup_logs.txt
 
 )
