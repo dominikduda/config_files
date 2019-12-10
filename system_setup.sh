@@ -88,6 +88,7 @@ sudo Rscript -e "install.packages('pacman')"
 
 echo "@>> setup chart wallpaper"
 
+mkdir ~/bin
 cp ~/github/config_files/bin/generate_wallpaper.sh ~/bin/generate_wallpaper.sh
 sudo curl -L "https://gist.githubusercontent.com/dominikduda/4ebab55329d7e8c9f2cbb05b82202705/raw/72e340bff29c16df0f9378c25bd1debefa35778a/generate_wallpaper.r" -o ~/bin/generate_wallpaper.r
 sudo ~/bin/generate_wallpaper.sh
