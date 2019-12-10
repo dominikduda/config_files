@@ -30,6 +30,10 @@ else
     exit
 fi
 
+touch ~/Desktop/system_setup_logs.txt
+
+(
+
 echo "@>> Setup SSH keys"
 
 sudo chmod 600 ~/.ssh/id_rsa
@@ -42,16 +46,16 @@ echo "@>> Updating kernel"
 sudo apt-add-repository ppa:teejee2008/ppa -y
 sudo apt-get --assume-yes install ukuu
 sudo ukuu --yes --install v5.1.21
-sudo apt --assume-yes autoremove ukuu
+sudo apt-get --assume-yes autoremove ukuu
 
 echo "@>> Installing nvidia driver"
 
 sudo add-apt-repository ppa:graphics-drivers/ppa -y
-sudo apt --assume-yes install nvidia-driver-435 nvidia-settings
+sudo apt-get --assume-yes install nvidia-driver-435 nvidia-settings
 
 echo "@>> Installing RVM"
 
-sudo apt --assume-yes install gnupg2
+sudo apt-get --assume-yes install gnupg2
 gpg2 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
 curl -sSL https://get.rvm.io | bash -s stable
 source ~/.bashrc
@@ -68,7 +72,7 @@ source ~/.bashrc
 
 echo "@>> Installing and setting up git"
 
-sudo apt --assume-yes install git
+sudo apt-get --assume-yes install git
 npm install -g diff-so-fancy
 mkdir ~/github
 mkdir ~/github/config_files
@@ -80,8 +84,8 @@ echo "@>> setup R"
 
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 sudo add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/' -y
-sudo apt update
-sudo apt --assume-yes install r-base
+sudo apt-get update
+sudo apt-get --assume-yes install r-base
 cp ~/github/config_files/.Rprofile ~/.Rprofile
 pip3 install radian
 sudo Rscript -e "install.packages('pacman')"
@@ -114,7 +118,7 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 echo "@>> setup zsh and oh-my-zsh"
 
-sudo apt --assume-yes install zsh
+sudo apt-get --assume-yes install zsh
 echo "n" | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
@@ -124,7 +128,7 @@ cp ~/github/config_files/.zshrc ~/.zshrc
 
 echo "@>> setup tmux"
 
-sudo apt --assume-yes install tmux
+sudo apt-get --assume-yes install tmux
 cp ~/github/config_files/.tmux.conf ~/.tmux.conf
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 tmux source ~/.tmux.conf
@@ -142,13 +146,13 @@ echo "@>> setup neovim"
 
 sudo add-apt-repository ppa:neovim-ppa/unstable -y
 sudo apt-get update
-sudo apt --assume-yes install neovim
-sudo apt --assume-yes install python-dev python-pip python3-dev python3-pip
-sudo apt --assume-yes install python-neovim
-sudo apt --assume-yes install python3-neovim
+sudo apt-get --assume-yes install neovim
+sudo apt-get --assume-yes install python-dev python-pip python3-dev python3-pip
+sudo apt-get --assume-yes install python-neovim
+sudo apt-get --assume-yes install python3-neovim
 pip install pynvim
 pip3 install pynvim
-sudo apt --assume-yes install xclip
+sudo apt-get --assume-yes install xclip
 npm install -g neovim
 gem install neovim
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
@@ -167,7 +171,7 @@ echo "@>> setup universal-ctags"
 
 mkdir ~/Desktop/universal-ctags
 git clone https://github.com/universal-ctags/ctags.git ~/Desktop/universal-ctags
-sudo apt --assume-yes install \
+sudo apt-get --assume-yes install \
     gcc make \
     pkg-config autoconf automake \
     python3-docutils \
@@ -193,7 +197,7 @@ cp ~/github/config_files/.local/share/applications/whatsapp.desktop ~/.local/sha
 
 echo "@>> install docker"
 
-sudo apt --assume-yes install docker.io
+sudo apt-get --assume-yes install docker.io
 sudo systemctl start docker
 sudo systemctl enable docker
 sudo curl -L "https://github.com/docker/compose/releases/download/1.25.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -202,25 +206,25 @@ sudo chmod +x /usr/local/bin/docker-compose
 echo "@>> setup numix circle icons"
 
 sudo add-apt-repository ppa:numix/ppa -y
-sudo apt --assume-yes install numix-icon-theme-circle
+sudo apt-get --assume-yes install numix-icon-theme-circle
 gsettings set org.gnome.desktop.interface icon-theme "Numix-Circle"
 
 echo "@>> install slack"
 
 curl https://downloads.slack-edge.com/linux_releases/slack-desktop-4.0.2-amd64.deb -o ~/Downloads/slack.deb
-sudo apt --assume-yes install ~/Downloads/slack.deb
+sudo apt-get --assume-yes install ~/Downloads/slack.deb
 
 echo "@>> install gnome-system-monitor from apt"
 
 sudo snap remove --purge gnome-system-monitor
-sudo apt --assume-yes install gnome-system-monitor
+sudo apt-get --assume-yes install gnome-system-monitor
 
 echo "@>> install spotify"
 
 curl -sS https://download.spotify.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
-sudo apt update
-sudo apt --assume-yes install spotify-client
+sudo apt-get update
+sudo apt-get --assume-yes install spotify-client
 
 echo "@>> set favourite bar"
 
@@ -233,6 +237,7 @@ gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
 # workspaces work on multiple monitors
 gsettings set org.gnome.mutter workspaces-only-on-primary false
 
+gsettings set org.gnome.desktop.interface text-scaling-factor 1.3
 gsettings set org.gnome.desktop.peripherals.keyboard delay 150
 gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 20
 gsettings set org.gnome.desktop.interface cursor-size 40
@@ -252,5 +257,7 @@ echo "Icon=/var/lib/AccountsService/icons/dominikduda" | sudo tee -a /var/lib/Ac
 sudo cp ~/github/config_files/dd_logo_blue_bg.png /var/lib/AccountsService/icons/dominikduda
 
 source ~/.bashrc
+
+) >> ~/Desktop/system_setup_logs.txt
 
 )
