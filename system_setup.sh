@@ -80,6 +80,10 @@ ssh-keyscan github.com >> ~/.ssh/known_hosts
 git clone git@github.com:dominikduda/config_files.git ~/github/config_files
 cp ~/github/config_files/.gitconfig ~/.gitconfig
 
+echo "@>> Install python"
+
+sudo apt --assume-yes install python-dev python-pip python3-dev python3-pip
+
 echo "@>> setup R"
 
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
@@ -146,10 +150,9 @@ echo "@>> setup neovim"
 
 sudo add-apt-repository ppa:neovim-ppa/unstable -y
 sudo apt-get update
-sudo apt-get --assume-yes install neovim
-sudo apt-get --assume-yes install python-dev python-pip python3-dev python3-pip
-sudo apt-get --assume-yes install python-neovim
-sudo apt-get --assume-yes install python3-neovim
+sudo apt --assume-yes install neovim
+sudo apt --assume-yes install python-neovim
+sudo apt --assume-yes install python3-neovim
 pip install pynvim
 pip3 install pynvim
 sudo apt-get --assume-yes install xclip
