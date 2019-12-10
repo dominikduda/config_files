@@ -30,9 +30,9 @@ else
     exit
 fi
 
-touch ~/Desktop/system_setup_logs.txt
-
 (
+
+touch ~/Desktop/system_setup_logs.txt
 
 echo "@>> Setup SSH keys"
 
