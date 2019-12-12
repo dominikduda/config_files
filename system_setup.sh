@@ -50,6 +50,7 @@ sudo mv ~/.cache/ukuu/v5.1.21 ~/Downloads
 cd ~/Downloads/v5.1.21/amd64
 sudo dpkg -i *
 sudo apt-get --assume-yes autoremove ukuu
+cd ~
 
 echo "@>> Installing nvidia driver"
 
