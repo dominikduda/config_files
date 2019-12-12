@@ -42,15 +42,18 @@ ssh-add
 
 echo "@>> Updating kernel"
 
-# this did not work last time
+(
 sudo apt-add-repository ppa:teejee2008/ppa -y
 sudo apt-get --assume-yes install ukuu
 sudo ukuu --download v5.1.21
+sleep 1;
+source ~/.bashrc
 sudo mv ~/.cache/ukuu/v5.1.21 ~/Downloads
 cd ~/Downloads/v5.1.21/amd64
 sudo dpkg -i *
 sudo apt-get --assume-yes autoremove ukuu
 cd ~
+)
 
 echo "@>> Installing nvidia driver"
 
