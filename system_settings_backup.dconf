@@ -14,7 +14,7 @@ overrides={'Gdk/WindowScalingFactor': <1>}
 numlock-state='off'
 
 [org/gnome/shell/extensions/dash-to-dock]
-dock-fixed=false
+dock-fixed=true
 
 [org/gnome/shell]
 favorite-apps=['google-chrome.desktop', 'org.gnome.Nautilus.desktop', 'gnome-system-monitor.desktop', 'org.gnome.Terminal.desktop', 'spotify.desktop', 'whatsapp.desktop', 'slack.desktop']
@@ -102,8 +102,8 @@ picture-options='stretched'
 
 [org/gnome/desktop/peripherals/touchpad]
 natural-scroll=false
-edge-scrolling-enabled=true
-two-finger-scrolling-enabled=false
+edge-scrolling-enabled=false
+two-finger-scrolling-enabled=true
 
 [org/gnome/desktop/peripherals/keyboard]
 repeat-interval=uint32 20
