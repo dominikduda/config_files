@@ -45,7 +45,10 @@ echo "@>> Updating kernel"
 # this did not work last time
 sudo apt-add-repository ppa:teejee2008/ppa -y
 sudo apt-get --assume-yes install ukuu
-sudo ukuu --yes --install v5.1.21
+sudo ukuu --download v5.1.21
+sudo mv ~/.cache/ukuu/v5.1.21 ~/Downloads
+cd ~/Downloads/v5.1.21/amd64
+sudo dpkg -i *
 sudo apt-get --assume-yes autoremove ukuu
 
 echo "@>> Installing nvidia driver"
@@ -210,7 +213,6 @@ echo "@>> setup numix circle icons"
 
 sudo add-apt-repository ppa:numix/ppa -y
 sudo apt-get --assume-yes install numix-icon-theme-circle
-gsettings set org.gnome.desktop.interface icon-theme "Numix-Circle"
 
 echo "@>> install slack"
 
@@ -229,25 +231,7 @@ echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sou
 sudo apt-get update
 sudo apt-get --assume-yes install spotify-client
 
-echo "@>> set favourite bar"
-
-dconf write /org/gnome/shell/favorite-apps "['google-chrome.desktop', 'nautilus.desktop', 'gnome-system-monitor.desktop', 'gnome-terminal.desktop', 'spotify.desktop', 'whatsapp.desktop', 'slack.desktop']"
-
 echo "@>> configure system"
-
-# flux
-gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
-# workspaces work on multiple monitors
-gsettings set org.gnome.mutter workspaces-only-on-primary false
-
-gsettings set org.gnome.desktop.interface text-scaling-factor 1.3
-gsettings set org.gnome.desktop.peripherals.keyboard delay 150
-gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 20
-gsettings set org.gnome.desktop.interface cursor-size 40
-gsettings set org.gnome.nautilus.desktop trash-icon-visible false
-
-# import terminal profile
-dconf load /org/gnome/terminal/legacy/profiles:/ < ~/github/config_files/gnome-terminal-profiles.dconf
 
 # custom monitor scaling
 mkdir ~/.config/autostart
@@ -258,6 +242,12 @@ chmod +x ~/bin/normalize_monitor_scales.sh
 # setup profile picture
 echo "Icon=/var/lib/AccountsService/icons/dominikduda" | sudo tee -a /var/lib/AccountsService/users/dominikduda
 sudo cp ~/github/config_files/dd_logo_blue_bg.png /var/lib/AccountsService/icons/dominikduda
+
+# import terminal profile
+dconf load /org/gnome/terminal/legacy/profiles:/ < ~/github/config_files/gnome-terminal-profiles.dconf
+
+# load system settings
+dconf load / < ~/github/config_files/system_settings_backup.dconf
 
 source ~/.bashrc
 
