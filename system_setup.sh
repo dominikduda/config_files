@@ -40,10 +40,17 @@ sudo chmod 600 ~/.ssh/id_rsa
 sudo chmod 600 ~/.ssh/id_rsa.pub
 ssh-add
 
+echo "@>> Minimal git setup"
+
+sudo apt update
+mkdir ~/github
+mkdir ~/github/config_files
+sudo apt-get --assume-yes install git
+ssh-keyscan github.com >> ~/.ssh/known_hosts
+git clone git@github.com:dominikduda/config_files.git ~/github/config_files
+
 echo "@>> Updating kernel"
 
-mkdir ~/github
-sudo apt-get --assume-yes install git
 git clone git@github.com:dominikduda/my_kernel.git ~/github/my_kernel
 cd ~/github/my_kernel
 sudo dpkg -i *
@@ -71,12 +78,9 @@ source ~/.bashrc
 nvm install node
 source ~/.bashrc
 
-echo "@>> Installing and setting up git"
+echo "@>> Further git setup"
 
 npm install -g diff-so-fancy
-mkdir ~/github/config_files
-ssh-keyscan github.com >> ~/.ssh/known_hosts
-git clone git@github.com:dominikduda/config_files.git ~/github/config_files
 cp ~/github/config_files/.gitconfig ~/.gitconfig
 
 echo "@>> Install python"
