@@ -40,6 +40,15 @@ sudo chmod 600 ~/.ssh/id_rsa
 sudo chmod 600 ~/.ssh/id_rsa.pub
 ssh-add
 
+echo "@>> Updating kernel"
+
+mkdir ~/github
+sudo apt-get --assume-yes install git
+git clone git@github.com:dominikduda/my_kernel.git ~/github/my_kernel
+cd ~/github/my_kernel
+sudo dpkg -i *
+cd
+
 echo "@>> Installing nvidia driver"
 
 sudo add-apt-repository ppa:graphics-drivers/ppa -y
@@ -64,20 +73,11 @@ source ~/.bashrc
 
 echo "@>> Installing and setting up git"
 
-sudo apt-get --assume-yes install git
 npm install -g diff-so-fancy
-mkdir ~/github
 mkdir ~/github/config_files
 ssh-keyscan github.com >> ~/.ssh/known_hosts
 git clone git@github.com:dominikduda/config_files.git ~/github/config_files
 cp ~/github/config_files/.gitconfig ~/.gitconfig
-
-echo "@>> Updating kernel"
-
-git clone git@github.com:dominikduda/my_kernel.git ~/github/my_kernel
-cd ~/github/my_kernel
-sudo dpkg -i *
-cd
 
 echo "@>> Install python"
 
