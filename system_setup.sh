@@ -42,7 +42,7 @@ ssh-add
 
 echo "@>> Minimal git setup"
 
-sudo apt update
+sudo apt-get update
 mkdir ~/github
 mkdir ~/github/config_files
 sudo apt-get --assume-yes install git
@@ -63,6 +63,7 @@ sudo apt-get --assume-yes install nvidia-driver-435 nvidia-settings
 
 echo "@>> Installing RVM"
 
+sudo apt-get --assume-yes install curl
 sudo apt-get --assume-yes install gnupg2
 gpg2 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
 curl -sSL https://get.rvm.io | bash -s stable
@@ -85,7 +86,7 @@ cp ~/github/config_files/.gitconfig ~/.gitconfig
 
 echo "@>> Install python"
 
-sudo apt --assume-yes install python-dev python-pip python3-dev python3-pip
+sudo apt-get --assume-yes install python-dev python-pip python3-dev python3-pip
 
 echo "@>> setup R"
 
@@ -153,9 +154,9 @@ echo "@>> setup neovim"
 
 sudo add-apt-repository ppa:neovim-ppa/unstable -y
 sudo apt-get update
-sudo apt --assume-yes install neovim
-sudo apt --assume-yes install python-neovim
-sudo apt --assume-yes install python3-neovim
+sudo apt-get --assume-yes install neovim
+sudo apt-get --assume-yes install python-neovim
+sudo apt-get --assume-yes install python3-neovim
 pip install pynvim
 pip3 install pynvim
 sudo apt-get --assume-yes install xclip
