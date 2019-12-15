@@ -1,3 +1,4 @@
+dir.create("~/R", showWarnings = FALSE)
 dir.create("~/R/library", showWarnings = FALSE)
 .libPaths(c("~/R/library"))
 options(radian.color_scheme = "monokai")
