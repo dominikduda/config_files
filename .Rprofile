@@ -1,4 +1,5 @@
-
+dir.create("~/R/library", showWarnings = FALSE)
+.libPaths(c("~/R/library"))
 options(radian.color_scheme = "monokai")
 options(radian.editing_mode = "vi")
 options(radian.indent_lines = TRUE)
