@@ -249,9 +249,6 @@ chmod +x ~/bin/normalize_monitor_scales.sh
 echo "Icon=/var/lib/AccountsService/icons/dominikduda" | sudo tee -a /var/lib/AccountsService/users/dominikduda
 sudo cp ~/github/config_files/dd_logo_blue_bg.png /var/lib/AccountsService/icons/dominikduda
 
-# import terminal profile
-dconf load /org/gnome/terminal/legacy/profiles:/ < ~/github/config_files/gnome-terminal-profiles.dconf
-
 # load system settings
 dconf load / < ~/github/config_files/system_settings_backup.dconf
 

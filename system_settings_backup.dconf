@@ -27,7 +27,7 @@ use-experimental-views=false
 
 [org/gnome/nautilus/window-state]
 sidebar-width=228
-geometry='1887x2079+67+35'
+geometry='1887x1393+67+0'
 maximized=false
 
 [org/gnome/nautilus/desktop]
@@ -133,14 +133,45 @@ xkb-options=@as []
 [org/gnome/control-center]
 last-panel='region'
 
+[org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
+foreground-color='rgb(228,228,228)'
+rewrap-on-resize=true
+visible-name='thedd'
+login-shell=true
+palette=['rgb(0,0,0)', 'rgb(224,108,112)', 'rgb(141,192,98)', 'rgb(222,184,99)', 'rgb(62,164,237)', 'rgb(198,120,195)', 'rgb(101,194,205)', 'rgb(229,229,229)', 'rgb(255,255,255)', 'rgb(224,108,117)', 'rgb(152,195,121)', 'rgb(223,192,123)', 'rgb(75,171,240)', 'rgb(198,120,195)', 'rgb(101,194,205)', 'rgb(255,255,255)']
+custom-command='tmux'
+cursor-shape='block'
+use-custom-command=true
+use-theme-colors=false
+use-system-font=false
+exit-action='close'
+font='Input Extra-Condensed 11'
+use-theme-transparency=false
+bold-color-same-as-fg=false
+bold-color='rgb(224,224,224)'
+background-color='rgb(0,0,0)'
+audible-bell=true
+
 [org/gnome/terminal/legacy]
 schema-version=uint32 3
+default-show-menubar=false
 
 [org/gnome/software]
-check-timestamp=int64 1576173094
+check-timestamp=int64 1576438082
 
 [org/gnome/mutter]
 workspaces-only-on-primary=false
+
+[org/gnome/gnome-system-monitor]
+show-dependencies=true
+cpu-colors=[(uint32 0, '#FF6E00'), (1, '#CB0C29'), (2, '#49A835'), (3, '#2D7DB3'), (4, '#f25915e815e8'), (5, '#f25915e815e8'), (6, '#f25915e815e8'), (7, '#f25915e815e8'), (8, '#f25915e815e8'), (9, '#f25915e815e8'), (10, '#f25915e815e8'), (11, '#f25915e815e8')]
+maximized=false
+window-state=(1720, 1394, 0, 0)
+show-whose-processes='user'
+
+[org/gnome/gnome-system-monitor/disktreenew]
+col-6-visible=true
+col-6-width=0
 
 [org/gtk/settings/file-chooser]
 sort-column='name'
