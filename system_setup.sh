@@ -90,6 +90,7 @@ sudo apt-get --assume-yes install python-dev python-pip python3-dev python3-pip
 echo "@>> setup R"
 
 cp ~/github/config_files/.Rprofile ~/.Rprofile
+sudo apt-get --assume-yes install libcurl4-openssl-dev
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 sudo add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/' -y
 sudo apt-get update
