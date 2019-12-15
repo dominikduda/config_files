@@ -60,9 +60,9 @@ type='google'
 migrated=true
 
 [org/gnome/desktop/interface]
-text-scaling-factor=1.3
-scaling-factor=uint32 2
-cursor-size=40
+text-scaling-factor=1.2
+scaling-factor=uint32 1
+cursor-size=30
 gtk-im-module='gtk-im-context-simple'
 icon-theme='Numix-Circle'
 

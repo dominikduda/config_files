@@ -13,6 +13,7 @@ name: catalyst
 pre: |
   cd ~/github/catalyst/client
   export DISABLE_AUTO_TITLE=true
+  nvm install 8.9.1
 
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
 pre_window: |
