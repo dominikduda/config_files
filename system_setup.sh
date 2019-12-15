@@ -176,8 +176,7 @@ vim +PlugInstall +qall
 
 echo "@>> setup universal-ctags"
 
-mkdir ~/Desktop/universal-ctags
-git clone https://github.com/universal-ctags/ctags.git ~/Desktop/universal-ctags
+git clone https://github.com/universal-ctags/ctags.git ~/Downloads/universal-ctags
 sudo apt-get --assume-yes install \
     gcc make \
     pkg-config autoconf automake \
@@ -186,7 +185,7 @@ sudo apt-get --assume-yes install \
     libjansson-dev \
     libyaml-dev \
     libxml2-dev
-cd ~/Desktop/universal-ctags
+cd ~/Downloads/universal-ctags
 ./autogen.sh
 ./configure
 make
@@ -235,6 +234,11 @@ sudo apt-get update
 sudo apt-get --assume-yes install spotify-client
 
 echo "@>> configure system"
+
+# generic packages
+sudo apt-get --assume-yes install silversearcher-ag
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/Downloads/fzf
+echo "yyy" | ~/Downloads/fzf/install
 
 # custom monitor scaling
 mkdir ~/.config/autostart
