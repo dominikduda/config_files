@@ -14,6 +14,9 @@ on_project_start: |
   cd ~/github/catalyst/client
   export DISABLE_AUTO_TITLE=true
   nvm install 8.9.1
+  npm install webpack
+  npm rebuild node-sass
+  cp ../config/database.yml.example ../config/database.yml
 
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
 pre_window: |

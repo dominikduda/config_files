@@ -252,7 +252,11 @@ echo "Icon=/var/lib/AccountsService/icons/dominikduda" | sudo tee -a /var/lib/Ac
 # load system settings
 dconf load / < ~/github/config_files/system_settings_backup.dconf
 
-source ~/.bashrc
+# TODO:
+# - ensure credentials file at beginning of script
+# - remove credential file at end of the script credentials file at beginning of script
+# - login into docker using the credential file
+# - get username (dominikduda) dynamically everywhere
 
 ) 2>&1 | tee ~/Desktop/system_setup_logs.txt
 
