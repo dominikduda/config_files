@@ -10,7 +10,7 @@ name: catalyst
 # Runs before everything. Use it to start daemons etc.
 # Sets current postgres version and cluster (so all pg_related helper apps versions match psql server app (like pg_dump, pg_restore))
 # Strings separated by space are respectively: postgres version, host:port, database (* = anything)
-pre: |
+on_project_start: |
   cd ~/github/catalyst/client
   export DISABLE_AUTO_TITLE=true
   nvm install 8.9.1
