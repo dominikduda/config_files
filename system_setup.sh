@@ -246,8 +246,8 @@ cp ~/github/config_files/.config/autostart/normalize_monitor_scales.desktop ~/.c
 chmod +x ~/bin/normalize_monitor_scales.sh
 
 # setup profile picture
-echo "Icon=/var/lib/AccountsService/icons/dominikduda" | sudo tee -a /var/lib/AccountsService/users/dominikduda
 sudo cp ~/github/config_files/dd_logo_blue_bg.png /var/lib/AccountsService/icons/dominikduda
+echo "Icon=/var/lib/AccountsService/icons/dominikduda" | sudo tee -a /var/lib/AccountsService/users/dominikduda
 
 # load system settings
 dconf load / < ~/github/config_files/system_settings_backup.dconf
