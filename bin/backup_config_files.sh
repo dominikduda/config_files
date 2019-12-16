@@ -10,6 +10,7 @@ cp -r ~/.config/RStudio ~/github/config_files/.config/RStudio
 
 # zsh
 cp ~/.zshrc ~/github/config_files/.zshrc
+cp ~/.oh-my-zsh/themes/thedd.zsh-theme ~/github/config_files/.oh-my-zsh/themes/thedd.zsh-theme
 
 # tmux
 cp ~/.tmux.conf ~/github/config_files/.tmux.conf

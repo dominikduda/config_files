@@ -133,6 +133,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.oh-my-zsh/cust
 git clone https://github.com/djui/alias-tips.git ~/.oh-my-zsh/custom/plugins/alias-tips
 sudo chsh -s /bin/zsh
 cp ~/github/config_files/.zshrc ~/.zshrc
+cp ~/github/config_files/.oh-my-zsh/themes/thedd.zsh-theme ~/.oh-my-zsh/themes/thedd.zsh-theme
 
 echo "@>> setup tmux"
 
@@ -253,6 +254,7 @@ echo "Icon=/var/lib/AccountsService/icons/dominikduda" | sudo tee -a /var/lib/Ac
 dconf load / < ~/github/config_files/system_settings_backup.dconf
 
 # TODO:
+# - install shutter
 # - save importjs config file + install the lib here
 # - ensure credentials file at beginning of script
 # - remove credential file at end of the script credentials file at beginning of script
