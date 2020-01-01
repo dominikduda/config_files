@@ -127,6 +127,14 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 echo "@>> setup zsh and oh-my-zsh"
 
 sudo apt-get --assume-yes install zsh
+
+git clone https://github.com/zsh-users/zsh.git ~/Downloads/zsh
+cd ~/Downloads/zsh
+./Util/preconfig
+./configure
+make
+sudo make install
+
 echo "n" | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
@@ -138,6 +146,14 @@ cp ~/github/config_files/.oh-my-zsh/themes/thedd.zsh-theme ~/.oh-my-zsh/themes/t
 echo "@>> setup tmux"
 
 sudo apt-get --assume-yes install tmux
+
+git clone https://github.com/tmux/tmux.git ~/bin/tmux
+apt-get install libevent-dev
+cd ~/bin/tmux
+./configure
+make
+cd ~
+ln ~/bin/tmux/tmux ~/bin/tmux
 cp ~/github/config_files/.tmux.conf ~/.tmux.conf
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 tmux source ~/.tmux.conf
@@ -254,10 +270,13 @@ echo "Icon=/var/lib/AccountsService/icons/dominikduda" | sudo tee -a /var/lib/Ac
 dconf load / < ~/github/config_files/system_settings_backup.dconf
 
 # TODO:
+# - install gnupg
 # - install shutter
 # - save importjs config file + install the lib here
-# - ensure credentials file at beginning of script
-# - remove credential file at end of the script credentials file at beginning of script
+# - add encrypted ssh keys to repo
+# - add encrypted credentials
+# - delete decrytped credentials and or bash history at end of script
+# - when encryption is working remove ssh file check from beginning of the script
 # - login into docker using the credential file
 # - get username (dominikduda) dynamically everywhere
 
