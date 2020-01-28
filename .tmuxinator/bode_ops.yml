@@ -48,8 +48,9 @@ windows:
                 - dc up
             - server:
                 - foreman start -f Procfile.dev
-                - clear
             - helper:
+                - yarn
+                - clear
                 - gst
             - editor:
                 - clear
