@@ -13,13 +13,12 @@ name: bode_ops
 on_project_start: |
   cd ~/github/bode_ops_app
   export DISABLE_AUTO_TITLE=true
-  nvm use 13
-  rvm use 2.6.3
 
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
 pre_window: |
   export DISABLE_SPRING=1
-  nvm use 8.9.1
+  nvm use 13
+  rvm use 2.6.3
   export CURRENT_PROJECT_NAME='BODE_OPS'
   export VIMUX_RUNNER_PANE_INDEX='3'
   tmux source ~/.tmux.conf
@@ -47,9 +46,9 @@ windows:
             - docker:
                 - dc up
             - server:
+                - yarn install
                 - foreman start -f Procfile.dev
             - helper:
-                - yarn
                 - clear
                 - gst
             - editor:
