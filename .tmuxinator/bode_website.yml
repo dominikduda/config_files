@@ -1,0 +1,52 @@
+# ~/.tmuxinator/bode_website.yml
+
+name: bode_website
+# This stopped working after tmux upgrade, use 'pre' instead
+# root: ~/github/ab
+
+# Optional tmux socket
+# socket_name: foo
+
+# Runs before everything. Use it to start daemons etc.
+# Sets current postgres version and cluster (so all pg_related helper apps versions match psql server app (like pg_dump, pg_restore))
+# Strings separated by space are respectively: postgres version, host:port, database (* = anything)
+on_project_start: |
+  cd ~/github/bode_website
+  export DISABLE_AUTO_TITLE=true
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+pre_window: |
+  export DISABLE_SPRING=1
+  nvm use 10
+  rvm use 2.4.2
+  export CURRENT_PROJECT_NAME='BODE_WEBSITE'
+  export VIMUX_RUNNER_PANE_INDEX='2'
+  tmux source ~/.tmux.conf
+
+# Pass command line options to tmux. Useful for specifying a different tmux.conf.
+# tmux_options: -f ~/.tmux.mac.conf
+
+# Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
+# tmux_command: tmux-next
+
+# Specifies (by name or index) which window will be selected on project startup. If not set, the first window is used.
+startup_window: editor
+startup_pane: 0
+
+# Controls whether the tmux session should be attached to automatically. Defaults to true.
+# attach: false
+
+# Runs after everything. Use it to attach to tmux with custom options etc.
+# post: tmux -CC attach -t ab
+
+windows:
+    - backend:
+        layout: 0fda,380x70,0,0{98x70,0,0[98x27,0,0,4,98x42,0,28,7],281x70,99,0,6}
+        panes:
+            - server:
+                - rails s
+            - helper:
+                - clear
+                - gst
+            - editor:
+                - clear
