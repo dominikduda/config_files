@@ -68,6 +68,9 @@ sudo apt-get --assume-yes install gnupg2
 gpg2 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
 curl -sSL https://get.rvm.io | bash -s stable
 source ~/.rvm/scripts/rvm
+  touch ~/.rvm/gemsets/global.gems
+  echo "rubocop" >> ~/.rvm/gemsets/global.gems
+  echo "neovim" >> ~/.rvm/gemsets/global.gems
 rvm install ruby-2.6.5
 rvm --default use 2.6.5
 
@@ -75,6 +78,11 @@ echo "@>> Installing NVM"
 
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash
 source ~/.bashrc
+  touch ~/.nvm/default-packages
+  echo "eslint" >> ~/.nvm/default-packages
+  echo "importjs" >> ~/.nvm/default-packages
+  echo "neovim" >> ~/.nvm/default-packages
+  echo "diff-so-fancy" >> ~/.nvm/default-packages
 nvm install node
 source ~/.bashrc
 
@@ -134,6 +142,7 @@ cd ~/Downloads/zsh
 ./configure
 make
 sudo make install
+  sudo ln -s ~/bin/zsh /bin/zsh
 
 echo "n" | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
