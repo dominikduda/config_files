@@ -83,6 +83,7 @@ source ~/.bashrc
   echo "importjs" >> ~/.nvm/default-packages
   echo "neovim" >> ~/.nvm/default-packages
   echo "diff-so-fancy" >> ~/.nvm/default-packages
+  echo "livedown" >> ~/.nvm/default-packages
 nvm install node
 source ~/.bashrc
 
