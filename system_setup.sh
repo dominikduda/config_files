@@ -25,12 +25,12 @@ touch ~/Desktop/system_setup_logs.txt
 
 echo "@>> Decrypt secrets"
 
-gpg2 -d ~/github/config_files/secrets.gpg >> ~/Desktop/secrets_decrypted
+  gpg2 -d ~/github/config_files/secrets.gpg >> ~/Desktop/secrets_decrypted
 
 echo "@>> Setup github SSH keys"
 
 mkdir ~/.ssh
-gpg2 -d ~/github/config_files/.ssh/id_rsa.gpg >> ~/.ssh/id_rsa
+  gpg2 -d ~/github/config_files/.ssh/id_rsa.gpg >> ~/.ssh/id_rsa
 cp ~/github/config_files/.ssh/id_rsa.pub >> ~/.ssh/id_rsa.pub
 sudo chmod 600 ~/.ssh/id_rsa
 sudo chmod 600 ~/.ssh/id_rsa.pub
@@ -233,7 +233,7 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.25.0/docker-
 sudo chmod +x /usr/local/bin/docker-compose
 sudo groupadd docker
 sudo usermod -aG docker $USER
-docker login -u "$(cat ~/Desktop/secrets_decrypted | grep docker_login | awk '{ print $2 }')" -p "$(cat ~/Desktop/secrets_decrypted | grep docker_password | awk '{ print $2 }')"
+  docker login -u "$(cat ~/Desktop/secrets_decrypted | grep docker_login | awk '{ print $2 }')" -p "$(cat ~/Desktop/secrets_decrypted | grep docker_password | awk '{ print $2 }')"
 
 echo "@>> setup numix circle icons"
 
@@ -282,7 +282,6 @@ dconf load / < ~/github/config_files/system_settings_backup.dconf
 # - save importjs config file + install the lib here
 # - add encrypted credentials
 # - delete decrytped credentials and or bash history at end of script
-# - login into docker using the credential file
 # - get username (dominikduda) dynamically everywhere
 
 ) 2>&1 | tee ~/Desktop/system_setup_logs.txt
