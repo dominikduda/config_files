@@ -100,7 +100,7 @@
     " Default tab width
         set shiftwidth=2
     " Add extra tab when starting new line in some cases
-        set smartindent
+        " set smartindent
     " Show column and row numbers
         set ruler
     " Color 100th column
@@ -117,7 +117,6 @@
 filetype off
 call plug#begin('~/.config/nvim/plug')
         Plug 'dominikduda/vim_timebox'
-        Plug 'gillyb/stable-windows'
     " Go to snapshot command provider
         Plug 'tapayne88/vim-jest-snapshot'
     " Spell checker
@@ -155,11 +154,11 @@ call plug#begin('~/.config/nvim/plug')
     " Vim-operator-flashy dependency
         Plug 'kana/vim-operator-user'
     " Asynchronous lint engine
-        Plug 'w0rp/ale', { 'branch': 'master'}
+        Plug 'w0rp/ale'
     " Color parentheses based on nest depth
         Plug 'kien/rainbow_parentheses.vim'
     " Live markdown preview
-        Plug 'shime/vim-livedown', { 'do': 'npm install -g livedown' }
+        Plug 'shime/vim-livedown'
     " Enable 'Rvm use' in vim
         Plug 'tpope/vim-rvm'
     " Comments
@@ -256,7 +255,7 @@ call plug#begin('~/.config/nvim/plug')
     " CLIPS syntax
         Plug 'vim-scripts/clips.vim'
     " Support for a lot of languages (syntax, indent and much more)
-        Plug 'sheerun/vim-polyglot', { 'do': 'rm ~/.config/nvim/plug/vim-polyglot/after/indent/jsx.vim' }
+        Plug 'sheerun/vim-polyglot', { 'do': 'rm ~/.config/nvim/plug/vim-polyglot/after/indent/jsx.vim; rm ~/.config/nvim/plug/vim-polyglot/after/indent/javascript.vim' }
     " jsx syntax
         Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
         Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
@@ -456,6 +455,7 @@ filetype plugin indent on
     let g:matchup_matchparen_hi_surround_always = 1
     let g:matchup_matchparen_timeout = 100
     let g:matchup_matchparen_insert_timeout = 50
+    let g:matchup_matchparen_offscreen = {'method': 'popup'}
     " autocmd CursorHold * MatchupWhereAmI
     highlight MatchWord ctermbg=NONE ctermfg=226 cterm=bold
     highlight MatchParen ctermbg=NONE ctermfg=226 cterm=bold,underline
@@ -588,6 +588,7 @@ filetype plugin indent on
     hi! link ALEVirtualTextError VirtualText
     let g:ale_fixers = {}
     let g:ale_fixers['r'] = ['styler']
+    let g:ale_fixers['ruby'] = ['rubocop']
     let g:ale_r_lintr_options = '
           \ with_defaults(
           \  object_usage_linter = NULL,
@@ -611,7 +612,9 @@ filetype plugin indent on
     let g:ale_lint_on_save = 1
     let g:ale_lint_on_text_changed =  1
     let g:ale_linters = {
-          \  'r': ['lintr']
+          \  'r': ['lintr'],
+          \  'ruby': ['rubocop'],
+          \  'javascript': ['eslint']
           \ }
     " Jump betwen lint errors
         nmap <silent> [l <Plug>(ale_previous_wrap)
@@ -744,7 +747,7 @@ filetype plugin indent on
     let g:ctrlp_max_files = 0
     let g:ctrlp_map = '<c-p>'
     let g:ctrlp_cmd = 'CtrlP'
-    map <C-l> :CtrlPMRU<CR>
+    nmap <C-l> :CtrlPMRUFiles<CR>
     " Speed fixes http://stackoverflow.com/questions/21346068/slow-performance-on-ctrlp-it-doesnt-work-to-ignore-some-folders
         let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
     " Use ag instead of grep if installed
@@ -1140,4 +1143,8 @@ inoremap .. >
 inoremap // ?
 vmap s S
 
-
+" autocmd VimEnter     * ContextActivate
+" autocmd BufAdd       * call context#update(1, 'BufAdd')
+" autocmd BufEnter     * call context#update(0, 'BufEnter')
+" autocmd CursorMoved  * call context#update(0, 'CursorMoved')
+" autocmd User GitGutter call context#update_padding('GitGutter')
