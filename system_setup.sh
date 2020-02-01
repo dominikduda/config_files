@@ -23,6 +23,10 @@ fi
 
 touch ~/Desktop/system_setup_logs.txt
 
+echo "@>> Decrypt secrets"
+
+gpg2 -d ~/github/config_files/secrets.gpg >> ~/Desktop/secrets_decrypted
+
 echo "@>> Setup github SSH keys"
 
 mkdir ~/.ssh
@@ -229,6 +233,7 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.25.0/docker-
 sudo chmod +x /usr/local/bin/docker-compose
 sudo groupadd docker
 sudo usermod -aG docker $USER
+docker login -u "$(cat ~/Desktop/secrets_decrypted | grep docker_login | awk '{ print $2 }')" -p "$(cat ~/Desktop/secrets_decrypted | grep docker_password | awk '{ print $2 }')"
 
 echo "@>> setup numix circle icons"
 
