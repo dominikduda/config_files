@@ -1,6 +1,6 @@
 (
 
-# copy whole file and paste it into terminal
+# USAGE: Copy whole file and paste it into terminal.
 
 echo "@>> You should only run this script on freshly installed system!"
 read -p "@>> Do you confirm that this is the case? ('YES'): "
@@ -11,8 +11,6 @@ else
   exit
 fi
 
-# Check prerequisites
-
 wget --quiet --spider http://google.com
 if [ $? -eq 0 ]; then
   echo '@>> Internet connection is working, cool!'
@@ -21,21 +19,15 @@ else
   exit
 fi
 
-ls ~/.ssh | grep --silent id_rsa
-if [ $? -eq 0 ]; then
-    echo "@>> SSH key is present, cool!"
-else
-    echo "@>> No SSH key is present in ~/.ssh"
-    echo "@>> Github SSH key is required for the script"
-    exit
-fi
-
 (
 
 touch ~/Desktop/system_setup_logs.txt
 
-echo "@>> Setup SSH keys"
+echo "@>> Setup github SSH keys"
 
+mkdir ~/.ssh
+gpg2 -d ~/github/config_files/.ssh/id_rsa.gpg >> ~/.ssh/id_rsa
+cp ~/github/config_files/.ssh/id_rsa.pub >> ~/.ssh/id_rsa.pub
 sudo chmod 600 ~/.ssh/id_rsa
 sudo chmod 600 ~/.ssh/id_rsa.pub
 ssh-add
@@ -283,10 +275,8 @@ dconf load / < ~/github/config_files/system_settings_backup.dconf
 # - install gnupg
 # - install shutter
 # - save importjs config file + install the lib here
-# - add encrypted ssh keys to repo
 # - add encrypted credentials
 # - delete decrytped credentials and or bash history at end of script
-# - when encryption is working remove ssh file check from beginning of the script
 # - login into docker using the credential file
 # - get username (dominikduda) dynamically everywhere
 
