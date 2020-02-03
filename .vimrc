@@ -1056,6 +1056,9 @@ filetype plugin indent on
         nnoremap , :Ag!<Space>-Q<Space>--ignore node_modules --ignore coverage<Space>''<Left>
     " Search selected text project wide (+ possibility to pass path)
         vnoremap , y:Ag!<Space>-Q<Space>--ignore node_modules --ignore coverage<Space>'<C-r>"'<Space>
+    " Squashing commits helpers
+        command! SquashCommits call feedkeys("ggjV}:s/pick/squash\<CR>:wq\<CR>", 'tx')
+        command! -nargs=1 NameSquashedCommit call feedkeys("/Please enter the commit message for<CR>kdggO\<Esc>xi<args>\<ESC>:wq\<CR>", 'tx')
 " <!!!!!!!!**************!!!!!!!!>
 
 
@@ -1143,8 +1146,4 @@ inoremap .. >
 inoremap // ?
 vmap s S
 
-" autocmd VimEnter     * ContextActivate
-" autocmd BufAdd       * call context#update(1, 'BufAdd')
-" autocmd BufEnter     * call context#update(0, 'BufEnter')
-" autocmd CursorMoved  * call context#update(0, 'CursorMoved')
-" autocmd User GitGutter call context#update_padding('GitGutter')
+
