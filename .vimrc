@@ -1,3 +1,4 @@
+
 " |-----------------------------------------------------------------------------------------|
 " | FORMATTING INFO                                                                         |
 " |-----------------------------------------------------------------------------------------|
@@ -52,9 +53,10 @@
     " Always show at least 5 columns on the left/right side of cursor
         set sidescrolloff=5
     " Always show at least 1 line above/below the cursor
-        set scrolloff=1
+        set scrolloff=8
     " Use old regexp engine (on new one tags highlighting was running deadly slow)
-        set regexpengine=0
+        " set regexpengine=0
+        " set regexpengine=1
     " AFAIK time to update gitgutter signs
         set updatetime=200
     " Mouse support
@@ -116,6 +118,9 @@
 
 filetype off
 call plug#begin('~/.config/nvim/plug')
+        " Plug 'vobornik/vim-mql4'
+        " Plug 'wellle/context.vim', { 'branch': '43-full-border' }
+        Plug 'wellle/context.vim'
         Plug 'dominikduda/vim_timebox'
     " Go to snapshot command provider
         Plug 'tapayne88/vim-jest-snapshot'
@@ -255,7 +260,7 @@ call plug#begin('~/.config/nvim/plug')
     " CLIPS syntax
         Plug 'vim-scripts/clips.vim'
     " Support for a lot of languages (syntax, indent and much more)
-        Plug 'sheerun/vim-polyglot', { 'do': 'rm ~/.config/nvim/plug/vim-polyglot/after/indent/jsx.vim; rm ~/.config/nvim/plug/vim-polyglot/after/indent/javascript.vim' }
+        " Plug 'sheerun/vim-polyglot', { 'do': 'rm ~/.config/nvim/plug/vim-polyglot/after/indent/jsx.vim; rm ~/.config/nvim/plug/vim-polyglot/after/indent/javascript.vim' }
     " jsx syntax
         Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
         Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
@@ -263,9 +268,9 @@ call plug#begin('~/.config/nvim/plug')
 
 " GIT INTEGRATION ************************************
       Plug 'airblade/vim-gitgutter'
-      Plug 'tpope/vim-fugitive'
       " Extension to vim-fugitive open files on github and more
           Plug 'tpope/vim-rhubarb'
+      Plug 'tpope/vim-fugitive'
       Plug 'Xuyuanp/nerdtree-git-plugin'
 " <!!!!!!!!**************!!!!!!!!>
 
@@ -356,10 +361,6 @@ filetype plugin indent on
         highlight SpelunkerComplexOrCompoundWord cterm=underline
     " Disable default autogroup
         let g:spelunker_disable_auto_group = 1
-    augroup spelunker
-      autocmd!
-      " autocmd InsertLeave * call timer_start(500), {-> execute('call spelunker#check()')}, { 'repeat': 0 })
-    augroup END
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIM-TRADEWINDS CONFIG ************************************
@@ -630,8 +631,8 @@ filetype plugin indent on
     autocmd BufReadPost *.js RainbowParenthesesToggleAll
     let g:rbpt_colorpairs = [
                           \ ['129', 'RoyalBlue3'],
-                          \ ['32', 'RoyalBlue3'],
                           \ ['118', 'firebrick3'],
+                          \ ['32', 'RoyalBlue3'],
                           \ ['226', 'RoyalBlue3'],
                           \ ['202', 'DarkOrchid3'],
                           \ ['160', 'DarkOrchid3'],
@@ -723,7 +724,7 @@ filetype plugin indent on
     let g:airline_theme='wombat'
     let g:airline_section_z = '%#__accent_bold#%{LineNoIndicator()}▏%#__restore__#/%L  ➜▌%2c'
     let g:airline_section_x = "%{vim_timebox#time_left()}"
-    " call timer_start(900, {-> execute(':AirlineRefresh')}, { 'repeat': -1 })
+    call timer_start(900, {-> execute(':AirlineRefresh')}, { 'repeat': -1 })
 
     let g:airline_mode_map = {
             \ '__' : '-',
@@ -857,16 +858,15 @@ filetype plugin indent on
 
 " FUGITIVE CONFIG ************************************
     nmap <leader>g :Gstatus<CR>j
-    function! RemapJAndKUnlessComitting()
-      let s:current_file_name = expand('%:t')
-      if s:current_file_name == "COMMIT_EDITMSG"
-        startinsert
-      else
-        nmap <buffer> j <C-N>zb
-        nmap <buffer> k <C-P>zb
-      endif
+    function! RemapJAndK()
+      nmap <buffer> j <C-N>zb
+      nmap <buffer> k <C-P>zb
     endfunction
-    autocmd FileType gitcommit call RemapJAndKUnlessComitting()
+    function! HandleGitCommitStart()
+      startinsert
+    endfunction
+    autocmd FileType fugitive call RemapJAndK()
+    autocmd FileType gitcommit call HandleGitCommitStart()
     autocmd FileType gitcommit setlocal colorcolumn=72
     set diffopt+=vertical
     hi! link gitCommitSelected gitcommitSelectedType
@@ -887,6 +887,12 @@ filetype plugin indent on
 " <!!!!!!!!**************!!!!!!!!>
 
 " PROJECT SPECIFIC ************************************
+    if $CURRENT_PROJECT_NAME == 'BODE_OPS' || $CURRENT_PROJECT_NAME == 'BODE_WEBSITE' || $CURRENT_PROJECT_NAME == 'BOOKING_API'
+      function! HandleGitCommitStart()
+        call feedkeys("/branch ts-\<CR>eeewyeggi[#\<ESC>pA]\<Space>\<ESC>", 'tx')
+        startinsert!
+      endfunction
+    endif
     if $CURRENT_PROJECT_NAME == 'CATALYST'
         autocmd FileType javascript setlocal colorcolumn=101
         autocmd FileType javascript.jsx setlocal colorcolumn=101
@@ -1102,48 +1108,81 @@ endfunction
     inoremap <A-.> <C-]>
 
 augroup LargeFile
-        let g:large_file = 3145728 " 3MB
-        " Set options:
-        "   eventignore+=FileType (no syntax highlighting etc
-        "   assumes FileType always on)
-        "   noswapfile (save copy of file)
-        "   bufhidden=unload (save memory when other file is viewed)
-        "   buftype=nowritefile (is read-only)
-        "   undolevels=-1 (no undo possible)
-        au BufReadPre *
-                \ let f=expand("<afile>") |
-                \ if getfsize(f) > g:large_file |
-                        \ set eventignore+=FileType |
-                        \ setlocal noswapfile bufhidden=unload buftype=nowrite undolevels=-1 |
-                \ else |
-                        \ set eventignore-=FileType |
-                \ endif
+    let g:large_file = 3145728 " 3MB
+    " Set options:
+    "   eventignore+=FileType (no syntax highlighting etc
+    "   assumes FileType always on)
+    "   noswapfile (save copy of file)
+    "   bufhidden=unload (save memory when other file is viewed)
+    "   buftype=nowritefile (is read-only)
+    "   undolevels=-1 (no undo possible)
+    au BufReadPre *
+            \ let f=expand("<afile>") |
+            \ if getfsize(f) > g:large_file |
+                    \ set eventignore+=FileType |
+                    \ setlocal noswapfile bufhidden=unload buftype=nowrite undolevels=-1 |
+            \ else |
+                    \ set eventignore-=FileType |
+            \ endif
 augroup END
 
 
-autocmd InsertEnter * set timeoutlen=250
-autocmd InsertLeave * set timeoutlen=900
-inoremap `` ~
-inoremap 11 !
-inoremap 22 @
-inoremap 33 #
-inoremap 44 $
-inoremap 55 %
-inoremap 66 ^
-inoremap 77 &
-inoremap 88 *
-inoremap 99 (
-inoremap 00 )
-inoremap -- _
-inoremap == +
-inoremap [[ {
-inoremap ]] }
-inoremap \\ \|
-inoremap ;; :
-inoremap '' "
-inoremap ,, <
-inoremap .. >
-inoremap // ?
+" autocmd InsertEnter * set timeoutlen=250
+" autocmd InsertLeave * set timeoutlen=900
+" inoremap `` ~
+" inoremap 11 !
+" inoremap 22 @
+" inoremap 33 #
+" inoremap 44 $
+" inoremap 55 %
+" inoremap 66 ^
+" inoremap 77 &
+" inoremap 88 *
+" inoremap 99 (
+" inoremap 00 )
+" inoremap -- _
+" inoremap == +
+" inoremap [[ {
+" inoremap ]] }
+" inoremap \\ \|
+" inoremap ;; :
+" inoremap '' "
+" inoremap ,, <
+" inoremap .. >
+" inoremap // ?
 vmap s S
 
 
+
+
+hi ContextLogo guifg=#b3b1b3 guibg=guisp=#0a0a0a gui=NONE ctermfg=232 ctermbg=232 cterm=NONE
+let g:context_highlight_border = 'LineNr'
+let g:context_highlight_normal = 'Normal'
+let g:context_highlight_tag    = 'ContextLogo'
+" let g:context_presenter = 'preview'
+let g:context_border_char = '⬍'
+let g:context_add_autocmds = 0
+let g:context_add_mappings = 0
+let g:context_max_per_indent = 1
+let g:context_max_height = 8
+autocmd BufAdd       * call context#update('BufAdd')
+autocmd BufEnter     * call context#update('BufEnter')
+autocmd WinEnter     * call context#update('BufEnter')
+autocmd WinNew     * call context#update('BufEnter')
+autocmd VimEnter     * ContextActivate
+autocmd VimResized   * call context#update('VimResized')
+autocmd CursorHold  * call context#update('CursorHold')
+
+" mine
+" autocmd CursorMoved * call feedkeys(":ContextDisable\<cr>", 'tx')
+
+function Xxx()
+  call context#enable()
+  call context#update('CursorHold')
+endfunction
+autocmd CursorHold  * call Xxx()
+autocmd CursorMoved  * ContextDisable
+
+" autocmd CursorMoved  * call context#update('CursorMoved')
+autocmd User GitGutter call context#update('GitGutter')
+set maxmempattern=2500
