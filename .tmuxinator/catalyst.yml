@@ -45,7 +45,6 @@ startup_pane: 0
 
 windows:
     - frontend:
-        layout: 00ff,342x70,0,0{95x70,0,0[95x9,0,0,10,95x12,0,10,12,95x47,0,23,17],246x70,96,0,14}
         panes:
             - build_watcher:
                 - cat_webpack_build_watcher.sh
@@ -57,8 +56,9 @@ windows:
                 - clear
                 - gst
             - editor:
+                - tmux select-window -t frontend
+                - tmux select-layout "262a,380x70,0,0{73x70,0,0[73x6,0,0,1,73x8,0,7,3,73x54,0,16,4],306x70,74,0,5}"
     - backend:
-        layout: d246,342x70,0,0{94x70,0,0[94x35,0,0,2,94x34,0,36,8],247x70,95,0,7}
         panes:
             - server:
                 - cd ..
@@ -70,3 +70,6 @@ windows:
             - editor:
                 - export VIMUX_RUNNER_PANE_INDEX='2'
                 - cd ..
+                - sleep 5
+                - tmux select-window -t backend
+                - tmux select-layout "7369,380x70,0,0{73x70,0,0[73x19,0,0,2,73x50,0,20,6],306x70,74,0,7}"

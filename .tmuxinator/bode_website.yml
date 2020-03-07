@@ -12,12 +12,13 @@ name: bode_website
 # Strings separated by space are respectively: postgres version, host:port, database (* = anything)
 on_project_start: |
   cd ~/github/bode_website
+  sudo service postgresql start
   export DISABLE_AUTO_TITLE=true
 
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
 pre_window: |
   export DISABLE_SPRING=1
-  nvm use 10
+  nvm use 10.16
   rvm use 2.4.2
   export CURRENT_PROJECT_NAME='BODE_WEBSITE'
   export VIMUX_RUNNER_PANE_INDEX='2'
@@ -41,9 +42,10 @@ startup_pane: 0
 
 windows:
     - backend:
-        layout: 0fda,380x70,0,0{98x70,0,0[98x27,0,0,4,98x42,0,28,7],281x70,99,0,6}
         panes:
             - server:
+                - tmux select-layout "9ae7,380x70,0,0{71x70,0,0[71x16,0,0,57,71x53,0,17,58],308x70,72,0,59}"
+                - yarn
                 - rails s
             - helper:
                 - clear

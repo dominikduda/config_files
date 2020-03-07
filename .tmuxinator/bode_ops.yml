@@ -7,6 +7,8 @@ name: bode_ops
 # Optional tmux socket
 # socket_name: foo
 
+on_project_first_start: sudo service postgresql stop
+
 # Runs before everything. Use it to start daemons etc.
 # Sets current postgres version and cluster (so all pg_related helper apps versions match psql server app (like pg_dump, pg_restore))
 # Strings separated by space are respectively: postgres version, host:port, database (* = anything)
@@ -41,15 +43,15 @@ startup_pane: 0
 
 windows:
     - backend:
-        layout: 7fb4,380x70,0,0{94x70,0,0[94x11,0,0,0,94x29,0,12,2,94x28,0,42,4],285x70,95,0,1}
-        panes:
-            - docker:
-                - dc up
-            - server:
-                - yarn install
-                - foreman start -f Procfile.dev
-            - helper:
-                - clear
-                - gst
-            - editor:
-                - clear
+          panes:
+              - docker:
+                  - tmux select-layout "f160,380x70,0,0{71x70,0,0[71x10,0,0,37,71x10,0,11,38,71x48,0,22,39],308x70,72,0,40}"
+                  - dc up
+              - server:
+                  - yarn install
+                  - foreman start -f Procfile.dev
+              - helper:
+                  - clear
+                  - gst
+              - editor:
+                  - clear
