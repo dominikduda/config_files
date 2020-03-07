@@ -1,3 +1,58 @@
+function! s:special_cols_width()
+  let numberwidth = max([&numberwidth, strlen(line('$'))+1])
+  let numwidth = (&number || &relativenumber)? numberwidth : 0
+  let foldwidth = &foldcolumn
+
+  if &signcolumn == 'yes'
+    let signwidth = 2
+  elseif &signcolumn == 'auto'
+    let signs = execute(printf('sign place buffer=%d', bufnr('')))
+    let signs = split(signs, "\n")
+    let signwidth = len(signs)>2? 2: 0
+  else
+    let signwidth = 0
+  endif
+  return numwidth + foldwidth + signwidth
+endfunction
+
+function! s:optimize_win_width()
+  let s:buf_name = expand('%:t')
+  let s:longest_line_length = max(map(range(1, line('$')), "col([v:val, '$'])"))
+  let s:special_cols_width = s:special_cols_width()
+  let s:used_win_width = s:special_cols_width + s:longest_line_length
+  let s:total_win_width=winwidth(0)
+  let s:current_split_width = winwidth('%')
+  let s:resize_to = s:used_win_width - 1
+  let s:whole_vim_width = &columns
+  let s:max_single_window_width_percent = 0.5
+
+
+  let b:width_optimized_to = s:resize_to
+
+  " Skip resizing if after last resize window was smaller then currently (== now its larger then optimal)
+  if (exists("b:width_optimized_to") && b:width_optimized_to <= s:total_win_width)
+    let b:width_optimized_to = 0
+    return
+  endif
+
+  " Skip resizing if window would be resized over allowed threshold
+  if (s:resize_to > &columns * s:max_single_window_width_percent)
+    " s:resize_to = float2nr(&columns * s:max_single_window_width_percent)
+    let s:resize_to = float2nr(&columns * s:max_single_window_width_percent)
+  endif
+
+  if (s:used_win_width != s:total_win_width && (s:resize_to > 50))
+    execute "vertical resize " . s:resize_to
+  endif
+endfunction
+
+autocmd WinEnter * call s:optimize_win_width()
+autocmd WinNew * call s:optimize_win_width()
+autocmd BufReadPost * call s:optimize_win_width()
+
+
+
+
 
 " |-----------------------------------------------------------------------------------------|
 " | FORMATTING INFO                                                                         |
@@ -51,9 +106,9 @@
     " Maximum jump when scrolling horizontally
         set sidescroll=1
     " Always show at least 5 columns on the left/right side of cursor
-        set sidescrolloff=5
+        set sidescrolloff=0
     " Always show at least 1 line above/below the cursor
-        set scrolloff=8
+        set scrolloff=9
     " Use old regexp engine (on new one tags highlighting was running deadly slow)
         " set regexpengine=0
         " set regexpengine=1
@@ -118,10 +173,14 @@
 
 filetype off
 call plug#begin('~/.config/nvim/plug')
+Plug 'ryanoasis/vim-devicons'
+" Plug 'camspiers/animate.vim'
+"         Plug 'camspiers/lens.vim'
         " Plug 'vobornik/vim-mql4'
         " Plug 'wellle/context.vim', { 'branch': '43-full-border' }
         Plug 'wellle/context.vim'
         Plug 'dominikduda/vim_timebox'
+        Plug 'lambdalisue/fern.vim'
     " Go to snapshot command provider
         Plug 'tapayne88/vim-jest-snapshot'
     " Spell checker
@@ -149,7 +208,8 @@ call plug#begin('~/.config/nvim/plug')
     " todo-list management
         Plug 'rlue/vim-getting-things-down'
     " Posting/updating/opening gists from vim
-        Plug 'mattn/gist-vim'
+        " Plug 'mattn/gist-vim'
+        Plug 'mattn/vim-gist'
     " Gist-vim dependency
         Plug 'mattn/webapi-vim'
     " Navigation and information for yaml files (current node path, jump to parent, jump to key)
@@ -208,8 +268,6 @@ call plug#begin('~/.config/nvim/plug')
         Plug 'Shougo/unite.vim'
     " Haml support
         Plug 'tpope/vim-haml'
-    " Open files from nerd tree with default application for file extension (e. g. images)
-        Plug 'ivalkeen/nerdtree-execute'
 
 " R support ************************************
     Plug 'jalvesaq/Nvim-R'
@@ -249,7 +307,6 @@ call plug#begin('~/.config/nvim/plug')
     Plug 'dominikduda/vim_yank_with_context'
     Plug 'xolox/vim-misc'
     Plug 'ludovicchabant/vim-gutentags'
-    Plug 'scrooloose/nerdtree'
     Plug 'tpope/vim-surround'
     Plug 'majutsushi/tagbar'
 " <!!!!!!!!**************!!!!!!!!>
@@ -271,7 +328,6 @@ call plug#begin('~/.config/nvim/plug')
       " Extension to vim-fugitive open files on github and more
           Plug 'tpope/vim-rhubarb'
       Plug 'tpope/vim-fugitive'
-      Plug 'Xuyuanp/nerdtree-git-plugin'
 " <!!!!!!!!**************!!!!!!!!>
 
 " SMART SEARCH ************************************
@@ -375,32 +431,18 @@ filetype plugin indent on
     let g:bookmark_center = 1
     let g:bookmark_save_per_working_dir = 0
     let g:bookmark_manage_per_buffer = 0
-    " Unmap default mappings when entering nerd tree and map when entering other buffer
-        function! BookmarkMapKeys()
-            nmap mm :BookmarkToggle<CR>
-            nmap mi :BookmarkAnnotate<CR>
-            nmap mn :BookmarkNext<CR>
-            nmap mp :BookmarkPrev<CR>
-            nmap ma :BookmarkShowAll<CR>
-            nmap mc :BookmarkClear<CR>
-            nmap mx :BookmarkClearAll<CR>
-            nmap mkk :BookmarkMoveUp
-            nmap mjj :BookmarkMoveDown
-        endfunction
-        function! BookmarkUnmapKeys()
-            silent! unmap mm
-            silent! unmap mg
-            silent! unmap mi
-            silent! unmap mn
-            silent! unmap mp
-            silent! unmap ma
-            silent! unmap mc
-            silent! unmap mx
-            silent! unmap mkk
-            silent! unmap mjj
-        endfunction
-        autocmd BufEnter * :call BookmarkMapKeys()
-        autocmd BufEnter NERD_tree_* :call BookmarkUnmapKeys()
+    function! BookmarkMapKeys()
+        nmap mm :BookmarkToggle<CR>
+        nmap mi :BookmarkAnnotate<CR>
+        nmap mn :BookmarkNext<CR>
+        nmap mp :BookmarkPrev<CR>
+        nmap ma :BookmarkShowAll<CR>
+        nmap mc :BookmarkClear<CR>
+        nmap mx :BookmarkClearAll<CR>
+        nmap mkk :BookmarkMoveUp
+        nmap mjj :BookmarkMoveDown
+    endfunction
+    autocmd BufEnter * :call BookmarkMapKeys()
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIM-LINE-NO-INDICATOR CONFIG ************************************
@@ -494,10 +536,10 @@ filetype plugin indent on
 
 " VIM-GETTING-THINGS-DOWN CONFIG ************************************
     let g:gtdown_cycle_states = ['TODO', 'WIP', 'DONE', 'WAIT', 'CANCELLED']
-    let g:gtdown_default_fold_level = 2222
+    let g:gtdown_default_fold_level = 0
     let g:gtdown_show_progress = 1
     let g:gtdown_fold_list_items = 0
-    command! TODO :call getting_things_down#show_todo()
+    command! TODO :e ~/TODO.md
     augroup gtDown
         " Cycle through TODO keywords
             autocmd BufReadPre TODO.md nmap <buffer> <silent> <leader>s :call getting_things_down#cycle_status()<CR>
@@ -508,6 +550,10 @@ filetype plugin indent on
             autocmd BufReadPre TODO.md hi! markdownTodoReadyN ctermfg=227
             autocmd BufReadPre TODO.md hi! markdownTodoDoneN ctermfg=40
             autocmd BufReadPre TODO.md hi! markdownTodoWaitingN ctermfg=160
+        " Custom folding logic
+            autocmd BufReadPost TODO.md setlocal foldmethod=marker
+            autocmd BufReadPost TODO.md setlocal foldmarker=PROJECT_TODO:,PROJECT_TODO_END
+            autocmd BufReadPost TODO.md setlocal foldnestmax=1
     augroup END
 " <!!!!!!!!**************!!!!!!!!>
 
@@ -770,29 +816,21 @@ filetype plugin indent on
     hi! CtrlPLinePre guifg=#4040d6 guibg=NONE guisp=NONE gui=underline ctermfg=232 ctermbg=246 cterm=NONE
 " <!!!!!!!!**************!!!!!!!!>
 
-" NERDTREE CONFIG ************************************
-    let g:NERDTreeWinSize = 36
-    " Close vim if only NERDTree is opened
-        autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-    " NerdTree toggle
-        nmap <leader>1 :NERDTreeToggle<CR>
-    noremap <leader>f :NERDTreeFind<CR>zz
-    let NERDTreeMinimalUI = 1
-    let NERDTreeStatusline=""
-    autocmd BufEnter NERD_tree_* setlocal signcolumn=no
-    hi! link NERDTreeDir Constant
-    hi! link NERDTreeCWD Type
-    hi! link NerdTreeFile Number
-    hi! link NERDTreeExecFile Include
-    hi! link NERDTreeFlags Function
-    hi! link NERDTreeDirSlash Statement
-    hi! link NERDTreeClosable Statement
-    hi! link NERDTreeOpenable String
-    hi! link NERDTreeGitStatusDirDirty Comment
-    hi! link NERDTreeGitStatusModified Comment
-    hi! link NERDTreeGitStatusChanged Comment
-    let g:NERDTreeDirArrowExpandable = '▷'
-    let g:NERDTreeDirArrowCollapsible = '▼'
+" FERN.VIM CONFIG ************************************
+    " Fern toggle
+        nmap <leader>1 :Fern -drawer -toggle -width=36 .<Cr>
+    " Find curent file in fern
+        noremap <leader>f :Fern -drawer -width=36 -reveal=% .<Cr>
+    function! s:init_fern() abort
+      " Use 'select' instead of 'edit' for default 'open' action
+      nmap <buffer> <Plug>(fern-action-open) <Plug>(fern-action-open:select)
+      set nonumber
+    endfunction
+    augroup fern-custom
+      autocmd! *
+      autocmd FileType fern call s:init_fern()
+    augroup END
+
 " <!!!!!!!!**************!!!!!!!!>
 
 " TAGBAR CONFIG ************************************
@@ -1176,13 +1214,18 @@ autocmd CursorHold  * call context#update('CursorHold')
 " mine
 " autocmd CursorMoved * call feedkeys(":ContextDisable\<cr>", 'tx')
 
-function Xxx()
-  call context#enable()
-  call context#update('CursorHold')
-endfunction
-autocmd CursorHold  * call Xxx()
-autocmd CursorMoved  * ContextDisable
+" function Xxx()
+"   call context#enable('window')
+"   call context#update('CursorHold')
+" endfunction
+" autocmd CursorHold,WinLeave * call Xxx()
+autocmd CursorMoved  * ContextDisableWindow
 
 " autocmd CursorMoved  * call context#update('CursorMoved')
-autocmd User GitGutter call context#update('GitGutter')
+" autocmd User GitGutter call context#update('GitGutter')
 set maxmempattern=2500
+
+
+autocmd BufReadPost TODO.md syntax match Type "PROJECT_TODO:"
+autocmd BufReadPost TODO.md syntax match Type "PROJECT_TODO_END"
+autocmd BufReadPre TODO.md nnoremap <buffer> <silent> <leader>t :call getting_things_down#toggle_task()<CR>
