@@ -117,6 +117,7 @@
 
 filetype off
 call plug#begin('~/.config/nvim/plug')
+        Plug 'dunckr/js_alternate.vim', { 'for': ['javascript', 'javascript.jsx'] }
         Plug 'wellle/context.vim'
         Plug 'dominikduda/vim_timebox'
         Plug 'lambdalisue/fern.vim'
@@ -278,7 +279,7 @@ call plug#begin('~/.config/nvim/plug')
     " Enable 'bundle' in vim and more
         Plug 'tpope/vim-bundler'
     " Add rails-releated shortcuts to vim
-        Plug 'tpope/vim-rails'
+        Plug 'tpope/vim-rails', { 'for': 'ruby' }
     " Vim-rails shortcuts everywhere!
         Plug 'tpope/vim-rake'
 " <!!!!!!!!**************!!!!!!!!>
