@@ -1,59 +1,3 @@
-function! s:special_cols_width()
-  let numberwidth = max([&numberwidth, strlen(line('$'))+1])
-  let numwidth = (&number || &relativenumber)? numberwidth : 0
-  let foldwidth = &foldcolumn
-
-  if &signcolumn == 'yes'
-    let signwidth = 2
-  elseif &signcolumn == 'auto'
-    let signs = execute(printf('sign place buffer=%d', bufnr('')))
-    let signs = split(signs, "\n")
-    let signwidth = len(signs)>2? 2: 0
-  else
-    let signwidth = 0
-  endif
-  return numwidth + foldwidth + signwidth
-endfunction
-
-function! s:optimize_win_width()
-  let s:buf_name = expand('%:t')
-  let s:longest_line_length = max(map(range(1, line('$')), "col([v:val, '$'])"))
-  let s:special_cols_width = s:special_cols_width()
-  let s:used_win_width = s:special_cols_width + s:longest_line_length
-  let s:total_win_width=winwidth(0)
-  let s:current_split_width = winwidth('%')
-  let s:resize_to = s:used_win_width - 1
-  let s:whole_vim_width = &columns
-  let s:max_single_window_width_percent = 0.5
-
-
-  let b:width_optimized_to = s:resize_to
-
-  " Skip resizing if after last resize window was smaller then currently (== now its larger then optimal)
-  if (exists("b:width_optimized_to") && b:width_optimized_to <= s:total_win_width)
-    let b:width_optimized_to = 0
-    return
-  endif
-
-  " Skip resizing if window would be resized over allowed threshold
-  if (s:resize_to > &columns * s:max_single_window_width_percent)
-    " s:resize_to = float2nr(&columns * s:max_single_window_width_percent)
-    let s:resize_to = float2nr(&columns * s:max_single_window_width_percent)
-  endif
-
-  if (s:used_win_width != s:total_win_width && (s:resize_to > 50))
-    execute "vertical resize " . s:resize_to
-  endif
-endfunction
-
-autocmd WinEnter * call s:optimize_win_width()
-autocmd WinNew * call s:optimize_win_width()
-autocmd BufReadPost * call s:optimize_win_width()
-
-
-
-
-
 " |-----------------------------------------------------------------------------------------|
 " | FORMATTING INFO                                                                         |
 " |-----------------------------------------------------------------------------------------|
@@ -173,11 +117,6 @@ autocmd BufReadPost * call s:optimize_win_width()
 
 filetype off
 call plug#begin('~/.config/nvim/plug')
-Plug 'ryanoasis/vim-devicons'
-" Plug 'camspiers/animate.vim'
-"         Plug 'camspiers/lens.vim'
-        " Plug 'vobornik/vim-mql4'
-        " Plug 'wellle/context.vim', { 'branch': '43-full-border' }
         Plug 'wellle/context.vim'
         Plug 'dominikduda/vim_timebox'
         Plug 'lambdalisue/fern.vim'
@@ -208,7 +147,6 @@ Plug 'ryanoasis/vim-devicons'
     " todo-list management
         Plug 'rlue/vim-getting-things-down'
     " Posting/updating/opening gists from vim
-        " Plug 'mattn/gist-vim'
         Plug 'mattn/vim-gist'
     " Gist-vim dependency
         Plug 'mattn/webapi-vim'
@@ -373,6 +311,31 @@ filetype plugin indent on
     set omnifunc=syntaxcomplete#Complete
     set t_Co=256
     colorscheme dante_modified
+" <!!!!!!!!**************!!!!!!!!>
+
+" CONTEXT.VIM CONFIG ************************************
+    hi ContextLogo guifg=#b3b1b3 guibg=guisp=#0a0a0a gui=NONE ctermfg=232 ctermbg=232 cterm=NONE
+    let g:context_highlight_border = 'LineNr'
+    let g:context_highlight_normal = 'Normal'
+    let g:context_highlight_tag    = 'ContextLogo'
+    let g:context_border_char = '⬍'
+    let g:context_add_autocmds = 0
+    let g:context_add_mappings = 0
+    let g:context_max_per_indent = 1
+    let g:context_max_height = 8
+    autocmd BufAdd       * call context#update('BufAdd')
+    autocmd BufEnter     * call context#update('BufEnter')
+    autocmd WinEnter     * call context#update('BufEnter')
+    autocmd WinNew     * call context#update('BufEnter')
+    autocmd VimEnter     * ContextActivate
+    autocmd VimResized   * call context#update('VimResized')
+    autocmd CursorHold  * call context#update('CursorHold')
+    function Xxx()
+      call context#enable('window')
+      call context#update('CursorHold')
+    endfunction
+    autocmd CursorHold,WinLeave * call Xxx()
+    set maxmempattern=2500
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIM-JEST-SNAPSHOT CONFIG ************************************
@@ -554,6 +517,9 @@ filetype plugin indent on
             autocmd BufReadPost TODO.md setlocal foldmethod=marker
             autocmd BufReadPost TODO.md setlocal foldmarker=PROJECT_TODO:,PROJECT_TODO_END
             autocmd BufReadPost TODO.md setlocal foldnestmax=1
+            autocmd BufReadPost TODO.md syntax match Type "PROJECT_TODO:"
+            autocmd BufReadPost TODO.md syntax match Type "PROJECT_TODO_END"
+            autocmd BufReadPre TODO.md nnoremap <buffer> <silent> <leader>t :call getting_things_down#toggle_task()<CR>
     augroup END
 " <!!!!!!!!**************!!!!!!!!>
 
@@ -1034,28 +1000,6 @@ filetype plugin indent on
           noremap <leader>u lbvey:Ag! --ignore node_modules --ignore coverage --ignore tests '<<C-r>0\b'<CR>
       " Jumps to definition of javascript thing under cursor and persists current inc search value
           noremap gd :let @t = @/<CR>*ggn/from<CR>$hgfggn:let @/ = @t<CR>
-
-      " Flash window if changed from another vim one
-          let g:timer = 0
-          function! NaraFlash(timerr)
-            2match none
-            call timer_stop(g:timer)
-          endfunction
-
-          function! SiemanoFlash()
-            if expand('%:t') == "CtrlSF"
-              return
-            endif
-            2match IncSearch /./
-            redraw
-            let g:timer = timer_start(200, 'NaraFlash')
-          endfunction
-
-          " autocmd WinEnter * call SiemanoFlash()
-          " autocmd FocusGained * call SiemanoFlash()
-          " autocmd WinLeave * call NaraFlash(g:timer)
-          " autocmd FocusLost * call NaraFlash(g:timer)
-
       " Display special_characters, show eol only in visual mode
           function! ShowEOL(...)
             let g:eol_enabled_xxx = get(a:, 1, 0)
@@ -1103,129 +1047,88 @@ filetype plugin indent on
     " Squashing commits helpers
         command! SquashCommits call feedkeys("ggjV}:s/pick/squash\<CR>:wq\<CR>", 'tx')
         command! -nargs=1 NameSquashedCommit call feedkeys("/Please enter the commit message for<CR>kdggO\<Esc>xi<args>\<ESC>:wq\<CR>", 'tx')
+    function! EatWhiteSpace()
+        let c = nr2char(getchar(0))
+        return (c =~ '\s') ? '' : c
+    endfunction
+    " js jest test abbrevs
+      autocmd BufEnter *.test.js iab <buffer> cwrs const { component, wrapper } = renderShallowWrapper()<c-r>=EatWhiteSpace()<cr>
+      autocmd BufEnter *.test.js iab <buffer> cwrd const { component, wrapper } = renderWrapper()<c-r>=EatWhiteSpace()<cr>
+      autocmd BufEnter *.test.js iab <buffer> crs const { component } = renderShallowWrapper()<c-r>=EatWhiteSpace()<cr>
+      autocmd BufEnter *.test.js iab <buffer> wrs const { wrapper } = renderShallowWrapper()<c-r>=EatWhiteSpace()<cr>
+      autocmd BufEnter *.test.js iab <buffer> crd const { component } = renderWrapper()<c-r>=EatWhiteSpace()<cr>
+      autocmd BufEnter *.test.js iab <buffer> wrd const { wrapper } = renderWrapper()<c-r>=EatWhiteSpace()<cr>
+      autocmd BufEnter *.test.js iab <buffer> com component<c-r>=EatWhiteSpace()<cr>
+      autocmd BufEnter *.test.js iab <buffer> ex expect(<c-r>=EatWhiteSpace()<cr>
+      autocmd BufEnter *.test.js iab <buffer> te toEqual(<c-r>=EatWhiteSpace()<cr>
+      autocmd BufEnter *.test.js iab <buffer> mrv mockReturnValue(<c-r>=EatWhiteSpace()<cr>
+      autocmd BufEnter *.test.js iab <buffer> mi mockImplementation(<c-r>=EatWhiteSpace()<cr>
+      autocmd BufEnter *.test.js iab <buffer> mib mockImplementation(() => {})<c-r>=EatWhiteSpace()<cr>
+      autocmd BufEnter *.test.js iab <buffer> thbc toHaveBeenCalled()<c-r>=EatWhiteSpace()<cr>
+      autocmd BufEnter *.test.js iab <buffer> thbct toHaveBeenCalledTimes(<c-r>=EatWhiteSpace()<cr>
+      autocmd BufEnter *.test.js iab <buffer> thbcw toHaveBeenCalledWith(<c-r>=EatWhiteSpace()<cr>
+      autocmd BufEnter *.test.js iab <buffer> jso jest.spyOn(<c-r>=EatWhiteSpace()<cr>
+      autocmd BufEnter *.test.js iab <buffer> jfn jest.fn()<c-r>=EatWhiteSpace()<cr>
+      autocmd BufEnter *.test.js iab <buffer> sst setState(<c-r>=EatWhiteSpace()<cr>
+    " js generic abbrevs
+      autocmd BufEnter *.js,*.jsx iab <buffer> dbg debugger<c-r>=EatWhiteSpace()<cr>
+      autocmd BufEnter *.js,*.jsx inoremap <A-=> ()<space>=><space>{}
+    " ruby generic abbrevs
+      autocmd BufEnter *.rb iab dbg binding.pry
+      autocmd BufEnter *.rb iab org organization
+      autocmd BufEnter *.rb inoremap <A-Bslash> <Space><Bar><Bar>=<Space>
+      inoremap <A-.> <C-]>
 " <!!!!!!!!**************!!!!!!!!>
 
+" CUSTOM WINDOW SPACE MANAGEMENT ************************************
+  function! s:special_cols_width()
+    let numberwidth = max([&numberwidth, strlen(line('$'))+1])
+    let numwidth = (&number || &relativenumber)? numberwidth : 0
+    let foldwidth = &foldcolumn
 
-function! EatWhiteSpace()
-    let c = nr2char(getchar(0))
-    return (c =~ '\s') ? '' : c
-endfunction
+    if &signcolumn == 'yes'
+      let signwidth = 2
+    elseif &signcolumn == 'auto'
+      let signs = execute(printf('sign place buffer=%d', bufnr('')))
+      let signs = split(signs, "\n")
+      let signwidth = len(signs)>2? 2: 0
+    else
+      let signwidth = 0
+    endif
+    return numwidth + foldwidth + signwidth
+  endfunction
 
-  " js jest test abbrevs
-    autocmd BufEnter *.test.js iab <buffer> cwrs const { component, wrapper } = renderShallowWrapper()<c-r>=EatWhiteSpace()<cr>
-    autocmd BufEnter *.test.js iab <buffer> cwrd const { component, wrapper } = renderWrapper()<c-r>=EatWhiteSpace()<cr>
-    autocmd BufEnter *.test.js iab <buffer> crs const { component } = renderShallowWrapper()<c-r>=EatWhiteSpace()<cr>
-    autocmd BufEnter *.test.js iab <buffer> wrs const { wrapper } = renderShallowWrapper()<c-r>=EatWhiteSpace()<cr>
-    autocmd BufEnter *.test.js iab <buffer> crd const { component } = renderWrapper()<c-r>=EatWhiteSpace()<cr>
-    autocmd BufEnter *.test.js iab <buffer> wrd const { wrapper } = renderWrapper()<c-r>=EatWhiteSpace()<cr>
-    autocmd BufEnter *.test.js iab <buffer> com component<c-r>=EatWhiteSpace()<cr>
+  function! s:optimize_win_width()
+    let s:buf_name = expand('%:t')
+    let s:longest_line_length = max(map(range(1, line('$')), "col([v:val, '$'])"))
+    let s:special_cols_width = s:special_cols_width()
+    let s:used_win_width = s:special_cols_width + s:longest_line_length
+    let s:total_win_width=winwidth(0)
+    let s:current_split_width = winwidth('%')
+    let s:resize_to = s:used_win_width - 1
+    let s:whole_vim_width = &columns
+    let s:max_single_window_width_percent = 0.5
 
-    autocmd BufEnter *.test.js iab <buffer> ex expect(<c-r>=EatWhiteSpace()<cr>
-    autocmd BufEnter *.test.js iab <buffer> te toEqual(<c-r>=EatWhiteSpace()<cr>
+    let b:width_optimized_to = s:resize_to
 
-    autocmd BufEnter *.test.js iab <buffer> mrv mockReturnValue(<c-r>=EatWhiteSpace()<cr>
-    autocmd BufEnter *.test.js iab <buffer> mi mockImplementation(<c-r>=EatWhiteSpace()<cr>
-    autocmd BufEnter *.test.js iab <buffer> mib mockImplementation(() => {})<c-r>=EatWhiteSpace()<cr>
+    " Skip resizing if after last resize window was smaller then currently (== now its larger then optimal)
+    if (exists("b:width_optimized_to") && b:width_optimized_to <= s:total_win_width)
+      let b:width_optimized_to = 0
+      return
+    endif
 
-    autocmd BufEnter *.test.js iab <buffer> thbc toHaveBeenCalled()<c-r>=EatWhiteSpace()<cr>
-    autocmd BufEnter *.test.js iab <buffer> thbct toHaveBeenCalledTimes(<c-r>=EatWhiteSpace()<cr>
-    autocmd BufEnter *.test.js iab <buffer> thbcw toHaveBeenCalledWith(<c-r>=EatWhiteSpace()<cr>
-    autocmd BufEnter *.test.js iab <buffer> jso jest.spyOn(<c-r>=EatWhiteSpace()<cr>
-    autocmd BufEnter *.test.js iab <buffer> jfn jest.fn()<c-r>=EatWhiteSpace()<cr>
-    autocmd BufEnter *.test.js iab <buffer> sst setState(<c-r>=EatWhiteSpace()<cr>
+    " Skip resizing if window would be resized over allowed threshold
+    let s:max_allowed_win_width = s:whole_vim_width * s:max_single_window_width_percent
+    if (s:resize_to > s:max_allowed_win_width)
+      let s:resize_to = float2nr(s:max_allowed_win_width)
+    endif
 
-  " js generic abbrevs
-    autocmd BufEnter *.js,*.jsx iab <buffer> dbg debugger<c-r>=EatWhiteSpace()<cr>
-    autocmd BufEnter *.js,*.jsx inoremap <A-=> ()<space>=><space>{}
+    if (s:used_win_width != s:total_win_width && (s:resize_to > 50))
+      execute "vertical resize " . s:resize_to
+    endif
+  endfunction
 
-
-  " ruby generic abbrevs
-    autocmd BufEnter *.rb iab dbg binding.pry
-    autocmd BufEnter *.rb iab org organization
-    autocmd BufEnter *.rb inoremap <A-Bslash> <Space><Bar><Bar>=<Space>
-    inoremap <A-.> <C-]>
-
-augroup LargeFile
-    let g:large_file = 3145728 " 3MB
-    " Set options:
-    "   eventignore+=FileType (no syntax highlighting etc
-    "   assumes FileType always on)
-    "   noswapfile (save copy of file)
-    "   bufhidden=unload (save memory when other file is viewed)
-    "   buftype=nowritefile (is read-only)
-    "   undolevels=-1 (no undo possible)
-    au BufReadPre *
-            \ let f=expand("<afile>") |
-            \ if getfsize(f) > g:large_file |
-                    \ set eventignore+=FileType |
-                    \ setlocal noswapfile bufhidden=unload buftype=nowrite undolevels=-1 |
-            \ else |
-                    \ set eventignore-=FileType |
-            \ endif
-augroup END
-
-
-" autocmd InsertEnter * set timeoutlen=250
-" autocmd InsertLeave * set timeoutlen=900
-" inoremap `` ~
-" inoremap 11 !
-" inoremap 22 @
-" inoremap 33 #
-" inoremap 44 $
-" inoremap 55 %
-" inoremap 66 ^
-" inoremap 77 &
-" inoremap 88 *
-" inoremap 99 (
-" inoremap 00 )
-" inoremap -- _
-" inoremap == +
-" inoremap [[ {
-" inoremap ]] }
-" inoremap \\ \|
-" inoremap ;; :
-" inoremap '' "
-" inoremap ,, <
-" inoremap .. >
-" inoremap // ?
-vmap s S
-
-
-
-
-hi ContextLogo guifg=#b3b1b3 guibg=guisp=#0a0a0a gui=NONE ctermfg=232 ctermbg=232 cterm=NONE
-let g:context_highlight_border = 'LineNr'
-let g:context_highlight_normal = 'Normal'
-let g:context_highlight_tag    = 'ContextLogo'
-" let g:context_presenter = 'preview'
-let g:context_border_char = '⬍'
-let g:context_add_autocmds = 0
-let g:context_add_mappings = 0
-let g:context_max_per_indent = 1
-let g:context_max_height = 8
-autocmd BufAdd       * call context#update('BufAdd')
-autocmd BufEnter     * call context#update('BufEnter')
-autocmd WinEnter     * call context#update('BufEnter')
-autocmd WinNew     * call context#update('BufEnter')
-autocmd VimEnter     * ContextActivate
-autocmd VimResized   * call context#update('VimResized')
-autocmd CursorHold  * call context#update('CursorHold')
-
-" mine
-" autocmd CursorMoved * call feedkeys(":ContextDisable\<cr>", 'tx')
-
-" function Xxx()
-"   call context#enable('window')
-"   call context#update('CursorHold')
-" endfunction
-" autocmd CursorHold,WinLeave * call Xxx()
-autocmd CursorMoved  * ContextDisableWindow
-
-" autocmd CursorMoved  * call context#update('CursorMoved')
-" autocmd User GitGutter call context#update('GitGutter')
-set maxmempattern=2500
-
-
-autocmd BufReadPost TODO.md syntax match Type "PROJECT_TODO:"
-autocmd BufReadPost TODO.md syntax match Type "PROJECT_TODO_END"
-autocmd BufReadPre TODO.md nnoremap <buffer> <silent> <leader>t :call getting_things_down#toggle_task()<CR>
+  autocmd WinEnter * call s:optimize_win_width()
+  autocmd WinNew * call s:optimize_win_width()
+  autocmd BufReadPost * call s:optimize_win_width()
+" <!!!!!!!!**************!!!!!!!!>
