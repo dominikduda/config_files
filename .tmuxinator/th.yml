@@ -1,0 +1,75 @@
+# ~/.tmuxinator/th.yml
+
+name: th
+# This stopped working after tmux upgrade, use 'pre' instead
+# root: ~/github/ab
+
+# Optional tmux socket
+# socket_name: foo
+
+# Runs before everything. Use it to start daemons etc.
+# Sets current postgres version and cluster (so all pg_related helper apps versions match psql server app (like pg_dump, pg_restore))
+# Strings separated by space are respectively: postgres version, host:port, database (* = anything)
+on_project_start: |
+  cd ~/github
+  export DISABLE_AUTO_TITLE=true
+  # nvm install 8.9.1
+  # npm install webpack
+  # npm rebuild node-sass
+  # cp ../config/database.yml.example ../config/database.yml
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+pre_window: |
+  export DISABLE_SPRING=1
+  rvm use 2.5.3
+  nvm use 13.8
+  export CURRENT_PROJECT_NAME='TH'
+  export VIMUX_RUNNER_PANE_INDEX='2'
+  tmux source ~/.tmux.conf
+
+# Pass command line options to tmux. Useful for specifying a different tmux.conf.
+# tmux_options: -f ~/.tmux.mac.conf
+
+# Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
+# tmux_command: tmux-next
+
+# Specifies (by name or index) which window will be selected on project startup. If not set, the first window is used.
+startup_window: editor
+startup_pane: 0
+
+# Controls whether the tmux session should be attached to automatically. Defaults to true.
+# attach: false
+
+# Runs after everything. Use it to attach to tmux with custom options etc.
+# post: tmux -CC attach -t ab
+
+windows:
+    - frontend:
+        panes:
+            - server:
+                - cd th_frontend
+                - npm i
+                - npm start
+            - helper:
+                - cd th_frontend
+                - open https://localhost:3000
+                - clear
+                - gst
+            - editor:
+                - cd th_frontend
+                - tmux select-window -t frontend
+                - tmux select-layout "9ae7,380x70,0,0{71x70,0,0[71x16,0,0,57,71x53,0,17,58],308x70,72,0,59}"
+    - backend:
+        panes:
+            - server:
+                - cd th
+                - rails s
+            - helper:
+                - cd th
+                - clear
+                - gst
+            - editor:
+                - cd th
+                - sleep 5
+                - tmux select-window -t backend
+                - tmux select-layout "9ae7,380x70,0,0{71x70,0,0[71x16,0,0,57,71x53,0,17,58],308x70,72,0,59}"
