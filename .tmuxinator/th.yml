@@ -24,7 +24,6 @@ pre_window: |
   rvm use 2.5.3
   nvm use 13.8
   export CURRENT_PROJECT_NAME='TH'
-  export VIMUX_RUNNER_PANE_INDEX='2'
   tmux source ~/.tmux.conf
 
 # Pass command line options to tmux. Useful for specifying a different tmux.conf.
@@ -52,15 +51,23 @@ windows:
                 - npm start
             - helper:
                 - cd th_frontend
+                - sleep 3
                 - open https://localhost:3000
                 - clear
                 - gst
             - editor:
                 - cd th_frontend
+                - export VIMUX_RUNNER_PANE_INDEX='2'
                 - tmux select-window -t frontend
                 - tmux select-layout "9ae7,380x70,0,0{71x70,0,0[71x16,0,0,57,71x53,0,17,58],308x70,72,0,59}"
     - backend:
         panes:
+            - redis-server:
+                - cd th
+                - redis-server
+            - sidekiq:
+                - cd th
+                - sidekiq
             - server:
                 - cd th
                 - rails s
@@ -71,5 +78,6 @@ windows:
             - editor:
                 - cd th
                 - sleep 5
+                - export VIMUX_RUNNER_PANE_INDEX='4'
                 - tmux select-window -t backend
-                - tmux select-layout "9ae7,380x70,0,0{71x70,0,0[71x16,0,0,57,71x53,0,17,58],308x70,72,0,59}"
+                - tmux select-layout "4700,380x70,0,0{73x70,0,0[73x6,0,0{36x6,0,0,3,36x6,37,0,10},73x16,0,7,6,73x46,0,24,7],306x70,74,0,8}"

@@ -1,9 +1,9 @@
 # Path to your oh-my-zsh installation.
 export ZSH=/home/dominikduda/.oh-my-zsh
 
-plugins=(git z zsh-autosuggestions zsh-syntax-highlighting alias-tips)
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
+plugins=(git z zsh-autosuggestions zsh-syntax-highlighting alias-tips)
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 ZSH_THEME="thedd"
@@ -153,5 +153,7 @@ export NVM_DIR="/home/dominikduda/.nvm"
 
 # Override git branch segment from prompt with empty function to disable it
 prompt_git() {}
+
+export FZF_DEFAULT_COMMAND='ag --hidden -g "" --ignore-dir .git --ignore-dir node_modules'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

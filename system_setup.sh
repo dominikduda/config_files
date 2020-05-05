@@ -31,7 +31,7 @@ echo "@>> Setup github SSH keys"
 
 mkdir ~/.ssh
   gpg2 -d ~/github/config_files/.ssh/id_rsa.gpg >> ~/.ssh/id_rsa
-cp ~/github/config_files/.ssh/id_rsa.pub >> ~/.ssh/id_rsa.pub
+cp ~/github/config_files/.ssh/id_rsa.pub ~/.ssh/id_rsa.pub
 sudo chmod 600 ~/.ssh/id_rsa
 sudo chmod 600 ~/.ssh/id_rsa.pub
 ssh-add
@@ -45,17 +45,17 @@ sudo apt-get --assume-yes install git
 ssh-keyscan github.com >> ~/.ssh/known_hosts
 git clone git@github.com:dominikduda/config_files.git ~/github/config_files
 
-echo "@>> Updating kernel"
+# echo "@>> Updating kernel"
 
-git clone git@github.com:dominikduda/my_kernel.git ~/github/my_kernel
-cd ~/github/my_kernel
-sudo dpkg -i *
-cd
+# git clone git@github.com:dominikduda/my_kernel.git ~/github/my_kernel
+# cd ~/github/my_kernel
+# sudo dpkg -i *
+# cd
 
-echo "@>> Installing nvidia driver"
+# echo "@>> Installing nvidia driver"
 
-sudo add-apt-repository ppa:graphics-drivers/ppa -y
-sudo apt-get --assume-yes install nvidia-driver-435 nvidia-settings
+# sudo add-apt-repository ppa:graphics-drivers/ppa -y
+# sudo apt-get --assume-yes install nvidia-driver-435 nvidia-settings
 
 echo "@>> Installing RVM"
 
@@ -67,6 +67,8 @@ source ~/.rvm/scripts/rvm
   touch ~/.rvm/gemsets/global.gems
   echo "rubocop" >> ~/.rvm/gemsets/global.gems
   echo "neovim" >> ~/.rvm/gemsets/global.gems
+  echo "[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*" >> ~/.bashrc
+  source ~/.bashrc
 rvm install ruby-2.6.5
 rvm --default use 2.6.5
 
@@ -80,6 +82,7 @@ source ~/.bashrc
   echo "neovim" >> ~/.nvm/default-packages
   echo "diff-so-fancy" >> ~/.nvm/default-packages
   echo "livedown" >> ~/.nvm/default-packages
+  echo "yarn" >> ~/.nvm/default-packages
 nvm install node
 source ~/.bashrc
 
@@ -175,6 +178,8 @@ cp -a ~/github/config_files/.tmuxinator/. ~/.tmuxinator/
 
 echo "@>> setup neovim"
 
+sudo apt-get install ripgrep
+sudo apt-get install fzf
 sudo add-apt-repository ppa:neovim-ppa/unstable -y
 sudo apt-get update
 sudo apt-get --assume-yes install neovim
@@ -223,6 +228,12 @@ sudo dpkg -i ~/Downloads/google-chrome-stable_current_amd64.deb
 echo "@>> setup whatsapp"
 
 cp ~/github/config_files/.local/share/applications/whatsapp.desktop ~/.local/share/applications/whatsapp.desktop
+
+echo "@>> install and setup postgres"
+
+sudo apt install postgresql postgresql-contrib
+sudo apt install libpq-dev
+sudo -u postgres createuser dominikduda -s
 
 echo "@>> install docker"
 
@@ -275,6 +286,9 @@ echo "Icon=/var/lib/AccountsService/icons/dominikduda" | sudo tee -a /var/lib/Ac
 
 # load system settings
 dconf load / < ~/github/config_files/system_settings_backup.dconf
+
+# copy importjs
+cp ~/github/config_files/.importjs.js.example ~/.importjs.js
 
 # TODO:
 # - install gnupg

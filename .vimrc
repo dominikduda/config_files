@@ -101,7 +101,7 @@
     " Default tab width
         set shiftwidth=2
     " Add extra tab when starting new line in some cases
-        " set smartindent
+        set smartindent
     " Show column and row numbers
         set ruler
     " Color 100th column
@@ -117,8 +117,9 @@
 
 filetype off
 call plug#begin('~/.config/nvim/plug')
+
         Plug 'dunckr/js_alternate.vim', { 'for': ['javascript', 'javascript.jsx'] }
-        Plug 'wellle/context.vim'
+        " Plug 'wellle/context.vim'
         Plug 'dominikduda/vim_timebox'
         Plug 'lambdalisue/fern.vim'
     " Go to snapshot command provider
@@ -270,9 +271,9 @@ call plug#begin('~/.config/nvim/plug')
 " <!!!!!!!!**************!!!!!!!!>
 
 " SMART SEARCH ************************************
-    Plug 'kien/ctrlp.vim'
-    Plug 'JazzCore/ctrlp-cmatcher'
-    Plug 'jasoncodes/ctrlp-modified.vim'
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf.vim'
+    Plug 'bartoszmaka/fzf-mru.vim'
 " <!!!!!!!!**************!!!!!!!!>
 
 " RAILS ************************************
@@ -315,28 +316,28 @@ filetype plugin indent on
 " <!!!!!!!!**************!!!!!!!!>
 
 " CONTEXT.VIM CONFIG ************************************
-    hi ContextLogo guifg=#b3b1b3 guibg=guisp=#0a0a0a gui=NONE ctermfg=232 ctermbg=232 cterm=NONE
-    let g:context_highlight_border = 'LineNr'
-    let g:context_highlight_normal = 'Normal'
-    let g:context_highlight_tag    = 'ContextLogo'
-    let g:context_border_char = '⬍'
-    let g:context_add_autocmds = 0
-    let g:context_add_mappings = 0
-    let g:context_max_per_indent = 1
-    let g:context_max_height = 8
-    autocmd BufAdd       * call context#update('BufAdd')
-    autocmd BufEnter     * call context#update('BufEnter')
-    autocmd WinEnter     * call context#update('BufEnter')
-    autocmd WinNew     * call context#update('BufEnter')
-    autocmd VimEnter     * ContextActivate
-    autocmd VimResized   * call context#update('VimResized')
-    autocmd CursorHold  * call context#update('CursorHold')
-    function Xxx()
-      call context#enable('window')
-      call context#update('CursorHold')
-    endfunction
-    autocmd CursorHold,WinLeave * call Xxx()
-    set maxmempattern=2500
+    " hi ContextLogo guifg=#b3b1b3 guibg=guisp=#0a0a0a gui=NONE ctermfg=232 ctermbg=232 cterm=NONE
+    " let g:context_highlight_border = 'LineNr'
+    " let g:context_highlight_normal = 'Normal'
+    " let g:context_highlight_tag    = 'ContextLogo'
+    " let g:context_border_char = '⬍'
+    " let g:context_add_autocmds = 0
+    " let g:context_add_mappings = 0
+    " let g:context_max_per_indent = 1
+    " let g:context_max_height = 8
+    " autocmd BufAdd       * call context#update('BufAdd')
+    " autocmd BufEnter     * call context#update('BufEnter')
+    " autocmd WinEnter     * call context#update('BufEnter')
+    " autocmd WinNew     * call context#update('BufEnter')
+    " autocmd VimEnter     * ContextActivate
+    " autocmd VimResized   * call context#update('VimResized')
+    " autocmd CursorHold  * call context#update('CursorHold')
+    " function Xxx()
+    "   call context#enable('window')
+    "   call context#update('CursorHold')
+    " endfunction
+    " autocmd CursorHold,WinLeave * call Xxx()
+    " set maxmempattern=2500
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIM-JEST-SNAPSHOT CONFIG ************************************
@@ -526,7 +527,7 @@ filetype plugin indent on
 
 " VIM-POLYGLOT CONFIG ************************************
     " Javascript syntax higlighter breaks rainbow_parentheses.vim - using alternative
-        let g:polyglot_disabled = ['javascript', 'javascript.jsx', 'markdown', 'yaml']
+        " let g:polyglot_disabled = ['javascript', 'javascript.jsx', 'markdown', 'yaml']
 " <!!!!!!!!**************!!!!!!!!>
 
 " GIST-VIM CONFIG ************************************
@@ -710,7 +711,7 @@ filetype plugin indent on
 
 " ULTISNIPS CONFIG ************************************
     " Add html snippets to js files (needed e. g. in react)
-        autocmd FileType javascript UltiSnipsAddFiletypes html
+        " autocmd FileType javascript UltiSnipsAddFiletypes html
     " Better key bindings for UltiSnipsExpandTrigger
         let g:UltiSnipsExpandTrigger = "<C-e>"
         let g:UltiSnipsJumpForwardTrigger = "<C-e>"
@@ -757,30 +758,50 @@ filetype plugin indent on
     let g:airline#extensions#anzu#enabled = 0
 " <!!!!!!!!**************!!!!!!!!>
 
-" CTRLP CONFIG ************************************
-    let g:ctrlp_max_files = 0
-    let g:ctrlp_map = '<c-p>'
-    let g:ctrlp_cmd = 'CtrlP'
-    nmap <C-l> :CtrlPMRUFiles<CR>
-    " Speed fixes http://stackoverflow.com/questions/21346068/slow-performance-on-ctrlp-it-doesnt-work-to-ignore-some-folders
-        let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-    " Use ag instead of grep if installed
-        if executable('ag')
-            set grepprg=ag\ --nogroup\ --nocolor
-            " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-            let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-            " ag is fast enough that CtrlP doesn't need to cache
-            let g:ctrlp_use_caching = 0
-        endif
-    " Show only files from current working dir in mru mode
-        let g:ctrlp_mruf_relative = 1
-        let g:ctrlp_mruf_exclude = '\.git/.*'
-    let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
-    let g:ctrlp_by_filename = 0
-    highlight  CtrlPPrtCursor ctermbg=124
-    hi! link CtrlPMatch IncSearch
-    hi! link CtrlPPrtText Statement
-    hi! CtrlPLinePre guifg=#4040d6 guibg=NONE guisp=NONE gui=underline ctermfg=232 ctermbg=246 cterm=NONE
+" FZF CONFIG ************************************
+    nmap <C-l> :FZFMruPreview<CR>
+    nmap <C-p> :Files<CR>
+    nnoremap <C-_> :BLines<CR>
+    " Search projectwide
+        nnoremap , :Rg<CR>
+    " Search selected text project wide
+        vnoremap , y:Rg<Space><C-r>"<CR>
+    " Make fzf appear in floating wint + style it
+      function! FloatingFZF()
+        let buf = nvim_create_buf(v:false, v:true)
+        call setbufvar(buf, 'number', 'no')
+        let height = float2nr(&lines * 0.7)
+        let width = float2nr(&columns * 0.9)
+        let row = float2nr(&lines * 0.2)
+        let col = float2nr((&columns - width) / 2)
+        let opts = {
+              \ 'relative': 'editor',
+              \ 'row': row,
+              \ 'col': col,
+              \ 'width': width,
+              \ 'height':height,
+              \ }
+        let win =  nvim_open_win(buf, v:true, opts)
+        call setwinvar(win, '&number', 0)
+        call setwinvar(win, '&relativenumber', 0)
+      endfunction
+      let g:fzf_layout = { 'window': 'call FloatingFZF()' }
+      hi FloatingPopupBg guifg=#000000 guibg=NONE guisp=NONE gui=underline ctermfg=NONE ctermbg=234 cterm=NONE
+      hi SelectedBg guifg=#000000 guibg=NONE guisp=NONE gui=underline ctermfg=NONE ctermbg=236 cterm=NONE
+      let g:fzf_colors = {
+            \ 'fg':      ['fg', 'Directory'],
+            \ 'bg':      ['bg', 'FloatingPopupBg'],
+            \ 'hl':      ['fg', 'Conditional'],
+            \ 'fg+':     ['fg', 'Directory'],
+            \ 'bg+':     ['bg', 'SelectedBg'],
+            \ 'hl+':     ['fg', 'Conditional'],
+            \ 'info':    ['fg', 'LineNr'],
+            \ 'border':  ['fg', 'LineNr'],
+            \ 'pointer': ['fg', 'FloatingPopupBg'],
+            \ 'marker':  ['fg', 'Comment'],
+            \ 'spinner': ['fg', 'LineNr'],
+            \ 'header':  ['fg', 'Comment']
+            \ }
 " <!!!!!!!!**************!!!!!!!!>
 
 " FERN.VIM CONFIG ************************************
@@ -789,15 +810,14 @@ filetype plugin indent on
     " Find curent file in fern
         noremap <leader>f :Fern -drawer -width=36 -reveal=% .<Cr>
     function! s:init_fern() abort
-      " Use 'select' instead of 'edit' for default 'open' action
-      nmap <buffer> <Plug>(fern-action-open) <Plug>(fern-action-open:select)
+      " Remove instead of trash on D
+        nmap <buffer> <Plug>(fern-action-trash) <Plug>(fern-action-remove)
       set nonumber
     endfunction
     augroup fern-custom
       autocmd! *
       autocmd FileType fern call s:init_fern()
     augroup END
-
 " <!!!!!!!!**************!!!!!!!!>
 
 " TAGBAR CONFIG ************************************
@@ -825,28 +845,6 @@ filetype plugin indent on
     let g:gitgutter_realtime = 1
     let g:gitgutter_eager = 1
     let g:gitgutter_async = 1
-" <!!!!!!!!**************!!!!!!!!>
-
-" CTRLSF.VIM CONFIG ************************************
-    let g:ctrlsf_mapping = {
-        \ "next": "J",
-        \ "prev": "K",
-        \ }
-    let g:ctrlsf_auto_focus = {
-        \ "at" : "start",
-        \ }
-        hi! link ctrlsfFilename Type
-        hi! link qfLineNr Constant
-        let g:ctrlsf_default_view_mode = 'compact'
-        let g:ctrlsf_indent = 0
-        autocmd BufReadPost ctrlsf nmap <buffer> j <C-j>
-        autocmd BufReadPost ctrlsf nmap <buffer> k <C-k>
-        vmap , <Plug>CtrlSFVwordPath
-        nmap , <Plug>CtrlSFPrompt
-        let g:ctrlsf_ignore_dir = ['node_modules', 'coverage']
-        let g:ctrlsf_extra_backend_args = {
-            \ 'ag': "--ignore={'*tags*','*package.json*','*package-lock.json*','*node_modules*'}",
-            \ }
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIM-TEST CONFIG ************************************
@@ -892,12 +890,6 @@ filetype plugin indent on
 " <!!!!!!!!**************!!!!!!!!>
 
 " PROJECT SPECIFIC ************************************
-    if $CURRENT_PROJECT_NAME == 'BODE_OPS' || $CURRENT_PROJECT_NAME == 'BODE_WEBSITE' || $CURRENT_PROJECT_NAME == 'BOOKING_API'
-      function! HandleGitCommitStart()
-        call feedkeys("/branch ts-\<CR>eeewyeggi[#\<ESC>pA]\<Space>\<ESC>", 'tx')
-        startinsert!
-      endfunction
-    endif
     if $CURRENT_PROJECT_NAME == 'CATALYST'
         autocmd FileType javascript setlocal colorcolumn=101
         autocmd FileType javascript.jsx setlocal colorcolumn=101
@@ -909,6 +901,12 @@ filetype plugin indent on
         \}
         let g:ale_fixers = {'ruby': ['rubocop'], 'javascript': ['eslint', 'importjs']}
         let g:rbpt_max = 0
+    endif
+    if $CURRENT_PROJECT_NAME == 'TH'
+        function! HandleGitCommitStart()
+          call feedkeys("/branch \<CR>wwwyeggi\<Space>[]\<ESC>P0", 'tx')
+        endfunction
+        autocmd FileType ruby setlocal colorcolumn=121
     endif
 " <!!!!!!!!**************!!!!!!!!>
 
@@ -1042,9 +1040,9 @@ filetype plugin indent on
         endfunction
         nmap <leader>b :call ToggleScrollBind()<CR>
     " Search projectwide
-        nnoremap , :Ag!<Space>-Q<Space>--ignore node_modules --ignore coverage<Space>''<Left>
+        " nnoremap , :Ag!<Space>-Q<Space>--ignore node_modules --ignore coverage<Space>''<Left>
     " Search selected text project wide (+ possibility to pass path)
-        vnoremap , y:Ag!<Space>-Q<Space>--ignore node_modules --ignore coverage<Space>'<C-r>"'<Space>
+        " vnoremap , y:Ag!<Space>-Q<Space>--ignore node_modules --ignore coverage<Space>'<C-r>"'<Space>
     " Squashing commits helpers
         command! SquashCommits call feedkeys("ggjV}:s/pick/squash\<CR>:wq\<CR>", 'tx')
         command! -nargs=1 NameSquashedCommit call feedkeys("/Please enter the commit message for<CR>kdggO\<Esc>xi<args>\<ESC>:wq\<CR>", 'tx')
@@ -1133,3 +1131,6 @@ filetype plugin indent on
   autocmd WinNew * call s:optimize_win_width()
   autocmd BufReadPost * call s:optimize_win_width()
 " <!!!!!!!!**************!!!!!!!!>
+"
+autocmd BufReadPost * set indentkeys-=.
+autocmd BufReadPost * syntax sync fromstart

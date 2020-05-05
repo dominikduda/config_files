@@ -172,3 +172,5 @@ hi! link rPreProc Include
 hi! SpellCap guifg=#000000 guibg=#ff6666 guisp=#ff6666 gui=NONE ctermfg=NONE ctermbg=NONE cterm=NONE
 hi! SpellBad guifg=#000000 guibg=#ff6363 guisp=#ff6363 gui=NONE ctermfg=NONE ctermbg=NONE cterm=underline
 hi! SpellRare guifg=#000000 guibg=#ff6363 guisp=#ff6363 gui=NONE ctermfg=NONE ctermbg=NONE cterm=underline
+
+hi! link markdownError normal
