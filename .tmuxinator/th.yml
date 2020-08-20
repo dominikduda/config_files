@@ -20,9 +20,11 @@ on_project_start: |
 
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
 pre_window: |
+  export VAULT_ADDR=https://vault.tilcra.de
+  export GOOGLE_APPLICATION_CREDENTIALS=account.json
   export DISABLE_SPRING=1
   rvm use 2.5.3
-  nvm use 13.8
+  nvm use 14
   export CURRENT_PROJECT_NAME='TH'
   tmux source ~/.tmux.conf
 
@@ -45,6 +47,11 @@ startup_pane: 0
 windows:
     - frontend:
         panes:
+            - editor:
+                - cd th_frontend
+                - export VIMUX_RUNNER_PANE_INDEX='3'
+                - tmux select-window -t frontend
+                - tmux select-layout "6635,342x61,0,0{234x61,0,0,21,107x61,235,0[107x22,235,0,27,107x38,235,23,28]}"
             - server:
                 - cd th_frontend
                 - npm i
@@ -55,13 +62,14 @@ windows:
                 - open https://localhost:3000
                 - clear
                 - gst
-            - editor:
-                - cd th_frontend
-                - export VIMUX_RUNNER_PANE_INDEX='2'
-                - tmux select-window -t frontend
-                - tmux select-layout "9ae7,380x70,0,0{71x70,0,0[71x16,0,0,57,71x53,0,17,58],308x70,72,0,59}"
     - backend:
         panes:
+            - editor:
+                - cd th
+                - sleep 5
+                - export VIMUX_RUNNER_PANE_INDEX='5'
+                - tmux select-window -t backend
+                - tmux select-layout "c0ad,342x61,0,0{234x61,0,0,19,107x61,235,0[107x9,235,0{53x9,235,0,22,53x9,289,0,23},107x18,235,10,24,107x32,235,29,25]}"
             - redis-server:
                 - cd th
                 - redis-server
@@ -75,9 +83,3 @@ windows:
                 - cd th
                 - clear
                 - gst
-            - editor:
-                - cd th
-                - sleep 5
-                - export VIMUX_RUNNER_PANE_INDEX='4'
-                - tmux select-window -t backend
-                - tmux select-layout "4700,380x70,0,0{73x70,0,0[73x6,0,0{36x6,0,0,3,36x6,37,0,10},73x16,0,7,6,73x46,0,24,7],306x70,74,0,8}"
