@@ -13,6 +13,7 @@ name: th
 on_project_start: |
   cd ~/github
   export DISABLE_AUTO_TITLE=true
+  sudo service postgresql stop
   # nvm install 8.9.1
   # npm install webpack
   # npm rebuild node-sass
@@ -21,7 +22,7 @@ on_project_start: |
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
 pre_window: |
   export VAULT_ADDR=https://vault.tilcra.de
-  export GOOGLE_APPLICATION_CREDENTIALS=account.json
+  export GOOGLE_APPLICATION_CREDENTIALS=../account.json
   export DISABLE_SPRING=1
   rvm use 2.5.3
   nvm use 14
@@ -51,7 +52,8 @@ windows:
                 - cd th_frontend
                 - export VIMUX_RUNNER_PANE_INDEX='3'
                 - tmux select-window -t frontend
-                - tmux select-layout "6635,342x61,0,0{234x61,0,0,21,107x61,235,0[107x22,235,0,27,107x38,235,23,28]}"
+                - tmux select-layout "333b,426x107,0,0{127x107,0,0[127x41,0,0,10,127x65,0,42,12],298x107,128,0,13}"
+                - vim
             - server:
                 - cd th_frontend
                 - npm i
@@ -64,22 +66,25 @@ windows:
                 - gst
     - backend:
         panes:
-            - editor:
+            - redis-server-and-postgres:
                 - cd th
-                - sleep 5
-                - export VIMUX_RUNNER_PANE_INDEX='5'
-                - tmux select-window -t backend
-                - tmux select-layout "c0ad,342x61,0,0{234x61,0,0,19,107x61,235,0[107x9,235,0{53x9,235,0,22,53x9,289,0,23},107x18,235,10,24,107x32,235,29,25]}"
-            - redis-server:
-                - cd th
-                - redis-server
+                - dc up
             - sidekiq:
                 - cd th
+                - sleep 10
                 - sidekiq
             - server:
                 - cd th
+                - sleep 10
                 - rails s
             - helper:
                 - cd th
                 - clear
                 - gst
+            - editor:
+                - cd th
+                - sleep 5
+                - export VIMUX_RUNNER_PANE_INDEX='5'
+                - tmux select-window -t backend
+                - tmux select-layout "18c0,343x95,0,0{85x95,0,0[85x4,0,0,8,85x11,0,5,10,85x33,0,17,11,85x44,0,51,12],257x95,86,0,9}"
+                - vim

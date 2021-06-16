@@ -99,6 +99,8 @@ open() {
 }
 
 # Fuzzy:
+alias lsf="vim \$(ls -w 1 | fzf)"
+alias cdf="cd \$(ls -w 1 | fzf)"
 alias gcof="git checkout \$(git branch -a | fzf)"
 
 alias gdf="git filteredDiff"
@@ -107,17 +109,16 @@ alias gds="git diff --staged"
 alias v="nvim"
 alias sv="sudo nvim"
 alias vimrc="nvim ~/.vimrc"
+alias r="ranger"
+
+alias dc="docker-compose"
 
 alias dcd="docker-compose -f docker-compose.dev.yml"
-alias dc="docker-compose"
 alias de='docker exec -it catalyst_puma_1'
 alias catalyst_clean_all="
   docker-compose down;
   docker volume prune --force;
   docker system prune -a --volumes --force;
-  setopt rm_star_silent
-  rm -rf ~/github/catalyst/public/generated/*
-  setopt no_rm_star_silent
 "
 
 alias catalyst_clean_generated="
@@ -125,6 +126,18 @@ alias catalyst_clean_generated="
   rm -rf ~/github/catalyst/public/generated/*
   setopt no_rm_star_silent
 "
+
+xset r rate 220 50
+
+
+# docker
+alias dsh='docker exec -it $(  docker ps | fzf | awk '"'"'{print $1;}'"'"'  ) sh'
+alias dbash='docker exec -it $(  docker ps | fzf | awk '"'"'{print $1;}'"'"'  ) bash'
+
+
+
+eenvf() { bin/env $(ls ~/.docker/machine/machines | sed -r 's/-/ / g' | sed -r 's/catalyst // g' | sort -V | fzf +s --tac;) }
+
 
 alias cat_npm_log="npm start | tee /tmp/cat_npm.log"
 alias cat_npm_grepped_log="tail -f /tmp/cat_npm.log | grep 'built'"
@@ -136,6 +149,8 @@ export EDITOR='nvim'
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 export PATH="/home/dominikduda/.rvm/gems/ruby-2.1.5/bin:/home/dominikduda/.rvm/gems/ruby-2.1.5@global/bin:/home/dominikduda/.rvm/rubies/ruby-2.1.5/bin:/home/dominikduda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/heroku/bin:/home/dominikduda/.local/bin:/home/dominikduda/.rvm/bin"
+
+. $HOME/.asdf/asdf.sh
 
 # Android studio requires
 export ANDROID_HOME=$HOME/Android/Sdk

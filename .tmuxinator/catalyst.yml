@@ -13,7 +13,7 @@ name: catalyst
 on_project_start: |
   cd ~/github/catalyst/client
   export DISABLE_AUTO_TITLE=true
-  nvm install 12.16.1
+  nvm install 12.13.1
   npm install webpack
   npm rebuild node-sass
   cp ../config/database.yml.example ../config/database.yml
@@ -22,9 +22,9 @@ on_project_start: |
 pre_window: |
   export DISABLE_SPRING=1
   rvm use 2.6.5
-  nvm use 12.16.1
+  nvm use 12.13.1
   export CURRENT_PROJECT_NAME='CATALYST'
-  export VIMUX_RUNNER_PANE_INDEX='4'
+  export VIMUX_RUNNER_PANE_INDEX='2'
   tmux source ~/.tmux.conf
 
 # Pass command line options to tmux. Useful for specifying a different tmux.conf.
@@ -42,31 +42,23 @@ startup_pane: 0
 
 # Runs after everything. Use it to attach to tmux with custom options etc.
 # post: tmux -CC attach -t ab
-
 windows:
     - frontend:
         panes:
-            - editor:
-                - tmux select-window -t frontend
-                - tmux select-layout "491e,342x64,0,0{234x64,0,0,10,107x64,235,0[107x10,235,0,13,107x19,235,11,15,107x33,235,31,16]}"
-            - build_watcher:
-                - sleep 20
-                - google-chrome https://chicago.catalystmeeting.dev
-                - cat_webpack_build_watcher.sh
             - server:
                 - npm i
                 - npm start
             - helper:
+                - sleep 20
+                - google-chrome https://chicago.catalystmeeting.dev
                 - clear
                 - gst
+            - editor:
+                - tmux select-window -t frontend
+                - tmux select-layout "333b,426x107,0,0{127x107,0,0[127x41,0,0,10,127x65,0,42,12],298x107,128,0,13}"
+                - vim
     - backend:
         panes:
-            - editor:
-                - export VIMUX_RUNNER_PANE_INDEX='3'
-                - cd ..
-                - sleep 5
-                - tmux select-window -t backend
-                - tmux select-layout "714b,342x64,0,0{234x64,0,0,10,107x64,235,0[107x30,235,0,13,107x33,235,31,16]}"
             - server:
                 - cd ..
                 - dcd up -d && dcd logs -f
@@ -74,3 +66,10 @@ windows:
                 - cd ..
                 - clear
                 - gst
+            - editor:
+                - export VIMUX_RUNNER_PANE_INDEX='2'
+                - cd ..
+                - sleep 5
+                - tmux select-window -t backend
+                - tmux select-layout "333b,426x107,0,0{127x107,0,0[127x41,0,0,10,127x65,0,42,12],298x107,128,0,13}"
+                - vim
