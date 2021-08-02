@@ -291,7 +291,7 @@ call plug#begin('~/.config/nvim/plug')
     " Port of Damians snippets for VScode
         Plug 'dominikduda/vim_es7_javascript_react_snippets'
     " Intelligent js complete source
-        Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+        " Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
     " Confrim autocompletion with tab
         Plug 'ervandew/supertab'
     " Snippets for various languages pack
@@ -310,10 +310,10 @@ filetype plugin indent on
 " <!!!!!!!!**************!!!!!!!!>
 
 " NVIM-SCROLLVIEW CONFIG ************************************
-    highlight ScrollView ctermfg=NONE ctermbg=220
+    highlight ScrollView ctermfg=NONE ctermbg=107
     let g:scrollview_column = 1
 " <!!!!!!!!**************!!!!!!!!>
-"
+
 " INDENT-BLANKLINE.NVIM CONFIG ************************************
     let g:indentLine_char = '⁝'
     let g:indent_blankline_char = '⁝'
@@ -342,7 +342,7 @@ filetype plugin indent on
       call context#enable('window')
       call context#update('CursorHold')
     endfunction
-    autocmd CursorHold,WinLeave * call Xxx()
+    autocmd CursorHold * call Xxx()
     " autocmd CursorMoved * ContextDisableWindow
     set maxmempattern=2500
 " <!!!!!!!!**************!!!!!!!!>
@@ -514,14 +514,9 @@ filetype plugin indent on
     augroup END
 " <!!!!!!!!**************!!!!!!!!>
 
-" VIM-RANGER CONFIG ************************************
-  let g:ranger_map_keys = 0
-  " let g:ranger_replace_netrw = 1
-  let g:ranger_command_override = 'ranger --cmd "set show_hidden=true"'
-" <!!!!!!!!**************!!!!!!!!>
-
 " RNVIMR CONFIG ************************************
-  map <leader>1 :RnvimrToggle<CR>
+  " Because it opened file into context floating window
+    map <leader>1 :ContextDisable<CR>:RnvimrToggle<CR>
   " Make Ranger replace Netrw and be the file explorer
     let g:rnvimr_enable_ex = 1
   let g:rnvimr_enable_picker = 1
@@ -633,6 +628,13 @@ filetype plugin indent on
         nmap <silent> [l <Plug>(ale_previous_wrap)
         nmap <silent> ]l <Plug>(ale_next_wrap)
     nmap <leader>l :ALEFix<CR>:call timer_start(500, {-> execute('call spelunker#check()')}, { 'repeat': 0 })<CR> :echo 'Fixing ur file'<CR>
+
+  hi ALESignCustom ctermfg=255 ctermbg=33
+  hi! link ALEErrorSign ALESignCustom
+  hi! link ALEWarningSign ALESignCustom
+  hi! link ALEInfoSign ALESignCustom
+  hi! link ALEStyleErrorSign ALESignCustom
+  hi! link ALEStyleWarningSign ALESignCustom
 " <!!!!!!!!**************!!!!!!!!>
 
 " RAINBOW-PARENTHESES CONFIG ************************************
@@ -910,9 +912,9 @@ filetype plugin indent on
           function! ShowEOL(...)
             let g:eol_enabled_xxx = get(a:, 1, 0)
             if mode() == "v" || mode() == "V" || mode() == "\<C-V>" || g:eol_enabled_xxx
-              set listchars=nbsp:•,tab:⎔➤,eol:↲
+              set listchars=nbsp:•,tab:➤-,eol:↲
             else
-              set listchars=nbsp:•,tab:⎔➤
+              set listchars=nbsp:•,tab:➤-
             endif
           endfunction
           autocmd CursorMoved,CursorHold * call ShowEOL()
