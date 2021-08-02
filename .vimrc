@@ -1,16 +1,3 @@
-let g:indentLine_char = '⁝'
-let g:indent_blankline_char = '⁝'
-
-
-" hi! SignColumn guibg=#453f3f
-
-let g:context_max_join_parts = 2
-
-
-let g:context_max_per_indent = 1
-" set conceallevel=2
-
-
 " |-----------------------------------------------------------------------------------------|
 " | FORMATTING INFO                                                                         |
 " |-----------------------------------------------------------------------------------------|
@@ -20,9 +7,9 @@ let g:context_max_per_indent = 1
 " | There should be empty line before and after section                                     |
 " | Everything but section begin/end should be indented at least twice                      |
 " | Comment should indented 2x less then lines which it is concerning                       |
+" |-----------------------------------------------------------------------------------------|
 
 " ENCODING ************************************
-" |-----------------------------------------------------------------------------------------|
     language en_US.UTF-8
     set langmenu=en_US.UTF-8
     set fileencoding=utf-8
@@ -88,7 +75,7 @@ let g:context_max_per_indent = 1
     " Turn screen blinking off
         set novisualbell
     " Always show status line
-        set laststatus=0
+        set laststatus=2
     " Show commands as they are entered
         set showcmd
     " Text (e. g. comment) break point (simply big-enough number)
@@ -130,30 +117,20 @@ let g:context_max_per_indent = 1
 
 filetype off
 call plug#begin('~/.config/nvim/plug')
-
-
-Plug 'dstein64/nvim-scrollview'
-Plug 'Yggdroot/indentLine'
-Plug 'lukas-reineke/indent-blankline.nvim'
-         Plug 'jamespwilliams/bat.vim'
-        " Plug 'Yggdroot/indentLine'
-        " Plug 'lukas-reineke/indent-blankline.nvim'
-
-
-        " Plug 'yuki-ycino/fzf-preview.vim', { 'do': ':FzfPreviewInstall' }
-
-      Plug 'kien/ctrlp.vim'
-      Plug 'JazzCore/ctrlp-cmatcher'
-      Plug 'jasoncodes/ctrlp-modified.vim'
-
-
+    Plug 'kevinhwang91/rnvimr', { 'branch': 'main' }
+    Plug 'dstein64/nvim-scrollview'
+    Plug 'Yggdroot/indentLine'
+    Plug 'lukas-reineke/indent-blankline.nvim'
+    Plug 'jamespwilliams/bat.vim'
+    Plug 'kien/ctrlp.vim'
+    Plug 'JazzCore/ctrlp-cmatcher'
+    Plug 'jasoncodes/ctrlp-modified.vim'
     Plug 'francoiscabrol/ranger.vim'
     Plug 'rbgrouleff/bclose.vim'
+    Plug 'dunckr/js_alternate.vim', { 'for': ['javascript', 'javascript.jsx'] }
+    Plug 'wellle/context.vim'
+    Plug 'dominikduda/vim_timebox'
 
-        Plug 'dunckr/js_alternate.vim', { 'for': ['javascript', 'javascript.jsx'] }
-        Plug 'wellle/context.vim'
-        Plug 'dominikduda/vim_timebox'
-        " Plug 'lambdalisue/fern.vim'
     " Go to snapshot command provider
         Plug 'tapayne88/vim-jest-snapshot'
     " Spell checker
@@ -185,7 +162,7 @@ Plug 'lukas-reineke/indent-blankline.nvim'
     " Gist-vim dependency
         Plug 'mattn/webapi-vim'
     " Navigation and information for yaml files (current node path, jump to parent, jump to key)
-        " Plug 'lmeijvogel/vim-yaml-helper'
+        Plug 'lmeijvogel/vim-yaml-helper'
     " Flash yanked area
         Plug 'haya14busa/vim-operator-flashy'
     " Vim-operator-flashy dependency
@@ -206,10 +183,6 @@ Plug 'lukas-reineke/indent-blankline.nvim'
         Plug 'jgdavey/vim-blockle'
     " Repeat plugin commands with .
         Plug 'tpope/vim-repeat'
-    " Airline
-        Plug 'vim-airline/vim-airline'
-    " Airline themes
-        Plug 'vim-airline/vim-airline-themes'
     " Detect trailing whitespaces
         Plug 'bronson/vim-trailing-whitespace'
     " Select region +/-
@@ -272,9 +245,7 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 
 " GENERAL ************************************
     " Signed bookmarks persisting over vim quit
-        Plug 'MattesGroeger/vim-bookmarks'
-    " Graphical indicator of current line relation to file length
-        Plug 'drzel/vim-line-no-indicator'
+      Plug 'MattesGroeger/vim-bookmarks'
     Plug 'dominikduda/vim_current_word', { 'branch': 'development' }
     Plug 'dominikduda/vim_yank_with_context'
     Plug 'xolox/vim-misc'
@@ -288,8 +259,6 @@ Plug 'lukas-reineke/indent-blankline.nvim'
         Plug 'joker1007/vim-ruby-heredoc-syntax'
     " CLIPS syntax
         Plug 'vim-scripts/clips.vim'
-    " Support for a lot of languages (syntax, indent and much more)
-        " Plug 'sheerun/vim-polyglot', { 'do': 'rm ~/.config/nvim/plug/vim-polyglot/after/indent/jsx.vim; rm ~/.config/nvim/plug/vim-polyglot/after/indent/javascript.vim' }
     " jsx syntax
         Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
         Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
@@ -322,19 +291,13 @@ Plug 'lukas-reineke/indent-blankline.nvim'
     " Port of Damians snippets for VScode
         Plug 'dominikduda/vim_es7_javascript_react_snippets'
     " Intelligent js complete source
-        " Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+        Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
     " Confrim autocompletion with tab
         Plug 'ervandew/supertab'
     " Snippets for various languages pack
         Plug 'honza/vim-snippets'
     " Snippet engine
         Plug 'SirVer/ultisnips'
-    " Dark powered autocompletion ];-|
-        " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    " Deoplete extension for ruby methods
-        " Plug 'fishbullet/deoplete-ruby'
-    " Deoplete extension (more tag sources)
-        " Plug 'Shougo/neoinclude.vim'
 " <!!!!!!!!**************!!!!!!!!>
 call plug#end()
 filetype plugin indent on
@@ -344,13 +307,22 @@ filetype plugin indent on
     set omnifunc=syntaxcomplete#Complete
     set t_Co=256
     colorscheme dante_modified
-" set termguicolors
-" colorscheme bat
+" <!!!!!!!!**************!!!!!!!!>
+
+" NVIM-SCROLLVIEW CONFIG ************************************
+    highlight ScrollView ctermfg=NONE ctermbg=220
+    let g:scrollview_column = 1
+" <!!!!!!!!**************!!!!!!!!>
+"
+" INDENT-BLANKLINE.NVIM CONFIG ************************************
+    let g:indentLine_char = '⁝'
+    let g:indent_blankline_char = '⁝'
 " <!!!!!!!!**************!!!!!!!!>
 
 " CONTEXT.VIM CONFIG ************************************
+    let g:context_max_join_parts = 2
+    let g:context_max_per_indent = 1
     hi ContextLogo guifg=#b3b1b3 guibg=guisp=#0a0a0a gui=NONE ctermfg=232 ctermbg=232 cterm=NONE
-
     let g:context_highlight_border = 'LineNr'
     let g:context_highlight_normal = 'Normal'
     let g:context_highlight_tag    = 'ContextLogo'
@@ -445,34 +417,24 @@ filetype plugin indent on
     autocmd BufEnter * :call BookmarkMapKeys()
 " <!!!!!!!!**************!!!!!!!!>
 
-" VIM-LINE-NO-INDICATOR CONFIG ************************************
-    let g:line_no_indicator_chars = [
-        \ '▏  ', '▎  ', '▍  ', '▌  ',
-        \ '▋  ', '▊  ', '▉  ', '█  ', '█▏ ',
-        \ '█▎ ', '█▍ ', '█▌ ', '█▋ ', '█▊ ',
-        \ '█▉ ', '██ ', '██▏', '██▎', '██▍',
-        \ '██▌', '██▋', '██▊', '██▉', '███'
-        \ ]
-" <!!!!!!!!**************!!!!!!!!>
-
 " DEOPLETE-TERNJS CONFIG ************************************
     " Remove .tern-port on vim start if exists (echos never worked)
-    "     function! TernPrep()
-    "         if !empty(glob(join([getcwd(), ".tern-port"], "/")))
-    "             echo ".tern-port exists, deleting with result:"
-    "             echo delete(fnameescape(join([getcwd(), ".tern-port"], "/"))) == 0 ? "Success" : "Fail"
-    "         endif
-    "     endfunction
-    "     autocmd VimEnter * :call TernPrep()
-    " let g:deoplete#sources#ternjs#filetypes = [
-    "     \ 'jsx',
-    "     \ 'javascript',
-    "     \ 'html',
-    "     \ 'coffe',
-    "     \ 'eruby',
-    "     \ 'javascript.jsx',
-    "     \ 'vue',
-    "     \ ]
+        function! TernPrep()
+            if !empty(glob(join([getcwd(), ".tern-port"], "/")))
+                echo ".tern-port exists, deleting with result:"
+                echo delete(fnameescape(join([getcwd(), ".tern-port"], "/"))) == 0 ? "Success" : "Fail"
+            endif
+        endfunction
+        autocmd VimEnter * :call TernPrep()
+    let g:deoplete#sources#ternjs#filetypes = [
+        \ 'jsx',
+        \ 'javascript',
+        \ 'html',
+        \ 'coffe',
+        \ 'eruby',
+        \ 'javascript.jsx',
+        \ 'vue',
+        \ ]
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIM-ASTERISK CONFIG ************************************
@@ -499,10 +461,6 @@ filetype plugin indent on
     let g:matchup_matchparen_timeout = 100
     let g:matchup_matchparen_insert_timeout = 50
     let g:matchup_matchparen_offscreen = {'method': ''}
-    " autocmd CursorHold * MatchupWhereAmI
-    " highlight MatchWord ctermbg=NONE ctermfg=226 cterm=bold
-    " highlight MatchParen ctermbg=NONE ctermfg=226 cterm=bold,underline
-    " highlight MatchParenCur ctermbg=NONE ctermfg=226 cterm=bold,underline
 " <!!!!!!!!**************!!!!!!!!>
 
 " SPLITJOIN.VIM CONFIG ************************************
@@ -546,10 +504,6 @@ filetype plugin indent on
         " Toggle TODO tasks
             autocmd BufReadPre TODO.md nnoremap <buffer> <silent> <leader>t :call getting_things_down#toggle_task()<CR>
             autocmd BufReadPre TODO.md vnoremap <buffer> <silent> <leader>t :call getting_things_down#toggle_task()<CR>
-        " Change default task colors
-            " autocmd BufReadPre TODO.md hi! markdownTodoReadyN ctermfg=227
-            " autocmd BufReadPre TODO.md hi! markdownTodoDoneN ctermfg=40
-            " autocmd BufReadPre TODO.md hi! markdownTodoWaitingN ctermfg=160
         " Custom folding logic
             autocmd BufReadPost TODO.md setlocal foldmethod=marker
             autocmd BufReadPost TODO.md setlocal foldmarker=PROJECT_TODO:,PROJECT_TODO_END
@@ -560,20 +514,17 @@ filetype plugin indent on
     augroup END
 " <!!!!!!!!**************!!!!!!!!>
 
-" VIM-POLYGLOT CONFIG ************************************
-    " Javascript syntax higlighter breaks rainbow_parentheses.vim - using alternative
-        " let g:polyglot_disabled = ['javascript', 'javascript.jsx', 'markdown', 'yaml']
-" <!!!!!!!!**************!!!!!!!!>
-"
 " VIM-RANGER CONFIG ************************************
   let g:ranger_map_keys = 0
-  map <leader>1 :RangerCurrentFile<CR>
-  let g:ranger_replace_netrw = 1
+  " let g:ranger_replace_netrw = 1
   let g:ranger_command_override = 'ranger --cmd "set show_hidden=true"'
-    " Fern toggle
-    "     nmap <leader>1 :Fern -drawer -toggle -width=36 .<Cr>
-    " Find curent file in fern
-    "     noremap <leader>f :Fern -drawer -width=36 -reveal=% .<Cr>
+" <!!!!!!!!**************!!!!!!!!>
+
+" RNVIMR CONFIG ************************************
+  map <leader>1 :RnvimrToggle<CR>
+  " Make Ranger replace Netrw and be the file explorer
+    let g:rnvimr_enable_ex = 1
+  let g:rnvimr_enable_picker = 1
 " <!!!!!!!!**************!!!!!!!!>
 
 " GIST-VIM CONFIG ************************************
@@ -589,9 +540,9 @@ filetype plugin indent on
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIM-YAML-HELPER CONFIG ************************************
-    " let g:vim_yaml_helper#always_get_root = 1
-    " let g:vim_yaml_helper#auto_display_path = 0
-    " autocmd! CursorMoved *.yml YamlDisplayFullPath
+    let g:vim_yaml_helper#always_get_root = 1
+    let g:vim_yaml_helper#auto_display_path = 0
+    autocmd! CursorMoved *.yml YamlDisplayFullPath
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIM-TRAILING-WHITESPACE CONFIG ************************************
@@ -646,9 +597,6 @@ filetype plugin indent on
     let g:ale_virtualtext_cursor = 1
     let g:ale_virtualtext_prefix = '◀ '
     let g:ale_virtualtext_delay = 110
-    " hi! link ALEVirtualTextError LineNr
-    " hi! link ALEVirtualTextInfo LineNr
-    " hi! link ALEVirtualTextWarning LineNr
     let g:ale_fixers = {}
     let g:ale_fixers['r'] = ['styler']
     let g:ale_fixers['ruby'] = ['rubocop']
@@ -662,7 +610,6 @@ filetype plugin indent on
           \ )'
     let g:ale_fixers['javascript'] = ['importjs', 'eslint']
     let g:ale_fixers['javascript.jsx'] = ['importjs', 'eslint']
-    " highlight link ALEStyleErrorSign todo
     let g:ale_type_map = {'eslint': {'E': 'ES'}}
     let g:ale_echo_msg_error_str = 'E'
     let g:ale_echo_msg_warning_str = 'W'
@@ -675,7 +622,7 @@ filetype plugin indent on
     let g:ale_lint_delay = 400
     let g:ale_lint_on_save = 1
     let g:ale_lint_on_text_changed =  1
- let g:ale_use_global_executables = 1
+    let g:ale_use_global_executables = 1
     let g:ale_linters = {
           \  'java': ['google-java-format'],
           \  'r': ['lintr'],
@@ -746,23 +693,7 @@ filetype plugin indent on
     let g:SuperTabDefaultCompletionType = "<c-n>"
 " <!!!!!!!!**************!!!!!!!!>
 
-" DEOPLETE CONFIG ************************************
-    " let g:deoplete#auto_complete_start_length = 2
-    " let deoplete#tag#cache_limit_size = 500000000
-    " let g:deoplete#enable_ignore_case = 0
-    " let g:deoplete#enable_smart_case = 1
-    " let g:deoplete#enable_at_startup = 1
-    " let g:deoplete#enable_refresh_always = 1
-    " let g:deoplete#max_abbr_width = 0
-    " let g:deoplete#max_menu_width = 0
-    " let g:deoplete#max_list = 20
-    " imap <C-j> <Tab>
-    " imap <C-k> <S-Tab>
-" <!!!!!!!!**************!!!!!!!!>
-
 " ULTISNIPS CONFIG ************************************
-    " Add html snippets to js files (needed e. g. in react)
-        " autocmd FileType javascript UltiSnipsAddFiletypes html
     " Better key bindings for UltiSnipsExpandTrigger
         let g:UltiSnipsExpandTrigger = "<C-e>"
         let g:UltiSnipsJumpForwardTrigger = "<C-e>"
@@ -774,39 +705,6 @@ filetype plugin indent on
         let g:livedown_browser = 'google-chrome'
     " Should the browser window pop-up upon previewing
         let g:livedown_open = 1
-" <!!!!!!!!**************!!!!!!!!>
-
-" AIRLINE CONFIG ************************************
-    " Caused errors after one of updates
-        let g:airline#extensions#tagbar#enabled = 0
-    let g:airline#extensions#hunks#enabled = 0
-    let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
-    let g:airline#extensions#syntastic#enabled = 0
-    let g:airline#extensions#branch#enabled = 0
-    let g:airline#extensions#branch#format = 2
-    let g:airline#extensions#branch#displayed_head_limit = 15
-    set fillchars+=stl:\ ,stlnc:\
-    let g:airline_theme='wombat'
-    let g:airline_section_z = '%#__accent_bold#%{LineNoIndicator()}▏%#__restore__#/%L  ➜▌%2c'
-    let g:airline_section_x = "%{vim_timebox#time_left()}"
-    call timer_start(900, {-> execute(':AirlineRefresh')}, { 'repeat': -1 })
-
-    let g:airline_mode_map = {
-            \ '__' : '-',
-            \ 'n'  : 'N',
-            \ 'i'  : 'I',
-            \ 'R'  : 'R',
-            \ 'c'  : 'C',
-            \ 'v'  : 'V',
-            \ 'V'  : 'V',
-            \ '' : 'V',
-            \ 's'  : 'S',
-            \ 'S'  : 'S',
-            \ '' : 'S',
-            \ 't'  : 'T',
-            \ }
-    let g:airline#extensions#ale#enabled = 0
-    let g:airline#extensions#anzu#enabled = 0
 " <!!!!!!!!**************!!!!!!!!>
 
 " CTRLP CONFIG ************************************
@@ -829,10 +727,6 @@ filetype plugin indent on
         let g:ctrlp_mruf_exclude = '\.git/.*'
     let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
     let g:ctrlp_by_filename = 0
-    " highlight  CtrlPPrtCursor ctermbg=124
-    " hi! link CtrlPMatch IncSearch
-    " hi! link CtrlPPrtText Statement
-    " hi! CtrlPLinePre guifg=#4040d6 guibg=NONE guisp=NONE gui=underline ctermfg=232 ctermbg=246 cterm=NONE
 " <!!!!!!!!**************!!!!!!!!>
 
 " FZF CONFIG ************************************
@@ -840,33 +734,8 @@ filetype plugin indent on
         nnoremap , :Rg<CR>
     " Search selected text project wide
         vnoremap , y:Rg<Space><C-r>"<CR>
-    " nmap <C-l> :FzfPreviewProjectMruFiles -add-fzf-arg=--no-sort<CR>
-    " nmap <C-p> :FzfPreviewProjectFiles<CR>
-    " nnoremap <C-_> :FzfPreviewBufferLines<CR>
-    " " Search projectwide
-    "     nnoremap , :Rg<CR>
-    " " Search selected text project wide
-    "     vnoremap , y:FzfPreviewProjectGrep<Space><C-r>"<CR>
-    "
-    "
 " <!!!!!!!!**************!!!!!!!!>
 
-" FERN.VIM CONFIG ************************************
-    " Fern toggle
-    "     nmap <leader>1 :Fern -drawer -toggle -width=36 .<Cr>
-    " Find curent file in fern
-    "     noremap <leader>f :Fern -drawer -width=36 -reveal=% .<Cr>
-    " function! s:init_fern() abort
-    "   Remove instead of trash on D
-    "     nmap <buffer> <Plug>(fern-action-trash) <Plug>(fern-action-remove)
-    "     set nonumber
-    "     set signcolumn=no
-    " endfunction
-    " augroup fern-custom
-    "   autocmd! *
-    "   autocmd FileType fern call s:init_fern()
-    " augroup END
-" <!!!!!!!!**************!!!!!!!!>
 
 " TAGBAR CONFIG ************************************
     nmap <leader>3 :TagbarToggle<CR>
@@ -886,9 +755,6 @@ filetype plugin indent on
 " <!!!!!!!!**************!!!!!!!!>
 
 " GITGUTTER CONFIG ************************************
-    " highlight GitGutterAdd    guifg=#009900 ctermfg=2
-    " highlight GitGutterChange guifg=#bbbb00 ctermfg=3
-    " highlight GitGutterDelete guifg=#ff2222 ctermfg=1
     set signcolumn=yes
     let g:gitgutter_realtime = 1
     let g:gitgutter_eager = 1
@@ -904,7 +770,7 @@ filetype plugin indent on
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIMUX CONFIG ************************************
-    let g:vimuxUseNearestPane = 1
+    let g:VimuxUseNearest = 1
 " <!!!!!!!!**************!!!!!!!!>
 
 " FUGITIVE CONFIG ************************************
@@ -920,17 +786,6 @@ filetype plugin indent on
     autocmd FileType gitcommit call HandleGitCommitStart()
     autocmd FileType gitcommit setlocal colorcolumn=72
     set diffopt+=vertical
-    " hi! link gitCommitSelected gitcommitSelectedType
-    " hi! link gitCommitHeader Include
-    " hi! link gitCommitOnBranch Include
-    " hi! link gitCommitComment Include
-    " hi! link gitcommitDiscardedType Constant
-    " hi! link gitcommitDiscarded Constant
-    " hi! link gitcommitHead String
-    " hi! link gitcommitUntracked String
-    " hi gitcommitUntrackedFile guifg=#b3b1b3 guibg=guisp=#0a0a0a gui=NONE ctermfg=250 ctermbg=NONE cterm=NONE
-    " hi gitcommitDiscardedFile guifg=#b3b1b3 guibg=guisp=#0a0a0a gui=NONE ctermfg=250 ctermbg=NONE cterm=NONE
-    " hi gitcommitSelectedFile guifg=#b3b1b3 guibg=guisp=#0a0a0a gui=NONE ctermfg=250 ctermbg=NONE cterm=NONE
 " <!!!!!!!!**************!!!!!!!!>
 
 " VIM-CLOSETAG CONFIG ************************************
@@ -982,11 +837,11 @@ filetype plugin indent on
           vnoremap <C-v> x"+P
           inoremap <C-v> <Esc>"+pa
       " Change current line color when entering/leaving insert mode
-          " autocmd InsertEnter * highlight  CursorLine ctermbg=52
-          " autocmd InsertLeave * highlight  CursorLine ctermbg=235
+          autocmd InsertEnter * highlight  CursorLine ctermbg=52
+          autocmd InsertLeave * highlight  CursorLine ctermbg=235
       " Change current line number color when entering/leaving insert mode
-          " autocmd InsertEnter * highlight  CursorLineNR ctermbg=124
-          " autocmd InsertLeave * highlight  CursorLineNR ctermbg=246
+          autocmd InsertEnter * highlight  CursorLineNR ctermbg=124
+          autocmd InsertLeave * highlight  CursorLineNR ctermbg=246
       " Check file change every 4 seconds ('CursorHold') and reload the buffer upon detecting change
           set autoread
           autocmd CursorHold * checktime
@@ -1125,13 +980,40 @@ filetype plugin indent on
       autocmd BufEnter *.js,*.jsx iab <buffer> dbg debugger<c-r>=EatWhiteSpace()<cr>
       autocmd BufEnter *.js,*.jsx inoremap <A-=> ()<space>=><space>{}
     " ruby generic abbrevs
-      autocmd BufEnter *.rb iab dbg binding.pry
+      autocmd BufEnter *.rb iab dbg binding.remote_pry
+      autocmd BufEnter *.rb iab msg Rails.logger.info "#{}"
       autocmd BufEnter *.rb iab org organization
       autocmd BufEnter *.rb inoremap <A-Bslash> <Space><Bar><Bar>=<Space>
       inoremap <A-.> <C-]>
+    " Statusline config
+      set statusline=
+      set statusline+=%#DiffAdd#%{(mode()=='n')?'\ \ NORMAL\ ':''}
+      set statusline+=%#DiffChange#%{(mode()=='i')?'\ \ INSERT\ ':''}
+      set statusline+=%#DiffDelete#%{(mode()=='r')?'\ \ RPLACE\ ':''}
+      set statusline+=%#Cursor#%{(mode()=='v')?'\ \ VISUAL\ ':''}
+      set statusline+=%#Visual#       " colour
+      set statusline+=%{&paste?'\ PASTE\ ':''}
+      set statusline+=%{&spell?'\ SPELL\ ':''}
+      set statusline+=%#CursorIM#     " colour
+      set statusline+=%R                        " readonly flag
+      set statusline+=%M                        " modified [+] flag
+      set statusline+=%#Cursor#               " colour
+      set statusline+=%#CursorLine#     " colour
+      set statusline+=\ %F\                   " short file name
+      set statusline+=%=                          " right align
+      set statusline+=%#CursorLine#   " colour
+      set statusline+=\ %Y\                   " file type
+      set statusline+=%#CursorIM#     " colour
+      set statusline+=\ %-2c\         " line + column
+      set statusline+=%{vim_timebox#time_left()}
 " <!!!!!!!!**************!!!!!!!!>
 
 " CUSTOM WINDOW SPACE MANAGEMENT ************************************
+  function! s:is_floating(id) abort
+      let l:cfg = nvim_win_get_config(a:id)
+      return !empty(l:cfg.relative) || l:cfg.external
+  endfunction
+
   function! s:special_cols_width()
     let numberwidth = max([&numberwidth, strlen(line('$'))+1])
     let numwidth = (&number || &relativenumber)? numberwidth : 0
@@ -1150,6 +1032,11 @@ filetype plugin indent on
   endfunction
 
   function! s:optimize_win_width()
+    " Skip the function if running from floating window (fzf was breaking)
+    if s:is_floating(0)
+      return
+    end
+
     let s:buf_name = expand('%:t')
     let s:longest_line_length = max(map(range(1, line('$')), "col([v:val, '$'])"))
     let s:special_cols_width = s:special_cols_width()
@@ -1158,15 +1045,8 @@ filetype plugin indent on
     let s:current_split_width = winwidth('%')
     let s:resize_to = s:used_win_width - 1
     let s:whole_vim_width = &columns
-    let s:max_single_window_width_percent = 0.7
-
-    let b:width_optimized_to = s:resize_to
-
-    " Skip resizing if after last resize window was smaller then currently (== now its larger then optimal)
-    if (exists("b:width_optimized_to") && b:width_optimized_to <= s:total_win_width)
-      let b:width_optimized_to = 0
-      return
-    endif
+    let s:max_single_window_width_percent = 0.5
+    let w:width_optimized_to = s:resize_to
 
     " Skip resizing if window would be resized over allowed threshold
     let s:max_allowed_win_width = s:whole_vim_width * s:max_single_window_width_percent
@@ -1174,8 +1054,9 @@ filetype plugin indent on
       let s:resize_to = float2nr(s:max_allowed_win_width)
     endif
 
-    if (s:used_win_width != s:total_win_width && (s:resize_to > 50))
+    if (s:used_win_width != s:total_win_width)
       execute "vertical resize " . s:resize_to
+      :ContextUpdate
     endif
   endfunction
 
@@ -1183,66 +1064,15 @@ filetype plugin indent on
   autocmd WinNew * call s:optimize_win_width()
   autocmd BufReadPost * call s:optimize_win_width()
 " <!!!!!!!!**************!!!!!!!!>
-"
-" autocmd BufReadPost * set indentkeys-=.
 
-autocmd BufReadPost * syntax sync fromstart
+" EXPERIMENTAL
+  autocmd BufReadPost * syntax sync fromstart
+  autocmd BufReadPost *.md :setlocal foldlevel=20
+  autocmd BufReadPost TODO.md :setlocal foldlevel=0
 
+  if exists("b:current_syntax")
+    finish
+  endif
 
-
-
-
-autocmd BufReadPost *.md :setlocal foldlevel=20
-autocmd BufReadPost TODO.md :setlocal foldlevel=0
-
-
-
-if exists("b:current_syntax")
-  finish
-endif
-
-" Custom conceal
-" syntax match todoCheckbox "\[\ \]" conceal cchar=r
-" syntax match todoCheckbox "\[x\]" conceal cchar=z
-
-let b:current_syntax = "todo"
-
-" hi def link todoCheckbox Todo
-" hi Conceal guibg=NONE
-
-setlocal cole=1
-
-
-
-
-
-
-" do not use:
-" autocmd CursorMoved * IndentBlanklineRefresh
-" let g:indent_blankline_char = '|'
-" let g:indent_blankline_char_list = ['|', '¦', '┆', '┊']
-" let g:indent_blankline_space_char = ' '
-" let g:indent_blankline_indent_level = 4
-" let g:indent_blankline_extra_indent_level = -1
-
-  " let g:indent_blankline_debug = v:true
-
-
-
-" let g:indent_blankline_enabled = v:true
-
-" " XXX
-" let g:indentLine_bgcolor_term = 202
-" let g:indentLine_bgcolor_gui = '#FF5F00'
-" let g:indentLine_char = 'c'
-" set background=dark
-
-" hi! SignColumn guibg=#122142
-" hi! LineNr guibg=#122142
-
-
-
-
-let g:indentLine_char = '⁝'
-let g:indent_blankline_char = '⁝'
-
+  let b:current_syntax = "todo"
+  setlocal cole=1
