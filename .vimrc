@@ -6,7 +6,7 @@
 " | Section description (optional): < sample description >                                  |
 " | There should be empty line before and after section                                     |
 " | Everything but section begin/end should be indented at least twice                      |
-" | Comment should indented 2x less then lines which it is concerning                       |
+" | should indented less then lines which it is concerning                                  |
 " |-----------------------------------------------------------------------------------------|
 
 " ENCODING ************************************
@@ -67,7 +67,7 @@
     " Show absolute line number in current line
         set number
     " Wrapped line symbol
-        set showbreak=⤷▶
+        set showbreak=↳
     " Disable jumping to matching parenthesis after typing it
         set noshowmatch
     " Disable creating swap files
@@ -118,7 +118,7 @@
 filetype off
 call plug#begin('~/.config/nvim/plug')
     Plug 'kevinhwang91/rnvimr', { 'branch': 'main' }
-    Plug 'dstein64/nvim-scrollview'
+    Plug 'dstein64/nvim-scrollview',  { 'branch': 'main' }
     Plug 'Yggdroot/indentLine'
     Plug 'lukas-reineke/indent-blankline.nvim'
     Plug 'jamespwilliams/bat.vim'
@@ -234,7 +234,7 @@ call plug#begin('~/.config/nvim/plug')
 
 " TMUX INTEGRATION ************************************
     " Execute commands from vim in tmux pane easily (mainly for running tests)
-        Plug 'benmills/vimux'
+        Plug 'dominikduda/vimux', { 'branch': 'master' }
     " Treat tmux panes like vim splits
         Plug 'christoomey/vim-tmux-navigator'
     " Tmux focus events integraion (switching between vim pane and other console pane)
@@ -246,7 +246,7 @@ call plug#begin('~/.config/nvim/plug')
 " GENERAL ************************************
     " Signed bookmarks persisting over vim quit
       Plug 'MattesGroeger/vim-bookmarks'
-    Plug 'dominikduda/vim_current_word', { 'branch': 'development' }
+    Plug 'dominikduda/vim_current_word', { 'branch': 'master' }
     Plug 'dominikduda/vim_yank_with_context'
     Plug 'xolox/vim-misc'
     Plug 'ludovicchabant/vim-gutentags'
@@ -346,6 +346,14 @@ filetype plugin indent on
     " autocmd CursorMoved * ContextDisableWindow
     set maxmempattern=2500
 " <!!!!!!!!**************!!!!!!!!>
+"
+function Yyy()
+  let s:line_count = line('$')
+  if $line_count > N << N TODO
+    " use leader-b mode << Also TODO
+  endif
+  let s:line_count = line('$')
+endfunction
 
 " VIM-JEST-SNAPSHOT CONFIG ************************************
     command! SnapshotGo call snapshot#show()
@@ -356,28 +364,6 @@ filetype plugin indent on
         let g:r_setup_finished = 0
     let g:rout_follow_colorscheme = 1
     let g:Rout_more_colors = 1
-    let R_objbr_allnames = 1
-    let R_objbr_h = 3
-    let R_assign = 0
-    function! SetupRBindings()
-        nmap <leader>r :VimuxRunCommand "system('clear')"<cr>:VimuxRunCommand "rm(list = ls())"<cr>:VimuxRunCommand "source('main.R')"<cr>
-        nmap <leader>r :VimuxRunCommand "system('clear')"<cr>:VimuxRunCommand "rm(list = ls())"<cr>:VimuxRunCommand "source('main.R')"<cr>
-        nmap <leader>o :VimuxRunCommand "system('clear')"<cr>:VimuxRunCommand "ls(all.names = TRUE, sorted = TRUE)"<cr>
-        if g:r_setup_finished
-          return
-        endif
-        inoremap <A-5> <space>%>%<space>
-        inoremap <A--> <space><-<space>
-        tnoremap <A-5> <space>%>%<space>
-        tnoremap <A--> <space><-<space>
-    endfunction
-    function! SetupR()
-      setlocal shiftwidth=2
-        let g:r_setup_finished = 1
-    "     echo "R setup done"
-    endfunction
-    autocmd BufReadPre *.R call SetupRBindings()
-    autocmd BufEnter *.R call SetupR()
 " <!!!!!!!!**************!!!!!!!!>
 
 " SPELUNKER CONFIG ************************************
@@ -589,6 +575,7 @@ filetype plugin indent on
 " <!!!!!!!!**************!!!!!!!!>
 
 " ALE CONFIG ************************************
+"
     let g:ale_virtualtext_cursor = 1
     let g:ale_virtualtext_prefix = '◀ '
     let g:ale_virtualtext_delay = 110
@@ -603,8 +590,10 @@ filetype plugin indent on
           \  camel_case_linter = NULL,
           \  snake_case_linter = snake_case_linter
           \ )'
-    let g:ale_fixers['javascript'] = ['importjs', 'eslint']
-    let g:ale_fixers['javascript.jsx'] = ['importjs', 'eslint']
+    " let g:ale_fixers['javascript'] = ['importjs', 'eslint']
+    " let g:ale_fixers['javascript.jsx'] = ['importjs', 'eslint']
+    let g:ale_fixers['javascript'] = ['eslint']
+    let g:ale_fixers['javascript.jsx'] = ['eslint']
     let g:ale_type_map = {'eslint': {'E': 'ES'}}
     let g:ale_echo_msg_error_str = 'E'
     let g:ale_echo_msg_warning_str = 'W'
@@ -629,12 +618,49 @@ filetype plugin indent on
         nmap <silent> ]l <Plug>(ale_next_wrap)
     nmap <leader>l :ALEFix<CR>:call timer_start(500, {-> execute('call spelunker#check()')}, { 'repeat': 0 })<CR> :echo 'Fixing ur file'<CR>
 
-  hi ALESignCustom ctermfg=255 ctermbg=33
+  hi ALESignCustom ctermfg=248 ctermbg=57
+  hi NoUnderlineDiagnostic cterm=NONE
+  hi! link ALEError ALESignCustom
   hi! link ALEErrorSign ALESignCustom
   hi! link ALEWarningSign ALESignCustom
   hi! link ALEInfoSign ALESignCustom
   hi! link ALEStyleErrorSign ALESignCustom
   hi! link ALEStyleWarningSign ALESignCustom
+
+
+  "TODO:  THESE ARENT ALE SPECIFIC ANYMORE NEED TO MOVE.
+  sign define DiagnosticSignError text=:( texthl=DiagnosticSignError linehl= numhl=
+  sign define DiagnosticSignWarn text=:| texthl=DiagnosticSignWarn linehl= numhl=
+  sign define DiagnosticSignInfo text=:) texthl=DiagnosticSignInfo linehl= numhl=
+  sign define DiagnosticSignHint text=:] texthl=DiagnosticSignHint linehl= numhl=
+
+  hi! link DiagnosticError ALESignCustom
+  hi! link DiagnosticWarn ALESignCustom
+  hi! link DiagnosticInfo ALESignCustom
+  hi! link DiagnosticHint ALESignCustom
+  hi! link DiagnosticOk ALESignCustom
+  " hi! link DiagnosticVirtualTextError ALESignCustom
+  " hi! link DiagnosticVirtualTextWarn ALESignCustom
+  " hi! link DiagnosticVirtualTextInfo ALESignCustom
+  " hi! link DiagnosticVirtualTextHint ALESignCustom
+  " hi! link DiagnosticVirtualTextOk ALESignCustom
+  hi! link DiagnosticUnderlineError NoUnderlineDiagnostic
+  hi! link DiagnosticUnderlineWarn NoUnderlineDiagnostic
+  hi! link DiagnosticUnderlineInfo NoUnderlineDiagnostic
+  hi! link DiagnosticUnderlineHint NoUnderlineDiagnostic
+  hi! link DiagnosticUnderlineOk NoUnderlineDiagnostic
+  " hi! link DiagnosticFloatingError ALESignCustom
+  " hi! link DiagnosticFloatingWarn ALESignCustom
+  " hi! link DiagnosticFloatingInfo ALESignCustom
+  " hi! link DiagnosticFloatingHint ALESignCustom
+  " hi! link DiagnosticFloatingOk ALESignCustom
+  hi! link DiagnosticSignError ALESignCustom
+  hi! link DiagnosticSignWarn ALESignCustom
+  hi! link DiagnosticSignInfo ALESignCustom
+  hi! link DiagnosticSignHint ALESignCustom
+  hi! link DiagnosticSignOk ALESignCustom
+  hi! link DiagnosticDeprecated ALESignCustom
+  hi! link DiagnosticUnnecessary ALESignCustom
 " <!!!!!!!!**************!!!!!!!!>
 
 " RAINBOW-PARENTHESES CONFIG ************************************
@@ -736,6 +762,7 @@ filetype plugin indent on
         nnoremap , :Rg<CR>
     " Search selected text project wide
         vnoremap , y:Rg<Space><C-r>"<CR>
+
 " <!!!!!!!!**************!!!!!!!!>
 
 
@@ -769,10 +796,12 @@ filetype plugin indent on
     nmap <silent> <leader>T :TestFile<CR>
     nmap <silent> <leader>a :TestSuite<CR>
     let test#strategy = 'vimux'
-" <!!!!!!!!**************!!!!!!!!>
-
-" VIMUX CONFIG ************************************
-    let g:VimuxUseNearest = 1
+    let g:test#preserve_screen = 1
+    let g:test#echo_command = 0
+    let g:VimuxUseNearest = v:false
+    let g:VimuxRunnerType = "pane"
+    " Index of tmux pane to run tests in
+        let g:VimuxRunnerIndex = $VIMUX_RUNNER_PANE_INDEX
 " <!!!!!!!!**************!!!!!!!!>
 
 " FUGITIVE CONFIG ************************************
@@ -801,10 +830,10 @@ filetype plugin indent on
         autocmd FileType ruby setlocal colorcolumn=141
         let g:deoplete#enable_ignore_case = 1
         let g:ale_linters = {
-        \   'javascript': ['eslint', 'importjs'],
+        \   'javascript': ['eslint'],
         \   'ruby': ['rubocop'],
         \}
-        let g:ale_fixers = {'ruby': ['rubocop'], 'javascript': ['eslint', 'importjs']}
+        let g:ale_fixers = {'ruby': ['rubocop'], 'javascript': ['eslint']}
         let g:rbpt_max = 0
     endif
     if $CURRENT_PROJECT_NAME == 'TH'
@@ -830,6 +859,8 @@ filetype plugin indent on
     nnoremap ; :
     inoremap <C-l> <End>
     inoremap kk <Right>
+    inoremap zz <Esc>dawi
+    imap <C-Backspace> <Esc>dawi
     inoremap <A-j> <Esc>
       " Copy to system clipboard
           vnoremap <C-c> "+y
@@ -899,8 +930,6 @@ filetype plugin indent on
           command! UpdatePlugins call s:update_plugins()
       " Keep cursor position after yanking in visual mode
           vmap y ygv<Esc>
-      " Index of tmux pane to run tests in
-          let g:VimuxRunnerIndex = $VIMUX_RUNNER_PANE_INDEX
       " Take most characters literally in incsearch
           map / /\V
           map ? ?\V
@@ -1047,7 +1076,7 @@ filetype plugin indent on
     let s:current_split_width = winwidth('%')
     let s:resize_to = s:used_win_width - 1
     let s:whole_vim_width = &columns
-    let s:max_single_window_width_percent = 0.5
+    let s:max_single_window_width_percent = 0.6
     let w:width_optimized_to = s:resize_to
 
     " Skip resizing if window would be resized over allowed threshold

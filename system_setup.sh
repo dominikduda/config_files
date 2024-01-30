@@ -79,6 +79,7 @@ source ~/.bashrc
   touch ~/.nvm/default-packages
   echo "eslint" >> ~/.nvm/default-packages
   echo "importjs" >> ~/.nvm/default-packages
+  echo "import-js" >> ~/.nvm/default-packages
   echo "neovim" >> ~/.nvm/default-packages
   echo "diff-so-fancy" >> ~/.nvm/default-packages
   echo "livedown" >> ~/.nvm/default-packages

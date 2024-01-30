@@ -11,18 +11,15 @@ name: catalyst
 # Sets current postgres version and cluster (so all pg_related helper apps versions match psql server app (like pg_dump, pg_restore))
 # Strings separated by space are respectively: postgres version, host:port, database (* = anything)
 on_project_start: |
-  cd ~/github/catalyst/client
+  cd ~/github/catalyst
   export DISABLE_AUTO_TITLE=true
-  nvm install 12.13.1
-  npm install webpack
-  npm rebuild node-sass
   cp ../config/database.yml.example ../config/database.yml
 
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
 pre_window: |
   export DISABLE_SPRING=1
-  rvm use 2.6.5
-  nvm use 12.13.1
+  rvm use 3.1.2
+  nvm use 18.18.2
   export CURRENT_PROJECT_NAME='CATALYST'
   export VIMUX_RUNNER_PANE_INDEX='2'
   tmux source ~/.tmux.conf
@@ -46,30 +43,36 @@ windows:
     - frontend:
         panes:
             - server:
+                - cd client
+                - export VIMUX_RUNNER_PANE_INDEX='2'
                 - npm i
+                - npm rebuild node-sass
                 - npm start
             - helper:
+                - cd client
+                - export VIMUX_RUNNER_PANE_INDEX='2'
                 - sleep 20
                 - google-chrome https://chicago.catalystmeeting.dev
                 - clear
                 - gst
             - editor:
+                - cd client
+                - export VIMUX_RUNNER_PANE_INDEX='2'
                 - tmux select-window -t frontend
-                - tmux select-layout "333b,426x107,0,0{127x107,0,0[127x41,0,0,10,127x65,0,42,12],298x107,128,0,13}"
-                - vim
+                - tmux select-layout "5c9b,314x80,0,0{117x80,0,0[117x27,0,0,1,117x52,0,28,3],196x80,118,0,4}"
+                - ranger
     - backend:
         panes:
-            - server:
-                - cd ..
+            - server_b:
+                - export VIMUX_RUNNER_PANE_INDEX='2'
                 - dcd up -d && dcd logs -f
-            - helper:
-                - cd ..
+            - helper_b:
+                - export VIMUX_RUNNER_PANE_INDEX='2'
                 - clear
                 - gst
-            - editor:
+            - editor_b:
                 - export VIMUX_RUNNER_PANE_INDEX='2'
-                - cd ..
                 - sleep 5
                 - tmux select-window -t backend
-                - tmux select-layout "333b,426x107,0,0{127x107,0,0[127x41,0,0,10,127x65,0,42,12],298x107,128,0,13}"
-                - vim
+                - tmux select-layout "5c9f,314x80,0,0{117x80,0,0[117x27,0,0,2,117x52,0,28,5],196x80,118,0,6}"
+                - ranger

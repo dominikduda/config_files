@@ -1,6 +1,7 @@
 # Path to your oh-my-zsh installation.
 export ZSH=/home/dominikduda/.oh-my-zsh
 
+
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 plugins=(git z zsh-autosuggestions zsh-syntax-highlighting alias-tips)
@@ -8,6 +9,9 @@ plugins=(git z zsh-autosuggestions zsh-syntax-highlighting alias-tips)
 # time that oh-my-zsh is loaded.
 ZSH_THEME="thedd"
 # ZSH_THEME="agnoster"
+
+# bindkey "^[[A" history-substring-search-up
+# bindkey "^[[B" history-substring-search-down
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -95,7 +99,7 @@ setopt    HIST_REDUCE_BLANKS
 setopt    HIST_VERIFY
 
 open() {
-  gnome-open $1 &> /dev/null
+  xdg-open $1 &> /dev/null
 }
 
 # Fuzzy:
@@ -113,11 +117,15 @@ alias r="ranger"
 
 alias dc="docker-compose"
 
-alias dcd="docker-compose -f docker-compose.dev.yml"
+alias dcd="docker-compose -f docker-compose.yml"
 alias de='docker exec -it catalyst_puma_1'
 alias catalyst_clean_all="
   docker-compose down;
   docker volume prune --force;
+  docker system prune -a --volumes --force;
+  docker-compose down;
+  docker volume prune --force;
+  docker volume prune -f
   docker system prune -a --volumes --force;
 "
 
@@ -127,13 +135,17 @@ alias catalyst_clean_generated="
   setopt no_rm_star_silent
 "
 
-xset r rate 220 50
+xset r rate 664 50
 
+
+
+# alias cat_frontend="docker-compose down; docker-compose up; docker-compose logs -f"
 
 # docker
 alias dsh='docker exec -it $(  docker ps | fzf | awk '"'"'{print $1;}'"'"'  ) sh'
 alias dbash='docker exec -it $(  docker ps | fzf | awk '"'"'{print $1;}'"'"'  ) bash'
 
+alias ddbg='docker exec -it $(  docker ps | fzf | awk '"'"'{print $1;}'"'"'  ) dbg'
 
 
 eenvf() { bin/env $(ls ~/.docker/machine/machines | sed -r 's/-/ / g' | sed -r 's/catalyst // g' | sort -V | fzf +s --tac;) }
@@ -169,6 +181,13 @@ export NVM_DIR="/home/dominikduda/.nvm"
 # Override git branch segment from prompt with empty function to disable it
 prompt_git() {}
 
-export FZF_DEFAULT_COMMAND='ag --hidden -g "" --ignore-dir .git --ignore-dir node_modules'
+# export FZF_DEFAULT_COMMAND='ag --hidden -g "" --ignore-dir .git --ignore-dir node_modules'
+
+# export FZF_CTRL_R_OPTS="
+#   --preview 'echo {}' --preview-window up:3:hidden:wrap
+#   --bind 'ctrl-/:toggle-preview'
+#   --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+#   --color header:italic
+#   --header 'Press CTRL-Y to copy command into clipboard'"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
