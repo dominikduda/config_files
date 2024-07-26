@@ -827,7 +827,7 @@ endfunction
     if $CURRENT_PROJECT_NAME == 'CATALYST'
         autocmd FileType javascript setlocal colorcolumn=101
         autocmd FileType javascript.jsx setlocal colorcolumn=101
-        autocmd FileType ruby setlocal colorcolumn=141
+        autocmd FileType ruby setlocal colorcolumn=121
         let g:deoplete#enable_ignore_case = 1
         let g:ale_linters = {
         \   'javascript': ['eslint'],
@@ -1094,6 +1094,7 @@ endfunction
   autocmd WinEnter * call s:optimize_win_width()
   autocmd WinNew * call s:optimize_win_width()
   autocmd BufReadPost * call s:optimize_win_width()
+  autocmd InsertLeave * call s:optimize_win_width()
 " <!!!!!!!!**************!!!!!!!!>
 
 " EXPERIMENTAL

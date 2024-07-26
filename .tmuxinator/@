@@ -1,0 +1,78 @@
+# ~/.tmuxinator/catalyst.yml
+
+name: catalyst
+# This stopped working after tmux upgrade, use 'pre' instead
+# root: ~/github/ab
+
+# Optional tmux socket
+# socket_name: foo
+
+# Runs before everything. Use it to start daemons etc.
+# Sets current postgres version and cluster (so all pg_related helper apps versions match psql server app (like pg_dump, pg_restore))
+# Strings separated by space are respectively: postgres version, host:port, database (* = anything)
+on_project_start: |
+  cd ~/github/catalyst
+  export DISABLE_AUTO_TITLE=true
+  cp ../config/database.yml.example ../config/database.yml
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+pre_window: |
+  export DISABLE_SPRING=1
+  rvm use 3.1.1
+  nvm use 16
+  export CURRENT_PROJECT_NAME='CATALYST'
+  tmux source ~/.tmux.conf
+
+# Pass command line options to tmux. Useful for specifying a different tmux.conf.
+# tmux_options: -f ~/.tmux.mac.conf
+
+# Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
+# tmux_command: tmux-next
+
+# Specifies (by name or index) which window will be selected on project startup. If not set, the first window is used.
+startup_window: editor
+startup_pane: 0
+
+# Controls whether the tmux session should be attached to automatically. Defaults to true.
+# attach: false
+
+# Runs after everything. Use it to attach to tmux with custom options etc.
+# post: tmux -CC attach -t ab
+windows:
+    - frontend:
+        panes:
+            - server:
+                - nvm install 16.5.0
+                - cd client
+                - export VIMUX_RUNNER_PANE_INDEX='2'
+                - npm i
+                - npm rebuild node-sass
+                - npm start
+            - helper:
+                - cd client
+                - export VIMUX_RUNNER_PANE_INDEX='2'
+                - sleep 20
+                - google-chrome https://chicago.catalystmeeting.dev
+                - clear
+                - gst
+            - editor:
+                - cd client
+                - export VIMUX_RUNNER_PANE_INDEX='2'
+                - tmux select-window -t frontend
+                - tmux select-layout "333b,426x107,0,0{127x107,0,0[127x41,0,0,10,127x65,0,42,12],298x107,128,0,13}"
+                - ranger
+    - backend:
+        panes:
+            - server_b:
+                - export VIMUX_RUNNER_PANE_INDEX='2'
+                - dcd up -d && dcd logs -f
+            - helper_b:
+                - export VIMUX_RUNNER_PANE_INDEX='2'
+                - clear
+                - gst
+            - editor_b:
+                - export VIMUX_RUNNER_PANE_INDEX='2'
+                - sleep 5
+                - tmux select-window -t backend
+                - tmux select-layout "333b,426x107,0,0{127x107,0,0[127x41,0,0,10,127x65,0,42,12],298x107,128,0,13}"
+                - ranger
